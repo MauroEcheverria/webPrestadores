@@ -1,6 +1,6 @@
 <?php 
-	function template_footer(){ 
-	?>
+  function template_footer($data_template,$js_dreconstec){ 
+?>
     <div class="container">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -14,12 +14,18 @@
       </footer>
     </div>
 
-    <script src="../../../plugins/jquery/jquery-3.6.0.min.js"></script>
-    <script src="../../../plugins/bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../plugins/jquery/jquery-3.6.0.min.js?dct_v_1.1"></script>
+    <script src="../../../plugins/bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js?dct_v_1.1"></script>
+
+    <?php
+      for ($i = 0; $i < count($js_dreconstec); ++$i){
+        echo $js_dreconstec[$i];
+      }
+    ?>
         
     </body>
 
   </html>
-	<?php 
-	} 
+<?php 
+  } 
 ?>

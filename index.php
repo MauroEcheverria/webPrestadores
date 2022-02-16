@@ -1,6 +1,11 @@
 <?php  
-include("template/templateHeadIndex.php");
-template_head();
+  include("template/templateHeadIndex.php");
+  include("template/templateFooterIndex.php");
+
+  $css_dreconstec = array();
+  $js_dreconstec = array();
+
+  template_head($css_dreconstec);
 ?>
   <main>
 
@@ -243,6 +248,5 @@ template_head();
 
   </main>
 <?php
-include("template/templateFooterIndex.php");
-template_footer();
+  template_footer($js_dreconstec);
 ?>
