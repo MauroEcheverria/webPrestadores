@@ -1,4 +1,7 @@
-<?php function modalViews(){ ?>
+<?php 
+  function modalViews(){
+?>
+
   <div class="modal fade" id="myModalInactivity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -19,6 +22,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalCerrarSesionOtraPC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -39,6 +43,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalCerrarUserInactivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -59,6 +64,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalContraseñaInactiva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -79,6 +85,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalCerrarExpirePass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="z-index: 9999;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -100,7 +107,7 @@
     </div>
   </div>
 
-<div class="modal fade" id="myModalErrorGeneral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="z-index: 9999;">
+  <div class="modal fade" id="myModalErrorGeneral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="z-index: 9999;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -118,6 +125,7 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalGenericoInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="z-index: 9999;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -135,8 +143,6 @@
     </div>
   </div>
 
-
-
 <?php
-} 
+  } 
 ?>
