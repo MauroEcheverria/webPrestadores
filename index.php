@@ -1,11 +1,15 @@
 <?php  
   include("template/templateHeadIndex.php");
   include("template/templateFooterIndex.php");
+  require_once("dctDatabase/Parameter.php");
+
+  $data_template["error_reporting"] = $app_error_reporting;
+  $data_template["version_css_js"] = $version_css_js;
 
   $css_dreconstec = array();
   $js_dreconstec = array();
 
-  template_head($css_dreconstec);
+  template_head($data_template,$css_dreconstec);
 ?>
   <main>
 
@@ -248,5 +252,5 @@
 
   </main>
 <?php
-  template_footer($js_dreconstec);
+  template_footer($data_template,$js_dreconstec);
 ?>

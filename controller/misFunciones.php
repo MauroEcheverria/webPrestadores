@@ -18,25 +18,7 @@
 			$data = trim($data);
 		  $data = stripslashes($data);
 		  $data = htmlspecialchars($data);
-		  $data = str_replace("'","´",$data);
-		  $data = str_replace("insert ","",$data);
-		  $data = str_replace("delete ","",$data);
-		  $data = str_replace("select ","",$data);
-		  $data = str_replace("select *","",$data);
-		  $data = str_replace("create ","",$data);
-		  $data = str_replace("INSERT ","",$data);
-		  $data = str_replace("DELETE ","",$data);
-		  $data = str_replace("SELECT ","",$data);
-		  $data = str_replace("SELECT *","",$data);
-		  $data = str_replace("CREATE ","",$data);
-		  $data = str_replace("insert' ","",$data);
-		  $data = str_replace("delete' ","",$data);
-		  $data = str_replace("select' ","",$data);
-		  $data = str_replace("create' ","",$data);
-		  $data = str_replace("INSERT' ","",$data);
-		  $data = str_replace("DELETE' ","",$data);
-		  $data = str_replace("SELECT' ","",$data);
-		  $data = str_replace("CREATE' ","",$data);
+		  //$data = str_replace("'","´",$data);
 			if ($limite == "siLimite") {
 				$data = substr($data,0,$max);
 			}

@@ -12,19 +12,15 @@
 	$fechaActual_8 = $hora->format("H:i");
 	$fechaActual_9 = $hora->format("Y-m-d H:i:s.u");
 	/************	Mail ************/
-	
 	$mailSMTP = 'ssl';
 	$mailPort = 465;
 	$hostSince = "mail.meditategy.com";
 	$passSince = "t6YQreu53&%";
 	$mailSince = "info@meditategy.com";
 	$deCorreo = "info@meditategy.com";
-
 	/****************** ERROR REPORTING *************************/
-	/*
-	1 - Se ven todo tipo de error y advertencias
-	0 - No se ven error ni anvertencias
-	*/
+	// 1 - Se ven todo tipo de error y advertencias
+	// 0 - No se ven error ni anvertencias
 	$app_error_reporting = 1;
 	/****************** TIMEOUT SESSION *************************/
 	// 15 min = 900 seg
@@ -32,4 +28,6 @@
 	// 30 min = 1800 seg
 	// 45 min = 2700 seg
 	$param_timeout = 2700;
+	/****************** VERSIONES CSS Y JS *************************/
+	$version_css_js = "?dct_1.0";
 ?>

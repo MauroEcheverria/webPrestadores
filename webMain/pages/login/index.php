@@ -17,6 +17,7 @@
   $data_template["varLogin"] = $varLogin;
 	$data_template["linkTemp"] = $linkTemp;
 	$data_template["error_reporting"] = $app_error_reporting;
+  $data_template["version_css_js"] = $version_css_js;
 
   include("login.php");
   tema_login($data_template);

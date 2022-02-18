@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2022 a las 22:19:27
+-- Tiempo de generación: 18-02-2022 a las 22:02:48
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.3.23
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dct_sistema_tbl_aplicacion` (
   `apl_id_aplicacion` int(11) NOT NULL,
-  `apl_aplicacion` varchar(80) NOT NULL,
+  `apl_aplicacion` varchar(20) NOT NULL,
   `apl_ruta` varchar(100) NOT NULL,
   `apl_estado` bit(1) NOT NULL,
   `apl_nom_superior` varchar(40) NOT NULL,
@@ -57,6 +57,29 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
   `ape_id_aplicacion` int(11) NOT NULL,
   `ape_id_empresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dct_sistema_tbl_catalogo`
+--
+
+CREATE TABLE `dct_sistema_tbl_catalogo` (
+  `ctg_id_catalogo` int(11) NOT NULL,
+  `ctg_key` varchar(2) NOT NULL,
+  `ctg_descripcion` varchar(20) NOT NULL,
+  `ctg_aplicativo` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_catalogo`
+--
+
+INSERT INTO `dct_sistema_tbl_catalogo` (`ctg_id_catalogo`, `ctg_key`, `ctg_descripcion`, `ctg_aplicativo`) VALUES
+(1, 'S', 'SI', 'SISTEMA'),
+(2, 'N', 'NO', 'SISTEMA'),
+(3, 'A', 'ACTIVO', 'SISTEMA'),
+(4, 'I', 'INACTIVO', 'SISTEMA');
 
 -- --------------------------------------------------------
 
@@ -229,7 +252,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_id_usuario`, `usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'MVZhVTdzVW1GaVUwc0M3NnYyWVVLVms1ZGNkWUtJZWNmOU1HT01RQUFLNFFoVXRnZ0RKNkt0OGkzZllBZEZkUg==', 'S', 'A', '::1', '2022-01-13 20:46:31', 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'S', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'MVZhVTdzVW1GaVUwc0M3NnYyWVVLVms1ZGNkWUtJZWNmOU1HT01RQUFLNFFoVXRnZ0RKNkt0OGkzZllBZEZkUg==', '0', 'A', NULL, NULL, 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'S', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 --
 -- Índices para tablas volcadas
@@ -248,6 +271,12 @@ ALTER TABLE `dct_sistema_tbl_aplicacion`
 ALTER TABLE `dct_sistema_tbl_aplicacion_empresa`
   ADD PRIMARY KEY (`ape_id_aplicacion`,`ape_id_empresa`),
   ADD KEY `ape_id_empresa` (`ape_id_empresa`);
+
+--
+-- Indices de la tabla `dct_sistema_tbl_catalogo`
+--
+ALTER TABLE `dct_sistema_tbl_catalogo`
+  ADD PRIMARY KEY (`ctg_id_catalogo`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_contrasenia`
@@ -309,6 +338,12 @@ ALTER TABLE `dct_sistema_tbl_usuario`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `dct_sistema_tbl_catalogo`
+--
+ALTER TABLE `dct_sistema_tbl_catalogo`
+  MODIFY `ctg_id_catalogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_contrasenia`

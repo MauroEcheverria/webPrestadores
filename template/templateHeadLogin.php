@@ -1,5 +1,7 @@
 <?php 
   function template_head($data_template,$css_dreconstec){ 
+
+    $var = "?dct_111";
 ?>
     <!doctype html>
       <html lang="es">
@@ -8,10 +10,10 @@
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <title>Checkout example · Bootstrap v5.1</title>
 
-          <link href="../../../plugins/bootstrap-5.1.3/dist/css/bootstrap.min.css?dct_v_1.1" rel="stylesheet">
-          <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css?dct_v_1.1" rel="stylesheet">
-          <link href="../../../plugins/bootstrap-5.1.3/dist/css/signin.css?dct_v_1.1" rel="stylesheet">
-          <link href="../../../dist/css/webSistema.css?dct_v_1.1" rel="stylesheet">
+          <link href="../../../plugins/bootstrap-5.1.3/dist/css/bootstrap.min.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+          <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+          <link href="../../../plugins/bootstrap-5.1.3/dist/css/signin.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+          <link href="../../../dist/css/webSistema.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
 
           <?php
             for ($i = 0; $i < count($css_dreconstec); ++$i){

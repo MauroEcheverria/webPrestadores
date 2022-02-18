@@ -8,38 +8,35 @@
   include("../../../dialogs/modalViews.php");
   
   $css_dreconstec = array();
-  $css_dreconstec[0] = '<link href="../../../dist/css/dreconstec.css?dct_v_1.1" rel="stylesheet">';
-  $css_dreconstec[1] = '<link rel="stylesheet" href="../../../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?dct_v_1.1">';
+  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  $js_dreconstec[0] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js?dct_v_1.1"></script>';
-  $js_dreconstec[1] = '<script src="../../../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?dct_v_1.1"></script>';
-  $js_dreconstec[2] = '<script src="../../../plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js?dct_v_1.1"></script>';
-  $js_dreconstec[3] = '<script src="../../../dist/js/loginWEB.js?dct_v_1.1"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webInspector.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/loginWEB.js'.$data_template["version_css_js"].'"></script>';
 
   template_head($data_template, $css_dreconstec);
 ?>
   <main class="form-signin">
-    <form>
+    <form id="btnFormLogin" class="form-group" method="post" data-toggle="validator" role="form" autocomplete="off">
       <img class="mb-4" src="../../../dist/img/dreconstec_2.png" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 fw-normal">Inicio de Sesión</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
+        <input type="text" class="form-control" name="inputUser" id="inputUser">
+        <label for="floatingInput">Cédula Identidad</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
+        <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Password">
+        <label for="floatingPassword">Contraseña</label>
       </div>
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <a href="../login/olvidoSuContrasena.php" class="olvidoContrasena">¿Olvidó su contraseña?</a>
         </label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Acceder</button>
     </form>
   </main>
 
