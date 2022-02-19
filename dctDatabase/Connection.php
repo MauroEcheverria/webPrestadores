@@ -6,14 +6,8 @@
       
       $database = 'prestadores_iess';
       $user = 'root';
-      //$password = 'Dreconstec2022';
-      $password = 'mauro';
-      
-      /*
-      $database = 'meditate_bd_meditategy';
-      $user = 'meditate_bd_meditategy';
-      $password = '%hM;a}Hq.cRO';
-      */
+      $password = 'Dreconstec2022';
+      //$password = 'mauro';
       
       $charset = 'utf8mb4';
       $dsn = "mysql:host=$host;dbname=$database;port=3306;charset=$charset;options='--client_encoding=UTF8'";

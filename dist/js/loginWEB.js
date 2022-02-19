@@ -17,12 +17,7 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "accesoPermitido":
-              if ($("#linkTemp").val() == "") {
-                window.location = "../principal";
-              }
-              else {
-                window.location = $("#linkTemp").val();
-              }
+              window.location = "../bienvenido";
               break;
             case "errorCaptcha":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

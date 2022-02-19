@@ -9,7 +9,6 @@
 
   $sesion = new sesion();
   $userSystem = $sesion->get("userSystem");
-  $linkTemp = $sesion->get("linkTemp");
 
   if( $userSystem === false ) { 
     $varLogin=0;

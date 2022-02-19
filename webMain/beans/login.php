@@ -13,12 +13,13 @@ try {
     $pdo->beginTransaction();
 
     $userSystem = cleanData("siLimite", 13, "noMayuscula", $_POST["inputUser"]);
-    $contrasena = cleanData("noLimite", 0, "noMayuscula", $_POST["valPaciente"]);
+    $contrasena = cleanData("noLimite", 0, "noMayuscula", $_POST["inputPassword"]);
 
     $validacionUsuario = new ValidacionUsuario();
     switch ($validacionUsuario->login($userSystem, $contrasena, $pdo)) {
         case 'pasoTodo':
-            $sql = "SELECT usr_cod_usuario, usr_nom_completos, usr_estado, usr_logeado, usr_ip_pc_acceso, usr_expiro_contrasenia
+            $sql = "SELECT usr_cod_usuario, usr_estado, usr_logeado, usr_ip_pc_acceso, usr_expiro_contrasenia,
+              CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ', usr_apellido_2) usr_nom_completos
 							FROM dct_sistema_tbl_usuario
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
             $query = $pdo->prepare($sql);
@@ -26,8 +27,8 @@ try {
             $query->execute();
             $row = $query->fetchAll();
             foreach ($row as $row) {
-                if ($row["usr_estado"]) {
-                    if (!$row["usr_logeado"]) {
+                if ($row["usr_estado"] == 'A') {
+                    if ($row["usr_logeado"] == 'N') {
                       $accesoPermitido = "normal";
                     } else {
                         if ($row["usr_ip_pc_acceso"] == getRealIP()) {
@@ -36,7 +37,7 @@ try {
                           $accesoPermitido = "normalEnOtraPC";
                         }
                     }
-                    if ($row["usr_expiro_contrasenia"]) {
+                    if ($row["usr_expiro_contrasenia"] == 'S') {
                       $data_result["message"] = "accesoPermitidoExpirePass";
                       $data_result["cod_system_user"] = $row["usr_cod_usuario"];
                       $data_result["complete_names"] = $row["usr_nom_completos"];
@@ -94,7 +95,7 @@ try {
 
             if ($claveNoIgual[1] + 1 == 3) {
                 $sql_2 = "UPDATE dct_sistema_tbl_usuario
-							  SET usr_estado_contrasenia=FALSE
+							  SET usr_estado_contrasenia='I'
 								WHERE usr_cod_usuario = :usr_cod_usuario";
                 $query_2 = $pdo->prepare($sql_2);
                 $query_2->bindValue(':usr_cod_usuario', $userSystem);

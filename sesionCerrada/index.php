@@ -1,22 +1,20 @@
 <?php
- tema_login();
-  function tema_login(){
   include("../template/templateHeadContent.php");
   include("../template/templateFooterContent.php");
-  include("../template/templateServices.php");
   require_once("../controller/sesion.class.php");
   require_once("../dctDatabase/Parameter.php");
-  $sesion = new sesion();
-  $userSystem = $sesion->get("userSystem"); 
-  if( $userSystem === false ) { 
-    $varLogin=0;
-  }
-  else {
-    $varLogin=1;
-  }
-  $data_template["varLogin"] = $varLogin;
+
   $data_template["error_reporting"] = $app_error_reporting;
-  template_head($data_template);?>
+  $data_template["version_css_js"] = $version_css_js;
+
+  $css_dreconstec = array();
+  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+
+  $js_dreconstec = array();
+  //$js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+
+  template_head($data_template,$css_dreconstec);
+  ?>
 
   <div class="container">
     <p>Por su seguridad su sesión ha sido cerrada.</p>
@@ -25,4 +23,6 @@
     </div>
   </div>
 
-<?php template_footer(); }?>
+<?php 
+  template_footer($data_template,$js_dreconstec); 
+?>

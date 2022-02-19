@@ -49,6 +49,7 @@
 
     function encrypt_decrypt($action, $string) {
 		  $output = false;
+		  $string = md5($string);
 		  $encrypt_method = "AES-256-CBC";
 		  $secret_key = 'M@ruto_Di0s_3s_Fu3rz@';
 		  $secret_iv = 'S@mu31_Di0s_3s_Fu3rz@';
@@ -104,7 +105,7 @@
 		    $query->execute();
 		    if ($query->rowCount() == 1) {
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
-		    	if ($row["usr_estado_contrasenia"] == 1) {
+		    	if ($row["usr_estado_contrasenia"] == 'A') {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
               return "pasoTodo";
 		        }
@@ -114,7 +115,7 @@
 				}
 			  return "cedulaNoRegistrada";
 			} catch (\PDOException $e) {
-			    echo $e->getMessage();
+			  echo $e->getMessage();
 			}
     }
 	} //Fin de clase ValidacionUsuario

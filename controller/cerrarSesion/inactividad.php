@@ -24,7 +24,6 @@
     	$pdo->commit();
 
       $nombres = new sesion();
-			$nombres->set("linkTemp",$_POST["linkTemp"]);
 
     	$data_result["message"] = "saveOK";
 			echo json_encode($data_result);

@@ -5,20 +5,14 @@
 
   $sesion = new sesion();
   $userSystem = $sesion->get("userSystem");
-  $linkTemp = $sesion->get("linkTemp");
 
   if( $userSystem === false ) { 
-    $varLogin=0;
+    $data_template["error_reporting"] = $app_error_reporting;
+    $data_template["version_css_js"] = $version_css_js;
+    include("login.php");
+    tema_login($data_template);
   }
   else {
-    $varLogin=1;
-  }
-
-  $data_template["varLogin"] = $varLogin;
-	$data_template["linkTemp"] = $linkTemp;
-	$data_template["error_reporting"] = $app_error_reporting;
-  $data_template["version_css_js"] = $version_css_js;
-
-  include("login.php");
-  tema_login($data_template);
+    header("Location: ../../../webMain/pages/bienvenido");
+  } 
 ?>
