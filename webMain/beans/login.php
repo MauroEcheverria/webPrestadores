@@ -28,35 +28,35 @@ try {
             $row = $query->fetchAll();
             foreach ($row as $row) {
                 if ($row["usr_estado"] == 'A') {
-                    if ($row["usr_logeado"] == 'N') {
-                      $accesoPermitido = "normal";
-                    } else {
-                        if ($row["usr_ip_pc_acceso"] == getRealIP()) {
-                          $accesoPermitido = "normal";
-                        } else {
-                          $accesoPermitido = "normalEnOtraPC";
-                        }
-                    }
-                    if ($row["usr_expiro_contrasenia"] == 'S') {
-                      $data_result["message"] = "accesoPermitidoExpirePass";
-                      $data_result["cod_system_user"] = $row["usr_cod_usuario"];
-                      $data_result["complete_names"] = $row["usr_nom_completos"];
+                  if ($row["usr_logeado"] == 'N') {
+                    $accesoPermitido = "normal";
+                  } else {
+                      if ($row["usr_ip_pc_acceso"] == getRealIP() || $row["usr_ip_pc_acceso"] == NULL) {
+                        $accesoPermitido = "normal";
+                      } else {
+                        $accesoPermitido = "normalEnOtraPC";
+                      }
+                  }
+                  if ($row["usr_expiro_contrasenia"] == 'S') {
+                    $data_result["message"] = "accesoPermitidoExpirePass";
+                    $data_result["cod_system_user"] = $row["usr_cod_usuario"];
+                    $data_result["complete_names"] = $row["usr_nom_completos"];
+                    echo json_encode($data_result);
+                  } else {
+                    if ($accesoPermitido == "normal") {
+                      $data_result["message"] = "accesoPermitido";
+                      $validacionUsuario->newSesion($userSystem);
                       echo json_encode($data_result);
                     } else {
-                      if ($accesoPermitido == "normal") {
-                        $data_result["message"] = "accesoPermitido";
-                        $validacionUsuario->newSesion($userSystem);
-                        echo json_encode($data_result);
-                      } else {
-                        $validacionUsuario->newSesionOtraPC($userSystem);
-                        $data_result["message"] = "accesoEnOtraPc";
-                        $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
-                        $data_result["dataModal_2"] = 'Información';
-                        $data_result["dataModal_3"] = 'Usted ya ha iniciado sesión en otro computador...!!!';
-                        $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
-                        echo json_encode($data_result);
-                      }
+                      $validacionUsuario->newSesionOtraPC($userSystem);
+                      $data_result["message"] = "accesoEnOtraPc";
+                      $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                      $data_result["dataModal_2"] = 'Información';
+                      $data_result["dataModal_3"] = 'Usted ya ha iniciado sesión en otro computador...!!!';
+                      $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
+                      echo json_encode($data_result);
                     }
+                  }
                 } else {
                   $data_result["message"] = "usuarioInactivo";
                   $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
