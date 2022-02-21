@@ -1,26 +1,25 @@
 <?php
+  require_once("../../../dctDatabase/Connection.php");
   require_once("../../../controller/misFunciones.php");
   require_once("../../../dctDatabase/Parameter.php");
-  require_once("../../../controller/sesion.class.php");
   include("../../../template/templateHeadLogin.php");
-  include("../../../template/templateFooterLogin.php"); 
-  include("../../../template/templateServices.php");
-  include("../../../dialogs/modalViews.php"); 
+  include("../../../template/templateFooterLogin.php");
+  include("../../../dialogs/modalViews.php");
 
-  $sesion = new sesion();
-  $userSystem = $sesion->get("userSystem");
-
-  if( $userSystem === false ) { 
-    $varLogin=0;
-  }
-  else {
-    $varLogin=1;
-  }
-
-  $data_template["varLogin"] = $varLogin;
+  app_error_reporting($app_error_reporting);
   $data_template["error_reporting"] = $app_error_reporting;
+  $data_template["version_css_js"] = $version_css_js;
+  
+  $css_dreconstec = array();
+  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
 
-  template_head($data_template); modalViews();?>
+  $js_dreconstec = array();
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/loginWEB.js'.$data_template["version_css_js"].'"></script>';
+
+  template_head($data_template, $css_dreconstec);
+?>
+  
   <div class="container container_main centrarContent">
     <section class="sectionDataTable">
       <div class="panel panel-primary widthDataTable" style="width: 50%;">
@@ -50,7 +49,7 @@
       </div>
     </section>
   </div>
-  <?php
-  template_services("../../../buscarPor/","../../../webSalud/pages/agendarCita/")
-  ?>
-<?php template_footer(); ?>
+
+<?php
+  template_footer($data_template, $js_dreconstec);
+?>

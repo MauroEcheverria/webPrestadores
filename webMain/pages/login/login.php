@@ -12,7 +12,6 @@
 
   $js_dreconstec = array();
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
-  $js_dreconstec[] = '<script src="../../../dist/js/webInspector.js'.$data_template["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../dist/js/loginWEB.js'.$data_template["version_css_js"].'"></script>';
 
   template_head($data_template, $css_dreconstec);

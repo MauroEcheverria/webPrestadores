@@ -6,8 +6,8 @@
       
       $database = 'prestadores_iess';
       $user = 'root';
-      $password = 'Dreconstec2022';
-      //$password = 'mauro';
+      //$password = 'Dreconstec2022';
+      $password = 'mauro';
       
       $charset = 'utf8mb4';
       $dsn = "mysql:host=$host;dbname=$database;port=3306;charset=$charset;options='--client_encoding=UTF8'";

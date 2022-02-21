@@ -90,7 +90,7 @@
 			$nombres->set("userSystemOtraPC",$userSystem);
     }
     public function verifyPassword($password, $password_encript) {
-      if ($this->encrypt_decrypt('encrypt',$password) == $password_encript) {
+      if (hash_equals($this->encrypt_decrypt('encrypt',$password),$password_encript)) {
       	return true;
       }
       return false;

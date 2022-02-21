@@ -1,17 +1,24 @@
 <?php
-
+  require_once("../../../dctDatabase/Connection.php");
   require_once("../../../controller/misFunciones.php");
   require_once("../../../dctDatabase/Parameter.php");
-  require_once("../../../dctDatabase/Connection.php");
   include("../../../template/templateHeadLogin.php");
-  include("../../../template/templateFooterLogin.php"); 
-  include("../../../template/templateServices.php");
-  include("../../../dialogs/modalViews.php"); 
-  $data_template=null;
-  template_head($data_template); 
-  modalViews();
+  include("../../../template/templateFooterLogin.php");
+  include("../../../dialogs/modalViews.php");
 
+  $data_template["error_reporting"] = $app_error_reporting;
+  $data_template["version_css_js"] = $version_css_js;
+  
+  $css_dreconstec = array();
+  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+
+  $js_dreconstec = array();
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/loginWEB.js'.$data_template["version_css_js"].'"></script>';
+
+  template_head($data_template, $css_dreconstec);
   app_error_reporting($app_error_reporting);
+
   try {
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
@@ -26,7 +33,7 @@
           FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
           AND tok_tipo = 'RESETEO'
-          AND tok_estado = TRUE;";
+          AND tok_estado = 'A';";
     $query_1=$pdo->prepare($sql_1);
     $query_1->bindValue(':tok_token',$_GET["linkReset"]);
     $query_1->execute();
@@ -91,9 +98,6 @@
                   </div>
                 </section>
               </div>
-              <?php
-              template_services("../../../buscarPor/","../../../webSalud/pages/agendarCita/")
-              ?>
             <?php
           }
           else {
@@ -116,9 +120,6 @@
                     </div>
                 </div>
               </div>
-              <?php
-              template_services("../../../buscarPor/","../../../webSalud/pages/agendarCita/")
-              ?>
             <?php
           }
         }
@@ -142,9 +143,6 @@
                   </div>
               </div>
             </div>
-            <?php
-            template_services("../../../buscarPor/","../../../webSalud/pages/agendarCita/")
-            ?>
           <?php
         }
       }
@@ -168,9 +166,6 @@
                 </div>
             </div>
           </div>
-          <?php
-          template_services("../../../buscarPor/","../../../webSalud/pages/agendarCita/")
-          ?>
         <?php
       }
       ?>    
@@ -187,4 +182,5 @@
   } catch (\PDOException $e) {
       echo $e->getMessage();
   }        
-template_footer(); ?>
+  template_footer($data_template, $js_dreconstec); 
+?>

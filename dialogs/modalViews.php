@@ -118,7 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-body">Se ha detectado un error al procesar la solicitud requerida. Código de error: <strong><span id="idCodErrorGeneral"></span></strong>, por favor enviar un correo electrónico a <strong>info@meditategy.com</strong> indicando la novedad presentada.</div>
+        <div class="modal-body">Se ha detectado un error al procesar la solicitud requerida. Código de error: <strong><span id="idCodErrorGeneral"></span></strong>, por favor enviar un correo electrónico a <strong>app-web@dreconstec.com</strong> indicando la novedad presentada.</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn-estandar-dreconstec" onClick="location.reload();">Cerrar</button>
         </div>

@@ -14,10 +14,10 @@
 	/************	Mail ************/
 	$mailSMTP = 'ssl';
 	$mailPort = 465;
-	$hostSince = "mail.meditategy.com";
-	$passSince = "t6YQreu53&%";
-	$mailSince = "info@meditategy.com";
-	$deCorreo = "info@meditategy.com";
+	$hostSince = "mail.dreconstec.com";
+	$passSince = "T6YQuertyreu53&%1";
+	$mailSince = "app-web@dreconstec.com";
+	$deCorreo = "app-web@dreconstec.com";
 	/****************** ERROR REPORTING *************************/
 	// 1 - Se ven todo tipo de error y advertencias
 	// 0 - No se ven error ni anvertencias

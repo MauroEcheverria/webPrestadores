@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2022 a las 22:02:48
+-- Tiempo de generación: 21-02-2022 a las 22:31:47
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.3.23
 
@@ -31,7 +31,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion` (
   `apl_id_aplicacion` int(11) NOT NULL,
   `apl_aplicacion` varchar(20) NOT NULL,
   `apl_ruta` varchar(100) NOT NULL,
-  `apl_estado` bit(1) NOT NULL,
+  `apl_estado` varchar(1) NOT NULL,
   `apl_nom_superior` varchar(40) NOT NULL,
   `apl_nom_inferior` varchar(40) NOT NULL,
   `apl_id_htm` varchar(20) NOT NULL,
@@ -43,9 +43,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion` (
 --
 
 INSERT INTO `dct_sistema_tbl_aplicacion` (`apl_id_aplicacion`, `apl_aplicacion`, `apl_ruta`, `apl_estado`, `apl_nom_superior`, `apl_nom_inferior`, `apl_id_htm`, `apl_id_imagen`) VALUES
-(1, 'Sistema', '../../../webMain', b'1', '', '', '', ''),
-(2, 'Fármacos', '../../../webFarmacos', b'1', 'Fármacos', 'Stock y Caducidad', 'indexLinkFarmIns', 'fa fa-line-chart'),
-(3, 'Salud', '../../../webSalud', b'1', 'Salud', 'Rehi', 'indexLinkSalud', 'fa fa-heartbeat');
+(1, 'Sistema', '../../../webMain', 'A', 'Sistemas', 'Loco', 'indexLinkTics', 'fa fa-laptop');
 
 -- --------------------------------------------------------
 
@@ -57,6 +55,13 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
   `ape_id_aplicacion` int(11) NOT NULL,
   `ape_id_empresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_aplicacion_empresa`
+--
+
+INSERT INTO `dct_sistema_tbl_aplicacion_empresa` (`ape_id_aplicacion`, `ape_id_empresa`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -146,10 +151,9 @@ CREATE TABLE `dct_sistema_tbl_opcion` (
 
 INSERT INTO `dct_sistema_tbl_opcion` (`opc_id_opcion`, `opc_opcion`, `opc_estado`, `opc_ruta`, `opc_id_aplicacion`, `opc_orden`) VALUES
 (1, 'Principal', 'A', '/pages/principal', 1, 1),
-(2, 'Administrar Contraseña', 'I', '/pages/administrarContrasena', 1, 3),
-(3, 'Administrar Usuarios', 'A', '/pages/administrarUsuarios', 1, 2),
-(4, 'Administrar Roles', 'A', '/pages/administrarRoles', 1, 4),
-(5, 'Adm. Perfil', 'A', '/pages/administrarPerfil', 1, 3);
+(2, 'Administrar Usuarios', 'A', '/pages/administrarUsuarios', 1, 2),
+(3, 'Administrar Roles', 'A', '/pages/administrarRoles', 1, 4),
+(4, 'Adm. Perfil', 'A', '/pages/administrarPerfil', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -186,6 +190,13 @@ CREATE TABLE `dct_sistema_tbl_rol_aplicacion` (
   `rla_estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_rol_aplicacion`
+--
+
+INSERT INTO `dct_sistema_tbl_rol_aplicacion` (`rla_id`, `rla_id_rol`, `rla_id_aplicacion`, `rla_estado`) VALUES
+(16, 1, 1, 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -198,6 +209,16 @@ CREATE TABLE `dct_sistema_tbl_rol_opcion` (
   `rlo_id_opcion` int(11) NOT NULL,
   `rlo_estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_rol_opcion`
+--
+
+INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id`, `rlo_id_rol`, `rlo_id_opcion`, `rlo_estado`) VALUES
+(66, 1, 1, 'A'),
+(67, 1, 2, 'A'),
+(68, 1, 3, 'A'),
+(69, 1, 4, 'A');
 
 -- --------------------------------------------------------
 
@@ -252,7 +273,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_id_usuario`, `usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'MVZhVTdzVW1GaVUwc0M3NnYyWVVLVms1ZGNkWUtJZWNmOU1HT01RQUFLNFFoVXRnZ0RKNkt0OGkzZllBZEZkUg==', '0', 'A', NULL, NULL, 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'S', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', '1', 'A', '::1', '2022-02-21 21:26:32', 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'N', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 --
 -- Índices para tablas volcadas
@@ -367,13 +388,13 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_rol_aplicacion`
 --
 ALTER TABLE `dct_sistema_tbl_rol_aplicacion`
-  MODIFY `rla_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `rla_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_rol_opcion`
 --
 ALTER TABLE `dct_sistema_tbl_rol_opcion`
-  MODIFY `rlo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `rlo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`

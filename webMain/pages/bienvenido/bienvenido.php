@@ -11,9 +11,48 @@ $js_dreconstec = array();
 //$js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
 
 template_head($pdo,$dataSesion,$css_dreconstec);
+
+$sql="SELECT *
+      FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
+      WHERE app.apl_id_aplicacion  = up.rla_id_aplicacion 
+      AND up.rla_id_rol  = :rla_id_rol 
+      /*AND up.rla_id_aplicacion  NOT IN (1)*/
+      AND app.apl_estado = 'A';";
+$query=$pdo->prepare($sql);
+$query->bindValue(':rla_id_rol', $dataSesion['id_role']);
+$query->execute();
+$row = $query->fetchAll();
+$color_icon_main = array("small-box bg-aqua", "small-box bg-green", "small-box bg-yellow", "small-box bg-red");
 ?>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+      <section class="content">
+        <div class="row">
+        <?php
+          $count_icon_main = 0;
+          foreach ($row as $row) {
+        ?>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 main_identificador_div" id=<?php echo $row["apl_id_htm"]; ?>>
+            <div class='<?php echo $color_icon_main[$count_icon_main]; ?>' >
+              <div class="inner">
+                <h3><?php echo $row["apl_nom_superior"]; ?></h3>
+
+                <p><?php echo $row["apl_nom_inferior"]; ?></p>
+              </div>
+              <div class="icon">
+                <i class='<?php echo $row["apl_id_imagen"]; ?>' ></i>
+              </div>
+              <a href=<?php echo $row["apl_ruta"]."/pages/principal"; ?> class="small-box-footer">Acceder <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        <?php
+          if ($count_icon_main >= 3) { $count_icon_main = 0; } else { $count_icon_main += 1; }
+          }
+        ?>
+        </div>
+      </section>
+
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">

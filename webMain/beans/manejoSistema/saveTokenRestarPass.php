@@ -15,7 +15,7 @@
     			FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
           AND tok_tipo = 'RESETEO'
-          AND tok_estado = TRUE;";
+          AND tok_estado = 'A';";
     $query=$pdo->prepare($sql);
     $query->bindValue(':tok_token', $pass_token);
     $query->execute();
@@ -64,7 +64,7 @@
                 SET tok_estado = FALSE
                 WHERE tok_token = :tok_token
                 AND tok_tipo = 'RESETEO'
-                AND tok_estado = TRUE;";
+                AND tok_estado = 'A';";
         $query_1=$pdo->prepare($sql_1);
         $query_1->bindValue(':tok_token', $pass_token);
         $query_1->execute();
@@ -85,7 +85,7 @@
         $query_4->execute();
 
         $sql_2="UPDATE dct_sistema_tbl_usuario
-                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = TRUE
+                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'A'
                 WHERE usr_cod_usuario = :usr_cod_usuario";
         $query_2=$pdo->prepare($sql_2);
         $query_2->bindValue(':usr_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])));
