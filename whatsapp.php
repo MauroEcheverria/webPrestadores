@@ -10,7 +10,7 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "token=c9bd482wvzytwvb4&to=+593960939030&body= Hola que haciendo XD funciona bien&priority=1&referenceId=",
+  CURLOPT_POSTFIELDS => "token=c9bd482wvzytwvb4&to=+593960939030&body=La API de WhatsApp en UltraMsg.com funciona bien&priority=1&referenceId=",
   CURLOPT_HTTPHEADER => array(
     "content-type: application/x-www-form-urlencoded"
   ),

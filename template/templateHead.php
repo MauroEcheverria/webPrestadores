@@ -6,11 +6,18 @@
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Checkout example · Bootstrap v5.1</title>
+        <title>Prestores IESS</title>
      
-        <link href="../../../plugins/bootstrap-5.1.3/dist/css/bootstrap.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-        <link href="../../../plugins/bootstrap-5.1.3/dist/css/dashboard.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link href="../../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/icheck-bootstrap/icheck-bootstrap.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/jqvmap/jqvmap.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../dist/css/adminlte.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/daterangepicker/daterangepicker.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/summernote/summernote-bs4.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/webSistema.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
 
         <?php
@@ -21,99 +28,267 @@
 
       </head>
 
-      <body>
-
-      <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <div class="navbar-nav">
-          <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="../../../controller/cerrarSesionLogin">Sign out</a>
+      <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+          <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
           </div>
-        </div>
-      </header>
-
-      <div class="container-fluid">
-        <div class="row">
-          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">
-                    <span data-feather="home"></span>
-                    Dashboard
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Orders
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Products
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="users"></span>
-                    Customers
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2"></span>
-                    Reports
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="layers"></span>
-                    Integrations
-                  </a>
-                </li>
-              </ul>
-
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Saved reports</span>
-                <a class="link-secondary" href="#" aria-label="Add a new report">
-                  <span data-feather="plus-circle"></span>
+          <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              </li>
+              <li class="nav-item d-none d-sm-inline-block">
+                <a href="index3.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                  <i class="fas fa-search"></i>
                 </a>
-              </h6>
-              <ul class="nav flex-column mb-2">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Current month
+                <div class="navbar-search-block">
+                  <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                      <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                      <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                  <i class="far fa-comments"></i>
+                  <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                  <a href="#" class="dropdown-item">
+                    <div class="media">
+                      <img src="../../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          Brad Diesel
+                          <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">Call me whenever you can...</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
+                    </div>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Last quarter
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <div class="media">
+                      <img src="../../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          John Pierce
+                          <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">I got your message bro</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
+                    </div>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Social engagement
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <div class="media">
+                      <img src="../../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                          Nora Silvester
+                          <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">The subject goes here</p>
+                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                      </div>
+                    </div>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Year-end sale
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                  <i class="far fa-bell"></i>
+                  <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                  <span class="dropdown-item dropdown-header">15 Notifications</span>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
                   </a>
-                </li>
-              </ul>
-            </div>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                  <i class="fas fa-th-large"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../../controller/cerrarSesionLogin" role="button">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+              </li>
+            </ul>
           </nav>
 
+          <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="index3.html" class="brand-link">
+              <img src="../../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+              <span class="brand-text font-weight-light">AdminLTE 3</span>
+            </a>
+            <div class="sidebar">
+              <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                  <img src="../../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                  <a href="#" class="d-block">Alexander Pierce</a>
+                </div>
+              </div>
+              <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                  <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                      <i class="fas fa-search fa-fw"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                  <?php 
+                    $sql="SELECT up.rla_id_aplicacion, app.apl_aplicacion, app.apl_ruta 
+                          FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
+                          WHERE up.rla_id_aplicacion = app.apl_id_aplicacion
+                          AND app.apl_estado = 'A'
+                          AND up.rla_id_rol = :id_role
+                          ORDER BY 1;";
+                    $query=$pdo->prepare($sql);
+                    $query->bindValue(':id_role', $dataSesion['id_role']);
+                    $query->execute();
+                    $row = $query->fetchAll();
+                    foreach ($row as $row1) {
+                      ?>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                              <?php echo $row1["apl_aplicacion"]; ?>
+                              <i class="fas fa-angle-left right"></i>
+                            </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                          <?php 
+                            $sql="SELECT opt.opc_opcion, opt.opc_ruta
+                                      FROM dct_sistema_tbl_opcion opt
+                                      WHERE opt.opc_id_opcion  IN (SELECT rp.rlo_id_opcion
+                                      FROM dct_sistema_tbl_rol_opcion rp, dct_sistema_tbl_opcion op
+                                      WHERE rp.rlo_id_opcion = op.opc_id_opcion
+                                      AND op.opc_estado = 'A'
+                                      AND rp.rlo_id_rol = :id_role)
+                                      AND opt.opc_id_aplicacion = :id_application
+                                      ORDER BY opt.opc_orden;";
+                            $query=$pdo->prepare($sql);
+                            $query->bindValue(':id_role', $dataSesion['id_role']);
+                            $query->bindValue(':id_application', $row1["rla_id_aplicacion"]);
+                            $query->execute();
+                            $row = $query->fetchAll();
+                            foreach ($row as $row2) {
+                              $route = $row1["apl_ruta"].$row2["opc_ruta"];
+                              ?>
+                                <li class="nav-item">
+                                  <a href="<?php echo $route; ?>" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p><?php echo $row2["opc_opcion"]; ?></p>
+                                  </a>
+                                </li>
+                              <?php 
+                            } 
+                          ?>
+                          </ul>
+                        </li>
+                      <?php
+                    }
+                  ?>
+
+                  <li class="nav-header">EXAMPLES</li>
+                  <li class="nav-item">
+                    <a href="pages/calendar.html" class="nav-link">
+                      <i class="nav-icon far fa-calendar-alt"></i>
+                      <p>
+                        Calendar
+                        <span class="badge badge-info right">2</span>
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-envelope"></i>
+                      <p>
+                        Mailbox
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="pages/mailbox/mailbox.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Inbox</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/mailbox/compose.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Compose</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="pages/mailbox/read-mail.html" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Read</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+
+                </ul>
+              </nav>
+
+            </div>
+          </aside>
 <?php 
   } 
 ?>

@@ -16,28 +16,46 @@
 
   template_head($data_template, $css_dreconstec);
 ?>
-  <main class="form-signin">
-    <form id="btnFormLogin" class="form-group" method="post" data-toggle="validator" role="form" autocomplete="off">
-      <img class="mb-4" src="../../../dist/img/dreconstec_2.png" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Inicio de Sesión</h1>
 
-      <div class="form-floating">
-        <input type="text" class="form-control" name="inputUser" id="inputUser">
-        <label for="floatingInput">Cédula Identidad</label>
+  <div class="login-box">
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Password">
-        <label for="floatingPassword">Contraseña</label>
+      <div class="card-body">
+        <p class="login-box-msg">Inicio de Sesión</p>
+        <form id="btnFormLogin" class="form-group" method="post" data-toggle="validator" role="form" autocomplete="off">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+            </div>
+          </div>
+        </form>
+        <p class="mb-1">
+          <a href="../login/olvidoSuContrasena.php">¿Olvidó su contraseña?</a>
+        </p>
       </div>
+    </div>
+  </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <a href="../login/olvidoSuContrasena.php" class="olvidoContrasena">¿Olvidó su contraseña?</a>
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Acceder</button>
-    </form>
-  </main>
+
+  
 
   <div class="modal fade" id="myModalRegistroOk" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">

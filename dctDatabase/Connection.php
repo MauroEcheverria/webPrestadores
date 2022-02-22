@@ -4,10 +4,18 @@
     public function connect() {
       $host = 'localhost';
       
+      
       $database = 'prestadores_iess';
       $user = 'root';
       $password = 'Dreconstec2022';
-      //$password = 'mauro';
+      $password = 'mauro';
+      
+
+      /*
+      $database = 'dreconst_prestadores_iess';
+      $user = 'dreconst_admin';
+      $password = 'D%#(#74hT3cf4#';
+      */
       
       $charset = 'utf8mb4';
       $dsn = "mysql:host=$host;dbname=$database;port=3306;charset=$charset;options='--client_encoding=UTF8'";

@@ -8,11 +8,12 @@
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>Checkout example · Bootstrap v5.1</title>
+          <title>Prestores IESS</title>
 
           <link href="../../../plugins/bootstrap-5.1.3/dist/css/bootstrap.min.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
           <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
-          <link href="../../../plugins/bootstrap-5.1.3/dist/css/signin.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+          <link href="../../../plugins/icheck-bootstrap/icheck-bootstrap.min.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+          <link href="../../../dist/css/adminlte.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
           <link href="../../../dist/css/webSistema.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
 
           <?php
@@ -23,7 +24,7 @@
 
         </head>
 
-        <body class="text-center">
+        <body class="hold-transition login-page">
 <?php 
   } 
 ?>

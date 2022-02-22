@@ -1,25 +1,48 @@
 <?php 
   function template_footer($pdo,$dataSesion,$js_dreconstec){ 
 ?>
-
+ 
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.2.0
       </div>
-    </div>
+    </footer>
 
-    <script src="../../../plugins/jquery/jquery-3.6.0.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-    <script src="../../../plugins/bootstrap-5.1.3/dist/js/bootstrap.bundle.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-    <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-    <script src="../../../plugins/bootstrap-5.1.3/dist/js/dashboard.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
+  </div>
 
-    <?php
-      for ($i = 0; $i < count($js_dreconstec); ++$i){
-        echo $js_dreconstec[$i];
-      }
-    ?>
-        
-    </body>
+  <script src="../../../plugins/jquery/jquery-3.6.0.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/jquery-ui/jquery-ui.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  
+  <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../plugins/chart.js/Chart.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/sparklines/sparkline.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/jqvmap/jquery.vmap.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/jqvmap/maps/jquery.vmap.usa.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/jquery-knob/jquery.knob.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/moment/moment.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/daterangepicker/daterangepicker.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/summernote/summernote-bs4.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/adminlte.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/demo.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/dashboard.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+
+  <?php
+    for ($i = 0; $i < count($js_dreconstec); ++$i){
+      echo $js_dreconstec[$i];
+    }
+  ?>
+
+  </body>
 
   </html>
 <?php 
