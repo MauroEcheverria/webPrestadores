@@ -25,7 +25,7 @@
 
     $tok_cedula = cleanData("siLimite",13,"noMayuscula",$row["tok_cedula"]);
 
-    $sql_pass="SELECT um.usr_correo, um.usr_nom_completos
+    $sql_pass="SELECT um.usr_correo, CONCAT(um.usr_nombre_1,' ',um.usr_nombre_2,' ',um.usr_apellido_1,' ', um.usr_apellido_2) usr_nom_completos
           FROM dct_sistema_tbl_usuario um
           WHERE um.usr_cod_usuario = :usr_cod_usuario;";
     $query_pass=$pdo->prepare($sql_pass);
@@ -45,7 +45,7 @@
       $return_2 = array();
       $countSi = 0;
       foreach ($row_2 as $row_2) {
-        if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"]),$row_2["cts_contrasenia"])) {
+        if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"]),$row_2["cts_contrasenia"])) {
           $countSi += 1;
         }
         if ($countSi == 1) { break; }
@@ -80,7 +80,7 @@
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
               VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'A');";
         $query_4=$pdo->prepare($sql_4);
-        $query_4->bindValue(':cts_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])));
+        $query_4->bindValue(':cts_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])));
         $query_4->bindValue(':cts_cod_usuario', $tok_cedula);
         $query_4->execute();
 
@@ -88,7 +88,7 @@
                 SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'A'
                 WHERE usr_cod_usuario = :usr_cod_usuario";
         $query_2=$pdo->prepare($sql_2);
-        $query_2->bindValue(':usr_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])));
+        $query_2->bindValue(':usr_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])));
         $query_2->bindValue(':usr_cod_usuario', $tok_cedula);
         $query_2->execute();
 

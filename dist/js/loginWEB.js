@@ -1,3 +1,36 @@
+function soloNumeros(e) {
+  var key = window.event ? e.which : e.charCode;
+  if (key == 8) {
+    return true;
+  }
+  if (key !== undefined && key === 0) {
+    return true;
+  }
+  var patron = /[0-9]/;
+  var tecla_final = String.fromCharCode(key);
+  return patron.test(tecla_final);
+}
+function validateOnlyNumber(evt) {
+  var theEvent = evt || window.event;
+  if (theEvent.type === 'paste') {
+    key = event.clipboardData.getData('text/plain');
+  } else {
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+  }
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+function modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4) {
+  $("#putIconModalgeneric").empty().prepend(dataModal_1);
+  $("#putTitleModalgeneric").empty().prepend(dataModal_2);
+  $("#putMessaggeModalgeneric").empty().prepend(dataModal_3);
+  $("#putButtonModalgeneric").empty().prepend(dataModal_4);
+  $('#modalGenericoInfo').modal('show');
+}
 $(document).ready(function() { 
 
   $('#loading').hide();  
@@ -162,7 +195,7 @@ $(document).ready(function() {
           url: '../../beans/manejoSistema/saveTokenRestarPass.php',
           type: 'POST',
           dataType: 'html',
-          data:$("#formTokenReestaPass").serialize()+"&valPaciente="+$.md5($('#passPassNew').val(),'M@rut0'),
+          data:$("#formTokenReestaPass").serialize(),
           success: function(result){
             var result = eval('('+result+')');
             document.getElementById('formTokenReestaPass').reset();

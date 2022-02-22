@@ -41,7 +41,7 @@
 
     if($query_1->rowCount() == 1) {
       if ($row_1["diff"] <= 10) {
-        if ($row_1["tok_estado"] == 1) {
+        if ($row_1["tok_estado"] == 'A') {
           $tokenUsado = "NO";
         }
         $dentroLimite = "SI";

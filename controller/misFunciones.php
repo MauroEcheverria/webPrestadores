@@ -186,4 +186,66 @@
 		/*'%Y años %m meses %d days %H horas %i minutos %s segundos'*/
 		return $interval->format('%Y AÑOS %M MESES %D DÍAS');
 	}
+	function phpMailer($arrayMail)
+	{
+		include("../../../dctDatabase/Parameter.php");
+		require_once('../../../plugins/PHPSendMail/PHPMailerAutoload.php');
+	  $mail = new PHPMailer;
+	  $mail->SMTPDebug = 0;
+	  $mail->Debugoutput = 'html';
+	  $mail->isSMTP();
+	  $mail->Host = $hostSince;
+	  $mail->SMTPAuth = true;
+	  $mail->CharSet = "UTF-8";
+	  $mail->Username = $mailSince;
+	  $mail->Password = $passSince;
+	  $mail->SMTPSecure = $mailSMTP;
+	  $mail->Port = $mailPort;
+	  $mail->setFrom($deCorreo);
+	  $mail->SMTPOptions = array(
+	    'ssl' => array(
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+      'allow_self_signed' => true
+	    )
+	  );
+
+	  switch ($arrayMail["tipoCorreo"]) {
+	  	case 'htmlResetPass':
+					$mail->addAddress($arrayMail["paraCorreo"]);
+				  $mail->Subject = $arrayMail["subject"];
+				  $body = file_get_contents($arrayMail["archivoHTML"]);
+				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
+				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
+				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+	  		break;
+	  	case 'htmlResetPassConfirmacion':
+	  			$mail->addAddress($arrayMail["paraCorreo"]);
+				  $mail->Subject = $arrayMail["subject"];
+				  $body = file_get_contents($arrayMail["archivoHTML"]);
+				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
+				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+	  		break;
+	  	case 'htmlActivarCuenta':
+	  			$mail->addAddress($arrayMail["paraCorreo"]);
+				  $mail->Subject = $arrayMail["subject"];
+				  $body = file_get_contents($arrayMail["archivoHTML"]);
+				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
+				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
+				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+				break;
+	  	default:
+	  		break;
+	  }
+
+	  $mail->MsgHTML($body);
+	  $mail->IsHTML(true);
+		if ($mail->send()) {
+		    return true;
+				//echo json_encode(array('message'=>"sendOk"));
+		} else {
+		    return false;
+		    //echo json_encode(array('message'=>"sendError"));
+		}
+	}
 ?>

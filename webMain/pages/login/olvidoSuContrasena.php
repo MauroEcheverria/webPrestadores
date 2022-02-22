@@ -51,5 +51,6 @@
   </div>
 
 <?php
+  modalViews();
   template_footer($data_template, $js_dreconstec);
 ?>

@@ -10,7 +10,7 @@
 
     $cedOlvPass = cleanData("siLimite",13,"noMayuscula",$_POST["cedOlvPass"]); 
 
-    $sql="SELECT um.usr_correo, um.usr_nom_completos
+    $sql="SELECT um.usr_correo, CONCAT(um.usr_nombre_1,' ',um.usr_nombre_2,' ',um.usr_apellido_1,' ', um.usr_apellido_2) usr_nom_completos
           FROM dct_sistema_tbl_usuario um
           WHERE um.usr_cod_usuario = :usr_cod_usuario;";
     $query=$pdo->prepare($sql);
