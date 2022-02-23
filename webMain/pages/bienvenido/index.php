@@ -49,7 +49,7 @@
 								$pdo->commit();
 								$getToken = new ValidacionUsuario();
 								$dataSesion = [
-									'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
+							    'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
 							    'cod_system_user' => $row['usr_cod_usuario'],
 							    'complete_names' => $row['usr_nom_completos'],
 							    'version_css_js' => $version_css_js,

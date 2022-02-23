@@ -154,7 +154,7 @@
 		    $query_app->execute();
 		    $row_app = $query_app->fetch(\PDO::FETCH_ASSOC);
 
-		    if ($row_opt["opc_estado"] == 1 &&  $row_app["apl_estado"] == 1) {
+		    if ( $row_opt["opc_estado"] == 'A' &&  $row_app["apl_estado"] == 'A' ) {
 		    	return TRUE;
 		    }
 		    else {

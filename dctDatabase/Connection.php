@@ -8,7 +8,7 @@
       $database = 'prestadores_iess';
       $user = 'root';
       $password = 'Dreconstec2022';
-      $password = 'mauro';
+      //$password = 'mauro';
       
 
       /*

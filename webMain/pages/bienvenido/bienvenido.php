@@ -1,34 +1,46 @@
 <?php 
-function bienvenido($pdo,$dataSesion){ 
-include("../../../template/templateHead.php");
-include("../../../template/templateFooter.php");
-include("../../../dialogs/modalViews.php"); 
+  function bienvenido($pdo,$dataSesion){ 
+  include("../../../template/templateHead.php");
+  include("../../../template/templateFooter.php");
+  include("../../../dialogs/modalViews.php"); 
 
-$css_dreconstec = array();
-//$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec = array();
+  $css_dreconstec[] = '<link href="../../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link href="../../../plugins/icheck-bootstrap/icheck-bootstrap.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link href="../../../plugins/jqvmap/jqvmap.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link href="../../../plugins/daterangepicker/daterangepicker.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link href="../../../plugins/summernote/summernote-bs4.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
 
-$js_dreconstec = array();
-//$js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec = array();
+  $js_dreconstec[] = '<script src="../../../plugins/chart.js/Chart.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/sparklines/sparkline.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/jqvmap/jquery.vmap.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/jqvmap/maps/jquery.vmap.usa.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/jquery-knob/jquery.knob.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/daterangepicker/daterangepicker.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/dashboard.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/summernote/summernote-bs4.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/demo.js'.$dataSesion["version_css_js"].'"></script>';
 
-template_head($pdo,$dataSesion,$css_dreconstec);
+  template_head($pdo,$dataSesion,$css_dreconstec);
 
-$sql="SELECT *
-      FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
-      WHERE app.apl_id_aplicacion  = up.rla_id_aplicacion 
-      AND up.rla_id_rol  = :rla_id_rol 
-      /*AND up.rla_id_aplicacion  NOT IN (1)*/
-      AND app.apl_estado = 'A';";
-$query=$pdo->prepare($sql);
-$query->bindValue(':rla_id_rol', $dataSesion['id_role']);
-$query->execute();
-$row = $query->fetchAll();
-$color_icon_main = array("small-box bg-green", "small-box bg-aqua", "small-box bg-yellow", "small-box bg-red");
-
+  $sql="SELECT *
+        FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
+        WHERE app.apl_id_aplicacion  = up.rla_id_aplicacion 
+        AND up.rla_id_rol  = :rla_id_rol 
+        /*AND up.rla_id_aplicacion  NOT IN (1)*/
+        AND app.apl_estado = 'A';";
+  $query=$pdo->prepare($sql);
+  $query->bindValue(':rla_id_rol', $dataSesion['id_role']);
+  $query->execute();
+  $row = $query->fetchAll();
+  $color_icon_main = array("small-box bg-green", "small-box bg-aqua", "small-box bg-yellow", "small-box bg-red");
 ?>
 
-<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -40,13 +52,10 @@ $color_icon_main = array("small-box bg-green", "small-box bg-aqua", "small-box b
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
 
@@ -588,9 +597,9 @@ $color_icon_main = array("small-box bg-green", "small-box bg-aqua", "small-box b
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
+        
+      </div>
     </section>
-    <!-- /.content -->
   </div>
 
 <?php 

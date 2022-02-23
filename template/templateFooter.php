@@ -19,21 +19,9 @@
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
-  
   <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../../plugins/chart.js/Chart.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/sparklines/sparkline.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/jqvmap/jquery.vmap.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/jqvmap/maps/jquery.vmap.usa.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/jquery-knob/jquery.knob.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../plugins/moment/moment.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/daterangepicker/daterangepicker.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/summernote/summernote-bs4.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/adminlte.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../dist/js/demo.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../dist/js/dashboard.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
 
   <?php
