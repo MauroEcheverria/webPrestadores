@@ -8,10 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Prestores IESS</title>
      
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" rel="stylesheet">
         <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link href="../../../dist/css/adminlte.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/select2/dist/css/select2.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/DataTables/media/css/jquery.dataTables.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/webSistema.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
 
         <?php
@@ -191,7 +194,7 @@
                           AND up.rla_id_rol = :id_role
                           ORDER BY 1;";
                     $query=$pdo->prepare($sql);
-                    $query->bindValue(':id_role', $dataSesion['id_role']);
+                    $query->bindValue(':id_role',$dataSesion['id_role'],PDO::PARAM_INT);
                     $query->execute();
                     $row = $query->fetchAll();
                     foreach ($row as $row1) {
@@ -216,8 +219,8 @@
                                       AND opt.opc_id_aplicacion = :id_application
                                       ORDER BY opt.opc_orden;";
                             $query=$pdo->prepare($sql);
-                            $query->bindValue(':id_role', $dataSesion['id_role']);
-                            $query->bindValue(':id_application', $row1["rla_id_aplicacion"]);
+                            $query->bindValue(':id_role',$dataSesion['id_role'],PDO::PARAM_INT);
+                            $query->bindValue(':id_application',$row1["rla_id_aplicacion"],PDO::PARAM_INT);
                             $query->execute();
                             $row = $query->fetchAll();
                             foreach ($row as $row2) {

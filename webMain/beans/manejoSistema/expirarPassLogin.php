@@ -18,7 +18,7 @@
             FROM dct_sistema_tbl_usuario 
             WHERE usr_cod_usuario = :usr_cod_usuario;";
     $query_1=$pdo->prepare($sql_1);
-    $query_1->bindValue(':usr_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]));
+    $query_1->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT);
     $query_1->execute();
     $row_1 = $query_1->fetch(\PDO::FETCH_ASSOC);
     if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPacienteAnt"]),$row_1["usr_contrasenia"])) { 
@@ -27,7 +27,7 @@
             FROM dct_sistema_tbl_contrasenia
             WHERE cts_cod_usuario = :cts_cod_usuario;";
       $query_2=$pdo->prepare($sql_2);
-      $query_2->bindValue(':cts_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]));
+      $query_2->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT);
       $query_2->execute();
       $row_2 = $query_2->fetchAll();
       $return_2 = array();
@@ -55,9 +55,9 @@
                 usr_contador_error_contrasenia  =0 
                 WHERE usr_cod_usuario = :usr_cod_usuario;";
         $query_3=$pdo->prepare($sql_3);
-        $query_3->bindValue(':usr_contrasenia', $nueva_contrasena);
-        $query_3->bindValue(':usr_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]));
-        $query_3->bindValue(':usr_fecha_cambio_contrasenia', $fechaActual_1);
+        $query_3->bindValue(':usr_contrasenia',$nueva_contrasena,PDO::PARAM_STR);
+        $query_3->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT);
+        $query_3->bindValue(':usr_fecha_cambio_contrasenia',$fechaActual_1,PDO::PARAM_STR);
         $query_3->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
@@ -65,14 +65,14 @@
               WHERE cts_cod_usuario =:cts_cod_usuario
               AND cts_estado='A';";
         $query_5=$pdo->prepare($sql_5);
-        $query_5->bindValue(':cts_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"])); 
+        $query_5->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
               VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'A');";
         $query_4=$pdo->prepare($sql_4);
-        $query_4->bindValue(':cts_contrasenia', $nueva_contrasena);
-        $query_4->bindValue(':cts_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]));
+        $query_4->bindValue(':cts_contrasenia',$nueva_contrasena);
+        $query_4->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT);
         $query_4->execute();
 
         if($query_3 && $query_4 && $query_5) {

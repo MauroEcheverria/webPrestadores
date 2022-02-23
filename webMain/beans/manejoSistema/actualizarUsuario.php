@@ -64,14 +64,14 @@
 
 	    if ($_POST["editEstado"] == "TRUE") { $editEstado = 1; } else { $editEstado = 0; }
 
-	    $query->bindValue(':usr_estado', $editEstado, PDO::PARAM_INT);
-	    $query->bindValue(':usr_cod_usuario', $usr_cedula); 
-	    $query->bindValue(':usr_id_empresa', 1); 
-	    $query->bindValue(':usr_nacimiento', cleanData("noLimite",0,"noMayuscula",$_POST["editNacimiento"]));
-	    $query->bindValue(':usr_sexo', cleanData("siLimite",1,"noMayuscula",$_POST["edit_usr_sexo"])); 
-	    $query->bindValue(':usr_telefono', cleanData("siLimite",10,"noMayuscula",$_POST["edit_usr_telefono"])); 
-	    $query->bindValue(':usr_usuario_modificacion', cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"])); 
-	    $query->bindValue(':usr_ip_modificacion', getRealIP());
+	    $query->bindValue(':usr_estado',$editEstado,PDO::PARAM_INT);
+	    $query->bindValue(':usr_cod_usuario',$usr_cedula,PDO::PARAM_INT); 
+	    $query->bindValue(':usr_id_empresa',1); 
+	    $query->bindValue(':usr_nacimiento',cleanData("noLimite",0,"noMayuscula",$_POST["editNacimiento"]),PDO::PARAM_STR);
+	    $query->bindValue(':usr_sexo',cleanData("siLimite",1,"noMayuscula",$_POST["edit_usr_sexo"]),PDO::PARAM_STR); 
+	    $query->bindValue(':usr_telefono',cleanData("siLimite",10,"noMayuscula",$_POST["edit_usr_telefono"]),PDO::PARAM_STR); 
+	    $query->bindValue(':usr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+	    $query->bindValue(':usr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 	    $query->execute();
 			if($query) {
 				$pdo->commit();

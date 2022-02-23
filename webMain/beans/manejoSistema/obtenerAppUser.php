@@ -16,7 +16,7 @@
           AND app.apl_estado = TRUE
           ORDER BY 1;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':rla_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"])); 
+    $query->bindValue(':rla_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
     $query->execute();
     $row = $query->fetchAll();
     $return_array = array();

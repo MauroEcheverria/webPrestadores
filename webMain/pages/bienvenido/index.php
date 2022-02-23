@@ -27,7 +27,7 @@
 						AND u.usr_id_empresa=m.emp_id_empresa
 						AND u.usr_cod_usuario=:usr_cod_usuario;";
 	    $query=$pdo->prepare($sql);
-	    $query->bindValue(':usr_cod_usuario', $userSystem);
+	    $query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
 	    $query->execute();
 	    $row = $query->fetch(\PDO::FETCH_ASSOC);
 	    if($row["usr_estado"] == 'A') {
@@ -41,9 +41,9 @@
 										usr_contador_error_contrasenia=0
 										WHERE usr_cod_usuario = :usr_cod_usuario;";
 							$query=$pdo->prepare($sql);
-							$query->bindValue(':usr_ip_pc_acceso', getRealIP());
-							$query->bindValue(':usr_cod_usuario', $userSystem);
-							$query->bindValue(':usr_fecha_acceso', $fechaActual_1);
+							$query->bindValue(':usr_ip_pc_acceso',getRealIP(),PDO::PARAM_STR);
+							$query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
+							$query->bindValue(':usr_fecha_acceso',$fechaActual_1,PDO::PARAM_STR);
 							$query->execute();
 							if ($query) {
 								$pdo->commit();

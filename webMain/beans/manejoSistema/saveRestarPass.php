@@ -14,7 +14,7 @@
           FROM dct_sistema_tbl_usuario um
           WHERE um.usr_cod_usuario = :usr_cod_usuario;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':usr_cod_usuario', $cedOlvPass);
+    $query->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);
     $query->execute();
     $row = $query->fetch(\PDO::FETCH_ASSOC);
 
@@ -33,7 +33,7 @@
 						AND tok_cedula = :tok_cedula
 						AND tok_tipo = 'RESETEO'";
 	    $query_2=$pdo->prepare($sql_2);
-	    $query_2->bindValue(':tok_cedula', $cedOlvPass);
+	    $query_2->bindValue(':tok_cedula',$cedOlvPass,PDO::PARAM_INT);
 	    $query_2->execute();
 
 	    if ($query_2->rowCount() == 0) {
@@ -44,15 +44,15 @@
 	    	$sql_1="INSERT INTO dct_sistema_tbl_token(tok_token,tok_cedula,tok_fecha,tok_estado,tok_tipo)
 			    		VALUES (:tok_token,:tok_cedula,now(),'A','RESETEO');";
 		    $query_1=$pdo->prepare($sql_1);
-		    $query_1->bindValue(':tok_token', $validacionUsuario->setPassword($tokenAsignado));
-		    $query_1->bindValue(':tok_cedula', $cedOlvPass);
+		    $query_1->bindValue(':tok_token',$validacionUsuario->setPassword($tokenAsignado),PDO::PARAM_STR);
+		    $query_1->bindValue(':tok_cedula',$cedOlvPass,PDO::PARAM_INT);
 		    $query_1->execute();
 
 		    $sql_3="UPDATE dct_sistema_tbl_usuario
 		            SET usr_estado_contrasenia = 'I'
 		            WHERE usr_cod_usuario = :usr_cod_usuario;";
 		    $query_3=$pdo->prepare($sql_3);
-		    $query_3->bindValue(':usr_cod_usuario', $cedOlvPass);
+		    $query_3->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);
 		    $query_3->execute();
 
 		    $arrayMail["subject"] = "Link para restablecimiento de contraseña";

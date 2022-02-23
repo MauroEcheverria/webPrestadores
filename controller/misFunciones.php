@@ -17,8 +17,7 @@
 		if ($data != "") {
 			$data = trim($data);
 		  $data = stripslashes($data);
-		  $data = htmlspecialchars($data);
-		  //$data = str_replace("'","´",$data);
+		  $data = htmlentities($data);
 			if ($limite == "siLimite") {
 				$data = substr($data,0,$max);
 			}

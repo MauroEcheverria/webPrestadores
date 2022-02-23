@@ -34,7 +34,7 @@
         /*AND up.rla_id_aplicacion  NOT IN (1)*/
         AND app.apl_estado = 'A';";
   $query=$pdo->prepare($sql);
-  $query->bindValue(':rla_id_rol', $dataSesion['id_role']);
+  $query->bindValue(':rla_id_rol',$dataSesion['id_role'],PDO::PARAM_INT);
   $query->execute();
   $row = $query->fetchAll();
   $color_icon_main = array("small-box bg-green", "small-box bg-aqua", "small-box bg-yellow", "small-box bg-red");

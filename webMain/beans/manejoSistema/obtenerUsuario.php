@@ -9,12 +9,12 @@
       //print_r($sesion->get('dataSesion'));
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
-    $sql="SELECT u.usr_cod_usuario, u.usr_nom_completos, u.usr_correo, u.usr_estado_contrasenia,
-          r.rol_rol, u.usr_estado, u.usr_id_empresa, m.emp_empresa, u.usr_nacimiento, u.usr_sexo,
-          u.usr_telefono
-          FROM dct_sistema_tbl_usuario u, dct_sistema_tbl_rol r, dct_sistema_tbl_empresa m
+    $sql="SELECT u.usr_cod_usuario,u.usr_correo,u.usr_estado_contrasenia,
+          r.rol_rol,u.usr_estado,u.usr_id_empresa,m.emp_empresa,
+          CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ',usr_apellido_2) usr_nom_completos
+          FROM dct_sistema_tbl_usuario u,dct_sistema_tbl_rol r,dct_sistema_tbl_empresa m
           WHERE u.usr_id_rol = r.rol_id_rol
-          AND u.usr_cod_usuario NOT IN ('0919664854')
+          /*AND u.usr_cod_usuario NOT IN ('0919664854')*/
           AND u.usr_id_empresa = m.emp_id_empresa;";
     $query=$pdo->prepare($sql);
     $query->execute();
@@ -30,10 +30,7 @@
 			$return_array[5] = $row["usr_estado"];
       $return_array[6] = $row["usr_estado_contrasenia"];
       $return_array[7] = $row["usr_id_empresa"];
-      $return_array[8] = $row["usr_nacimiento"];
-      $return_array[9] = $row["usr_sexo"];
-      $return_array[10] = $row["usr_telefono"];
-      $return_array[11] = null;
+      $return_array[8] = null;
 			array_push($return,$return_array);
 		}
 		$return = array(

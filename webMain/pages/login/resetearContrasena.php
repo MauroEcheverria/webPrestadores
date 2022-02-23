@@ -35,7 +35,7 @@
           AND tok_tipo = 'RESETEO'
           AND tok_estado = 'A';";
     $query_1=$pdo->prepare($sql_1);
-    $query_1->bindValue(':tok_token',$_GET["linkReset"]);
+    $query_1->bindValue(':tok_token',$_GET["linkReset"],PDO::PARAM_STR);
     $query_1->execute();
     $row_1 = $query_1->fetch(\PDO::FETCH_ASSOC);
 

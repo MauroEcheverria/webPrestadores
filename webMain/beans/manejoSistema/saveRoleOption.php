@@ -13,8 +13,8 @@
 			$sql="INSERT INTO dct_sistema_tbl_rol_opcion(rlo_id_rol, rlo_id_opcion, rlo_estado)
 		    		VALUES (:rlo_id_rol, :rlo_id_opcion, 'A');";
 	    $query=$pdo->prepare($sql);
-	    $query->bindValue(':rlo_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]));
-	    $query->bindValue(':rlo_id_opcion', cleanData("noLimite",0,"noMayuscula",$selectedOption));
+	    $query->bindValue(':rlo_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT);
+	    $query->bindValue(':rlo_id_opcion', cleanData("noLimite",0,"noMayuscula",$selectedOption),PDO::PARAM_INT);
 	    $query->execute();
 		}
 

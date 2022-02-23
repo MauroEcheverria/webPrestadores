@@ -13,8 +13,8 @@
  			  	AND rlo_id_opcion = :rlo_id_opcion
  			  	AND rlo_estado = 'A';";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':rlo_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"])); 
-    $query->bindValue(':rlo_id_opcion', cleanData("noLimite",0,"noMayuscula",$_POST["sys_id_opt"])); 
+    $query->bindValue(':rlo_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
+    $query->bindValue(':rlo_id_opcion', cleanData("noLimite",0,"noMayuscula",$_POST["sys_id_opt"]),PDO::PARAM_INT); 
     $query->execute();
 		if($query) {
 			$pdo->commit();

@@ -21,7 +21,7 @@
 						usr_contador_error_contrasenia=0
 						WHERE usr_cod_usuario = :usr_cod_usuario;";
 			$query=$pdo->prepare($sql);
-			$query->bindValue(':usr_cod_usuario', $userSystem);
+			$query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_STR);
 			$query->execute();
 	    if ($query) {
 	    	$sesion->termina_sesion();

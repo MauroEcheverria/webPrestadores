@@ -10,7 +10,7 @@
           FROM dct_sistema_tbl_usuario
           WHERE usr_cod_usuario = :usr_cod_usuario;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':usr_cod_usuario', cleanData("siLimite",13,"noMayuscula",$_POST["id_dt_cedula"])); 
+    $query->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["id_dt_cedula"]),PDO::PARAM_INT); 
     $query->execute();
     $row = $query->fetchAll();
 		$data_result["data_row"] = $row;

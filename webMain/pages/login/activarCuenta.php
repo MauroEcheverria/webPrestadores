@@ -24,7 +24,7 @@
           WHERE tok_token = :tok_token
           AND tok_tipo = 'ACTIVACION';";
     $query_1=$pdo->prepare($sql_1);
-    $query_1->bindValue(':tok_token',$_GET["linkActivarCuenta"]);
+    $query_1->bindValue(':tok_token',$_GET["linkActivarCuenta"],PDO::PARAM_STR);
     $query_1->execute();
     $row_1 = $query_1->fetch(\PDO::FETCH_ASSOC);
 
@@ -43,7 +43,7 @@
                   WHERE tok_token = :tok_token
                   AND tok_tipo = 'ACTIVACION';";
           $query_3=$pdo->prepare($sql_3);
-          $query_3->bindValue(':tok_token',$_GET["linkActivarCuenta"]);
+          $query_3->bindValue(':tok_token',$_GET["linkActivarCuenta"],PDO::PARAM_STR);
           $query_3->execute();
 
           $sql_2="UPDATE dct_sistema_tbl_usuario 
@@ -53,10 +53,10 @@
                  usr_ip_modificacion=:usr_ip_modificacion
                  WHERE usr_cod_usuario=:usr_cod_usuario";
           $query_2=$pdo->prepare($sql_2);
-          $query_2->bindValue(':usr_cod_usuario',$row_1["tok_cedula"]);
-          $query_2->bindValue(':usr_usuario_modificacion',$row_1["tok_cedula"]);
-          $query_2->bindValue(':usr_fecha_modificacion',$fechaActual_2);
-          $query_2->bindValue(':usr_ip_modificacion',getRealIP());
+          $query_2->bindValue(':usr_cod_usuario',$row_1["tok_cedula"],PDO::PARAM_INT);
+          $query_2->bindValue(':usr_usuario_modificacion',$row_1["tok_cedula"],PDO::PARAM_INT);
+          $query_2->bindValue(':usr_fecha_modificacion',$fechaActual_2,PDO::PARAM_STR);
+          $query_2->bindValue(':usr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
           $query_2->execute();
 
           if ($query_2) {

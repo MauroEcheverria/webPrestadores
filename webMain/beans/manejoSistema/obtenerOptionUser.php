@@ -23,8 +23,8 @@
           AND rp.rla_estado = 'A'
           ORDER BY 2,3;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':id_role_1', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"])); 
-    $query->bindValue(':id_role_2', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"])); 
+    $query->bindValue(':id_role_1',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
+    $query->bindValue(':id_role_2',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
     $query->execute();
     $row = $query->fetchAll();
     $return_array = array();

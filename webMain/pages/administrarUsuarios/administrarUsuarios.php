@@ -5,10 +5,10 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+  //$css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/select2/dist/css/select2.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  //$js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webMain.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>

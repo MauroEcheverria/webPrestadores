@@ -17,7 +17,7 @@
           AND tok_tipo = 'RESETEO'
           AND tok_estado = 'A';";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':tok_token', $pass_token);
+    $query->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
     $query->execute();
     $row = $query->fetch(\PDO::FETCH_ASSOC);
     $query_1=true;
@@ -29,7 +29,7 @@
           FROM dct_sistema_tbl_usuario um
           WHERE um.usr_cod_usuario = :usr_cod_usuario;";
     $query_pass=$pdo->prepare($sql_pass);
-    $query_pass->bindValue(':usr_cod_usuario', $tok_cedula);
+    $query_pass->bindValue(':usr_cod_usuario',$tok_cedula,PDO::PARAM_INT);
     $query_pass->execute();
     $row_pass = $query_pass->fetch(\PDO::FETCH_ASSOC);
     $correoEnviado = "NO";
@@ -39,7 +39,7 @@
             FROM dct_sistema_tbl_contrasenia
             WHERE cts_cod_usuario = :cts_cod_usuario;";
       $query_2=$pdo->prepare($sql_2);
-      $query_2->bindValue(':cts_cod_usuario', $tok_cedula);
+      $query_2->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT);
       $query_2->execute();
       $row_2 = $query_2->fetchAll();
       $return_2 = array();
@@ -66,7 +66,7 @@
                 AND tok_tipo = 'RESETEO'
                 AND tok_estado = 'A';";
         $query_1=$pdo->prepare($sql_1);
-        $query_1->bindValue(':tok_token', $pass_token);
+        $query_1->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
         $query_1->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
@@ -74,22 +74,22 @@
               WHERE cts_cod_usuario =:cts_cod_usuario
               AND cts_estado='A';";
         $query_5=$pdo->prepare($sql_5);
-        $query_5->bindValue(':cts_cod_usuario', $tok_cedula); 
+        $query_5->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
               VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'A');";
         $query_4=$pdo->prepare($sql_4);
-        $query_4->bindValue(':cts_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])));
-        $query_4->bindValue(':cts_cod_usuario', $tok_cedula);
+        $query_4->bindValue(':cts_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);
+        $query_4->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT);
         $query_4->execute();
 
         $sql_2="UPDATE dct_sistema_tbl_usuario
                 SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'A'
                 WHERE usr_cod_usuario = :usr_cod_usuario";
         $query_2=$pdo->prepare($sql_2);
-        $query_2->bindValue(':usr_contrasenia', $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])));
-        $query_2->bindValue(':usr_cod_usuario', $tok_cedula);
+        $query_2->bindValue(':usr_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);
+        $query_2->bindValue(':usr_cod_usuario',$tok_cedula,PDO::PARAM_INT);
         $query_2->execute();
 
         $arrayMail["subject"] = "Confirmación de restablecimiento de contraseña";

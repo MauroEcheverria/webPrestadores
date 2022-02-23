@@ -18,9 +18,9 @@
 	            usr_contador_error_contrasenia=0 
             WHERE usr_cod_usuario = :usr_cod_usuario;";
     $query_3=$pdo->prepare($sql_3);
-    $query_3->bindValue(':usr_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])));
-    $query_3->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["editCedula"]));
-    $query_3->bindValue(':usr_fecha_cambio_contrasenia', $fechaActual_1);
+    $query_3->bindValue(':usr_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])),PDO::PARAM_STR);
+    $query_3->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["editCedula"]),PDO::PARAM_INT);
+    $query_3->bindValue(':usr_fecha_cambio_contrasenia',$fechaActual_1,PDO::PARAM_STR);
     $query_3->execute();
 
     if($query_3) {

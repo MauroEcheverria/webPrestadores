@@ -23,7 +23,7 @@ try {
 							FROM dct_sistema_tbl_usuario
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
             $query = $pdo->prepare($sql);
-            $query->bindValue(':usr_cod_usuario', $userSystem);
+            $query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_STR);
             $query->execute();
             $row = $query->fetchAll();
             foreach ($row as $row) {
@@ -89,8 +89,8 @@ try {
 						  SET usr_contador_error_contrasenia=:usr_contador_error_contrasenia
 							WHERE usr_cod_usuario = :usr_cod_usuario";
             $query_1 = $pdo->prepare($sql_1);
-            $query_1->bindValue(':usr_cod_usuario', $userSystem);
-            $query_1->bindValue(':usr_contador_error_contrasenia', $claveNoIgual[1] + 1);
+            $query_1->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_STR);
+            $query_1->bindValue(':usr_contador_error_contrasenia',$claveNoIgual[1]+1,PDO::PARAM_INT);
             $query_1->execute();
 
             if ($claveNoIgual[1] + 1 == 3) {
@@ -98,7 +98,7 @@ try {
 							  SET usr_estado_contrasenia='I'
 								WHERE usr_cod_usuario = :usr_cod_usuario";
                 $query_2 = $pdo->prepare($sql_2);
-                $query_2->bindValue(':usr_cod_usuario', $userSystem);
+                $query_2->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_STR);
                 $query_2->execute();
             } else {
                 $query_2 = true;
