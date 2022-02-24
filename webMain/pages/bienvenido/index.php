@@ -53,6 +53,7 @@
 							    'cod_system_user' => $row['usr_cod_usuario'],
 							    'complete_names' => $row['usr_nom_completos'],
 							    'version_css_js' => $version_css_js,
+							    'fecha_actual' => $fechaActual_4,
 							    'id_role' => $row['usr_id_rol'],
 							    'role' => $row['rol_rol'],
 							    'id_option' => 1

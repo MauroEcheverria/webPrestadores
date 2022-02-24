@@ -25,6 +25,10 @@
         </head>
 
         <body class="hold-transition login-page">
+
+        <div id="loading">
+          <img src="../../../dist/img/loading.gif" style="margin-top: 15%;"/>
+        </div>
 <?php 
   } 
 ?>

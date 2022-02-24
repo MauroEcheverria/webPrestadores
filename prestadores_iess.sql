@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2022 a las 22:49:00
+-- Tiempo de generación: 24-02-2022 a las 22:38:43
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.3.23
 
@@ -64,8 +64,12 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
 
 INSERT INTO `dct_sistema_tbl_aplicacion_empresa` (`ape_id_aplicacion`, `ape_id_empresa`) VALUES
 (1, 1),
+(1, 2),
+(1, 3),
 (2, 1),
-(3, 1);
+(2, 3),
+(3, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -132,7 +136,7 @@ CREATE TABLE `dct_sistema_tbl_empresa` (
 --
 
 INSERT INTO `dct_sistema_tbl_empresa` (`emp_id_empresa`, `emp_empresa`, `emp_ruc`, `emp_estado`, `emp_vigencia_desde`, `emp_vigencia_hasta`) VALUES
-(1, 'Dreconstec', '0919664854001', 'A', '2022-02-08', '2022-02-28'),
+(1, 'Dreconstec', '0919664854001', 'A', '2022-02-08', '2500-12-31'),
 (2, 'Odontocenter Salud', '0264650623001', 'A', '2022-02-08', '2022-02-28'),
 (3, 'Medical Factura', '0264781245001', 'A', '2022-02-08', '2022-02-28');
 
@@ -279,7 +283,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_id_usuario`, `usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', '0', 'A', NULL, NULL, 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'N', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', '1', 'A', '::1', '2022-02-24 21:21:25', 'mauroviniciO@gmail.com', 1, 'A', 1, '2021-07-15', 0, 'N', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 --
 -- Índices para tablas volcadas

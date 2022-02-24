@@ -52,20 +52,17 @@ $(document).ready(function() {
             case "accesoPermitido":
               window.location = "../bienvenido";
               break;
-            case "errorCaptcha":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "accesoEnOtraPc":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
             case "accesoPermitidoExpirePass":
               $("h3#idPassCedula").empty().prepend(result.cod_system_user);
               $("h3#idPassNombres").empty().prepend(result.complete_names);
               $('#myModal_expire_pass').modal('show');
               break;
+            case "errorCaptcha":
+            case "accesoEnOtraPc":
             case "usuarioInactivo":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
+            case "licenciaAgotada":
+            case "empresaInactiva":
+            case "rolInactivo":
             case "statusPassFalse":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
@@ -75,8 +72,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             case "claveNoIgual":
-              $("#inputPassword").focus();
-              $("#inputPassword").val("");
+              $("#inputPassword").focus().val("");
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:

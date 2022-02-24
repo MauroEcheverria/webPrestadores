@@ -24,6 +24,10 @@
 
       <body>
 
+        <div id="loading">
+          <img src="../../../dist/img/loading.gif" style="margin-top: 15%;"/>
+        </div>
+
         <header>
           <div class="collapse bg-dark" id="navbarHeader">
             <div class="container">
