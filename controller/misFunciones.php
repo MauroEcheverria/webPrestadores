@@ -1,10 +1,10 @@
 <?php
-	function callCerrarSesion(){
+	/*function callCerrarSesion(){
 		include("../../../template/templateHeadCerrarSesion.php");
 		include("../../../template/templateFooterLogin.php");
 		include("../../../dialogs/modalViews.php"); 
 		template_head(); modalViews(); template_footer();
-	}
+	}*/
 
 	function restarDias($numDias, $fecha) {
 		$dias = "-".intval($numDias)." day";
@@ -119,7 +119,7 @@
     }
 	}
 
-	function validaAcceso($pdo,$userSystem) {
+	function validaAcceso($pdo,$dataValidaAcceso) {
 		try {
 
 			$sql_usr="SELECT u.usr_cod_usuario,u.usr_ip_pc_acceso,u.usr_id_rol,u.usr_estado,u.usr_estado_contrasenia,u.usr_expiro_contrasenia,
@@ -132,6 +132,8 @@
 	    $query_usr->bindValue(':usr_cod_usuario',$dataValidaAcceso['cod_system_user'],PDO::PARAM_INT);
 	    $query_usr->execute();
 	    $row_usr = $query_usr->fetch(\PDO::FETCH_ASSOC);
+
+	    $contValidaAcceso = 0;
 
 			$sql="SELECT rlo_id_opcion
 						FROM dct_sistema_tbl_rol_opcion
@@ -146,61 +148,87 @@
     	foreach ($row as $row) {
 	      $return[] = $row["rlo_id_opcion"];
 	  	}
+	  	$valAccesoOpcion = false;
 	  	if (in_array($dataValidaAcceso['id_option'], $return)) {
+	  		$valAccesoOpcion = true;
+	  		$contValidaAcceso += 1;
+	  	}
 
-	  		$sql_opt="SELECT opc_estado
-									FROM dct_sistema_tbl_opcion
-									WHERE opc_id_opcion = :opc_id_opcion;";
-		    $query_opt=$pdo->prepare($sql_opt);
-		    $query_opt->bindValue(':opc_id_opcion',$dataValidaAcceso['id_option'],PDO::PARAM_INT);
-		    $query_opt->execute();
-		    $row_opt = $query_opt->fetch(\PDO::FETCH_ASSOC);
+  		$sql_opt="SELECT opc_estado
+								FROM dct_sistema_tbl_opcion
+								WHERE opc_id_opcion = :opc_id_opcion;";
+	    $query_opt=$pdo->prepare($sql_opt);
+	    $query_opt->bindValue(':opc_id_opcion',$dataValidaAcceso['id_option'],PDO::PARAM_INT);
+	    $query_opt->execute();
+	    $row_opt = $query_opt->fetch(\PDO::FETCH_ASSOC);
 
-		    $sql_app="SELECT apl_estado
-									FROM dct_sistema_tbl_aplicacion
-									WHERE apl_id_aplicacion = (SELECT opc_id_aplicacion
-									FROM dct_sistema_tbl_opcion
-									WHERE opc_id_opcion = :opc_id_opcion);";
-		    $query_app=$pdo->prepare($sql_app);
-		    $query_app->bindValue(':opc_id_opcion',$dataValidaAcceso['id_option'],PDO::PARAM_INT);
-		    $query_app->execute();
-		    $row_app = $query_app->fetch(\PDO::FETCH_ASSOC);
+	    $sql_app="SELECT apl_estado
+								FROM dct_sistema_tbl_aplicacion
+								WHERE apl_id_aplicacion = (SELECT opc_id_aplicacion
+								FROM dct_sistema_tbl_opcion
+								WHERE opc_id_opcion = :opc_id_opcion);";
+	    $query_app=$pdo->prepare($sql_app);
+	    $query_app->bindValue(':opc_id_opcion',$dataValidaAcceso['id_option'],PDO::PARAM_INT);
+	    $query_app->execute();
+	    $row_app = $query_app->fetch(\PDO::FETCH_ASSOC);
 
-		    
+	    $sql_rol = "SELECT rol_estado
+              FROM dct_sistema_tbl_rol
+              WHERE rol_id_rol = :rol_id_rol;";
+      $query_rol = $pdo->prepare($sql_rol);
+      $query_rol->bindValue(':rol_id_rol',$row_usr["usr_id_rol"],PDO::PARAM_INT);
+      $query_rol->execute();
+      $row_rol = $query_rol->fetch(\PDO::FETCH_ASSOC);
 
-		    $sql_rol = "SELECT rol_estado
-                FROM dct_sistema_tbl_rol
-                WHERE rol_id_rol = :rol_id_rol;";
-        $query_rol = $pdo->prepare($sql_rol);
-        $query_rol->bindValue(':rol_id_rol',$row_usr["usr_id_rol"],PDO::PARAM_INT);
-        $query_rol->execute();
-        $row_rol = $query_rol->fetch(\PDO::FETCH_ASSOC);
+      $sql_emp = "SELECT emp_estado, emp_vigencia_desde, emp_vigencia_hasta
+              FROM dct_sistema_tbl_empresa
+              WHERE emp_id_empresa = :emp_id_empresa;";
+      $query_emp = $pdo->prepare($sql_emp);
+      $query_emp->bindValue(':emp_id_empresa',$row_usr["usr_id_empresa"],PDO::PARAM_INT);
+      $query_emp->execute();
+      $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
 
-        $sql_emp = "SELECT emp_estado, emp_vigencia_desde, emp_vigencia_hasta
-                FROM dct_sistema_tbl_empresa
-                WHERE emp_id_empresa = :emp_id_empresa;";
-        $query_emp = $pdo->prepare($sql_emp);
-        $query_emp->bindValue(':emp_id_empresa',$row_usr["usr_id_empresa"],PDO::PARAM_INT);
-        $query_emp->execute();
-        $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
+      $valEstadoUsuario = false;
+	    $valEstadoContrasena = false;
+	    $valExpiroContrasena = false;
+	    $valEnOtraPC = false;
+	    $valEstadoOpcion = false;
+	    $valEstadoAplicativo = false;
+	    $valEstadoRol = false;
+	    $valEstadoEmpresa = false;
+	    $valEstadoVigencia = false;
+	    $estadoValidarAcceso = false;
+	    
+      if($row_usr["usr_estado"] == 'A') { $valEstadoUsuario = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_estado_contrasenia"] == 'A') { $valEstadoContrasena = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_expiro_contrasenia"] == 'N') { $valExpiroContrasena = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_ip_pc_acceso"] == getRealIP() || $row_usr["usr_ip_pc_acceso"] == NULL) { $valEnOtraPC = true; $contValidaAcceso += 1; }
+		  if($row_opt["opc_estado"] == 'A') { $valEstadoOpcion = true; $contValidaAcceso += 1; }
+		  if($row_app["apl_estado"] == 'A') { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
+		  if($row_rol["rol_estado"] == 'A') { $valEstadoRol = true; $contValidaAcceso += 1; }
+		  if($row_emp["emp_estado"] == 'A') { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
+		  if($row_emp["emp_vigencia_hasta"] >= $dataValidaAcceso['fecha_actual']) { $valEstadoVigencia = true; $contValidaAcceso += 1; }
+		  if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
 
+      $dataSesion = [
+      	'estadoValidarAcceso' = $estadoValidarAcceso,
+		    'complete_names' => $row_usr["usr_nom_completos"],
+		    'id_role' => $row_usr["usr_id_rol"],
+		    'role' => $row_usr["rol_rol"]
+		    'valEstadoUsuario' => $valEstadoUsuario,
+		    'valEstadoContrasena' => $valEstadoContrasena,
+		    'valExpiroContrasena' => $valExpiroContrasena,
+		    'valEnOtraPC' => $valEnOtraPC,
+		    'valEstadoOpcion' => $valEstadoOpcion,
+		    'valAccesoOpcion' => $valAccesoOpcion,
+		    'valEstadoAplicativo' => $valEstadoAplicativo,
+		    'valEstadoRol' => $valEstadoRol,
+		    'valEstadoEmpresa' => $valEstadoEmpresa,
+		    'valEstadoVigencia' => $valEstadoVigencia,
+			];
 
-        /* if($row["usr_estado"] == 'A') {
-		    if($row["usr_estado_contrasenia"] == 'A') {
-		    	if($row["usr_expiro_contrasenia"] == 'N') {
-		    		if($row["usr_ip_pc_acceso"] == getRealIP() || $row["usr_ip_pc_acceso"] == NULL) {*/
+			return $dataSesion;
 
-
-		    if ( $row_opt["opc_estado"] == 'A' &&  $row_app["apl_estado"] == 'A'  && $row_rol["rol_estado"] == "A" && $row_emp["emp_estado"] == "A" && $row_emp["emp_vigencia_hasta"] >= $dataValidaAcceso['fecha_actual'] ) {
-		    	return TRUE;
-		    }
-		    else {
-		    	return FALSE;
-		    }
-			}
-			else {
-				return FALSE;
-			}
 		} catch (\PDOException $e) {
 		    echo $e->getMessage();
 		}
