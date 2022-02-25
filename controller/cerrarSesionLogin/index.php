@@ -1,6 +1,6 @@
 <?php 
 	require_once("../../controller/sesion.class.php");
-	require_once("../../controller/misFunciones.php");
+	require_once("../../controller/funcionesCore.php");
 	require_once("../../dctDatabase/Connection.php");
 	require_once("../../dctDatabase/Parameter.php");
 	app_error_reporting($app_error_reporting);

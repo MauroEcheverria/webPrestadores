@@ -1,6 +1,6 @@
 <?php
   require_once("../../../controller/sesion.class.php");
-  require_once("../../../controller/misFunciones.php");
+  require_once("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Connection.php");
   require_once("../../../dctDatabase/Parameter.php");
   app_error_reporting($app_error_reporting);
@@ -49,8 +49,8 @@
       else {
         $sql_3="UPDATE dct_sistema_tbl_usuario 
                 SET usr_contrasenia = :usr_contrasenia, 
-                usr_estado_contrasenia=TRUE, 
-                usr_expiro_contrasenia=FALSE, 
+                usr_estado_contrasenia='AC', 
+                usr_expiro_contrasenia='NO', 
                 usr_fecha_cambio_contrasenia=:usr_fecha_cambio_contrasenia, 
                 usr_contador_error_contrasenia  =0 
                 WHERE usr_cod_usuario = :usr_cod_usuario;";
@@ -61,15 +61,15 @@
         $query_3->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
-              SET cts_estado='I',cts_fecha_cambio=now()
+              SET cts_estado='IN',cts_fecha_cambio=now()
               WHERE cts_cod_usuario =:cts_cod_usuario
-              AND cts_estado='A';";
+              AND cts_estado='AC';";
         $query_5=$pdo->prepare($sql_5);
         $query_5->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
-              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'A');";
+              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'AC');";
         $query_4=$pdo->prepare($sql_4);
         $query_4->bindValue(':cts_contrasenia',$nueva_contrasena,PDO::PARAM_STR);
         $query_4->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);

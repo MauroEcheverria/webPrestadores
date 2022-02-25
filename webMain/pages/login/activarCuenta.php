@@ -1,6 +1,6 @@
 <?php
 
-  require_once("../../../controller/misFunciones.php");
+  require_once("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Parameter.php");
   require_once("../../../dctDatabase/Connection.php");
   include("../../../template/templateHeadLogin.php");

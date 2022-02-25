@@ -1,5 +1,5 @@
 <?php
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 	app_error_reporting($app_error_reporting);
@@ -15,7 +15,7 @@
     			FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
           AND tok_tipo = 'RESETEO'
-          AND tok_estado = 'A';";
+          AND tok_estado = 'AC';";
     $query=$pdo->prepare($sql);
     $query->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
     $query->execute();
@@ -64,28 +64,28 @@
                 SET tok_estado = FALSE
                 WHERE tok_token = :tok_token
                 AND tok_tipo = 'RESETEO'
-                AND tok_estado = 'A';";
+                AND tok_estado = 'AC';";
         $query_1=$pdo->prepare($sql_1);
         $query_1->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
         $query_1->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
-              SET cts_estado='I',cts_fecha_cambio=now()
+              SET cts_estado='IN',cts_fecha_cambio=now()
               WHERE cts_cod_usuario =:cts_cod_usuario
-              AND cts_estado='A';";
+              AND cts_estado='AC';";
         $query_5=$pdo->prepare($sql_5);
         $query_5->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
-              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'A');";
+              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'AC');";
         $query_4=$pdo->prepare($sql_4);
         $query_4->bindValue(':cts_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);
         $query_4->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT);
         $query_4->execute();
 
         $sql_2="UPDATE dct_sistema_tbl_usuario
-                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'A'
+                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'AC'
                 WHERE usr_cod_usuario = :usr_cod_usuario";
         $query_2=$pdo->prepare($sql_2);
         $query_2->bindValue(':usr_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);

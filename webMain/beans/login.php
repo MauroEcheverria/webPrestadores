@@ -1,7 +1,7 @@
 <?php
 
 require_once("../../controller/sesion.class.php");
-require_once("../../controller/misFunciones.php");
+require_once("../../controller/funcionesCore.php");
 require_once("../../dctDatabase/Connection.php");
 require_once("../../dctDatabase/Parameter.php");
 app_error_reporting($app_error_reporting);
@@ -28,17 +28,17 @@ try {
           $query->execute();
           $row = $query->fetch(\PDO::FETCH_ASSOC);
 
-          if ($row["usr_estado"] == 'A') {
-            if ($row["usr_logeado"] == 'N') {
+          if ($row["usr_estado"] == 'AC') {
+            if ($row["usr_logeado"] == 'NO') {
               $accesoPermitido = "normal";
             } else {
-                if ($row["usr_ip_pc_acceso"] == getRealIP() || $row["usr_ip_pc_acceso"] == NULL) {
-                  $accesoPermitido = "normal";
-                } else {
-                  $accesoPermitido = "normalEnOtraPC";
-                }
+              if ($row["usr_ip_pc_acceso"] == getRealIP() || $row["usr_ip_pc_acceso"] == NULL) {
+                $accesoPermitido = "normal";
+              } else {
+                $accesoPermitido = "normalEnOtraPC";
+              }
             }
-            if ($row["usr_expiro_contrasenia"] == 'S') {
+            if ($row["usr_expiro_contrasenia"] == 'SI') {
               $data_result["message"] = "accesoPermitidoExpirePass";
               $data_result["cod_system_user"] = $row["usr_cod_usuario"];
               $data_result["complete_names"] = $row["usr_nom_completos"];
@@ -61,8 +61,8 @@ try {
               $query_emp->execute();
               $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
 
-              if ($row_rol["rol_estado"] == "A") {
-                if ($row_emp["emp_estado"] == "A") {
+              if ($row_rol["rol_estado"] == "AC") {
+                if ($row_emp["emp_estado"] == "AC") {
                   if ($row_emp["emp_vigencia_hasta"] >= $fechaActual_4) {
                     if ($accesoPermitido == "normal") {
                       $data_result["message"] = "accesoPermitido";
@@ -145,7 +145,7 @@ try {
 
           if ($claveNoIgual[1] + 1 == 3) {
               $sql_2 = "UPDATE dct_sistema_tbl_usuario
-						  SET usr_estado_contrasenia='I'
+						  SET usr_estado_contrasenia='IN'
 							WHERE usr_cod_usuario = :usr_cod_usuario";
               $query_2 = $pdo->prepare($sql_2);
               $query_2->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);

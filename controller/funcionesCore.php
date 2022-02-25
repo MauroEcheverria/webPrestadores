@@ -1,10 +1,4 @@
 <?php
-	/*function callCerrarSesion(){
-		include("../../../template/templateHeadCerrarSesion.php");
-		include("../../../template/templateFooterLogin.php");
-		include("../../../dialogs/modalViews.php"); 
-		template_head(); modalViews(); template_footer();
-	}*/
 
 	function restarDias($numDias, $fecha) {
 		$dias = "-".intval($numDias)." day";
@@ -104,7 +98,7 @@
 		    $query->execute();
 		    if ($query->rowCount() == 1) {
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
-		    	if ($row["usr_estado_contrasenia"] == 'A') {
+		    	if ($row["usr_estado_contrasenia"] == 'AC') {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
               return "pasoTodo";
 		        }
@@ -139,7 +133,8 @@
 						FROM dct_sistema_tbl_rol_opcion
 						WHERE rlo_id_rol = (SELECT usr_id_rol 
 						FROM dct_sistema_tbl_usuario
-						WHERE usr_cod_usuario = :usr_cod_usuario);";
+						WHERE usr_cod_usuario = :usr_cod_usuario)
+						AND rlo_estado = 'AC';";
 	    $query=$pdo->prepare($sql);
 	    $query->bindValue(':usr_cod_usuario',$dataValidaAcceso['cod_system_user'],PDO::PARAM_INT);
 	    $query->execute();
@@ -198,39 +193,64 @@
 	    $valEstadoEmpresa = false;
 	    $valEstadoVigencia = false;
 	    $estadoValidarAcceso = false;
+	    $codigoValidacion = "";
 	    
-      if($row_usr["usr_estado"] == 'A') { $valEstadoUsuario = true; $contValidaAcceso += 1; }
-		  if($row_usr["usr_estado_contrasenia"] == 'A') { $valEstadoContrasena = true; $contValidaAcceso += 1; }
-		  if($row_usr["usr_expiro_contrasenia"] == 'N') { $valExpiroContrasena = true; $contValidaAcceso += 1; }
+      if($row_usr["usr_estado"] == 'AC') { $valEstadoUsuario = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_estado_contrasenia"] == 'AC') { $valEstadoContrasena = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_expiro_contrasenia"] == 'NO') { $valExpiroContrasena = true; $contValidaAcceso += 1; }
 		  if($row_usr["usr_ip_pc_acceso"] == getRealIP() || $row_usr["usr_ip_pc_acceso"] == NULL) { $valEnOtraPC = true; $contValidaAcceso += 1; }
-		  if($row_opt["opc_estado"] == 'A') { $valEstadoOpcion = true; $contValidaAcceso += 1; }
-		  if($row_app["apl_estado"] == 'A') { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
-		  if($row_rol["rol_estado"] == 'A') { $valEstadoRol = true; $contValidaAcceso += 1; }
-		  if($row_emp["emp_estado"] == 'A') { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
+		  if($row_opt["opc_estado"] == 'AC') { $valEstadoOpcion = true; $contValidaAcceso += 1; }
+		  if($row_app["apl_estado"] == 'AC') { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
+		  if($row_rol["rol_estado"] == 'AC') { $valEstadoRol = true; $contValidaAcceso += 1; }
+		  if($row_emp["emp_estado"] == 'AC') { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
 		  if($row_emp["emp_vigencia_hasta"] >= $dataValidaAcceso['fecha_actual']) { $valEstadoVigencia = true; $contValidaAcceso += 1; }
 		  if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
 
-      $dataSesion = [
-      	'estadoValidarAcceso' = $estadoValidarAcceso,
+			if (!$valEstadoUsuario) {
+				$codigoValidacion = "usuarioIncativo";
+			}
+			else if (!$valEstadoContrasena) {
+				$codigoValidacion = "contrasenaIncativa";
+			}
+			else if (!$valExpiroContrasena) {
+				$codigoValidacion = "expiroContrasena";
+			}
+			else if (!$valEstadoAplicativo) {
+				$codigoValidacion = "aplicativoIncativo";
+			}
+			else if (!$valEstadoRol) {
+				$codigoValidacion = "rolIncativo";
+			}
+			else if (!$valEstadoEmpresa) {
+				$codigoValidacion = "empresaInactiva";
+			}
+			else if (!$valEstadoVigencia) {
+				$codigoValidacion = "licenciaCaducada";
+			}
+			else if (!$valEstadoOpcion) {
+				$codigoValidacion = "moduloIncativo";
+			}
+			else if (!$valAccesoOpcion) {
+				$codigoValidacion = "noPosseeAccesoOpcion";
+			}
+			else {
+				if (!$valEnOtraPC) {
+					$codigoValidacion = "ingresoOtraPC";
+				}
+			}
+
+			$dataSesion = [
+      	'estadoValidarAcceso' => $estadoValidarAcceso,
 		    'complete_names' => $row_usr["usr_nom_completos"],
 		    'id_role' => $row_usr["usr_id_rol"],
-		    'role' => $row_usr["rol_rol"]
-		    'valEstadoUsuario' => $valEstadoUsuario,
-		    'valEstadoContrasena' => $valEstadoContrasena,
-		    'valExpiroContrasena' => $valExpiroContrasena,
-		    'valEnOtraPC' => $valEnOtraPC,
-		    'valEstadoOpcion' => $valEstadoOpcion,
-		    'valAccesoOpcion' => $valAccesoOpcion,
-		    'valEstadoAplicativo' => $valEstadoAplicativo,
-		    'valEstadoRol' => $valEstadoRol,
-		    'valEstadoEmpresa' => $valEstadoEmpresa,
-		    'valEstadoVigencia' => $valEstadoVigencia,
+		    'role' => $row_usr["rol_rol"],
+		    'codigoValidacion' => $codigoValidacion
 			];
 
 			return $dataSesion;
 
 		} catch (\PDOException $e) {
-		    echo $e->getMessage();
+		  echo $e->getMessage();
 		}
 	}
 

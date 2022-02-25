@@ -1,5 +1,5 @@
 <?php
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 	app_error_reporting($app_error_reporting);
@@ -28,7 +28,7 @@
     	$existeCuenta = "SI";
     	$sql_2="SELECT TIMESTAMPDIFF(MINUTE,tok_fecha,now()) diff
 						FROM dct_sistema_tbl_token
-						WHERE tok_estado = 'A'
+						WHERE tok_estado = 'AC'
 						AND TIMESTAMPDIFF(MINUTE,tok_fecha,now()) <= 10
 						AND tok_cedula = :tok_cedula
 						AND tok_tipo = 'RESETEO'";
@@ -42,14 +42,14 @@
 	    	$validacionUsuario = new ValidacionUsuario();
 
 	    	$sql_1="INSERT INTO dct_sistema_tbl_token(tok_token,tok_cedula,tok_fecha,tok_estado,tok_tipo)
-			    		VALUES (:tok_token,:tok_cedula,now(),'A','RESETEO');";
+			    		VALUES (:tok_token,:tok_cedula,now(),'AC','RESETEO');";
 		    $query_1=$pdo->prepare($sql_1);
 		    $query_1->bindValue(':tok_token',$validacionUsuario->setPassword($tokenAsignado),PDO::PARAM_STR);
 		    $query_1->bindValue(':tok_cedula',$cedOlvPass,PDO::PARAM_INT);
 		    $query_1->execute();
 
 		    $sql_3="UPDATE dct_sistema_tbl_usuario
-		            SET usr_estado_contrasenia = 'I'
+		            SET usr_estado_contrasenia = 'IN'
 		            WHERE usr_cod_usuario = :usr_cod_usuario;";
 		    $query_3=$pdo->prepare($sql_3);
 		    $query_3->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);

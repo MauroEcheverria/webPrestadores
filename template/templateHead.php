@@ -193,7 +193,7 @@
                     $sql="SELECT up.rla_id_aplicacion, app.apl_aplicacion, app.apl_ruta 
                           FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
                           WHERE up.rla_id_aplicacion = app.apl_id_aplicacion
-                          AND app.apl_estado = 'A'
+                          AND app.apl_estado = 'AC'
                           AND up.rla_id_rol = :id_role
                           ORDER BY 1;";
                     $query=$pdo->prepare($sql);
@@ -217,7 +217,7 @@
                                       WHERE opt.opc_id_opcion  IN (SELECT rp.rlo_id_opcion
                                       FROM dct_sistema_tbl_rol_opcion rp, dct_sistema_tbl_opcion op
                                       WHERE rp.rlo_id_opcion = op.opc_id_opcion
-                                      AND op.opc_estado = 'A'
+                                      AND op.opc_estado = 'AC'
                                       AND rp.rlo_id_rol = :id_role)
                                       AND opt.opc_id_aplicacion = :id_application
                                       ORDER BY opt.opc_orden;";

@@ -1,6 +1,6 @@
 <?php 
 	require_once("../../../controller/sesion.class.php");
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 	require_once("../../../webMain/pages/noAutorizado/index.php");
@@ -26,21 +26,20 @@
 				'fecha_actual' => $fechaActual_4,
 				'id_option' => 2
 			];
-
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$dataSesion = [
 				'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
-		    'cod_system_user' => $userSystem,
+		    'codigoValidacion' => $returnValidar["codigoValidacion"],
 		    'complete_names' => $returnValidar["complete_names"],
-		    'version_css_js' => $version_css_js,
-		    'fecha_actual' => $fechaActual_4,
 		    'id_role' => $returnValidar["id_role"],
+		    'version_css_js' => $version_css_js,
+		    'cod_system_user' => $userSystem,
+		    'fecha_actual' => $fechaActual_4,
 		    'role' => $returnValidar["role"],
 		    'id_option' => 2
 			];
 
 			if($returnValidar["estadoValidarAcceso"]) {
-
 				$sql="UPDATE dct_sistema_tbl_usuario
 							SET usr_logeado=TRUE,
 							usr_ip_pc_acceso=:usr_ip_pc_acceso,
@@ -52,62 +51,12 @@
 				$query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
 				$query->bindValue(':usr_fecha_acceso',$fechaActual_1,PDO::PARAM_STR);
 				$query->execute(); $pdo->commit();
-
 				$sesion->set('dataSesion', $dataSesion);
-				dinclude('administrarUsuarios.php');
+				include('administrarUsuarios.php');
 				administrarUsuarios($pdo,$dataSesion);
-
 			}
 			else {
-				if (!$returnValidar["valEstadoUsuario"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarUserInactivo').modal('show');</script>"
-					return;
-				}
-				else if (!$returnValidar["valEstadoContrasena"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalContraseñaInactiva').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valExpiroContrasena"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarExpirePass').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valEnOtraPC"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valEstadoOpcion"] || $returnValidar["valAccesoOpcion"]) {
-					noAutorizado($pdo,$dataSesion);
-					return;
-				}
-				else if (!$returnValidar["valEstadoAplicativo"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valEstadoRol"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valEstadoEmpresa"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
-				else if (!$returnValidar["valEstadoVigencia"]) {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
-				else {
-					callCerrarSesion();
-					echo "<script type='text/javascript'>$('#modalCerrarSesionOtraPC').modal('show');</script>";
-					return;
-				}
+				noAutorizado($pdo,$dataSesion); 
 			}
 
 		}

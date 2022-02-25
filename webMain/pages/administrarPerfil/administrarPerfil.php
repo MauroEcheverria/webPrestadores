@@ -134,7 +134,7 @@
                   <span class="panel-title"><b>Cambio de Contraseña</b></span>
                 </div>
                 <div class="card-body">
-                  <form id="formExpirePass" data-toggle="validator" role="form">
+                  <form id="formExpirePassPerfil" data-toggle="validator" role="form">
                     <div class="form-group">
                       <label for="passPassAnt" class="control-label">Contraseña Antigua:</label>
                       <input type="password" class="form-control" id="passPassAnt" name="passPassAnt" required maxlength="15">

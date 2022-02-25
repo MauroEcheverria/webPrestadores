@@ -1,7 +1,7 @@
 <?php
   require_once("../../../dctDatabase/Connection.php");
   require_once("../../../dctDatabase/Parameter.php");
-  require_once("../../../controller/misFunciones.php");
+  require_once("../../../controller/funcionesCore.php");
   app_error_reporting($app_error_reporting);
   try {
     $ConnectionDB = new ConnectionDB();

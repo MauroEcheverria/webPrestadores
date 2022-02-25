@@ -1,5 +1,5 @@
 <?php
-  require_once("../../../controller/misFunciones.php");
+  require_once("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Connection.php");
   require_once("../../../dctDatabase/Parameter.php");
   app_error_reporting($app_error_reporting);
@@ -12,7 +12,7 @@
           WHERE ro.rlo_id_opcion = opt.opc_id_opcion
           AND opt.opc_id_aplicacion = app.apl_id_aplicacion
           AND ro.rlo_id_rol = :rlo_id_rol
-          AND ro.rlo_estado = 'A'
+          AND ro.rlo_estado = 'AC'
           ORDER BY 2,3;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':rlo_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

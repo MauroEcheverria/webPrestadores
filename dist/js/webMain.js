@@ -449,20 +449,20 @@ $(document).ready(function() {
       });
     }
   });
-  $('#formExpirePass').validator().on('submit', function (e) {
+  $('#formExpirePassPerfil').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       $.ajax({
         url: '../../beans/manejoSistema/expirarPassAdminPerfil.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formExpirePass").serialize()+"&cod_system_user="+
+        data:$("#formExpirePassPerfil").serialize()+"&cod_system_user="+
         $('#idPassCedula').val()+"&valPaciente="+
         $.md5($('#passPassNew').val(),'M@rut0')+"&valPacienteAnt="+
         $.md5($('#passPassAnt').val(),'M@rut0'),
         success: function(result){
           var result = eval('('+result+')');
-          document.getElementById('formExpirePass').reset();
+          document.getElementById('formExpirePassPerfil').reset();
           $('#myModal_expire_pass').modal('hide');
           switch (result.message) {
             case "updateOk":

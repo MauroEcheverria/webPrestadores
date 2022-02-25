@@ -1,5 +1,5 @@
 <?php
-  include("../../../controller/misFunciones.php");
+  include("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Parameter.php");
   require_once("../../../controller/sesion.class.php");
 

@@ -1,6 +1,6 @@
 <?php 
 	require_once("../../../controller/sesion.class.php");
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 	app_error_reporting($app_error_reporting);
@@ -11,7 +11,7 @@
 		$pdo = $ConnectionDB->connect();
 		$pdo->beginTransaction();
 		$sql="UPDATE dct_sistema_tbl_usuario
-					SET usr_logeado='A',
+					SET usr_logeado='AC',
 					usr_ip_pc_acceso=:usr_ip_pc_acceso,
 					usr_fecha_acceso=:usr_fecha_acceso,
 					usr_contador_error_contrasenia=0

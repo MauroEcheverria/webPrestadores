@@ -55,7 +55,7 @@ $(document).ready(function() {
             case "accesoPermitidoExpirePass":
               $("h3#idPassCedula").empty().prepend(result.cod_system_user);
               $("h3#idPassNombres").empty().prepend(result.complete_names);
-              $('#myModal_expire_pass').modal('show');
+              $('#myModalExpirePass').modal('show');
               break;
             case "errorCaptcha":
             case "accesoEnOtraPc":

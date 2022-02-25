@@ -1,6 +1,6 @@
 <?php
 	require_once("../../../controller/sesion.class.php");
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 	app_error_reporting($app_error_reporting);
@@ -65,7 +65,7 @@
 	    $query->execute();
 
 	    $sql_2="INSERT INTO dct_salud_tbl_paciente(pct_cedula, pct_nom_completos, pct_fecha_nacimiento, pct_sexo, pct_estado_civil, pct_instruccion, pct_tipo_sangre, pct_telefono, pct_provincia, pct_canton, pct_parroquia, pct_direccion, pct_referencia, usr_usuario_creacion, usr_fecha_creacion, usr_ip_creacion, pct_datos_personales, pct_ante_familiares, pct_prefijo)
-		    	VALUES (:pct_cedula, :pct_nom_completos, :pct_fecha_nacimiento, :pct_sexo, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, :usr_usuario_creacion, now(), :usr_ip_creacion, 'I', 'I', '593');";
+		    	VALUES (:pct_cedula, :pct_nom_completos, :pct_fecha_nacimiento, :pct_sexo, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, :usr_usuario_creacion, now(), :usr_ip_creacion, 'IN', 'IN', '593');";
 	    $query_2=$pdo->prepare($sql_2);
 	    $query_2->bindValue(':pct_cedula',$usr_cedula,PDO::PARAM_INT);
 	    $query_2->bindValue(':pct_nom_completos', $usr_nom_completos,PDO::PARAM_STR); 
