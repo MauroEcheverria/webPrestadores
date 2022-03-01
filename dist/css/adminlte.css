@@ -6140,8 +6140,8 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 }
 
 .modal-header {
-  display: -ms-flexbox;
-  display: flex;
+  /*display: -ms-flexbox;
+  display: flex;*/
   -ms-flex-align: start;
   align-items: flex-start;
   -ms-flex-pack: justify;

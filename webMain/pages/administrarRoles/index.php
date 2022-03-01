@@ -24,7 +24,7 @@
 			$dataValidaAcceso = [
 				'cod_system_user' => $userSystem,
 				'fecha_actual' => $fechaActual_4,
-				'id_option' => 2
+				'id_option' => 3
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$dataSesion = [
@@ -36,7 +36,7 @@
 		    'cod_system_user' => $userSystem,
 		    'fecha_actual' => $fechaActual_4,
 		    'role' => $returnValidar["role"],
-		    'id_option' => 3
+		    'id_option' => $dataValidaAcceso["id_option"]
 			];
 
 			if($returnValidar["estadoValidarAcceso"]) {

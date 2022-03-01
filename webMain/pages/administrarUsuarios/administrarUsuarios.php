@@ -43,16 +43,15 @@
         <div class="modal-header">
           <div class="row">
             <div class="col-md-1">
-              <img src="../../../dist/img/visto.png" width="30px" heigth="20px">
+              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
             </div>
-            <div class="col-md-11 adminContra_3">
-              <h4 class="modal-title" id="myModalLabel">Nuevo Usuario</h4>
+            <div class="col-md-11">
+              <h4 class="modal-title">Nuevo Usuario</h4>
             </div>
           </div>
         </div>
-        <div class="modal-body">
-          <form id="formUserNew" class="formModalPages" data-toggle="validator" role="form">
-
+        <form id="formUserNew" class="formModalPages" data-toggle="validator" role="form">
+          <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -116,12 +115,14 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="modal-footer">
             <div class="form-group">
-              <button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-default btn-estandar-dreconstec">Guardar</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -131,16 +132,15 @@
         <div class="modal-header">
           <div class="row">
             <div class="col-md-1">
-              <img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">
+              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
             </div>
-            <div class="col-md-11 adminContra_3">
-              <h4 class="modal-title" id="myModalLabel">Editar Usuario</h4>
+            <div class="col-md-11">
+              <h4 class="modal-title">Editar Usuario</h4>
             </div>
           </div>
         </div>
-        <div class="modal-body">
-          <form id="formUserMod" class="formModalPages" data-toggle="validator" role="form">
-
+        <form id="formUserMod" class="formModalPages" data-toggle="validator" role="form">
+          <div class="modal-body">
             <div class="form-group">
               <label for="" class="control-label">Cédula</label>
               <h3 class="editCedula adminRoles_2"></h3>
@@ -211,14 +211,14 @@
                 </div>
               </div>
             </div>
-
-                
+          </div>
+          <div class="modal-footer">
             <div class="form-group">
-              <button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-default btn-estandar-dreconstec">Guardar</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -228,10 +228,10 @@
         <div class="modal-header">
           <div class="row">
             <div class="col-md-1">
-              <img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">
+              <img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">
             </div>
-            <div class="col-md-11 adminContra_3">
-              <h4 class="modal-title" id="myModalLabel">Resetear Contraseña</h4>
+            <div class="col-md-11">
+              <h4 class="modal-title">Resetear Contraseña</h4>
             </div>
           </div>
         </div>
@@ -247,8 +247,8 @@
               </div>
               <div><span>La contraseña se reseteará y será su mismo número de cédula. Al inicio de sesión este le pedirá realizar el respectivo cambio de contraseña para así personalizarlo a su preferencia.</span></div><br>
               <div class="form-group">
-                <button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-default btn-estandar-dreconstec">Resetear</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-warning">Resetear</button>
               </div>
             </form>
         </div>
@@ -263,7 +263,6 @@
       <a href="#" class="close aAlert" data-dismiss="alert">&times;</a>
       <strong>Por Favor.</strong> Ingrese una cédula válida.
   </div>
-
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

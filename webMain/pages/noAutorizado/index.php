@@ -50,16 +50,16 @@
         <div class="modal-header">
           <div class="row">
             <div class="col-md-1">
-              <img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">
+              <img src="../../../dist/img/modal_error.png" width="30px" heigth="20px">
             </div>
             <div class="col-md-11" style="width: 430px;">
-              <h4 class="modal-title" id="myModalLabel">Información</h4>
+              <h4 class="modal-title">Información</h4>
             </div>
           </div>
         </div>
         <div class="modal-body"><strong><span id="textBeansValidaAcceso"></span></strong></div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" onClick="location.href = '../../../controller/cerrarSesionLogin'">Cerrar</button>
+          <button type="button" class="btn btn-danger" onClick="location.href = '../../../controller/cerrarSesionLogin'">Cerrar</button>
         </div>
       </div>
     </div>
