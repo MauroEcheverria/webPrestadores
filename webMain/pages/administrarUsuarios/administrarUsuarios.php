@@ -70,14 +70,9 @@
                   <input type="text" class="form-control" id="usr_apellido_1" name="usr_apellido_1" maxlength="15" required minlength="3">
                   <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group labelUser">
-                  <label for="newNacimiento" class="control-label">Fecha de Nacimiento (yyyy-mm-dd)</label>
-                  <input type="mail" class="form-control" id="newNacimiento" name="newNacimiento" required>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group adminUser_2">
+                <div class="form-group">
                   <label for="newRol" class="control-label">Tipo Rol</label>
-                  <select name="newRol" id="newRol" class="form-control adminUser_1" required style="width: 100%;"></select>
+                  <select name="newRol" id="newRol" class="form-control" required style="width: 100%;"></select>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
@@ -88,29 +83,19 @@
                   data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
                   <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group labelUser">
+                <div class="form-group">
                   <label for="usr_nombre_2" class="control-label">Segundo Nombre</label>
                   <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" required minlength="2">
                    <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group labelUser">
+                <div class="form-group">
                   <label for="usr_apellido_2" class="control-label">Segundo Apellido</label>
                   <input type="text" class="form-control" id="usr_apellido_2" name="usr_apellido_2" maxlength="15">
                   <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group labelUser">
-                  <label for="usr_sexo" class="control-label">Sexo</label>
-                  <select class="form-control" id="usr_sexo" name="usr_sexo" required>
-                    <option value="">Sexo</option>
-                    <option value="H">Hombre</option>
-                    <option value="M">Mujer</option>
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group labelUser">
-                  <label for="usr_telefono" class="control-label">Teléfono/Convencional</label>
-                  <input type="text" class="form-control" id="usr_telefono" name="usr_telefono" maxlength="10" 
-                  onkeypress="return soloNumeros(event);">
+                <div class="form-group">
+                  <label for="newEmpresa" class="control-label">Empresa</label>
+                  <select name="newEmpresa" id="newEmpresa" class="form-control" required style="width: 100%;"></select>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
