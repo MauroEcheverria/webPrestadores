@@ -19,7 +19,7 @@
   <div class="container">
     <p>Por su seguridad su sesión ha sido cerrada.</p>
     <div class="btn_buscar_por">
-      <button type="button" class="btn btn-success btn-estandar-dreconstec" onclick="window.location.href = '../webMain/pages/login/';">Inicio de Sesión</button>
+      <button type="button" class="btn btn-success" onclick="window.location.href = '../webMain/pages/login/';">Inicio de Sesión</button>
     </div>
   </div>
 

@@ -90,7 +90,7 @@
 
                         <input type="hidden" name="pass_token" id="pass_token" value="<?php echo $_GET["linkReset"] ?>">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-default btn-estandar-dreconstec"
+                          <button type="submit" class="btn btn-default"
                           id="btnSubmitReset">Reestablecer</button>
                         </div>
                       </form>
@@ -111,7 +111,7 @@
                                     <div class="slider_text slider_text_bscar_por">
                                         <p>El link de reseteo ya ha sido usado. <br>Diríjase a la página principal para iniciar su sesión.</p>
                                         <div class="btn_buscar_por">
-                                          <button type="button" class="btn btn-success btn-estandar-dreconstec" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
+                                          <button type="button" class="btn btn-success" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                   <div class="slider_text slider_text_bscar_por">
                                       <p>El link de reseteo ya ha caducado, por favor generar <br>uno nuevamente en la opción <span style="text-decoration: underline;font-weight: bold;">¿Olvidó su contraseña?</span></p>
                                       <div class="btn_buscar_por">
-                                        <button type="button" class="btn btn-success btn-estandar-dreconstec" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
+                                        <button type="button" class="btn btn-success" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
                                       </div>
                                   </div>
                               </div>
@@ -157,7 +157,7 @@
                                 <div class="slider_text slider_text_bscar_por">
                                     <p>El link de reseteo no se encuentra registrado. <br>Contáctate con nosotros para indicarnos de esta novedad.</p>
                                     <div class="btn_buscar_por">
-                                      <button type="button" class="btn btn-success btn-estandar-dreconstec" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
+                                      <button type="button" class="btn btn-success" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
                                     </div>
                                 </div>
                             </div>

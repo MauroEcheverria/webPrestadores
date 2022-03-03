@@ -10,3 +10,10 @@
     opacity:.80;
     filter: alpha(opacity=80);
 }
+.seccionBtnAccion {
+    margin: 5px 0 20px 0;
+}
+.poppupAlert{
+  display:none;
+  font-size: 13px;
+}

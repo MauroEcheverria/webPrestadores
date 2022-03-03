@@ -28,10 +28,10 @@
             <div id="panelAdminRoles" class="criteriosOcultar">
               <span class="panel-title">Roles - Aplicativos</span>
               <div>
-                <button type="button" class="btn btn-default btn-estandar-dreconstec" id="sys_btn_asignar_app">
+                <button type="button" class="btn btn-default" id="sys_btn_asignar_app">
                   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Asignar
                 </button>
-                <button type="button" class="btn btn-default btn-estandar-dreconstec" id="sys_btn_desvincular_app" disabled="">
+                <button type="button" class="btn btn-default" id="sys_btn_desvincular_app" disabled="">
                   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Desvincular
                 </button>
               </div>
@@ -46,10 +46,10 @@
               <hr>
               <span class="panel-title">Roles - Opciones</span>
               <div>
-                <button type="button" class="btn btn-default btn-estandar-dreconstec" id="sys_btn_asignar_opt">
+                <button type="button" class="btn btn-default" id="sys_btn_asignar_opt">
                   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Asignar
                 </button>
-                <button type="button" class="btn btn-default btn-estandar-dreconstec" id="sys_btn_desvincular_opt" disabled="">
+                <button type="button" class="btn btn-default" id="sys_btn_desvincular_opt" disabled="">
                   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Desvincular
                 </button>
               </div>

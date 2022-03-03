@@ -29,8 +29,7 @@
       $return_array[4] = $row["emp_empresa"];
 			$return_array[5] = $row["usr_estado"];
       $return_array[6] = $row["usr_estado_contrasenia"];
-      $return_array[7] = $row["usr_id_empresa"];
-      $return_array[8] = null;
+      $return_array[7] = null;
 			array_push($return,$return_array);
 		}
 		$return = array(

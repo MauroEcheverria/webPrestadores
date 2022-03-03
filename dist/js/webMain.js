@@ -185,15 +185,14 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
       { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
-      { title: '<div class="tituloColumnasDT">Codigo</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
         width: "80",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fa fa-pencil iconDTicon" aria-hidden="true"></i></a>';
+          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fad fa-sistrix iconDTicon" aria-hidden="true"></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fa fa-refresh iconDTicon" aria-hidden="true"></i></a>';
+          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fad fa-sistrix iconDTicon" aria-hidden="true"></i></a>';
           return acciones
         }
       },
@@ -229,16 +228,21 @@ $(document).ready(function() {
     $('#myModalNuevoUser').modal('show');
     document.getElementById("formUserNew").reset();
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerRoles.php',
+      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
       type: 'POST',
       dataType: 'html',
       success: function(result){
-        getRoles = JSON.parse(result);
-        var newRol = "<option value='' selected>Seleccione una opción</option>";
-        for (var i = 0; i <= getRoles.length - 1; i++) {
-          newRol += "<option value='"+getRoles[i][0]+"'>"+getRoles[i][1]+"</option>";
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("select#newRol").empty().prepend(result.roles);
+            $("select#newEmpresa").empty().prepend(result.empresas);
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $('#myModalErrorGeneral').modal('show');
+            break;
         }
-        $("select#newRol").empty(); $("select#newRol").prepend(newRol);
       }
     });
   });
@@ -354,18 +358,19 @@ $(document).ready(function() {
     if (dt_estado == 1) {document.getElementById("editEstado").value = "TRUE"}
     if (dt_estado == 0) {document.getElementById("editEstado").value = "FALSE"}
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerRoles.php',
+      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
       type: 'POST',
       dataType: 'html',
       success: function(result){
-        getRoles = JSON.parse(result);
-        var editRol = "<option value='' selected>Seleccione una opción</option>";
-        for (var i = 0; i <= getRoles.length - 1; i++) {
-          editRol += "<option value='"+getRoles[i][0]+"'>"+getRoles[i][1]+"</option>";
-        }
-        $("select#editRol").empty(); $("select#editRol").prepend(editRol);
-        for (var j = 0; j <= getRoles.length - 1; j++) {
-          if (dt_role == getRoles[j][1]) {document.getElementById("editRol").value = getRoles[j][0]}
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("select#editRol").empty().prepend(result.roles);
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $('#myModalErrorGeneral').modal('show');
+            break;
         }
       }
     });
@@ -488,16 +493,20 @@ $(document).ready(function() {
   });
   if($('span#selectAdminRoles').hasClass('selectAdminRolesClass')) {
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerRoles.php',
+      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
       type: 'POST',
       dataType: 'html',
       success: function(result){
-        getRoles = JSON.parse(result);
-        var newRol = "<option value='' selected>Seleccione una opción</option>";
-        for (var i = 0; i <= getRoles.length - 1; i++) {
-          newRol += "<option value='"+getRoles[i][0]+"'>"+getRoles[i][1]+"</option>";
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("select#sys_selec_roles").empty().prepend(result.roles);
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $('#myModalErrorGeneral').modal('show');
+            break;
         }
-        $("select#sys_selec_roles").empty(); $("select#sys_selec_roles").prepend(newRol);
       }
     });
     $("#sys_selec_roles").change(function() {
@@ -619,7 +628,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:
@@ -716,7 +725,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:

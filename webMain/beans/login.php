@@ -74,7 +74,7 @@ try {
                       $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
                       $data_result["dataModal_2"] = 'Información';
                       $data_result["dataModal_3"] = 'Usted ya ha iniciado sesión en otro computador...!!!';
-                      $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-default btn-estandar-dreconstec btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
+                      $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-default btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-default btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
                       echo json_encode($data_result);
                     }
                   }
@@ -83,7 +83,7 @@ try {
                     $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
                     $data_result["dataModal_2"] = 'Información';
                     $data_result["dataModal_3"] = 'La licencia del aplicativo ha caducado...!!!';
-                    $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+                    $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
                     echo json_encode($data_result);
                   }
                 }
@@ -92,7 +92,7 @@ try {
                   $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
                   $data_result["dataModal_2"] = 'Información';
                   $data_result["dataModal_3"] = 'El estado la de empresa en el sistema se encuentra inactivo...!!!';
-                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
                   echo json_encode($data_result);
                 }
               }
@@ -101,7 +101,7 @@ try {
                 $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
                 $data_result["dataModal_2"] = 'Información';
                 $data_result["dataModal_3"] = 'Su rol asignado se encuentra inactivo...!!!';
-                $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+                $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
                 echo json_encode($data_result);
               }
 
@@ -112,7 +112,7 @@ try {
             $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
             $data_result["dataModal_2"] = 'Información';
             $data_result["dataModal_3"] = 'Su cuenta se encuentra inactiva...!!!';
-            $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
             echo json_encode($data_result);
           }
 
@@ -122,7 +122,7 @@ try {
           $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'Su cuenta ha sido inactivada por ingresos fallidos en su contraseña o por que realizó una solicitud de reestablecimiento de contraseña. Verifique su correo electronico por favor.';
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
           break;
         case 'cedulaNoRegistrada':
@@ -130,7 +130,7 @@ try {
           $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'El usuario ingresado no se encuentra registrado en el sistema.';
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
           break;
         default:
@@ -160,7 +160,7 @@ try {
               $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
               $data_result["dataModal_2"] = 'Información';
               $data_result["dataModal_3"] = "Ingresó una contraseña incorrecta. Intento fallido " . ($claveNoIgual[1] + 1) . " de 3. Al tercer intento fallido se bloqueará el acceso al aplicativo web.";
-              $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
               echo json_encode($data_result);
           } else {
               $pdo->rollBack();

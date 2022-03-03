@@ -21,21 +21,21 @@
           <section class="sectionDataTable contentNegocio">
             <div class="card">
               <div class="card-header">
-                  <span class="panel-title"><b>Administración de Usuarios</b></span>
+                <span class="panel-title"><b>Administración de Usuarios</b></span>
               </div>
               <div class="card-body">
-                <div class="buttonDataTable">
-                  <button type="button" class="btn btn-default btn-estandar-dreconstec" id="btnUserNuevo">Crear Usuario</button>
+                <div class="seccionBtnAccion">
+                  <button type="button" class="btn btn-default" id="btnUserNuevo">Crear Usuario</button>
                 </div>
-                  <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
+                <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
               </div>
             </div>
           </section>
         </div>
-        
+
       </div>
     </section>
-  </div>   
+  </div>
     
   <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modalLogin">
@@ -52,6 +52,21 @@
         </div>
         <form id="formUserNew" class="formModalPages" data-toggle="validator" role="form">
           <div class="modal-body">
+
+          <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a app-web@dreconstec.com
+          </div>
+
+          <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a app-web@dreconstec.com
+          </div>
+
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -239,14 +254,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="poppupAlert" id="alertNewCedulaRepet">
-      <a href="#" class="close aAlert" data-dismiss="alert">&times;</a>
-      <strong>Por Favor.</strong> Ha ingresado una cédula ya registrada.
-  </div>
-  <div class="poppupAlert" id="alertCedulaNOValida">
-      <a href="#" class="close aAlert" data-dismiss="alert">&times;</a>
-      <strong>Por Favor.</strong> Ingrese una cédula válida.
   </div>
 <?php 
   modalViews();

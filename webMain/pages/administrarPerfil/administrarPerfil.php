@@ -120,7 +120,7 @@
                       </div>
                     </div>
                     <div class="form-group centrarContent">
-                      <button type="submit" class="btn btn-default btn-estandar-dreconstec">Guardar</button>
+                      <button type="submit" class="btn btn-default">Guardar</button>
                     </div>
                   </form> 
                 </div>
@@ -166,7 +166,7 @@
                     </div>
                     <hr>
                     <div class="form-group centrarContent">
-                      <button type="submit" class="btn btn-default btn-estandar-dreconstec" id="idBtnSaveValidar">Guardar</button>
+                      <button type="submit" class="btn btn-default" id="idBtnSaveValidar">Guardar</button>
                     </div>
                   </form> 
                 </div>
