@@ -15,24 +15,18 @@
 
   <div class="content-wrapper">
     <section class="content">
-      <div class="container-fluid">
-
-        <div class="container container_main">
-          <section class="sectionDataTable contentNegocio">
-            <div class="card">
-              <div class="card-header">
-                <span class="panel-title"><b>Administración de Usuarios</b></span>
-              </div>
-              <div class="card-body">
-                <div class="seccionBtnAccion">
-                  <button type="button" class="btn btn-default" id="btnUserNuevo">Crear Usuario</button>
-                </div>
-                <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
-              </div>
+      <div class="container container_main">
+        <div class="card">
+          <div class="card-header">
+            <span class="panel-title"><b>Administración de Usuarios</b></span>
+          </div>
+          <div class="card-body">
+            <div class="seccionBtnAccion">
+              <button type="button" class="btn btn-success btn-dreconstec" id="btnUserNuevo">Crear Usuario</button>
             </div>
-          </section>
+            <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
+          </div>
         </div>
-
       </div>
     </section>
   </div>
@@ -100,7 +94,7 @@
                 </div>
                 <div class="form-group">
                   <label for="usr_nombre_2" class="control-label">Segundo Nombre</label>
-                  <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" required minlength="2">
+                  <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" minlength="2">
                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
@@ -116,11 +110,9 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="form-group">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-success">Guardar</button>
-            </div>
+          <div class="modal-footer centralFooter">
+            <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
           </div>
         </form>
       </div>

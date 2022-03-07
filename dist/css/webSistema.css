@@ -17,3 +17,27 @@
   display:none;
   font-size: 13px;
 }
+.iconDTicon {
+  font-size: 20px;
+}
+.iconDTsep {
+  font-size: 20px;
+  margin: 0 5px 0 5px;
+}
+.centrarContent {
+  text-align: center;
+  text-align: -webkit-center;
+  text-align: -moz-center;
+}
+.container_main {
+  padding-top: 25px;
+}
+.centralFooter {
+  text-align: center;
+  text-align: -webkit-center;
+  text-align: -moz-center;
+  display: block;
+}
+.btn-dreconstec {
+  width: 150px;
+}

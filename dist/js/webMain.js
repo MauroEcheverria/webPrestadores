@@ -169,10 +169,10 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [0,3,4]
+        aTargets: [0,3,4,5,6,9]
       },
       {
-        "targets": [],
+        "targets": [7,8],
         "visible": false,
         "searchable": false
       }
@@ -185,14 +185,16 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
       { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
+      { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
+      { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
         width: "80",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fad fa-sistrix iconDTicon" aria-hidden="true"></i></a>';
+          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fad fa-sistrix iconDTicon" aria-hidden="true"></i></a>';
+          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="far fa-trash-alt iconDTicon"></i></i></a>';
           return acciones
         }
       },
@@ -208,20 +210,6 @@ $(document).ready(function() {
         return json.data;
       },
       timeout: 60000
-    },
-    createdRow: function ( row, data, index ) {
-      if ( data[5] == true ) {
-        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/vistito_m.png' style='width: 17px;'/></div>");
-      }
-      if ( data[5] == false ) {
-        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/nop_m.png' style='width: 17px;'/></div>");
-      }
-      if ( data[6] == true ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/vistito_m.png' style='width: 17px;'/></div>");
-      }
-      if ( data[6] == false ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/nop_m.png' style='width: 17px;'/></div>");
-      }
     }
   });
   $('#btnUserNuevo').click( function () {
