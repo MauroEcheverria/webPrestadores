@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 25-02-2022 a las 22:04:48
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.3.23
+-- Servidor: localhost
+-- Tiempo de generación: 07-03-2022 a las 01:58:27
+-- Versión del servidor: 10.4.10-MariaDB
+-- Versión de PHP: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,10 +89,10 @@ CREATE TABLE `dct_sistema_tbl_catalogo` (
 --
 
 INSERT INTO `dct_sistema_tbl_catalogo` (`ctg_id_catalogo`, `ctg_key`, `ctg_descripcion`, `ctg_aplicativo`) VALUES
-(1, 'SI', 'SI', 'SISTEMA'),
-(2, 'NO', 'NO', 'SISTEMA'),
-(3, 'AC', 'ACTIVO', 'SISTEMA'),
-(4, 'IN', 'INACTIVO', 'SISTEMA');
+(1, 'SI', 'Si', 'SISTEMA'),
+(2, 'NO', 'No', 'SISTEMA'),
+(3, 'AC', 'Activo', 'SISTEMA'),
+(4, 'IN', 'Inactivo', 'SISTEMA');
 
 -- --------------------------------------------------------
 
@@ -283,34 +283,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_id_usuario`, `usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', '1', 'AC', '::1', '2022-02-25 20:58:18', 'mauroviniciO@gmail.com', 1, 'AC', 1, '2021-07-15', 0, 'NO', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dct_sistema_tbl_usuario_adicional`
---
-
-CREATE TABLE `dct_sistema_tbl_usuario_adicional` (
-  `adi_id_usuario` bigint(20) NOT NULL,
-  `adi_fecha_nacimiento` date DEFAULT NULL,
-  `adi_sexo` varchar(9) DEFAULT NULL,
-  `adi_estado_civil` varchar(12) DEFAULT NULL,
-  `adi_instruccion` varchar(11) DEFAULT NULL,
-  `adi_tipo_sangre` varchar(9) DEFAULT NULL,
-  `adi_telefono` varchar(10) DEFAULT NULL,
-  `adi_provincia` varchar(5) DEFAULT NULL,
-  `adi_canton` varchar(7) DEFAULT NULL,
-  `adi_parroquia` varchar(9) DEFAULT NULL,
-  `adi_direccion` varchar(70) DEFAULT NULL,
-  `adi_referencia` varchar(25) DEFAULT NULL,
-  `usr_usuario_creacion` varchar(13) DEFAULT NULL,
-  `usr_usuario_modificacion` varchar(13) DEFAULT NULL,
-  `usr_fecha_creacion` timestamp NULL DEFAULT NULL,
-  `usr_fecha_modificacion` timestamp NULL DEFAULT NULL,
-  `usr_ip_creacion` varchar(100) DEFAULT NULL,
-  `usr_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(1, '0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', '1', 'AC', '::1', '2022-03-06 03:31:38', 'maurovinicio.echeverria@gmail.com', 1, 'AC', 1, '2021-07-15', 0, 'NO', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 --
 -- Índices para tablas volcadas
@@ -392,12 +365,6 @@ ALTER TABLE `dct_sistema_tbl_usuario`
   ADD UNIQUE KEY `usr_cod_usuario` (`usr_cod_usuario`),
   ADD KEY `usr_id_empresa` (`usr_id_empresa`),
   ADD KEY `usr_id_usuario` (`usr_id_usuario`);
-
---
--- Indices de la tabla `dct_sistema_tbl_usuario_adicional`
---
-ALTER TABLE `dct_sistema_tbl_usuario_adicional`
-  ADD PRIMARY KEY (`adi_id_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -487,12 +454,6 @@ ALTER TABLE `dct_sistema_tbl_rol_opcion`
 --
 ALTER TABLE `dct_sistema_tbl_usuario`
   ADD CONSTRAINT `dct_sistema_tbl_usuario_ibfk_1` FOREIGN KEY (`usr_id_empresa`) REFERENCES `dct_sistema_tbl_empresa` (`emp_id_empresa`);
-
---
--- Filtros para la tabla `dct_sistema_tbl_usuario_adicional`
---
-ALTER TABLE `dct_sistema_tbl_usuario_adicional`
-  ADD CONSTRAINT `dct_sistema_tbl_usuario_adicional_ibfk_1` FOREIGN KEY (`adi_id_usuario`) REFERENCES `dct_sistema_tbl_usuario` (`usr_id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
