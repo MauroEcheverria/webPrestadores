@@ -55,4 +55,4 @@ Thumbs.db
 *.mov
 *.wmv
 
-/dctDatabase/Connection.php
+dctDatabase/Connection.php
