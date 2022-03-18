@@ -12,7 +12,7 @@
           WHERE app.id_application NOT IN (SELECT rp.id_application
           FROM system.role_app rp
           WHERE rp.id_role = :id_role)
-          AND app.status = TRUE
+          AND app.status = 1
           ORDER BY 1;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':id_role',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

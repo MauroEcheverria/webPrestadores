@@ -15,7 +15,7 @@
     			FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
           AND tok_tipo = 'RESETEO'
-          AND tok_estado = 'AC';";
+          AND tok_estado = 1;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
     $query->execute();
@@ -53,7 +53,7 @@
       if ($countSi >= 1) {
         $pdo->rollBack();
         $data_result["message"] = "passRegistradaAnteriormentes";
-        $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+        $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = 'Se ha detectado que la contraseña ingresada ya ha sido usada anteriormente, favor ingresar una nueva.';
         $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
@@ -61,31 +61,31 @@
       }
       else {
         $sql_1="UPDATE dct_sistema_tbl_token
-                SET tok_estado = FALSE
+                SET tok_estado = 0
                 WHERE tok_token = :tok_token
                 AND tok_tipo = 'RESETEO'
-                AND tok_estado = 'AC';";
+                AND tok_estado = 1;";
         $query_1=$pdo->prepare($sql_1);
         $query_1->bindValue(':tok_token',$pass_token,PDO::PARAM_STR);
         $query_1->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
-              SET cts_estado='IN',cts_fecha_cambio=now()
+              SET cts_estado=0,cts_fecha_cambio=now()
               WHERE cts_cod_usuario =:cts_cod_usuario
-              AND cts_estado='AC';";
+              AND cts_estado=1;";
         $query_5=$pdo->prepare($sql_5);
         $query_5->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
-              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'AC');";
+              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 1);";
         $query_4=$pdo->prepare($sql_4);
         $query_4->bindValue(':cts_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);
         $query_4->bindValue(':cts_cod_usuario',$tok_cedula,PDO::PARAM_INT);
         $query_4->execute();
 
         $sql_2="UPDATE dct_sistema_tbl_usuario
-                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 'AC'
+                SET usr_contrasenia = :usr_contrasenia, usr_estado_contrasenia = 1
                 WHERE usr_cod_usuario = :usr_cod_usuario";
         $query_2=$pdo->prepare($sql_2);
         $query_2->bindValue(':usr_contrasenia',$validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])),PDO::PARAM_STR);
@@ -125,7 +125,7 @@
       $pdo->rollBack();
       $data_result["message"] = "tokenNoRegistrado";
       $data_result["correoEnviado"] = $correoEnviado;
-      $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+      $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'Token no registrado en sistema, por favor genere uno nuevamente.';
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';

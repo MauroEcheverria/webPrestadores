@@ -11,7 +11,7 @@
 		$pdo = $ConnectionDB->connect();
 		$pdo->beginTransaction();
     $sql="UPDATE dct_sistema_tbl_usuario
-					SET usr_logeado=FALSE,
+					SET usr_logeado=0,
 					usr_ip_pc_acceso=NULL,
 					usr_fecha_acceso=NULL,
 					usr_contador_error_contrasenia=0
