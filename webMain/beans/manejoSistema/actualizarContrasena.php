@@ -12,8 +12,8 @@
 
 		$sql_3="UPDATE dct_sistema_tbl_usuario
             SET usr_contrasenia = :usr_contrasenia, 
-	            usr_estado_contrasenia='AC', 
-	            usr_expiro_contrasenia='SI', 
+	            usr_estado_contrasenia=1, 
+	            usr_expiro_contrasenia=1, 
 	            usr_fecha_cambio_contrasenia=:usr_fecha_cambio_contrasenia, 
 	            usr_contador_error_contrasenia=0 
             WHERE usr_cod_usuario = :usr_cod_usuario;";

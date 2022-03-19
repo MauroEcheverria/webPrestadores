@@ -152,7 +152,7 @@ $(document).ready(function() {
                       modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
                     }
                     else {
-                      var dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                      var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                       var dataModal_2 = 'Información';
                       var dataModal_3 = 'No se pudo enviar el correo con su clave de acceso. Intentelo de nuevo por favor.';
                       var dataModal_4 = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
@@ -160,7 +160,7 @@ $(document).ready(function() {
                     } 
                 }
                 else {
-                  var dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                  var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                   var dataModal_2 = 'Información';
                   var dataModal_3 = 'Aún tiene un ticket vigente, revise su correo electrónico y siga los pasos indicados.';
                   var dataModal_4 = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
@@ -168,7 +168,7 @@ $(document).ready(function() {
                 }
               }
               else {
-                var dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                 var dataModal_2 = 'Información';
                 var dataModal_3 = 'No se encontró ningún usuario que coincida con ese número de cédula';
                 var dataModal_4 = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
