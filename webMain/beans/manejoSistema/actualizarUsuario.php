@@ -61,10 +61,7 @@
 	    $query->bindValue(':usr_nombre_2', $usr_nombre_2);
 	    $query->bindValue(':usr_apellido_1', $usr_apellido_1);
 	    $query->bindValue(':usr_apellido_2', $usr_apellido_2); 
-
-	    if ($_POST["editEstado"] == "TRUE") { $editEstado = 1; } else { $editEstado = 0; }
-
-	    $query->bindValue(':usr_estado',$editEstado,PDO::PARAM_INT);
+	    $query->bindValue(':usr_estado',cleanData("siLimite",1,"noMayuscula",$_POST["editEstado"]),PDO::PARAM_INT);
 	    $query->bindValue(':usr_cod_usuario',$usr_cedula,PDO::PARAM_INT); 
 	    $query->bindValue(':usr_id_empresa',1); 
 	    $query->bindValue(':usr_nacimiento',cleanData("noLimite",0,"noMayuscula",$_POST["editNacimiento"]),PDO::PARAM_STR);

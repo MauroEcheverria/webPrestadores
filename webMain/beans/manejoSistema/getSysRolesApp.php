@@ -11,8 +11,8 @@
           FROM dct_sistema_tbl_aplicacion app, dct_sistema_tbl_rol_aplicacion rp
           WHERE app.apl_id_aplicacion = rp.rla_id_aplicacion
           AND rp.rla_id_rol = :rla_id_rol
-          AND app.apl_estado = 'AC'
-          AND rp.rla_estado = 'AC'
+          AND app.apl_estado = 1
+          AND rp.rla_estado = 1
           ORDER BY 1;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':rla_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

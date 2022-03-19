@@ -10,7 +10,7 @@
 
     $sql_1="SELECT rol_id_rol,rol_rol 
     FROM dct_sistema_tbl_rol
-    WHERE rol_estado = 'AC'
+    WHERE rol_estado = 1
     AND rol_id_rol NOT IN (1);";
     $query_1=$pdo->prepare($sql_1);
     $query_1->execute();
@@ -18,7 +18,7 @@
 
     $sql_2="SELECT emp_id_empresa,emp_empresa 
     FROM dct_sistema_tbl_empresa
-    WHERE emp_estado = 'AC';";
+    WHERE emp_estado = 1;";
     $query_2=$pdo->prepare($sql_2);
     $query_2->execute();
     $row_2 = $query_2->fetchAll();

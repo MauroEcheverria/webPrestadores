@@ -11,16 +11,16 @@
           FROM dct_sistema_tbl_opcion opt, dct_sistema_tbl_aplicacion app, dct_sistema_tbl_rol_aplicacion rp
           WHERE opt.opc_id_aplicacion = app.apl_id_aplicacion
           AND app.apl_id_aplicacion = rp.rla_id_aplicacion
-          AND opt.opc_estado = 'AC'
-          AND app.apl_estado = 'AC'
+          AND opt.opc_estado = 1
+          AND app.apl_estado = 1
           AND opt.opc_id_opcion NOT IN (SELECT ro.rlo_id_opcion
           FROM dct_sistema_tbl_rol_opcion ro, dct_sistema_tbl_opcion opt, dct_sistema_tbl_aplicacion app
           WHERE ro.rlo_id_opcion = opt.opc_id_opcion
           AND opt.opc_id_aplicacion = app.apl_id_aplicacion
           AND ro.rlo_id_rol = :id_role_1
-          AND ro.rlo_estado = 'AC')
+          AND ro.rlo_estado = 1)
           AND rp.rla_id_rol = :id_role_2
-          AND rp.rla_estado = 'AC'
+          AND rp.rla_estado = 1
           ORDER BY 2,3;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':id_role_1',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

@@ -98,7 +98,7 @@
 		    $query->execute();
 		    if ($query->rowCount() == 1) {
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
-		    	if ($row["usr_estado_contrasenia"] == 'AC') {
+		    	if ($row["usr_estado_contrasenia"] == 1) {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
               return "pasoTodo";
 		        }
@@ -134,7 +134,7 @@
 						WHERE rlo_id_rol = (SELECT usr_id_rol 
 						FROM dct_sistema_tbl_usuario
 						WHERE usr_cod_usuario = :usr_cod_usuario)
-						AND rlo_estado = 'AC';";
+						AND rlo_estado = 1;";
 	    $query=$pdo->prepare($sql);
 	    $query->bindValue(':usr_cod_usuario',$dataValidaAcceso['cod_system_user'],PDO::PARAM_INT);
 	    $query->execute();
@@ -187,14 +187,14 @@
 	    $valEstadoOpcion = false;$valEstadoAplicativo = false;$valEstadoRol = false;$valEstadoEmpresa = false;
 	    $valEstadoVigencia = false;$estadoValidarAcceso = false;$codigoValidacion = "";
 	    
-      if($row_usr["usr_estado"] == 'AC') { $valEstadoUsuario = true; $contValidaAcceso += 1; }
-		  if($row_usr["usr_estado_contrasenia"] == 'AC') { $valEstadoContrasena = true; $contValidaAcceso += 1; }
-		  if($row_usr["usr_expiro_contrasenia"] == 'NO') { $valExpiroContrasena = true; $contValidaAcceso += 1; }
+      if($row_usr["usr_estado"] == 1) { $valEstadoUsuario = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_estado_contrasenia"] == 1) { $valEstadoContrasena = true; $contValidaAcceso += 1; }
+		  if($row_usr["usr_expiro_contrasenia"] == 0) { $valExpiroContrasena = true; $contValidaAcceso += 1; }
 		  if($row_usr["usr_ip_pc_acceso"] == getRealIP() || $row_usr["usr_ip_pc_acceso"] == NULL) { $valEnOtraPC = true; $contValidaAcceso += 1; }
-		  if($row_opt["opc_estado"] == 'AC') { $valEstadoOpcion = true; $contValidaAcceso += 1; }
-		  if($row_app["apl_estado"] == 'AC') { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
-		  if($row_rol["rol_estado"] == 'AC') { $valEstadoRol = true; $contValidaAcceso += 1; }
-		  if($row_emp["emp_estado"] == 'AC') { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
+		  if($row_opt["opc_estado"] == 1) { $valEstadoOpcion = true; $contValidaAcceso += 1; }
+		  if($row_app["apl_estado"] == 1) { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
+		  if($row_rol["rol_estado"] == 1) { $valEstadoRol = true; $contValidaAcceso += 1; }
+		  if($row_emp["emp_estado"] == 1) { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
 		  if($row_emp["emp_vigencia_hasta"] >= $dataValidaAcceso['fecha_actual']) { $valEstadoVigencia = true; $contValidaAcceso += 1; }
 		  if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
 

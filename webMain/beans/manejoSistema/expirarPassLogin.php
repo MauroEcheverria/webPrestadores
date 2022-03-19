@@ -40,7 +40,7 @@
       }
       if ($countSi >= 1) {
         $data_result["message"] = "passRegistradaAnteriormentes";
-        $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+        $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = 'Se ha detectado que la contraseña ingresada ya ha sido usada anteriormente, favor ingresar una nueva.';
         $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
@@ -49,8 +49,8 @@
       else {
         $sql_3="UPDATE dct_sistema_tbl_usuario 
                 SET usr_contrasenia = :usr_contrasenia, 
-                usr_estado_contrasenia='AC', 
-                usr_expiro_contrasenia='NO', 
+                usr_estado_contrasenia=1, 
+                usr_expiro_contrasenia=0, 
                 usr_fecha_cambio_contrasenia=:usr_fecha_cambio_contrasenia, 
                 usr_contador_error_contrasenia  =0 
                 WHERE usr_cod_usuario = :usr_cod_usuario;";
@@ -61,15 +61,15 @@
         $query_3->execute();
 
         $sql_5="UPDATE dct_sistema_tbl_contrasenia
-              SET cts_estado='IN',cts_fecha_cambio=now()
+              SET cts_estado=0,cts_fecha_cambio=now()
               WHERE cts_cod_usuario =:cts_cod_usuario
-              AND cts_estado='AC';";
+              AND cts_estado=1;";
         $query_5=$pdo->prepare($sql_5);
         $query_5->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT); 
         $query_5->execute();
 
         $sql_4="INSERT INTO dct_sistema_tbl_contrasenia(cts_contrasenia, cts_cod_usuario, cts_fecha_cambio, cts_estado)
-              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 'AC');";
+              VALUES (:cts_contrasenia, :cts_cod_usuario, now(), 1);";
         $query_4=$pdo->prepare($sql_4);
         $query_4->bindValue(':cts_contrasenia',$nueva_contrasena);
         $query_4->bindValue(':cts_cod_usuario',cleanData("siLimite",13,"noMayuscula",$_POST["cod_system_user"]),PDO::PARAM_INT);
@@ -89,7 +89,7 @@
         else {
           $pdo->rollBack();
           $data_result["message"] = "updateError";
-          $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+          $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'Se ha detectado un error en la acción requerida, favor escribenos a app-web@dreconstec.com';
           $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
@@ -99,7 +99,7 @@
     }
     else {
       $data_result["message"] = "passOriginalError";
-      $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+      $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'La actual clave no es la correcta, ingrese la clave nuevamente.';
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';

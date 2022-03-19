@@ -28,22 +28,25 @@ try {
           $query->execute();
           $row = $query->fetch(\PDO::FETCH_ASSOC);
 
-          if ($row["usr_estado"] == 'AC') {
-            if ($row["usr_logeado"] == 'NO') {
+          if ($row["usr_estado"] == 1) {
+            if ($row["usr_logeado"] == 0) {
               $accesoPermitido = "normal";
-            } else {
+            } 
+            else {
               if ($row["usr_ip_pc_acceso"] == getRealIP() || $row["usr_ip_pc_acceso"] == NULL) {
                 $accesoPermitido = "normal";
-              } else {
+              } 
+              else {
                 $accesoPermitido = "normalEnOtraPC";
               }
             }
-            if ($row["usr_expiro_contrasenia"] == 'SI') {
+            if ($row["usr_expiro_contrasenia"] == 1) {
               $data_result["message"] = "accesoPermitidoExpirePass";
               $data_result["cod_system_user"] = $row["usr_cod_usuario"];
               $data_result["complete_names"] = $row["usr_nom_completos"];
               echo json_encode($data_result);
-            } else {
+            } 
+            else {
 
               $sql_rol = "SELECT rol_estado
                       FROM dct_sistema_tbl_rol
@@ -61,47 +64,48 @@ try {
               $query_emp->execute();
               $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
 
-              if ($row_rol["rol_estado"] == "AC") {
-                if ($row_emp["emp_estado"] == "AC") {
+              if ($row_rol["rol_estado"] == 1) {
+                if ($row_emp["emp_estado"] == 1) {
                   if ($row_emp["emp_vigencia_hasta"] >= $fechaActual_4) {
                     if ($accesoPermitido == "normal") {
                       $data_result["message"] = "accesoPermitido";
                       $validacionUsuario->newSesion($userSystem);
                       echo json_encode($data_result);
-                    } else {
+                    } 
+                    else {
                       $validacionUsuario->newSesionOtraPC($userSystem);
                       $data_result["message"] = "accesoEnOtraPc";
-                      $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                      $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                       $data_result["dataModal_2"] = 'Información';
                       $data_result["dataModal_3"] = 'Usted ya ha iniciado sesión en otro computador...!!!';
-                      $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-default btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-default btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
+                      $data_result["dataModal_4"] = '<div class="row"><div class="col-md-6"><button type="button" class="btn btn-warning btn_session_close" data-dismiss="modal" onClick="location.href = ' . "'" . '../../beans/manejoSistema/activarSesion.php' . "'" . '">Cerrar sesión anterior</button></div><div class="col-md-6"><button type="button" class="btn btn-warning btn_session_close" data-dismiss="modal">Ninguna acción</button></div></div>';
                       echo json_encode($data_result);
                     }
                   }
                   else {
                     $data_result["message"] = "licenciaAgotada";
-                    $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                    $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                     $data_result["dataModal_2"] = 'Información';
                     $data_result["dataModal_3"] = 'La licencia del aplicativo ha caducado...!!!';
-                    $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+                    $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
                     echo json_encode($data_result);
                   }
                 }
                 else {
                   $data_result["message"] = "empresaInactiva";
-                  $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                  $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                   $data_result["dataModal_2"] = 'Información';
                   $data_result["dataModal_3"] = 'El estado la de empresa en el sistema se encuentra inactivo...!!!';
-                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
                   echo json_encode($data_result);
                 }
               }
               else {
                 $data_result["message"] = "rolInactivo";
-                $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+                $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                 $data_result["dataModal_2"] = 'Información';
                 $data_result["dataModal_3"] = 'Su rol asignado se encuentra inactivo...!!!';
-                $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+                $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
                 echo json_encode($data_result);
               }
 
@@ -109,28 +113,28 @@ try {
           } 
           else {
             $data_result["message"] = "usuarioInactivo";
-            $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+            $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
             $data_result["dataModal_2"] = 'Información';
             $data_result["dataModal_3"] = 'Su cuenta se encuentra inactiva...!!!';
-            $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
             echo json_encode($data_result);
           }
 
           break;
         case 'statusPassFalse':
           $data_result["message"] = "statusPassFalse";
-          $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+          $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
-          $data_result["dataModal_3"] = 'Su cuenta ha sido inactivada por ingresos fallidos en su contraseña o por que realizó una solicitud de reestablecimiento de contraseña. Verifique su correo electronico por favor.';
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_3"] = 'Su cuenta ha sido inactivada por ingresos fallidos en su contraseña o por que realizó una solicitud de reestablecimiento de contraseña.<br><br>Verifique su correo electrónico por favor.';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
           break;
         case 'cedulaNoRegistrada':
           $data_result["message"] = "cedulaNoRegistrada";
-          $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+          $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'El usuario ingresado no se encuentra registrado en el sistema.';
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
           break;
         default:
@@ -144,33 +148,34 @@ try {
           $query_1->execute();
 
           if ($claveNoIgual[1] + 1 == 3) {
-              $sql_2 = "UPDATE dct_sistema_tbl_usuario
-						  SET usr_estado_contrasenia='IN'
-							WHERE usr_cod_usuario = :usr_cod_usuario";
-              $query_2 = $pdo->prepare($sql_2);
-              $query_2->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
-              $query_2->execute();
-          } else {
-              $query_2 = true;
+            $sql_2 = "UPDATE dct_sistema_tbl_usuario
+					  SET usr_estado_contrasenia=0
+						WHERE usr_cod_usuario = :usr_cod_usuario";
+            $query_2 = $pdo->prepare($sql_2);
+            $query_2->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
+            $query_2->execute();
+          } 
+          else {
+            $query_2 = true;
           }
 
           if ($query_1 && $query_2) {
-              $pdo->commit();
-              $data_result["message"] = "claveNoIgual";
-              $data_result["dataModal_1"] = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
-              $data_result["dataModal_2"] = 'Información';
-              $data_result["dataModal_3"] = "Ingresó una contraseña incorrecta. Intento fallido " . ($claveNoIgual[1] + 1) . " de 3. Al tercer intento fallido se bloqueará el acceso al aplicativo web.";
-              $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
-              echo json_encode($data_result);
+            $pdo->commit();
+            $data_result["message"] = "claveNoIgual";
+            $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+            $data_result["dataModal_2"] = 'Información';
+            $data_result["dataModal_3"] = "Ingresó una contraseña incorrecta. Intento fallido " . ($claveNoIgual[1] + 1) . " de 3. Al tercer intento fallido se bloqueará el acceso al aplicativo web.";
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+            echo json_encode($data_result);
           } else {
-              $pdo->rollBack();
-              $data_result["message"] = "saveError";
-              echo json_encode($data_result);
+            $pdo->rollBack();
+            $data_result["message"] = "saveError";
+            echo json_encode($data_result);
           }
 
           break;
     }
 } catch (\PDOException $e) {
-    echo $e->getMessage();
+  echo $e->getMessage();
 }
 ?>

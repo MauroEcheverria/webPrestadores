@@ -12,8 +12,8 @@
           WHERE app.apl_id_aplicacion NOT IN (SELECT rp.rla_id_aplicacion
           FROM dct_sistema_tbl_rol_aplicacion rp
           WHERE rp.rla_id_rol = :rla_id_rol
-          AND rp.rla_estado = 'AC')
-          AND app.apl_estado = TRUE
+          AND rp.rla_estado = 1)
+          AND app.apl_estado = 1
           ORDER BY 1;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':rla_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

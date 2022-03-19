@@ -613,7 +613,7 @@ $(document).ready(function() {
               table_sys_id_app.ajax.reload();
               table_sys_id_opt.ajax.reload();
               $('#sys_btn_desvincular_app').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
               var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
@@ -710,7 +710,7 @@ $(document).ready(function() {
             case "saveOK":
               table_sys_id_opt.ajax.reload();
               $('#sys_btn_desvincular_opt').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
+              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
               var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';

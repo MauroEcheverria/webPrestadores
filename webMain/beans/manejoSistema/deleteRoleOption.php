@@ -8,10 +8,10 @@
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
 		$sql="UPDATE dct_sistema_tbl_rol_opcion
-					SET rlo_estado = 'IN'
+					SET rlo_estado = 0
  			  	WHERE rlo_id_rol = :rlo_id_rol
  			  	AND rlo_id_opcion = :rlo_id_opcion
- 			  	AND rlo_estado = 'AC';";
+ 			  	AND rlo_estado = 1;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':rlo_id_rol', cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
     $query->bindValue(':rlo_id_opcion', cleanData("noLimite",0,"noMayuscula",$_POST["sys_id_opt"]),PDO::PARAM_INT); 
