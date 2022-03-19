@@ -24,7 +24,7 @@
 			$dataValidaAcceso = [
 				'cod_system_user' => $userSystem,
 				'fecha_actual' => $fechaActual_4,
-				'id_option' => 3
+				'id_option' => 14
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$dataSesion = [
@@ -52,8 +52,8 @@
 				$query->bindValue(':usr_fecha_acceso',$fechaActual_1,PDO::PARAM_STR);
 				$query->execute(); $pdo->commit();
 				$sesion->set('dataSesion', $dataSesion);
-				include('administrarRoles.php');
-				administrarRoles($pdo,$dataSesion);
+				include('principal.php');
+				principal($pdo,$dataSesion);
 			}
 			else {
 				noAutorizado($pdo,$dataSesion); 

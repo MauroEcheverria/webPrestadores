@@ -42,7 +42,7 @@
 		}
 		else {
 			$sql="INSERT INTO dct_sistema_tbl_usuario(usr_cod_usuario, usr_correo, usr_id_rol, usr_contrasenia, usr_logeado, usr_estado, usr_estado_contrasenia, usr_id_empresa, usr_expiro_contrasenia, usr_fecha_cambio_contrasenia, usr_contador_error_contrasenia,usr_usuario_creacion,usr_fecha_creacion,usr_ip_creacion,usr_nacimiento,usr_sexo,usr_telefono,usr_nombre_1,usr_nombre_2,usr_apellido_1,usr_apellido_2)
-		    	VALUES (:usr_cod_usuario, :usr_nom_completos, :usr_correo, :usr_id_rol, :usr_contrasenia, FALSE, TRUE, TRUE, :usr_id_empresa, TRUE, :usr_fecha_cambio_contrasenia, :usr_contador_error_contrasenia,:usr_usuario_creacion,now(),:usr_ip_creacion,:usr_nacimiento,:usr_sexo,:usr_telefono, :usr_nombre_1, :usr_nombre_2, :usr_apellido_1, :usr_apellido_2);";
+		    	VALUES (:usr_cod_usuario, :usr_nom_completos, :usr_correo, :usr_id_rol, :usr_contrasenia, 0, 1, 0, :usr_id_empresa, 1, :usr_fecha_cambio_contrasenia, :usr_contador_error_contrasenia,:usr_usuario_creacion,now(),:usr_ip_creacion,:usr_nacimiento,:usr_sexo,:usr_telefono, :usr_nombre_1, :usr_nombre_2, :usr_apellido_1, :usr_apellido_2);";
 	    $query=$pdo->prepare($sql);
 	    $query->bindValue(':usr_cod_usuario',$usr_cedula,PDO::PARAM_INT);
 	    $query->bindValue(':usr_correo',$usr_correo,PDO::PARAM_STR); 

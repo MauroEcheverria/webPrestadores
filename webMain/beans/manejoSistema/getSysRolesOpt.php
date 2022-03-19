@@ -12,7 +12,7 @@
           WHERE ro.rlo_id_opcion = opt.opc_id_opcion
           AND opt.opc_id_aplicacion = app.apl_id_aplicacion
           AND ro.rlo_id_rol = :rlo_id_rol
-          AND ro.rlo_estado = 'AC'
+          AND ro.rlo_estado = 1
           ORDER BY 2,3;";
     $query=$pdo->prepare($sql);
     $query->bindValue(':rlo_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 

@@ -163,8 +163,9 @@
                 <div class="form-group">
                   <label for="editEstado" class="control-label">Estado</label>
                   <select name="editEstado" id="editEstado" class="form-control" required>
-                    <option value="TRUE" selected>Activo</option>
-                    <option value="FALSE" selected>Inactivo</option>
+                    <option value="">Selecione una opción</option>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
                   </select>
                   <div class="help-block with-errors"></div>
                 </div>
