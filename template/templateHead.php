@@ -13,9 +13,6 @@
         <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link href="../../../dist/css/adminlte.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-        <link href="../../../plugins/select2/dist/css/select2.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-        <link href="../../../plugins/DataTables/media/css/jquery.dataTables.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-        <link href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/webSistema.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
 
         <?php
