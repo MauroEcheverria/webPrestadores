@@ -12,6 +12,7 @@
 			$data = trim($data);
 		  $data = stripslashes($data);
 		  $data = htmlentities($data);
+      $data = htmlspecialchars($data, ENT_QUOTES, 'utf-8');
 			if ($limite == "siLimite") {
 				$data = substr($data,0,$max);
 			}
