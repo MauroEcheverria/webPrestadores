@@ -9,12 +9,11 @@
         <meta name="description" content="Sistema de Atención Médico">
         <title>Prestores IESS</title>
      
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" rel="stylesheet">
-        <link href="../../../plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-        <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link href="../../../dist/css/adminlte.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/fonts/source_sans_pro.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/fontawesome/css/all.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../plugins/ionic/ionicons.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
+        <link href="../../../dist/css/adminlte.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/webSistema.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-
         <?php
           for ($i = 0; $i < count($css_dreconstec); ++$i){
             echo $css_dreconstec[$i];
@@ -45,9 +44,6 @@
             </ul>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                  <i class="fas fa-search"></i>
-                </a>
                 <div class="navbar-search-block">
                   <form class="form-inline">
                     <div class="input-group input-group-sm">
@@ -142,16 +138,6 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                  <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                  <i class="fas fa-th-large"></i>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="../../../controller/cerrarSesionLogin" role="button">
                   <i class="fas fa-sign-out-alt"></i>
                 </a>
@@ -171,16 +157,6 @@
                 </div>
                 <div class="info">
                   <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-              </div>
-              <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                  <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                      <i class="fas fa-search fa-fw"></i>
-                    </button>
-                  </div>
                 </div>
               </div>
 

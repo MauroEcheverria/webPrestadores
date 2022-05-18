@@ -127,9 +127,9 @@ $(document).ready(function() {
 
   /*$('[data-mask]').inputmask();*/
 
-  $(".select2,#sys_selec_option").select2({
+  /*$(".select2,#sys_selec_option").select2({
     maximumSelectionLength: 20
-  });
+  });*/
 
   /*$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
     checkboxClass: 'icheckbox_minimal-blue',
