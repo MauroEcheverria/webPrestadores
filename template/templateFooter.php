@@ -21,10 +21,11 @@
   </script>
   <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../plugins/moment/moment.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../dist/js/adminlte.min.js<?php echo $dataSesion["version_css_version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/adminlte.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/jquery.validate.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/bootstrap-validator/dist/validator.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../plugins/bootstrap-validator/dist/validator.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+
   <?php
     for ($i = 0; $i < count($js_dreconstec); ++$i){
       echo $js_dreconstec[$i];
