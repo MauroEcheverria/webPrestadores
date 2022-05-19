@@ -3,14 +3,14 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
-	require_once("../../../webMain/pages/noAutorizado/index.php");
+	require_once("../../../webAdministracion/pages/noAutorizado/index.php");
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
 		$userSystem = $sesion->get("userSystem");
 		$timeout = $sesion->get("timeoutSession");
 		if( $userSystem == false ) {	
-			header("Location: ../../../webMain/pages/login");
+			header("Location: ../../../webAdministracion/pages/login");
 		}
 		else if( (time() - $timeout) > $param_timeout) {
 			header("Location: ../../../controller/cerrarSesion");

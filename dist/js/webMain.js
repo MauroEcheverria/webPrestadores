@@ -237,7 +237,7 @@ $(document).ready(function() {
   $('#newCedula').change( function () {
     if ($("#newCedula").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCedula.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCedula.php',
         type: 'POST',
         dataType: 'html',
         data:{ 'cedula' : $("#newCedula").val() },
@@ -258,7 +258,7 @@ $(document).ready(function() {
   $('#newCorreo').change( function () {
     if ($("#newCorreo").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCorreo.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
         data:{ 'cedula' : $("#newCorreo").val() },
@@ -279,7 +279,7 @@ $(document).ready(function() {
   $('#editCorreo').change( function () {
     if ($("#editCorreo").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCorreo.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
         data:{ 'cedula' : $("#editCorreo").val() },
