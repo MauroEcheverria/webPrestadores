@@ -16,14 +16,10 @@
 
   <script src="../../../plugins/jquery/jquery-3.6.0.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../plugins/jquery-ui/jquery-ui.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
   <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../plugins/moment/moment.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../dist/js/adminlte.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script src="../../../dist/js/adminlte.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/jquery.validate.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
-  <script src="../../../plugins/bootstrap-validator/dist/validator.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
 
   <?php
