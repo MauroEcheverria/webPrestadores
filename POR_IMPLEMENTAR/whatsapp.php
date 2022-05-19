@@ -2,10 +2,10 @@
 
 $curl = curl_init();
 
-$instancia = "instance3387";
-$token = "6tlv7zyeipwi3zqi";
-$enviar = 960939030;
-$mensaje = "Un ejemplo de envio por Dreconstec";
+$instancia = "instance7021";
+$token = "y3ayb131wy8n8x2m";
+$num_a_enviar = 960939030;
+$mensaje = " 👻 Un ejemplo de envio por Dreconstec 🥶";
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.ultramsg.com/".$instancia."/messages/chat",
@@ -15,7 +15,7 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "token=".$token."&to=+593".$enviar."&body=".$mensaje."&priority=1&referenceId=",
+  CURLOPT_POSTFIELDS => "token=".$token."&to=+593".$num_a_enviar."&body=".$mensaje."&priority=1&referenceId=",
   CURLOPT_HTTPHEADER => array(
     "content-type: application/x-www-form-urlencoded"
   ),
