@@ -13,7 +13,8 @@
 			header("Location: ../../../webAdministracion/pages/login");
 		}
 		else if( (time() - $timeout) > $param_timeout) {
-			header("Location: ../../../controller/cerrarSesion");
+			$sesion->set("linkTemp",$url_actual);
+			header("Location: ../../../controller/cerrarSesion.php");
 		}
 		else {
 			$sesion->set("timeoutSession",time());
@@ -28,7 +29,7 @@
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$dataSesion = [
-				'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
+			'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
 		    'codigoValidacion' => $returnValidar["codigoValidacion"],
 		    'complete_names' => $returnValidar["complete_names"],
 		    'id_role' => $returnValidar["id_role"],
@@ -38,7 +39,7 @@
 		    'role' => $returnValidar["role"],
 		    'id_option' => $dataValidaAcceso["id_option"]
 			];
-
+			
 			if($returnValidar["estadoValidarAcceso"]) {
 				$sql="UPDATE dct_sistema_tbl_usuario
 							SET usr_logeado=TRUE,

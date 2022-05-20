@@ -6,7 +6,7 @@
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Sistema de Atención Médico">
+        <meta name="description" content="Sistema de Negocios">
         <title>Prestores IESS</title>
      
         <link href="../../../plugins/fonts/source_sans_pro.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
@@ -139,7 +139,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../../../controller/cerrarSesionLogin" role="button">
+                <a class="nav-link" href="../../../controller/cerrarSesion.php" role="button">
                   <i class="fas fa-sign-out-alt"></i>
                 </a>
               </li>

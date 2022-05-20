@@ -21,6 +21,7 @@
   <script src="../../../dist/js/adminlte.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/jquery.validate.min.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
   <script src="../../../dist/js/webInspector.js<?php echo $dataSesion["version_css_js"]; ?>"></script>
+  <script> $.widget.bridge('uibutton', $.ui.button) </script>
 
   <?php
     for ($i = 0; $i < count($js_dreconstec); ++$i){

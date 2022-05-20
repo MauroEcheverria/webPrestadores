@@ -200,19 +200,19 @@
 		  if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
 
 			if (!$valEstadoUsuario) {
-				$codigoValidacion = "usuarioIncativo";
+				$codigoValidacion = "usuarioInactivo";
 			}
 			else if (!$valEstadoContrasena) {
-				$codigoValidacion = "contrasenaIncativa";
+				$codigoValidacion = "contrasenaInactiva";
 			}
 			else if (!$valExpiroContrasena) {
 				$codigoValidacion = "expiroContrasena";
 			}
 			else if (!$valEstadoAplicativo) {
-				$codigoValidacion = "aplicativoIncativo";
+				$codigoValidacion = "aplicativoInactivo";
 			}
 			else if (!$valEstadoRol) {
-				$codigoValidacion = "rolIncativo";
+				$codigoValidacion = "rolInactivo";
 			}
 			else if (!$valEstadoEmpresa) {
 				$codigoValidacion = "empresaInactiva";
@@ -221,7 +221,7 @@
 				$codigoValidacion = "licenciaCaducada";
 			}
 			else if (!$valEstadoOpcion) {
-				$codigoValidacion = "moduloIncativo";
+				$codigoValidacion = "moduloInactivo";
 			}
 			else if (!$valAccesoOpcion) {
 				$codigoValidacion = "noPosseeAccesoOpcion";

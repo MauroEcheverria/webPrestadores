@@ -13,7 +13,8 @@
 			header("Location: ../../../webAdministracion/pages/login");
 		}
 		else if( (time() - $timeout) > $param_timeout) {
-			header("Location: ../../../controller/cerrarSesion");
+			$sesion->set("linkTemp",$url_actual);
+			header("Location: ../../../controller/cerrarSesion.php");
 		}
 		else {
 			$sesion->set("timeoutSession",time());

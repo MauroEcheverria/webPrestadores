@@ -1,5 +1,5 @@
 <?php
-	/************	Fecha	************/
+	/****************** Fecha	************/
 	$hora = new DateTime();
 	$hora->setTimezone(new DateTimeZone('America/Bogota'));	
 	$fechaActual_1 = $hora->format("Y-m-d H:i:s");
@@ -11,7 +11,7 @@
 	$fechaActual_7 = $hora->format("Y");
 	$fechaActual_8 = $hora->format("H:i");
 	$fechaActual_9 = $hora->format("Y-m-d H:i:s.u");
-	/************	Mail ************/
+	/****************** Mail ************/
 	$mailSMTP = 'ssl';
 	$mailPort = 465;
 	$hostSince = "mail.dreconstec.com";
@@ -22,6 +22,7 @@
 	// 1 - Se ven todo tipo de error y advertencias
 	// 0 - No se ven error ni anvertencias
 	$app_error_reporting = 1;
+  $http = ($app_error_reporting == 0) ? "https://" : "http://";
 	/****************** TIMEOUT SESSION *************************/
 	// 15 min = 900 seg
 	// 20 min = 1200 seg
@@ -30,4 +31,6 @@
 	$param_timeout = 2700;
 	/****************** VERSIONES CSS Y JS *************************/
 	$version_css_js = "?dct_1.0";
+	/****************** URL ACTUAL *************************/
+	$url_actual = "$http$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>

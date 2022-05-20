@@ -25,6 +25,7 @@
       <div class="card-body">
         <p class="login-box-msg">Inicio de Sesión</p>
         <form id="btnFormLogin" class="form-group" method="post" data-toggle="validator" role="form" autocomplete="off">
+        <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser">
             <div class="input-group-append">

@@ -57,56 +57,6 @@ function soloNumeros(e) {
   var tecla_final = String.fromCharCode(key);
   return patron.test(tecla_final);
 }
-
-var time;
-function inicio() { 
-  time = setTimeout(function() { 
-    $(document).ready(function(e) {
-      $.ajax({
-        url:'../../../controller/cerrarSesion/inactividad.php',
-        type:'POST',
-        data:{'linkTemp' : window.location.href },
-        success: function(result){
-        var result = eval('('+result+')');
-          switch (result.message) {
-            case "saveOK":
-              $('#myModalInactivity').modal('show'); 
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1400");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    });
-  },7200000);
-}
-//3600000 -> 60 min - 7200000
-function reset() {
-  clearTimeout(time);
-  time = setTimeout(function() { 
-    $(document).ready(function(e) {
-      $.ajax({
-        url:'../../../controller/cerrarSesion/inactividad.php',
-        type:'POST',
-        data:{'linkTemp' : window.location.href },
-        success: function(result){
-        var result = eval('('+result+')');
-          switch (result.message) {
-            case "saveOK":
-                $('#myModalInactivity').modal('show'); 
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1401");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    });
-  },7200000);
-}
 function modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4) {
   $("#putIconModalgeneric").empty().prepend(dataModal_1);
   $("#putTitleModalgeneric").empty().prepend(dataModal_2);

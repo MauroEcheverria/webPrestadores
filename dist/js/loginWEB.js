@@ -50,7 +50,12 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "accesoPermitido":
-              window.location = "../bienvenido";
+              if ($("#linkTemp").val() == "") {
+                window.location = "../bienvenido";
+              }
+              else {
+                window.location = $("#linkTemp").val();
+              }
               break;
             case "accesoPermitidoExpirePass":
               $("h3#idPassCedula").empty().prepend(result.cod_system_user);
