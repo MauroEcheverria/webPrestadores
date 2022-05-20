@@ -41,20 +41,39 @@
 			];
 			
 			if($returnValidar["estadoValidarAcceso"]) {
+
 				$sql="UPDATE dct_sistema_tbl_usuario
 							SET usr_logeado=TRUE,
 							usr_ip_pc_acceso=:usr_ip_pc_acceso,
 							usr_fecha_acceso=:usr_fecha_acceso,
-							usr_contador_error_contrasenia=0
+							usr_contador_error_contrasenia=0,
+              usr_ultimo_acceso=:usr_ultimo_acceso
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
 				$query=$pdo->prepare($sql);
 				$query->bindValue(':usr_ip_pc_acceso',getRealIP(),PDO::PARAM_STR);
 				$query->bindValue(':usr_cod_usuario',$userSystem,PDO::PARAM_INT);
 				$query->bindValue(':usr_fecha_acceso',$fechaActual_1,PDO::PARAM_STR);
+        $query->bindValue(':usr_ultimo_acceso',$fechaActual_4,PDO::PARAM_STR);
 				$query->execute(); $pdo->commit();
+
+        $sql_pass="SELECT (CURRENT_DATE - usr_fecha_cambio_contrasenia) dias_pass
+                  FROM dct_sistema_tbl_usuario
+                  WHERE usr_cod_usuario = :usr_cod_usuario;";
+        $query_pass=$pdo->prepare($sql_pass);
+        $query_pass->bindValue(':usr_cod_usuario', $userSystem);
+        $query_pass->execute();
+        $row_pass = $query_pass->fetch(\PDO::FETCH_ASSOC);
+
+        if($row_pass["dias_pass"] < 30) {
+          $diferencia_pass = 30 - $row_pass["dias_pass"];
+        }
+        else {
+          $diferencia_pass = 0;
+        }
+
 				$sesion->set('dataSesion', $dataSesion);
 				include('bienvenido.php');
-				bienvenido($pdo,$dataSesion);
+				bienvenido($pdo,$dataSesion,$diferencia_pass);
 			}
 			else {
 				noAutorizado($pdo,$dataSesion); 

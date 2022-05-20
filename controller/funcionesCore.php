@@ -91,7 +91,7 @@
     }
     public function login($userSystem,$password,$pdo) {
       try {
-				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_fecha_cambio_contrasenia,usr_contador_error_contrasenia,usr_expiro_contrasenia
+				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_contador_error_contrasenia,(CURRENT_DATE - usr_fecha_cambio_contrasenia) dias_pass
 							FROM dct_sistema_tbl_usuario
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
 		    $query=$pdo->prepare($sql);
@@ -101,7 +101,12 @@
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
 		    	if ($row["usr_estado_contrasenia"] == 1) {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
-              return "pasoTodo";
+              if ($row["dias_pass"] < 30) {
+                return "pasoTodo";
+              }
+              else {
+                return "passNecesitaCambio";
+              }
 		        }
 		        return "claveNoIgual&&&".$row["usr_contador_error_contrasenia"];
 		    	}

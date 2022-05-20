@@ -1,5 +1,5 @@
 <?php 
-  function bienvenido($pdo,$dataSesion){ 
+  function bienvenido($pdo,$dataSesion,$diferencia_pass){ 
   include("../../../template/templateHead.php");
   include("../../../template/templateFooter.php");
   include("../../../dialogs/modalViews.php"); 
@@ -31,9 +31,9 @@
             <h1 class="m-0">Dashboard</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">Home</li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+            <ol class="breadcrumb float-sm-right" id="num_pass_cambio">
+              <img src="../../../dist/img/alerta_gif.gif" alt="" class="img_pass_cambio">
+              <strong><span class="num_pass_cambio"><?php echo $diferencia_pass; ?></span> día(s) para cambio de contraseña</strong> 
             </ol>
           </div>
         </div>

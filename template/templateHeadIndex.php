@@ -8,27 +8,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Sistema de Negocios">
         <title>Prestores IESS</title>
-     
         <link href="plugins/bootstrap-5.1.3/dist/css/bootstrap.min.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
-        <link href="plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
         <link href="plugins/bootstrap-5.1.3/dist/css/carousel.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
         <link href="plugins/bootstrap-5.1.3/dist/css/features.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
+        <link href="plugins/fontawesome-free-5.15.4-web/css/all.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
         <link href="dist/css/webSistema.css<?php echo $data_template["version_css_js"]; ?>" rel="stylesheet">
-
         <?php
           for ($i = 0; $i < count($css_dreconstec); ++$i){
             echo $css_dreconstec[$i];
           }
         ?>
-
       </head>
-
       <body>
-
         <div id="loading">
           <img src="dist/img/loading.gif" style="margin-top: 15%;"/>
         </div>
-
         <header>
           <div class="collapse bg-dark" id="navbarHeader">
             <div class="container">

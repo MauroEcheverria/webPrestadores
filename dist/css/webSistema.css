@@ -59,3 +59,20 @@
   font-size: 13px;
   color: #ff6161;
 }
+.num_pass_cambio {
+  font-size: 20px;
+  text-decoration: underline;
+}
+#num_pass_cambio {
+  margin-top: -10px;
+}
+.img_pass_cambio {
+  width: 25px;
+  height: 25px;
+  margin: 2px 10px 0 0;
+}
+@media screen and (max-width: 991px) {
+  #num_pass_cambio {
+    margin-top: 0;
+  }
+}

@@ -8,22 +8,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Sistema de Negocios">
         <title>Prestores IESS</title>
-     
         <link href="../../../plugins/fonts/source_sans_pro.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../plugins/fontawesome/css/all.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../plugins/ionic/ionicons.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/adminlte.min.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
         <link href="../../../dist/css/webSistema.css<?php echo $dataSesion["version_css_js"]; ?>" rel="stylesheet">
-
         <?php
           for ($i = 0; $i < count($css_dreconstec); ++$i){
             echo $css_dreconstec[$i];
           }
         ?>
-
       </head>
-
-      <body class="hold-transition sidebar-mini layout-fixed">
+      <body class="hold-transition sidebar-mini layout-fixed" onkeypress="resetTimeoutSession()" onclick="resetTimeoutSession()">
         <div id="loading">
           <img src="../../../dist/img/loading.gif" style="margin-top: 15%;"/>
         </div>

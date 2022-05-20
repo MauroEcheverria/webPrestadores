@@ -8,10 +8,9 @@
   include("../../../dialogs/modalViews.php");
   
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$data_template["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../dist/js/loginWEB.js'.$data_template["version_css_js"].'"></script>';
 
   template_head($data_template, $css_dreconstec);
@@ -24,28 +23,44 @@
       </div>
       <div class="card-body">
         <p class="login-box-msg">Inicio de Sesión</p>
-        <form id="btnFormLogin" class="form-group" method="post" data-toggle="validator" role="form" autocomplete="off">
-        <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+        <form id="formLoginSesion" class="needs-validation" novalidate method="post" data-toggle="validator" role="form" autocomplete="off">
+          <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser" required="">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                Please provide a valid cityfgfdgd.
+              </div>
+              <div class="valid-feedback">
+                Looks good!
               </div>
             </div>
+            
           </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword" required="">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                Please provide a valid city34534543.
+              </div>
+              <div class="valid-feedback">
+                Looks good!
               </div>
             </div>
+ 
           </div>
-          <div class="row">
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-block">Acceder</button>
-            </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Acceder</button>
           </div>
         </form>
         <p class="mb-1">

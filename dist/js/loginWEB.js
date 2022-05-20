@@ -37,15 +37,27 @@ $(document).ready(function() {
   $(document)
   .ajaxStart(function(){$('#loading').show();})
   .ajaxStop(function(){$('#loading').hide();});
+
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+    }, false)
+  });
   
-  $('#btnFormLogin').validator().on('submit', function (e) {
+  $('#formLoginSesion').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       $.ajax({
         url: '../../beans/login.php',
         type: 'POST',
         dataType: 'html',
-        data:$('#btnFormLogin').serialize(),
+        data:$('#formLoginSesion').serialize(),
         success: function(result){
         var result = eval('('+result+')');
           switch (result.message) {
@@ -92,7 +104,7 @@ $(document).ready(function() {
   
   $('#inputUser,#inputPassword').keypress(function(e){
     if(e.which == 13){
-      $('#btnFormLogin').click();
+      $('#formLoginSesion').click();
     }
   });
 
