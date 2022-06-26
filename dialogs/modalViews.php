@@ -17,7 +17,7 @@
         </div>
         <div class="modal-body"><strong>Se ha detectado 2 horas de inactividad, por su seguridad se procederá a cerrar su sesión actual.</strong></div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal" onClick="location.href = '../../../'">Cerrar</button>
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onClick="location.href = '../../../'">Cerrar</button>
         </div>
       </div>
     </div>

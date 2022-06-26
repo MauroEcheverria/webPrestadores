@@ -115,7 +115,7 @@
             </div>
           </div>
           <div class="modal-footer centralFooter">
-            <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
           </div>
         </form>
@@ -211,7 +211,7 @@
           </div>
           <div class="modal-footer">
             <div class="form-group">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-success">Guardar</button>
             </div>
           </div>
@@ -244,7 +244,7 @@
               </div>
               <div><span>La contraseña se reseteará y será su mismo número de cédula. Al inicio de sesión este le pedirá realizar el respectivo cambio de contraseña para así personalizarlo a su preferencia.</span></div><br>
               <div class="form-group">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-warning">Resetear</button>
               </div>
             </form>

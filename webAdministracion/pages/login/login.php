@@ -34,11 +34,9 @@
                 </div>
               </div>
               <div class="invalid-feedback">
-                Please provide a valid cityfgfdgd.
+                Por favor ingrese su cédula de identidad
               </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <div class="valid-feedback"></div>
             </div>
             
           </div>
@@ -51,11 +49,9 @@
                 </div>
               </div>
               <div class="invalid-feedback">
-                Please provide a valid city34534543.
+                Por favor ingrese su contraseña
               </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <div class="valid-feedback"></div>
             </div>
  
           </div>
@@ -127,7 +123,7 @@
           <div class="modal-footer">
             <hr>
             <div class="form-group">
-              <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-warning">Guardar</button>
             </div>
           </div>

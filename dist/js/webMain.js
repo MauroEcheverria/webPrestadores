@@ -578,7 +578,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:
@@ -675,7 +675,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:

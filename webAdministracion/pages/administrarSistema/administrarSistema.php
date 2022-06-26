@@ -140,7 +140,7 @@
           </div>
           <div class="modal-footer">
             <div class="form-group">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-success">Asignar</button>
             </div>
           </div>
@@ -175,7 +175,7 @@
           </div>
           <div class="modal-footer">
             <div class="form-group">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-success">Asignar</button>
             </div>
           </div>
