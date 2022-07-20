@@ -26,10 +26,10 @@
     if($query_3) {
       $pdo->commit();
       $data_result["message"] = "saveOK";
-      $data_result["dataModal_1"] = '<img src="../../../dist/img/visto.png" width="30px" heigth="20px">';
+      $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'El reseteo la contraseña de manera correcta.';
-      $data_result["dataModal_4"] = '<button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>';
+      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
 			echo json_encode($data_result);
     }
     else {

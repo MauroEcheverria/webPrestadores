@@ -19,7 +19,7 @@
           }
         ?>
       </head>
-      <body class="hold-transition sidebar-mini layout-fixed" onkeypress="resetTimeoutSession()" onclick="resetTimeoutSession()">
+      <body class="hold-transition sidebar-mini layout-fixed">
         <div id="loading">
           <img src="../../../dist/img/loading.gif" style="margin-top: 15%;"/>
         </div>

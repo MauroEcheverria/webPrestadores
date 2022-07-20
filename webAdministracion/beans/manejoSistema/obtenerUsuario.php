@@ -11,8 +11,8 @@
     $pdo = $ConnectionDB->connect();
     $sql="SELECT u.usr_cod_usuario,u.usr_correo,
           r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
-          (SELECT ctg_descripcion FROM dct_sistema_tbl_catalogo WHERE ctg_key = u.usr_estado_contrasenia) usr_estado_contrasenia,
-          (SELECT ctg_descripcion FROM dct_sistema_tbl_catalogo WHERE ctg_key = u.usr_estado) usr_estado,
+          u.usr_estado_contrasenia,
+          u.usr_estado,
           CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ',usr_apellido_2) usr_nom_completos
           FROM dct_sistema_tbl_usuario u,dct_sistema_tbl_rol r,dct_sistema_tbl_empresa m
           WHERE u.usr_id_rol = r.rol_id_rol

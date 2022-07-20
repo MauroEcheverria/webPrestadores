@@ -162,7 +162,7 @@ $(document).ready(function() {
               if (result.existeCuenta == "SI") { 
                 if (result.tokenActivo == "NO") {
                     if (result.correoEnviado == "SI") {
-                      var dataModal_1 = '<img src="../../../dist/img/visto.png" width="30px" heigth="20px">';
+                      var dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
                       var dataModal_2 = 'Información';
                       var dataModal_3 = 'Se ha enviado una notificación a su cuenta de correo electrónico <span class="linkCorreo">'+result.usr_correo+'</span> con las instrucciones para que pueda ingresar su nueva contraseña.<br><p><strong>Favor revisar su bandeja de entrada o spam.</strong></p>';
                       var dataModal_4 = '<button type="button" class="btn btn-success" onClick="location.href = '+"'"+'../login'+"'"+'">Cerrar</button>';

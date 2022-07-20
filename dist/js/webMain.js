@@ -172,6 +172,20 @@ $(document).ready(function() {
         return json.data;
       },
       timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+      if ( data[6] == 1 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[6] == 0 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
     }
   });
   $('#btnUserNuevo').click( function () {
@@ -575,10 +589,10 @@ $(document).ready(function() {
               table_sys_id_app.ajax.reload();
               table_sys_id_opt.ajax.reload();
               $('#sys_btn_desvincular_app').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+              var sms_dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:
@@ -672,10 +686,10 @@ $(document).ready(function() {
             case "saveOK":
               table_sys_id_opt.ajax.reload();
               $('#sys_btn_desvincular_opt').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+              var sms_dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-bs-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:

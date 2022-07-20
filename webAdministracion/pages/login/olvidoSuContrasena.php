@@ -37,10 +37,10 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-xs-12 col-md-6">
-                  <button type="button" class="btn btn-default" onClick="location.href = '../login'">Regresar</button>
+                  <button type="button" class="btn btn-success" onClick="location.href = '../login'">Regresar</button>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                  <button type="submit" class="btn btn-default">Reestablecer</button>
+                  <button type="submit" class="btn btn-success">Reestablecer</button>
                 </div>
               </div>
             </div>

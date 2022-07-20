@@ -33,7 +33,7 @@
           FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
           AND tok_tipo = 'RESETEO'
-          AND tok_estado = 'A';";
+          AND tok_estado = 1;";
     $query_1=$pdo->prepare($sql_1);
     $query_1->bindValue(':tok_token',$_GET["linkReset"],PDO::PARAM_STR);
     $query_1->execute();
@@ -41,7 +41,7 @@
 
     if($query_1->rowCount() == 1) {
       if ($row_1["diff"] <= 10) {
-        if ($row_1["tok_estado"] == 'A') {
+        if ($row_1["tok_estado"] == 1) {
           $tokenUsado = "NO";
         }
         $dentroLimite = "SI";
@@ -90,7 +90,7 @@
 
                         <input type="hidden" name="pass_token" id="pass_token" value="<?php echo $_GET["linkReset"] ?>">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-default"
+                          <button type="submit" class="btn btn-success"
                           id="btnSubmitReset">Reestablecer</button>
                         </div>
                       </form>
@@ -181,6 +181,7 @@
       
   } catch (\PDOException $e) {
       echo $e->getMessage();
-  }        
+  }
+  modalViews();        
   template_footer($data_template, $js_dreconstec); 
 ?>
