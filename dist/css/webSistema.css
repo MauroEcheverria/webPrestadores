@@ -16,6 +16,11 @@
 .poppupAlert{
   display:none;
   font-size: 13px;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .iconDTicon {
   font-size: 20px;

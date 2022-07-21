@@ -5,15 +5,14 @@
   require_once("../../../dctDatabase/Parameter.php");
   app_error_reporting($app_error_reporting);
   try {
-      //$sesion = new sesion();
-      //print_r($sesion->get('dataSesion'));
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
     $sql="SELECT u.usr_cod_usuario,u.usr_correo,
           r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
           u.usr_estado_contrasenia,
           u.usr_estado,
-          CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ',usr_apellido_2) usr_nom_completos
+          CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ',usr_apellido_2) usr_nom_completos,
+          u.usr_nombre_1,u.usr_nombre_2,u.usr_apellido_1,u.usr_apellido_2
           FROM dct_sistema_tbl_usuario u,dct_sistema_tbl_rol r,dct_sistema_tbl_empresa m
           WHERE u.usr_id_rol = r.rol_id_rol
           /*AND u.usr_cod_usuario NOT IN ('0919664854')*/
@@ -34,6 +33,10 @@
       $return_array[7] = $row["usr_id_empresa"];
       $return_array[8] = $row["usr_id_rol"];
       $return_array[9] = null;
+      $return_array[10] = $row["usr_nombre_1"];
+      $return_array[11] = $row["usr_nombre_2"];
+      $return_array[12] = $row["usr_apellido_1"];
+      $return_array[13] = $row["usr_apellido_2"];
 			array_push($return,$return_array);
 		}
 		$return = array(

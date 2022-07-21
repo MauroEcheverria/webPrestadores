@@ -91,7 +91,7 @@
           $data_result["message"] = "updateError";
           $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
-          $data_result["dataModal_3"] = 'Se ha detectado un error en la acción requerida, favor escribenos a app-web@dreconstec.com';
+          $data_result["dataModal_3"] = 'Se ha detectado un error en la acción requerida, favor escribenos a info@dreconstec.com';
           $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
         }

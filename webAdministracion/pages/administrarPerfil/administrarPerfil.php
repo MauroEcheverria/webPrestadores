@@ -8,7 +8,7 @@
   //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  $js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';
+  /*$js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';*/
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
@@ -21,18 +21,18 @@
             <span class="panel-title"><b>Administra Perfíl</b></span>
           </div>
           <div class="card-body">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Datos Personales</a>
+                <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Datos Personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Actualizar Contraseña</a>
+                <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Actualizar Contraseña</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+
               <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
                 <div class="divPanelTogglable">
-
                   <div class="toggle_dentro_panel">
                     <form id="formAdminPerfil" data-toggle="validator" role="form">
                       <div class="row">
@@ -128,9 +128,9 @@
 
                 </div>
               </div>
+
               <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
                 <div class="divPanelTogglable">
-
                   <div class="toggle_dentro_panel">
                     <form id="formExpirePassPerfil" data-toggle="validator" role="form">
                       <div class="form-group">
@@ -167,9 +167,10 @@
                       </div>
                     </form>
                   </div>
-
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>

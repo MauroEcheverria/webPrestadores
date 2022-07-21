@@ -1,3 +1,8 @@
+function ocultarPoppupAlert(){
+  window.setTimeout(function(){
+    $('.poppupAlert').fadeOut('slow');
+  },3000);
+}
 $(document).ready(function() {
 
 	/*$(document).bind("contextmenu",function(e){
@@ -17,6 +22,16 @@ $(document).ready(function() {
       return false;
     }
   }*/
+
+  $(document)
+  .ajaxStart(function(){
+    $('.preloader').css('height', '100vh');
+    $('.preloader').children().show();
+  })
+  .ajaxStop(function(){
+    $('.preloader').css('height', '0');
+    $('.preloader').children().hide();
+  });
 
   window.dct_width_page = $(window).width();
   window.dct_height_page = $(window).height();

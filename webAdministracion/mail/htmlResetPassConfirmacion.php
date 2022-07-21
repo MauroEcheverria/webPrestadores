@@ -59,7 +59,7 @@
                                      
                                                     Se informa que su restablecimiento de contrase&ntilde;a se realiz&oacute; con &eacute;xito.
                                                     <br> <br> 
-                                                    Si usted no ha solicitado ning&uacute;n restablecimiento de contrase&ntilde;a, favor env&iacute;e un correo electr&oacute;nico a app-web@dreconstec.com indicando esta novedad.
+                                                    Si usted no ha solicitado ning&uacute;n restablecimiento de contrase&ntilde;a, favor env&iacute;e un correo electr&oacute;nico a info@dreconstec.com indicando esta novedad.
                                          
                                                   </span>
                                                 </p>

@@ -12,12 +12,12 @@
 		$pdo->beginTransaction();
 		$validacionUsuario = new ValidacionUsuario();
 
-		$usr_cedula = cleanData("siLimite",13,"noMayuscula",$_POST["newCedula"]);
+		$usr_cedula = cleanData("siLimite",13,"noMayuscula",$_POST["usr_cod_usuario"]);
 		$usr_nombre_1 = cleanData("siLimite",15,"noMayuscula",$_POST["usr_nombre_1"]);
 		$usr_nombre_2 = cleanData("siLimite",15,"noMayuscula",$_POST["usr_nombre_2"]);
 		$usr_apellido_1 = cleanData("siLimite",15,"noMayuscula",$_POST["usr_apellido_1"]);
 		$usr_apellido_2 = cleanData("siLimite",15,"noMayuscula",$_POST["usr_apellido_2"]);
-		$usr_correo = strtolower(cleanData("siLimite",60,"noMayuscula",$_POST["newCorreo"]));
+		$usr_correo = strtolower(cleanData("siLimite",60,"noMayuscula",$_POST["usr_correo"]));
 
 		$data_fast = 0;
 		if ( strlen($usr_cedula) >= 1) {
@@ -41,26 +41,24 @@
 			echo json_encode($data_result);
 		}
 		else {
-			$sql="INSERT INTO dct_sistema_tbl_usuario(usr_cod_usuario, usr_correo, usr_id_rol, usr_contrasenia, usr_logeado, usr_estado, usr_estado_contrasenia, usr_id_empresa, usr_expiro_contrasenia, usr_fecha_cambio_contrasenia, usr_contador_error_contrasenia,usr_usuario_creacion,usr_fecha_creacion,usr_ip_creacion,usr_nacimiento,usr_sexo,usr_telefono,usr_nombre_1,usr_nombre_2,usr_apellido_1,usr_apellido_2)
-		    	VALUES (:usr_cod_usuario, :usr_nom_completos, :usr_correo, :usr_id_rol, :usr_contrasenia, 0, 1, 0, :usr_id_empresa, 1, :usr_fecha_cambio_contrasenia, :usr_contador_error_contrasenia,:usr_usuario_creacion,now(),:usr_ip_creacion,:usr_nacimiento,:usr_sexo,:usr_telefono, :usr_nombre_1, :usr_nombre_2, :usr_apellido_1, :usr_apellido_2);";
+			$sql="INSERT INTO dct_sistema_tbl_usuario(usr_cod_usuario, usr_nombre_1, usr_nombre_2, usr_apellido_1, usr_apellido_2, usr_contrasenia, 
+				usr_logeado, usr_estado, usr_correo, usr_id_rol, usr_estado_contrasenia, usr_id_empresa, usr_fecha_cambio_contrasenia, 
+				usr_contador_error_contrasenia, usr_expiro_contrasenia, usr_usuario_creacion, usr_fecha_creacion, usr_ip_creacion)
+		    	VALUES (:usr_cod_usuario, :usr_nombre_1, :usr_nombre_2, :usr_apellido_1, :usr_apellido_2, :usr_contrasenia, 0, 1, 
+		    		:usr_correo, :usr_id_rol, 1, :usr_id_empresa, :usr_fecha_cambio_contrasenia, 0, 1, :usr_usuario_creacion, now(), :usr_ip_creacion);";
 	    $query=$pdo->prepare($sql);
 	    $query->bindValue(':usr_cod_usuario',$usr_cedula,PDO::PARAM_INT);
-	    $query->bindValue(':usr_correo',$usr_correo,PDO::PARAM_STR); 
-	    $query->bindValue(':usr_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["newRol"]),PDO::PARAM_INT); 
-	    $query->bindValue(':usr_contrasenia',$validacionUsuario->setPassword($usr_cedula),PDO::PARAM_STR); 
-	    $query->bindValue(':usr_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["newEmpresa
-	    	"]),PDO::PARAM_INT); 
-	    $query->bindValue(':usr_fecha_cambio_contrasenia',$fechaActual_4,PDO::PARAM_STR);
-	    $query->bindValue(':usr_contador_error_contrasenia',0);
-	    $query->bindValue(':usr_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-	    $query->bindValue(':usr_ip_creacion',getRealIP(),PDO::PARAM_STR);
-	    $query->bindValue(':usr_nacimiento',cleanData("noLimite",0,"noMayuscula",$_POST["newNacimiento"]),PDO::PARAM_STR);
-	    $query->bindValue(':usr_sexo',cleanData("siLimite",1,"noMayuscula",$_POST["usr_sexo"]),PDO::PARAM_STR); 
-	    $query->bindValue(':usr_telefono',cleanData("siLimite",10,"noMayuscula",$_POST["usr_telefono"]),PDO::PARAM_INT);
 	    $query->bindValue(':usr_nombre_1',$usr_nombre_1,PDO::PARAM_STR);
 	    $query->bindValue(':usr_nombre_2',$usr_nombre_2,PDO::PARAM_STR);
 	    $query->bindValue(':usr_apellido_1',$usr_apellido_1,PDO::PARAM_STR);
 	    $query->bindValue(':usr_apellido_2',$usr_apellido_2,PDO::PARAM_STR); 
+	    $query->bindValue(':usr_contrasenia',$validacionUsuario->setPassword($usr_cedula),PDO::PARAM_STR); 
+	    $query->bindValue(':usr_correo',$usr_correo,PDO::PARAM_STR); 
+	    $query->bindValue(':usr_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["usr_id_rol"]),PDO::PARAM_INT); 
+	    $query->bindValue(':usr_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["usr_id_empresa"]),PDO::PARAM_INT); 
+	    $query->bindValue(':usr_fecha_cambio_contrasenia',$fechaActual_4,PDO::PARAM_STR);
+	    $query->bindValue(':usr_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+	    $query->bindValue(':usr_ip_creacion',getRealIP(),PDO::PARAM_STR);
 	    $query->execute();
 
 			if($query) {

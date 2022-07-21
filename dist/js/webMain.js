@@ -71,26 +71,6 @@ $(document).ready(function() {
     return false;
   });
 
-  window.setTimeout(function(){
-    $('.poppupAlert').fadeOut('slow');
-  },3000);
-
-  /*$('[data-mask]').inputmask();*/
-
-  /*$(".select2,#sys_selec_option").select2({
-    maximumSelectionLength: 20
-  });*/
-
-  /*$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-    checkboxClass: 'icheckbox_minimal-blue',
-    radioClass   : 'iradio_minimal-blue'
-  });*/
-
-  /*$('.timepicker').timepicker({
-    showInputs: false,
-    showMeridian: false
-  });*/
-
   $('#newNacimiento,#editNacimiento').datepicker({
     singleDatePicker: true,
     showDropdowns: true,
@@ -100,11 +80,6 @@ $(document).ready(function() {
     /*startDate: '+0d',*/
     endDate: '+0d',
   });
-
-  $('#loading').hide();  
-  $(document)
-  .ajaxStart(function(){$('#loading').show();})
-  .ajaxStop(function(){$('#loading').hide();});
 
   var forms = document.querySelectorAll('.needs-validation')
   Array.prototype.slice.call(forms)
@@ -118,7 +93,6 @@ $(document).ready(function() {
     }, false)
   });
 
-  window.id_dt_cedula = null;
   var dtUsuarios = $('#dtUsuarios').DataTable( {
     bRetrive: true,
     processing: true,
@@ -134,7 +108,7 @@ $(document).ready(function() {
         aTargets: [0,3,4,5,6,9]
       },
       {
-        "targets": [7,8],
+        "targets": [7,8,10,11,12,13],
         "visible": false,
         "searchable": false
       }
@@ -156,7 +130,7 @@ $(document).ready(function() {
           var acciones = '';
           acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="far fa-trash-alt iconDTicon"></i></i></a>';
+          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
           return acciones
         }
       },
@@ -188,85 +162,79 @@ $(document).ready(function() {
       }
     }
   });
+  $.ajax({
+    url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
+    type: 'POST',
+    dataType: 'html',
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          $("#usr_id_rol,#edit_usr_id_rol").empty().prepend(result.roles);
+          $("#usr_id_empresa,#edit_usr_id_empresa").empty().prepend(result.empresas);
+          break;
+        default:
+          $("span#idCodErrorGeneral").empty().prepend("2515");
+          $('#myModalErrorGeneral').modal('show');
+          break;
+      }
+    }
+  });
   $('#btnUserNuevo').click( function () {
     $('#myModalNuevoUser').modal('show');
     document.getElementById("formUserNew").reset();
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
-      type: 'POST',
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        switch (result.message) {
-          case "saveOK":
-            $("select#newRol").empty().prepend(result.roles);
-            $("select#newEmpresa").empty().prepend(result.empresas);
-            break;
-          default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
-            $('#myModalErrorGeneral').modal('show');
-            break;
-        }
-      }
-    });
   });
-  $('#newCedula').change( function () {
-    if ($("#newCedula").val() != "") {
+  $('#usr_cod_usuario').change( function () {
+    if ($("#usr_cod_usuario").val() != "") {
       $.ajax({
         url: '../../../webAdministracion/beans/manejoSistema/validarCedula.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#newCedula").val() },
+        data:{ 'cedula' : $("#usr_cod_usuario").val() },
         success: function(result){
           var result = eval('('+result+')');
           if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#newCedula").val("").focus();
+            $("#usr_cod_usuario").val("").focus();
             $("#loginUsuarioRegistrado").show();
+            ocultarPoppupAlert();
             return false;
           }
         }
       });
     }
   });
-  $('#newCorreo').change( function () {
-    if ($("#newCorreo").val() != "") {
+  $('#usr_correo').change( function () {
+    if ($("#usr_correo").val() != "") {
       $.ajax({
         url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#newCorreo").val() },
+        data:{ 'usr_correo' : $("#usr_correo").val(), 'usr_cod_usuario' : $("#usr_cod_usuario").val(), 'tipo_val' : 'NUE' },
         success: function(result){
           var result = eval('('+result+')');
           if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#newCorreo").val("").focus();
+            $("#usr_correo").val("").focus();
             $("#loginCorreoRegistrado").show();
+            ocultarPoppupAlert();
             return false;
           }
         }
       });
     }
   });
-  $('#editCorreo').change( function () {
-    if ($("#editCorreo").val() != "") {
+  $('#edit_usr_correo').change( function () {
+    if ($("#edit_usr_correo").val() != "") {
       $.ajax({
         url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#editCorreo").val() },
+        data:{ 'usr_correo' : $("#edit_usr_correo").val(), 'usr_cod_usuario' : temp_usr_cod_usuario_1, 'tipo_val' : 'PAS' },
         success: function(result){
           var result = eval('('+result+')');
           if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#editCorreo").val("").focus();
+            $("#edit_usr_correo").val("").focus();
             $("#loginCorreoRegistradoEdit").show();
+            ocultarPoppupAlert();
             return false;
           }
         }
@@ -285,8 +253,8 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-                $('#myModalNuevoUser').modal('hide');
                 dtUsuarios.ajax.reload();
+                $('#myModalNuevoUser').modal('hide');
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             case "errorCriterios":
@@ -305,52 +273,16 @@ $(document).ready(function() {
   });
   $('#dtUsuarios').on('click','.iconDtUsuariosModificar', function (e) {
     e.preventDefault();
-    window.id_dt_cedula = dtUsuarios.row($(this).parents('tr').first()).data()[0];
-    var dt_nombres = dtUsuarios.row($(this).parents('tr').first()).data()[1];
-    var dt_correo = dtUsuarios.row($(this).parents('tr').first()).data()[2];
-    var dt_role = dtUsuarios.row($(this).parents('tr').first()).data()[3];
-    var dt_estado = dtUsuarios.row($(this).parents('tr').first()).data()[5];
-    var dt_cod_unidad = dtUsuarios.row($(this).parents('tr').first()).data()[7];
-    var dt_nacimiento = dtUsuarios.row($(this).parents('tr').first()).data()[8];
-    var dt_sexo = dtUsuarios.row($(this).parents('tr').first()).data()[9];
-    var dt_telefono = dtUsuarios.row($(this).parents('tr').first()).data()[10];
-    $("h3.editCedula").empty(); $("h3.editCedula").prepend(id_dt_cedula);
-    $('#editCorreo').val(dt_correo);
-    $('#editNacimiento').val(dt_nacimiento);
-    $('#edit_usr_sexo').val(dt_sexo);
-    $('#edit_usr_telefono').val(dt_telefono);
-    if (dt_estado == 1) {document.getElementById("editEstado").value = "TRUE"}
-    if (dt_estado == 0) {document.getElementById("editEstado").value = "FALSE"}
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
-      type: 'POST',
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        switch (result.message) {
-          case "saveOK":
-            $("select#editRol").empty().prepend(result.roles);
-            break;
-          default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
-            $('#myModalErrorGeneral').modal('show');
-            break;
-        }
-      }
-    });
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerNombres.php',
-      type: 'POST',
-      dataType: 'html',
-      data:{ 'id_dt_cedula' : id_dt_cedula },
-      success: function(result){
-        var result = eval('('+result+')');
-        $('#edit_usr_nombre_1').val(result.data_row[0].usr_nombre_1);
-        $('#edit_usr_nombre_2').val(result.data_row[0].usr_nombre_2);
-        $('#edit_usr_apellido_1').val(result.data_row[0].usr_apellido_1);
-        $('#edit_usr_apellido_2').val(result.data_row[0].usr_apellido_2);
-      }
-    });
+    window.temp_usr_cod_usuario_1 = dtUsuarios.row($(this).parents('tr').first()).data()[0];
+    $("h3.editCedula").empty().prepend(dtUsuarios.row($(this).parents('tr').first()).data()[0]);
+    $('#edit_usr_correo').val(dtUsuarios.row($(this).parents('tr').first()).data()[2]);
+    $('#edit_usr_estado').val(dtUsuarios.row($(this).parents('tr').first()).data()[5]);
+    $('#edit_usr_id_empresa').val(dtUsuarios.row($(this).parents('tr').first()).data()[7]);
+    $("#edit_usr_id_rol").val(dtUsuarios.row($(this).parents('tr').first()).data()[8]);
+    $('#edit_usr_nombre_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[10]);
+    $('#edit_usr_nombre_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[11]);
+    $('#edit_usr_apellido_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[12]);
+    $('#edit_usr_apellido_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[13]);
     $('#myModalEditUser').modal('show');
   });
   $('#formUserMod').validator().on('submit', function (e) {
@@ -360,7 +292,7 @@ $(document).ready(function() {
         url: '../../beans/manejoSistema/actualizarUsuario.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formUserMod").serialize()+"&editCedula="+id_dt_cedula,
+        data:$("#formUserMod").serialize()+"&usr_cod_usuario="+temp_usr_cod_usuario_1,
         success: function(result){
         var result = eval('('+result+')');
           switch (result.message) {
@@ -385,10 +317,10 @@ $(document).ready(function() {
   });
   $('#dtUsuarios').on('click','.icondtUsuariosResetear', function (e) {
     e.preventDefault();
-    var id_dt_cedula = dtUsuarios.row($(this).parents('tr').first()).data()[0];
+    window.temp_usr_cod_usuario_2 = dtUsuarios.row($(this).parents('tr').first()).data()[0];
     var dt_nombres = dtUsuarios.row($(this).parents('tr').first()).data()[1];
     $('#myModalPassUser').modal('show');
-    $("h3.passCedula").empty(); $("h3.passCedula").prepend(id_dt_cedula);
+    $("h3.passCedula").empty(); $("h3.passCedula").prepend(temp_usr_cod_usuario_2);
     $("h3.passNombres").empty();  $("h3.passNombres").prepend(dt_nombres);
   });
   $('#formUserPass').validator().on('submit', function (e) {
@@ -398,9 +330,7 @@ $(document).ready(function() {
           url: '../../beans/manejoSistema/actualizarContrasena.php',
           type: 'POST',
           dataType: 'html',
-          data:$("#formUserPass").serialize()+
-          "&editCedula="+$("h3.passCedula").text()+
-          "&valPaciente="+$.md5($("h3.passCedula").text(),'M@rut0'),
+          data:$("#formUserPass").serialize()+"&editCedula="+temp_usr_cod_usuario_2,
           success: function(result){
           var result = eval('('+result+')');
             $('#myModalPassUser').modal('hide');
