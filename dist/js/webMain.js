@@ -635,4 +635,68 @@ $(document).ready(function() {
       $('#myModalNoSelected').modal('show');
     }
   });
+
+  var dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [0,3,4,5,6,9]
+      },
+      {
+        "targets": [7,8,10,11,12,13],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">Cédula</div>' },
+      { title: '<div class="tituloColumnasDT">Nombres</div>' },
+      { title: '<div class="tituloColumnasDT">Correo</div>' },
+      { title: '<div class="tituloColumnasDT">Rol Asignado</div>' },
+      { title: '<div class="tituloColumnasDT">Empresa</div>' },
+      { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
+      { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
+      { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
+      { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/ObtenerSistemaEmpresa.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
 });

@@ -34,11 +34,19 @@
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="idTogglable_4-tab" data-bs-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Opciones</a>
               </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="idTogglable_5-tab" data-bs-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Accesos</a>
+              </li>
             </ul>
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
+
+                    <div class="seccionBtnAccion">
+                      <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresa">Crear Empresa</button>
+                    </div>
+                    <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
 
                   </div>
                 </div>
@@ -47,6 +55,11 @@
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
                     
+                    <div class="seccionBtnAccion">
+                      <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaAplicacion">Crear Aplicacion</button>
+                    </div>
+                    <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
+
                   </div>
                 </div>
               </div>
@@ -54,6 +67,30 @@
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
 
+                    <div class="seccionBtnAccion">
+                      <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear Rol</button>
+                    </div>
+                    <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
+                <div class="divPanelTogglable">
+                  <div class="toggle_dentro_panel">
+                     
+                    <div class="seccionBtnAccion">
+                      <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaOpcion">Crear Opcion</button>
+                    </div>
+                    <table id="dtSistemaOpcion" class="cell-border" cellspacing="0" width="100%"></table>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_4-tab">
+                <div class="divPanelTogglable">
+                  <div class="toggle_dentro_panel">
+                    
                     <div class="form-group">
                       <select class="form-control" name= "sys_selec_roles" id="sys_selec_roles" data-placeholder="Lista de Roles">
                       </select>
@@ -96,14 +133,7 @@
                         </thead>
                       </table> 
                     </div>
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
-                <div class="divPanelTogglable">
-                  <div class="toggle_dentro_panel">
-                    
+
                   </div>
                 </div>
               </div>
