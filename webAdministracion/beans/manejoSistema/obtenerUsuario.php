@@ -11,7 +11,7 @@
           r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
           u.usr_estado_contrasenia,
           u.usr_estado,
-          CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ',usr_apellido_2) usr_nom_completos,
+          CONCAT(IFNULL(usr_nombre_1,''),' ',IFNULL(usr_nombre_2,''),' ',IFNULL(usr_apellido_1,''),' ',IFNULL(usr_apellido_2,'')) usr_nom_completos,
           u.usr_nombre_1,u.usr_nombre_2,u.usr_apellido_1,u.usr_apellido_2
           FROM dct_sistema_tbl_usuario u,dct_sistema_tbl_rol r,dct_sistema_tbl_empresa m
           WHERE u.usr_id_rol = r.rol_id_rol

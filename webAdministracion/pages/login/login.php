@@ -25,6 +25,7 @@
         <p class="login-box-msg">Inicio de Sesión</p>
         <form id="formLoginSesion" class="needs-validation" novalidate method="post" data-toggle="validator" role="form" autocomplete="off">
           <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
+          <input type="hidden" name="csrf" value="<?php echo $data_template["token_csrf"]; ?>">
           <div class="form-group">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser" required="">

@@ -8,6 +8,7 @@
     $data_template["error_reporting"] = $app_error_reporting;
     $data_template["version_css_js"] = $version_css_js;
     $data_template["linkTemp"] = $sesion->get("linkTemp");
+    $data_template["token_csrf"] = $_SESSION["token_csrf"] = $token_csrf;
     include("login.php");
     tema_login($data_template);
   }

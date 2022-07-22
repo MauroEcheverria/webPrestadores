@@ -49,6 +49,7 @@
           </div>
         </div>
         <form id="formUserNew" class="formModalPages" data-toggle="validator" role="form">
+          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
           <div class="modal-body">
             <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
               El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
@@ -89,7 +90,7 @@
                 </div>
                 <div class="form-group">
                   <label for="usr_nombre_2" class="control-label">Segundo Nombre</label>
-                  <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" minlength="2" oninput="this.value = this.value.toUpperCase()">
+                  <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" minlength="2" required oninput="this.value = this.value.toUpperCase()">
                    <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
@@ -127,10 +128,10 @@
           </div>
         </div>
         <form id="formUserMod" class="formModalPages" data-toggle="validator" role="form">
+          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
           <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistradoEdit">
             El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
           </div>
-
           <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistradoEdit">
             La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
           </div>
@@ -216,6 +217,7 @@
           </div>
         </div>
         <form id="formUserPass" class="formModalPages" data-toggle="validator" role="form">
+          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
           <div class="modal-body">
                 <div class="form-group">
                   <label for="" class="control-label">Cédula:</label>

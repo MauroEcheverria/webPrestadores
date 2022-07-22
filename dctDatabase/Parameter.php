@@ -18,6 +18,8 @@
 	$passSince = "T6YQuertyreu53&%1";
 	$mailSince = "app-web@dreconstec.com";
 	$deCorreo = "app-web@dreconstec.com";
+	/****************** TOKEN ************/
+	$token_csrf = bin2hex(openssl_random_pseudo_bytes(32));
 	/****************** ERROR REPORTING *************************/
 	// 1 - Se ven todo tipo de error y advertencias
 	// 0 - No se ven error ni anvertencias

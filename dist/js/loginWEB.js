@@ -81,6 +81,7 @@ $(document).ready(function() {
             case "empresaInactiva":
             case "rolInactivo":
             case "statusPassFalse":
+            case "token_csrf_error":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             case "cedulaNoRegistrada":

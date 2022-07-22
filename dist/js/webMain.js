@@ -251,10 +251,11 @@ $(document).ready(function() {
         data:$("#formUserNew").serialize(),
         success: function(result){
         var result = eval('('+result+')');
+          $('#myModalNuevoUser').modal('hide');
           switch (result.message) {
             case "saveOK":
+            case "token_csrf_error":
                 dtUsuarios.ajax.reload();
-                $('#myModalNuevoUser').modal('hide');
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             case "errorCriterios":
@@ -262,7 +263,6 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $('#myModalNuevoUser').modal('hide');
               $("span#idCodErrorGeneral").empty().prepend("1402");
               $('#myModalErrorGeneral').modal('show');
               break;
@@ -295,9 +295,10 @@ $(document).ready(function() {
         data:$("#formUserMod").serialize()+"&usr_cod_usuario="+temp_usr_cod_usuario_1,
         success: function(result){
         var result = eval('('+result+')');
+          $('#myModalEditUser').modal('hide');
           switch (result.message) {
             case "saveOK":
-                $('#myModalEditUser').modal('hide');
+            case "token_csrf_error":
                 dtUsuarios.ajax.reload();
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
@@ -306,7 +307,6 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $('#myModalEditUser').modal('hide');
               $("span#idCodErrorGeneral").empty().prepend("1403");
               $('#myModalErrorGeneral').modal('show');
               break;
@@ -336,6 +336,7 @@ $(document).ready(function() {
             $('#myModalPassUser').modal('hide');
             switch (result.message) {
               case "saveOK":
+              case "token_csrf_error":
                   dtUsuarios.ajax.reload();
                   modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
@@ -547,10 +548,10 @@ $(document).ready(function() {
         data:$("#formSysApp").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),
         success: function(result){
           var result = eval('('+result+')');
+          $('#myModalSysRoleApp').modal('hide');
           switch (result.message) {
             case "saveOK":
               table_sys_id_app.ajax.reload();
-              $('#myModalSysRoleApp').modal('hide');
               break;
             default:
               $("span#idCodErrorGeneral").empty().prepend("1407");
@@ -589,10 +590,10 @@ $(document).ready(function() {
         data:$("#formSysOption").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),
         success: function(result){
           var result = eval('('+result+')');
+          $('#myModalSysRoleOpt').modal('hide');
           switch (result.message) {
             case "saveOK":
               table_sys_id_opt.ajax.reload();
-              $('#myModalSysRoleOpt').modal('hide');
               break;
             default:
               $("span#idCodErrorGeneral").empty().prepend("1408");
