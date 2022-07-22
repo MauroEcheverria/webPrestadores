@@ -189,9 +189,17 @@
       $query_emp->execute();
       $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
 
-      $valEstadoUsuario = false;$valEstadoContrasena = false;$valExpiroContrasena = false;$valEnOtraPC = false;
-	    $valEstadoOpcion = false;$valEstadoAplicativo = false;$valEstadoRol = false;$valEstadoEmpresa = false;
-	    $valEstadoVigencia = false;$estadoValidarAcceso = false;$codigoValidacion = "";
+      $valEstadoUsuario = false;
+      $valEstadoContrasena = false;
+      $valExpiroContrasena = false;
+      $valEnOtraPC = false;
+	    $valEstadoOpcion = false;
+	    $valEstadoAplicativo = false;
+	    $valEstadoRol = false;
+	    $valEstadoEmpresa = false;
+	    $valEstadoVigencia = false;
+	    $estadoValidarAcceso = false;
+	    $codigoValidacion = "";
 	    
       if($row_usr["usr_estado"] == 1) { $valEstadoUsuario = true; $contValidaAcceso += 1; }
 		  if($row_usr["usr_estado_contrasenia"] == 1) { $valEstadoContrasena = true; $contValidaAcceso += 1; }

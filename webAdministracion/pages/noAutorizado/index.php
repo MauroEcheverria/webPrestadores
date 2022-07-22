@@ -43,35 +43,21 @@
       break;
   }
 
-  $js_dreconstec[] = "<script type='text/javascript'>$('#modalBeansValidaAcceso').modal('show');</script>"; 
-
 ?>
   <div class="content-wrapper">
     <section class="content">
-      <div class="container container_main"></div>
-    </section>
-  </div>
-  <div class="modal fade" id="modalBeansValidaAcceso" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <div class="col-md-1">
-              <img src="../../../dist/img/modal_error.png" width="30px" heigth="20px">
-            </div>
-            <div class="col-md-11" style="width: 430px;">
-              <h4 class="modal-title">Información</h4>
-            </div>
+      <div class="container container_main centrarContent">
+        <div class="divNoAutorizado">
+          <div>
+            <img src="../../../dist/img/exclamation.png" class="imageNoAutorizado">
+          </div>
+          <div class="textNoAutorizado">
+            <strong><span id="textBeansValidaAcceso"></span></strong>
           </div>
         </div>
-        <div class="modal-body"><strong><span id="textBeansValidaAcceso"></span></strong></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" onClick="location.href = '../../../controller/cerrarSesion.php'">Salir</button>
-        </div>
       </div>
-    </div>
+    </section>
   </div>
 <?php 
-  modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 
 ?>

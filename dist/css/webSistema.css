@@ -81,3 +81,13 @@
     margin-top: 0;
   }
 }
+.textNoAutorizado {
+  margin-top: 25px;
+  font-size: 18px;
+}
+.imageNoAutorizado {
+  width: 200px;
+}
+.divNoAutorizado {
+  margin-top: 30px;
+}

@@ -29,7 +29,7 @@
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$dataSesion = [
-			'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
+				'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
 		    'codigoValidacion' => $returnValidar["codigoValidacion"],
 		    'complete_names' => $returnValidar["complete_names"],
 		    'id_role' => $returnValidar["id_role"],
