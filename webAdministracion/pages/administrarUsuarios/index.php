@@ -28,7 +28,6 @@
 				'id_option' => 2
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
-			
 			$_SESSION["token_csrf"] = $token_csrf;
 			$dataSesion = [
 			'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",

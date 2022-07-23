@@ -8,7 +8,7 @@
   //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  $js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';
+  //$js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>

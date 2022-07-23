@@ -92,7 +92,7 @@
         $query_2->bindValue(':usr_cod_usuario',$tok_cedula,PDO::PARAM_INT);
         $query_2->execute();
 
-        $arrayMail["subject"] = "Confirmación de restablecimiento de contraseña";
+        $arrayMail["subject"] = "🔓 Confirmación de restablecimiento de contraseña";
         $arrayMail["paraCorreo"] = $row_pass["usr_correo"];
         $arrayMail["nombres"] = $row_pass["usr_nom_completos"];
         $arrayMail["archivoHTML"] = "../../mail/htmlResetPassConfirmacion.php";

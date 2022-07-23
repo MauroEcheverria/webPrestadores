@@ -28,6 +28,7 @@
 				'id_option' => 14
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
+			$_SESSION["token_csrf"] = $token_csrf;
 			$dataSesion = [
 				'tipo_ambiente' => $app_error_reporting == 1 ? "PRUEBAS" : "PRODUCCIÓN",
 		    'codigoValidacion' => $returnValidar["codigoValidacion"],
@@ -37,7 +38,8 @@
 		    'cod_system_user' => $userSystem,
 		    'fecha_actual' => $fechaActual_4,
 		    'role' => $returnValidar["role"],
-		    'id_option' => $dataValidaAcceso["id_option"]
+		    'id_option' => $dataValidaAcceso["id_option"],
+		    'token_csrf' => $token_csrf
 			];
 
 			if($returnValidar["estadoValidarAcceso"]) {

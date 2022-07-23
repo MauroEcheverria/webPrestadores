@@ -55,7 +55,7 @@
 		    $query_3->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);
 		    $query_3->execute();
 
-		    $arrayMail["subject"] = "Link para restablecimiento de contraseña";
+		    $arrayMail["subject"] = "🔐 Link para restablecimiento de contraseña";
 		    $arrayMail["paraCorreo"] = $row["usr_correo"];
 		    $arrayMail["nombres"] = $row["usr_nom_completos"];
 		    $arrayMail["linkReset"] = $validacionUsuario->setPassword($tokenAsignado);

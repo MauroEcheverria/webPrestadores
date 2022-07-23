@@ -317,12 +317,10 @@
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
 	  		break;
-	  	case 'htmlActivarCuenta':
+	  	case 'htmlBienvenida':
 	  			$mail->addAddress($arrayMail["paraCorreo"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
-				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
-				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
 				break;
 	  	default:

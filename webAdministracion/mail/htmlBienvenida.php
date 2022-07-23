@@ -47,7 +47,7 @@
                                             <div>
 
                                               <div align="center" style="font-size:17px;color:#000000;padding-top: 15px;padding-right:0px;padding-left:0px;font-weight: bold;text-decoration: underline;">
-                                                <span>Procedimiento para activaci&oacute;n de cuenta</span>                                            
+                                                <span>Bienvenido a su Sistema WEB</span>                                            
                                               </div>
 
                                                 <p style="text-align: justify;">
@@ -57,19 +57,13 @@
                                                       <strong>Hola %%nombres%%</strong>
                                                     </div>
                                      
-                                                    Para proceder a activar su cuenta favor de clic en el bot&oacute;n que se muestra a continuaci&oacute;n.
+                                                    Es un gusto poder contar con tu compa&ntilde;ia. 😃 <br>
+
+                                                    Si tienes alguna duda o comentario no dudes en comunicarte con nosotros. 💪
                                          
                                                   </span>
                                                 </p>
                                     
-                                            </div>
-
-                                            <div >
-                                              <h2 style="text-align: justify; padding: 15px;">
-                                                  <a href="http://localhost/GIT/webPrestadores/webAdministracion/pages/login/activarCuenta.php?linkActivarCuenta=%%linkReset%%">
-                                                    <button style="display: inline-block;font-weight: 400;color: #212529;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-color: transparent;border: 1px solid transparent;padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; width: 155px;margin-bottom: 20px;background-color: #009fae;border-color: #009fae;color: #fff;">Clic Aqui</button>
-                                                </a>
-                                              </h2>
                                             </div>
 
                                             <div>

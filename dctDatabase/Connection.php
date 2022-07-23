@@ -4,7 +4,7 @@
     public function connect() {
       $host = 'localhost';
       
-      $database = 'prestadores_iess';
+      $database = 'bd_prestadores';
       $user = 'root';
       $password = 'Dreconstec2022';
       //$password = 'mauro';

@@ -63,13 +63,28 @@
 		    $query->execute();
 
 				if($query) {
+
 					$pdo->commit();
 					$data_result["message"] = "saveOK";
 					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
-		      $data_result["dataModal_2"] = 'Información';
-		      $data_result["dataModal_3"] = 'El usuario se guardo de manera correcta.';
-		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
-					echo json_encode($data_result);
+			    $data_result["dataModal_2"] = 'Información';
+			    $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
+
+			    $arrayMail["subject"] = "👋 Bienvenido a su Nuestros Sistema";
+			    $arrayMail["paraCorreo"] = $usr_correo;
+			    $arrayMail["nombres"] = $usr_nombre_1." ".$usr_nombre_2." ".$usr_apellido_1." ".$usr_apellido_2;
+			    $arrayMail["archivoHTML"] = "../../mail/htmlBienvenida.php";
+			    $arrayMail["tipoCorreo"] = "htmlBienvenida";
+			    $phpMail = phpMailer($arrayMail);
+
+			    if ($phpMail) {
+			      $data_result["dataModal_3"] = 'El registro fue guardado correctamente, revisa tu correo ya que te enviamos un correo de bienvenida.';
+			    }
+			    else {
+			      $data_result["dataModal_3"] = 'El registro fue guardado correctamente.';
+			    }
+			    echo json_encode($data_result);
+						
 				}
 				else {
 					$pdo->rollBack();
