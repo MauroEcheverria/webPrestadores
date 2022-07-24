@@ -53,10 +53,10 @@
   height: 38px !important;
   border: 1px solid #ced4da !important;
 }
-.select2-selection__rendered {
+/*.select2-selection__rendered {
   font-size: 21px !important;
   font-weight: 600 !important;
-}
+}*/
 .select2-selection__arrow {
   top: 6px !important;
 }
@@ -100,4 +100,7 @@
   border-radius: 5px;
   background-color: #3c8dbc;
   padding: 7px;
+}
+.formSelect2,.select2-container {
+  width: 100% !important;
 }

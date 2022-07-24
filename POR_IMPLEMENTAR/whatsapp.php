@@ -1,5 +1,5 @@
 <?php
-require_once('../plugins/apiWhatsapp/ultramsg.class.php'); // if you download ultramsg.class.php
+require_once('../plugins/apiWhatsapp/ultramsg.class.php');
 
 $ultramsg_token="glpr98u1bxxd6job";
 $instance_id="instance12736";

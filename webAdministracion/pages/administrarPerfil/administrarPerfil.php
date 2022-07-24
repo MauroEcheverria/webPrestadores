@@ -5,14 +5,18 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'.$dataSesion["version_css_js"].'">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/select2/dist/css/select2.min.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
-  /*$js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';*/
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/select2/dist/js/select2.full.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webAdminPerfil.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
-
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main">
@@ -35,40 +39,50 @@
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
                     <form id="formAdminPerfil" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipo_form" id="tipo_form">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="pct_provincia" class="control-label">Provincia</label><br/>
-                            <select class="form-control select2" name="pct_provincia" id="pct_provincia" style="width: 100%" required></select>
+                            <label for="adi_provincia" class="control-label">Provincia</label><br/>
+                            <select class="form-control select2" name="adi_provincia" id="adi_provincia" style="width: 100%" required></select>
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_canton" class="control-label">Cantón</label><br/>
-                            <select class="form-control select2" name="pct_canton" id="pct_canton" style="width: 100%" required></select>
+                            <label for="adi_canton" class="control-label">Cantón</label><br/>
+                            <select class="form-control select2" name="adi_canton" id="adi_canton" style="width: 100%" required></select>
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_parroquia" class="control-label">Parroquia</label><br/>
-                            <select class="form-control select2" name="pct_parroquia" id="pct_parroquia" style="width: 100%" required></select>
+                            <label for="adi_parroquia" class="control-label">Parroquia</label><br/>
+                            <select class="form-control select2" name="adi_parroquia" id="adi_parroquia" style="width: 100%" required></select>
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_direccion" class="control-label">Dirección exacta</label>
-                            <input class="form-control" type="text" name="pct_direccion" id="pct_direccion" 
-                            required maxlength="80" />
+                            <label for="adi_direccion" class="control-label">Dirección exacta</label>
+                            <input class="form-control" type="text" name="adi_direccion" id="adi_direccion" required maxlength="70" oninput="this.value = this.value.toUpperCase()"/>
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_referencia" class="control-label">Referencia</label>
-                            <input class="form-control" type="text" name="pct_referencia" id="pct_referencia" 
-                            required maxlength="50" />
+                            <label for="adi_referencia" class="control-label">Referencia</label>
+                            <input class="form-control" type="text" name="adi_referencia" id="adi_referencia" required maxlength="50" oninput="this.value = this.value.toUpperCase()"/>
                             <div class="help-block with-errors"></div>
                           </div>
+                          <div class="form-group">
+                            <label for="adi_fecha_nacimiento" class="control-label">Fecha de Nacimiento</label>
+                            <div class="input-group flex-nowrap">
+                              <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+                              <input type="text" class="form-control pull-right" id="adi_fecha_nacimiento" name="adi_fecha_nacimiento" required>
+                            </div>
+                            <div class="help-block with-errors"></div>
+                          </div>
+
+
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="pct_estado_civil" class="control-label">Estado Civil</label>
-                            <select class="form-control" name="pct_estado_civil" id="pct_estado_civil" required>
+                            <label for="adi_estado_civil" class="control-label">Estado Civil</label>
+                            <select class="form-control" name="adi_estado_civil" id="adi_estado_civil" required>
                               <option value="">Seleccione una opción</option>
                               <option value="CASADO/A">CASADO/A</option>
                               <option value="DIVORCIADO/A">DIVORCIADO/A</option>
@@ -78,13 +92,13 @@
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_telefono" class="control-label">Teléfono Convencional / Celular</label>
-                            <input class="form-control" type="text" onkeypress="return soloNumeros(event);" name="pct_telefono" id="pct_telefono" maxlength="10" required=""/>
+                            <label for="adi_celular" class="control-label">Celular</label>
+                            <input class="form-control" type="text" onkeypress="return soloNumeros(event);" name="adi_celular" id="adi_celular" maxlength="10" minlength="10" required=""/>
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_instruccion" class="control-label">Instrucción</label>
-                            <select class="form-control" name="pct_instruccion" id="pct_instruccion" required>
+                            <label for="adi_instruccion" class="control-label">Instrucción</label>
+                            <select class="form-control" name="adi_instruccion" id="adi_instruccion" required>
                               <option value="">Seleccione una opción</option>
                               <option value="BASICA">BASICA</option>
                               <option value="PRIMARIA">PRIMARIA</option>
@@ -95,8 +109,8 @@
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_tipo_sangre" class="control-label">Tipo de Sangre</label>
-                            <select class="form-control" name="pct_tipo_sangre" id="pct_tipo_sangre" required>
+                            <label for="adi_tipo_sangre" class="control-label">Tipo de Sangre</label>
+                            <select class="form-control" name="adi_tipo_sangre" id="adi_tipo_sangre" required>
                               <option value="">Seleccione una opción</option>
                               <option value="A +">A +</option>
                               <option value="O +">O +</option>
@@ -111,12 +125,13 @@
                             <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                            <label for="pct_sexo" class="control-label">Sexo</label>
-                            <select class="form-control" name="pct_sexo" id="pct_sexo" required>
+                            <label for="adi_sexo" class="control-label">Sexo</label>
+                            <select class="form-control" name="adi_sexo" id="adi_sexo" required>
                               <option value="">Seleccione una opción</option>
                               <option value="MASCULINO">MASCULINO</option>
                               <option value="FEMENINO">FEMENINO</option>
                             </select>
+                            <div class="help-block with-errors"></div>
                           </div>
                         </div>
                       </div>

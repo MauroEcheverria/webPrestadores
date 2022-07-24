@@ -1,5 +1,5 @@
 <?php
-	require_once("../../../controller/misFunciones.php");
+	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
   require_once("../../../controller/sesion.class.php");
@@ -11,44 +11,104 @@
 		$pdo = $ConnectionDB->connect();
 		$pdo->beginTransaction();
 
-		$sql="UPDATE dct_salud_tbl_paciente
-			SET pct_estado_civil=:pct_estado_civil,pct_instruccion=:pct_instruccion, pct_tipo_sangre=:pct_tipo_sangre, 
-				pct_provincia=:pct_provincia, pct_canton=:pct_canton, pct_parroquia=:pct_parroquia, pct_telefono=:pct_telefono,
-				pct_direccion=:pct_direccion, pct_referencia=:pct_referencia, usr_usuario_modificacion=:usr_usuario_modificacion, 
-				usr_fecha_modificacion=:usr_fecha_modificacion, usr_ip_modificacion=:usr_ip_modificacion, pct_datos_personales='A',
-				pct_sexo=:pct_sexo, pct_prefijo=:pct_prefijo
-		WHERE pct_cedula = :pct_cedula";
-    $query=$pdo->prepare($sql);
-    $query->bindValue(':pct_estado_civil', cleanData("siLimite",12,"noMayuscula",$_POST["pct_estado_civil"])); 
-    $query->bindValue(':pct_instruccion', cleanData("siLimite",11,"noMayuscula",$_POST["pct_instruccion"])); 
-    $query->bindValue(':pct_tipo_sangre', cleanData("siLimite",9,"noMayuscula",$_POST["pct_tipo_sangre"])); 
-    $query->bindValue(':pct_telefono', cleanData("siLimite",10,"noMayuscula",$_POST["pct_telefono"])); 
-    $query->bindValue(':pct_prefijo', cleanData("siLimite",4,"noMayuscula",$_POST["pct_prefijo"])); 
-    $query->bindValue(':pct_provincia', cleanData("siLimite",5,"noMayuscula",$_POST["pct_provincia"])); 
-    $query->bindValue(':pct_canton', cleanData("siLimite",7,"noMayuscula",$_POST["pct_canton"])); 
-    $query->bindValue(':pct_parroquia', cleanData("siLimite",9,"noMayuscula",$_POST["pct_parroquia"])); 
-    $query->bindValue(':pct_direccion', cleanData("siLimite",70,"noMayuscula",$_POST["pct_direccion"])); 
-    $query->bindValue(':pct_referencia', cleanData("siLimite",25,"noMayuscula",$_POST["pct_referencia"]));
-    $query->bindValue(':usr_usuario_modificacion', cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]));
-    $query->bindValue(':usr_fecha_modificacion', $fechaActual_1);
-    $query->bindValue(':usr_ip_modificacion', getRealIP());
-    $query->bindValue(':pct_sexo', cleanData("siLimite",9,"noMayuscula",$_POST["pct_sexo"]));  
-    $query->bindValue(':pct_cedula', cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]));
-    $query->execute();
-		if($query) {
-			$pdo->commit();
-			$data_result["message"] = "saveOK";
-			$data_result["dataModal_1"] = '<img src="../../../dist/img/visto.png" width="30px" heigth="20px">';
-      $data_result["dataModal_2"] = 'Información';
-      $data_result["dataModal_3"] = 'Perfil editado de manera correcta.';
-      $data_result["dataModal_4"] = '<button type="button" class="btn btn-default btn-estandar-dreconstec" data-dismiss="modal">Cerrar</button>';
-			echo json_encode($data_result);
+		if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
+			if ($_POST["tipo_form"] == "New") {
+				$sql_2="INSERT INTO dct_sistema_tbl_usuario_adicional(usr_cod_usuario, adi_fecha_nacimiento, adi_sexo, 
+					adi_estado_civil, adi_instruccion, adi_tipo_sangre, adi_celular, adi_provincia, adi_canton, adi_parroquia, 
+					adi_direccion, adi_referencia, usr_usuario_creacion, usr_fecha_creacion, usr_ip_creacion)
+			    	VALUES (:usr_cod_usuario, :adi_fecha_nacimiento, :adi_sexo, :adi_estado_civil, :adi_instruccion, 
+			    		:adi_tipo_sangre, :adi_celular, :adi_provincia, :adi_canton, :adi_parroquia, :adi_direccion, 
+			    		:adi_referencia, :usr_usuario_creacion, now(), :usr_ip_creacion);";
+		    $query_2=$pdo->prepare($sql_2);
+		    $query_2->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+		    $query_2->bindValue(':adi_fecha_nacimiento',cleanData("noLimite",0,"noMayuscula",$_POST["adi_fecha_nacimiento"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_sexo',cleanData("siLimite",9,"noMayuscula",$_POST["adi_sexo"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_estado_civil',cleanData("siLimite",12,"noMayuscula",$_POST["adi_estado_civil"]),PDO::PARAM_STR); 
+		    $query_2->bindValue(':adi_instruccion',cleanData("siLimite",11,"noMayuscula",$_POST["adi_instruccion"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_tipo_sangre',cleanData("siLimite",9,"noMayuscula",$_POST["adi_tipo_sangre"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$_POST["adi_celular"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':adi_provincia',cleanData("siLimite",5,"noMayuscula",$_POST["adi_provincia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_canton',cleanData("siLimite",7,"noMayuscula",$_POST["adi_canton"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_parroquia',cleanData("siLimite",9,"noMayuscula",$_POST["adi_parroquia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_direccion',cleanData("siLimite",70,"noMayuscula",$_POST["adi_direccion"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_referencia',cleanData("siLimite",50,"noMayuscula",$_POST["adi_referencia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':usr_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+		    $query_2->bindValue(':usr_ip_creacion',getRealIP(),PDO::PARAM_STR);
+		    $query_2->execute();
+
+		    if($query_2) {
+					$pdo->commit();
+					$data_result["message"] = "saveOK";
+					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
+		      $data_result["dataModal_2"] = 'Información';
+		      $data_result["dataModal_3"] = 'Perfíl registado de manera correcta.';
+		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>';
+					echo json_encode($data_result);
+				}
+				else {
+					$pdo->rollBack();
+					$data_result["message"] = "saveError";
+					echo json_encode($data_result);
+				}
+			}
+			else if ($_POST["tipo_form"] == "Old") {
+				$sql_2="UPDATE dct_sistema_tbl_usuario_adicional
+					SET adi_fecha_nacimiento = :adi_fecha_nacimiento, adi_sexo = :adi_sexo, adi_estado_civil = :adi_estado_civil, 
+					adi_instruccion = :adi_instruccion, adi_tipo_sangre = :adi_tipo_sangre, adi_celular = :adi_celular, 
+					adi_provincia = :adi_provincia, adi_canton = :adi_canton, adi_parroquia = :adi_parroquia, 
+					adi_direccion = :adi_direccion, adi_referencia = :adi_referencia, usr_usuario_modificacion = :usr_usuario_modificacion, 
+					usr_fecha_modificacion = now(), usr_ip_modificacion = :usr_ip_modificacion
+				WHERE usr_cod_usuario = :usr_cod_usuario";
+		    $query_2=$pdo->prepare($sql_2);
+		    $query_2->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+		    $query_2->bindValue(':adi_fecha_nacimiento',cleanData("noLimite",0,"noMayuscula",$_POST["adi_fecha_nacimiento"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_sexo',cleanData("siLimite",9,"noMayuscula",$_POST["adi_sexo"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_estado_civil',cleanData("siLimite",12,"noMayuscula",$_POST["adi_estado_civil"]),PDO::PARAM_STR); 
+		    $query_2->bindValue(':adi_instruccion',cleanData("siLimite",11,"noMayuscula",$_POST["adi_instruccion"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_tipo_sangre',cleanData("siLimite",9,"noMayuscula",$_POST["adi_tipo_sangre"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$_POST["adi_celular"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':adi_provincia',cleanData("siLimite",5,"noMayuscula",$_POST["adi_provincia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_canton',cleanData("siLimite",7,"noMayuscula",$_POST["adi_canton"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_parroquia',cleanData("siLimite",9,"noMayuscula",$_POST["adi_parroquia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_direccion',cleanData("siLimite",70,"noMayuscula",$_POST["adi_direccion"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':adi_referencia',cleanData("siLimite",50,"noMayuscula",$_POST["adi_referencia"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':usr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+		    $query_2->bindValue(':usr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+		    $query_2->execute();
+
+		    if($query_2) {
+					$pdo->commit();
+					$data_result["message"] = "saveOK";
+					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
+		      $data_result["dataModal_2"] = 'Información';
+		      $data_result["dataModal_3"] = 'Perfíl modificado de manera correcta.';
+		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>';
+					echo json_encode($data_result);
+				}
+				else {
+					$pdo->rollBack();
+					$data_result["message"] = "saveError";
+					echo json_encode($data_result);
+				}
+			}
+			else {
+				$data_result["message"] = "error_admin_perfil";
+				$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+				$data_result["dataModal_2"] = 'Información';
+				$data_result["dataModal_3"] = "Se presentó un inconveninete al registar al perfíl. Refresque el APP Web e intentelo nuevamente.";
+				$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
+				echo json_encode($data_result);
+			}	
+				
 		}
 		else {
-			$pdo->rollBack();
-			$data_result["message"] = "saveError";
+			$data_result["message"] = "token_csrf_error";
+			$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+			$data_result["dataModal_2"] = 'Información';
+			$data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
+			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
 			echo json_encode($data_result);
-		}
+		}		
 
 	} catch (\PDOException $e) {
 	    echo $e->getMessage();

@@ -5,8 +5,8 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
-  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
   $js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js'.$dataSesion["version_css_js"].'"></script>';
@@ -62,7 +62,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="usr_cod_usuario" class="control-label">Cédula</label>
-                  <input type="text" class="form-control" id="usr_cod_usuario" name="usr_cod_usuario" maxlength="13" onkeypress="return soloNumeros(event);" required minlength="1">
+                  <input type="text" class="form-control" id="usr_cod_usuario" name="usr_cod_usuario" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">

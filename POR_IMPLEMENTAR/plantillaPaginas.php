@@ -5,7 +5,7 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+  //$css_dreconstec[] = '<link rel="stylesheet" href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'">';
 
   $js_dreconstec = array();
   //$js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.js'.$data_template["version_css_js"].'"></script>';
