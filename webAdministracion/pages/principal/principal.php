@@ -1,5 +1,5 @@
 <?php 
-  function bienvenido($pdo,$dataSesion,$diferencia_pass){ 
+  function principal($pdo,$dataSesion,$diferencia_pass){ 
   include("../../../template/templateHead.php");
   include("../../../template/templateFooter.php");
   include("../../../dialogs/modalViews.php"); 

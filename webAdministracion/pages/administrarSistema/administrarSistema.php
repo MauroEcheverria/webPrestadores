@@ -5,14 +5,18 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link href="../../../dist/css/dreconstec.css'.$data_template["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'" rel="stylesheet">';
 
   $js_dreconstec = array();
-  //$js_dreconstec[] = '<script src="../../../dist/js/webAdministracion.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webMain.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
-
+  <div id="appAdministrarSistema" class="appAdministrarSistema"></div>
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main">
@@ -87,7 +91,7 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_4-tab">
+              <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_5-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
                     

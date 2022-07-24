@@ -63,7 +63,7 @@ $(document).ready(function() {
           switch (result.message) {
             case "accesoPermitido":
               if ($("#linkTemp").val() == "") {
-                window.location = "../bienvenido";
+                window.location = "../principal";
               }
               else {
                 window.location = $("#linkTemp").val();

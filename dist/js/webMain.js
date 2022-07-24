@@ -64,6 +64,245 @@ function modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4) {
   $("#putButtonModalgeneric").empty().prepend(dataModal_4);
   $('#modalGenericoInfo').modal('show');
 }
+function fnSistemaEmpresa() {
+  var dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,3,4,5,6]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">emp_id_empresa</div>' },
+      { title: '<div class="tituloColumnasDT">RUC</div>' },
+      { title: '<div class="tituloColumnasDT">Empresa</div>' },
+      { title: '<div class="tituloColumnasDT">Vigencia Desde</div>' },
+      { title: '<div class="tituloColumnasDT">Vigencia Hasta</div>' },
+      { title: '<div class="tituloColumnasDT">Estado </div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaEmpresaModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaEmpresa.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaAplicacion() {
+  var dtSistemaAplicacion = $('#dtSistemaAplicacion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [3,4,5,6,7,8]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">apl_id_aplicacion</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
+      { title: '<div class="tituloColumnasDT">Ruta</div>' },
+      { title: '<div class="tituloColumnasDT">Nombre Superior</div>' },
+      { title: '<div class="tituloColumnasDT">Nombre Inferior</div>' },
+      { title: '<div class="tituloColumnasDT">HTML </div>' },
+      { title: '<div class="tituloColumnasDT">Imagen </div>' },
+      { title: '<div class="tituloColumnasDT">Estado </div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaAplicacionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaAplicacion.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[7] == 1 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 0 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaRol() {
+  var dtSistemaRol = $('#dtSistemaRol').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,2,3]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">apl_id_Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaRolModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaRol.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[2] == 1 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[2] == 0 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaOpcion() {
+  var dtSistemaOpcion = $('#dtSistemaOpcion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,3,4,5,6]
+      },
+      {
+        "targets": [0,7],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">opc_id_opcion</div>' },
+      { title: '<div class="tituloColumnasDT">Opción</div>' },
+      { title: '<div class="tituloColumnasDT">Ruta</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
+      { title: '<div class="tituloColumnasDT">Orden</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaOpcionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 3, "asc" ],[ 4, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaOpcion.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
 $(document).ready(function() {
 
 	$(".aAlert").click(function(){
@@ -636,67 +875,52 @@ $(document).ready(function() {
     }
   });
 
-  var dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
-    bRetrive: true,
-    processing: true,
-    serverSide: false,
-    bDestroy: true,
-    responsive: false,
-    paging: true,
-    searching: true,
-    scrollX: true,
-    aoColumnDefs: [
-      { 
-        sClass: "centrarContent", 
-        aTargets: [0,3,4,5,6,9]
-      },
-      {
-        "targets": [7,8,10,11,12,13],
-        "visible": false,
-        "searchable": false
-      }
-    ],
-    columns: [
-      { title: '<div class="tituloColumnasDT">Cédula</div>' },
-      { title: '<div class="tituloColumnasDT">Nombres</div>' },
-      { title: '<div class="tituloColumnasDT">Correo</div>' },
-      { title: '<div class="tituloColumnasDT">Rol Asignado</div>' },
-      { title: '<div class="tituloColumnasDT">Empresa</div>' },
-      { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
-      { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
-      { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
-      { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
-      { 
-        title: '<div class="tituloColumnasDT">Acciones</div>',
-        width: "80",
-        mRender: function (data, type, row) {
-          var acciones = '';
-          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
-          acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
-          return acciones
-        }
-      },
-    ],
-    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
-    lengthMenu: [5,10,15,20,30],
-    order: [[ 1, "asc" ]],
-    ajax:{
-      url:'../../beans/manejoSistema/ObtenerSistemaEmpresa.php',
-      type: "post",
-      data: null,
-      dataSrc: function (json) {
-        return json.data;
-      },
-      timeout: 60000
-    },
-    createdRow: function ( row, data, index ) {
-      if ( data[5] == 1 ) {
-        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
-      }
-      if ( data[5] == 0 ) {
-        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
-      }
+  if($('div#appAdministrarSistema').hasClass('appAdministrarSistema')) {
+    fnSistemaEmpresa();
+  }
+
+  $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href")
+    if (target == "#idTogglable_1") {
+      fnSistemaEmpresa();
+    }
+    if (target == "#idTogglable_2") {
+      fnSistemaAplicacion();
+    }
+    if (target == "#idTogglable_3") {
+      fnSistemaRol();
+    }
+    if (target == "#idTogglable_4") {
+      fnSistemaOpcion();
+    }
+    if (target == "#idTogglable_5") {
+      //fnSistemaOpcion();
     }
   });
+
+  $('#formAdminPerfil').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      $params = $('#formAdminPerfil').serialize();
+      $.ajax({
+        url: '../../beans/manejoPaciente/guardarAdministrarPerfil.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+        var result = eval('('+result+')');
+          switch (result.message) {
+            case "saveOK":
+                modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend("2005");
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+
 });

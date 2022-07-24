@@ -6,6 +6,6 @@
     header("Location: webAdministracion/pages/login");
   }
   else {
-    header("Location: webAdministracion/pages/bienvenido");
+    header("Location: webAdministracion/pages/principal");
   }
 ?>

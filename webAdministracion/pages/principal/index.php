@@ -74,8 +74,8 @@
         }
 
 				$sesion->set('dataSesion', $dataSesion);
-				include('bienvenido.php');
-				bienvenido($pdo,$dataSesion,$diferencia_pass);
+				include('principal.php');
+				principal($pdo,$dataSesion,$diferencia_pass);
 			}
 			else {
 				noAutorizado($pdo,$dataSesion); 

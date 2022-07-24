@@ -13,6 +13,6 @@
     tema_login($data_template);
   }
   else {
-    header("Location: ../../../webAdministracion/pages/bienvenido");
+    header("Location: ../../../webAdministracion/pages/principal");
   } 
 ?>
