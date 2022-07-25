@@ -1,15 +1,18 @@
 <?php
-  error_reporting(0);
+  require_once("../../../controller/funcionesCore.php");
+  require_once("../../../dctDatabase/Connection.php");
+  require_once("../../../dctDatabase/Parameter.php");
   require_once("../../../controller/sesion.class.php");
-  require_once("../../../controller/misFunciones.php");
-  require_once("../../../database/Connection.php");
-  require_once("../../../database/Parameter.php");
-  use PostgreSQL\Connection as Connection;
+  require_once('../../../plugins/apiWhatsapp/ultramsg.class.php');
+  app_error_reporting($app_error_reporting);
   try {
-    $pdo = Connection::get()->connect();
+    $sesion = new sesion();
+    $dataSesion = $sesion->get('dataSesion');
+    $ConnectionDB = new ConnectionDB();
+    $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
    
-    if(isset($_FILES['arc_nombre_archivo']['name'])){
+    if(isset($_FILES['em_archivo_fact_elec']['name'])){
       /*
       1 MB-> BIT =  1048576
       2 MB-> BIT =  2097152
@@ -17,90 +20,89 @@
       4 MB-> BIT =  4194304
       5 MB-> BIT =  5242880
       */
-      if ($_FILES["arc_nombre_archivo"]["size"] <= 3145728) {
-        $valid_extensions = array("pdf","PDF");
-        $imageFileType = strtolower(pathinfo($_FILES['arc_nombre_archivo']['name'],PATHINFO_EXTENSION));
+      if ($_FILES["em_archivo_fact_elec"]["size"] <= 3145728) {
+        $valid_extensions = array("P12","p12");
+        $imageFileType = strtolower(pathinfo($_FILES['em_archivo_fact_elec']['name'],PATHINFO_EXTENSION));
         if(in_array(strtolower($imageFileType), $valid_extensions)) {
 
-          $temp_nombre_archivo = str_replace(" ","_",$_FILES['arc_nombre_archivo']['name']);
-          $temp_nombre_archivo = str_replace("-","_",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace(",","_",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace(".","_",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace("'","",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace(".PDF","",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace(".pdf","",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace("PDF","",$temp_nombre_archivo);
-          $temp_nombre_archivo = str_replace("pdf","",$temp_nombre_archivo);
-          $temp_nombre_archivo = strtolower($temp_nombre_archivo);
-          $temp_nombre_archivo = $fechaActual_3."_".substr($temp_nombre_archivo,0,75).".pdf";
-          $location = __DIR__."../../../uploadFile/".$temp_nombre_archivo;
+          $temp_nombre_archivo = $_POST["emp_ruc"].".p12";
+          //$location = __DIR__."../../../uploadP12/".$temp_nombre_archivo;
+          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\uploadP12\\\\".$temp_nombre_archivo;
 
-          /*$sql_crt="SELECT pa.crt_valor_1 
-          FROM dct_parametro_tbl_criterio pa 
-          WHERE pa.crt_cod_criterio =:crt_cod_criterio
-          AND crt_estado = 'A'";
-          $query_crt=$pdo->prepare($sql_crt);
-          $query_crt->bindValue(':crt_cod_criterio','ARC_MED_PACIENTE'); 
-          $query_crt->execute();
-          $row_crt = $query_crt->fetch(\PDO::FETCH_ASSOC);
+          $sql_up="UPDATE dct_sistema_tbl_empresa 
+                  SET em_archivo_fact_elec=:em_archivo_fact_elec,em_pass_fct_elec=:em_pass_fct_elec,
+                  em_usuario_modificacion=:em_usuario_modificacion,
+                  em_fecha_modificacion=now(),em_ip_modificacion=:em_ip_modificacion 
+                  WHERE emp_id_empresa = :emp_id_empresa";
+          $query_up=$pdo->prepare($sql_up);
+          $query_up->bindValue(':emp_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["emp_id_empresa"]),PDO::PARAM_INT);
+          $query_up->bindValue(':em_archivo_fact_elec',cleanData("siLimite",17,"noMayuscula",$temp_nombre_archivo),PDO::PARAM_STR);
+          $query_up->bindValue(':em_pass_fct_elec',cleanData("siLimite",40,"noMayuscula",$_POST["em_pass_fct_elec"]),PDO::PARAM_STR);
+          $query_up->bindValue(':em_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+          $query_up->bindValue(':em_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+          $query_up->execute();
 
-          if ($query->rowCount() < $row_crt["crt_valor_1"]) {*/
-            $sql_up="INSERT INTO app_flujo_procesos.seguimiento_archivo(id_cabecera_proceso, id_fase_proceso, id_responsable_proceso, arc_nombre_archivo, arc_estado, arc_fecha_creacion, arc_usuario_creacion, arc_ip_creacion)
-                    VALUES (:id_cabecera_proceso, :id_fase_proceso, :id_responsable_proceso, :arc_nombre_archivo, 'A', now(), :arc_usuario_creacion, :arc_ip_creacion)";
-            $query_up=$pdo->prepare($sql_up);
-            $query_up->bindValue(':id_cabecera_proceso', clean_data($_POST["id_cabecera_proceso"]));
-            $query_up->bindValue(':id_fase_proceso', clean_data($_POST["id_fase_proceso"]));
-            $query_up->bindValue(':id_responsable_proceso', clean_data($_POST["id_responsable_proceso"]));
-            $query_up->bindValue(':arc_nombre_archivo', $temp_nombre_archivo);
-            $query_up->bindValue(':arc_usuario_creacion', clean_data($_POST["cod_system_user"]));
-            $query_up->bindValue(':arc_ip_creacion', getRealIP());
-            $query_up->execute();
+          if($query_up) {
 
-            if($query_up) {
-
-              if(move_uploaded_file($_FILES['arc_nombre_archivo']['tmp_name'],$location)){
-                $pdo->commit();
-                $data_result["message"] = "saveOK";
-                echo json_encode($data_result);
-              }
-              else {
-                $pdo->rollBack();
-                $data_result["message"] = "saveError";
-                echo json_encode($data_result);
-              }
-
+            if(move_uploaded_file($_FILES['em_archivo_fact_elec']['tmp_name'],$location)){
+              $pdo->commit();
+              $data_result["message"] = "saveOK";
+              $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
+              $data_result["dataModal_2"] = 'Información';
+              $data_result["dataModal_3"] = 'Firma Electrónica registrada de manera correcta.';
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+              echo json_encode($data_result);
             }
             else {
               $pdo->rollBack();
               $data_result["message"] = "saveError";
+              $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+              $data_result["dataModal_2"] = 'Información';
+              $data_result["dataModal_3"] = "No se guardo el archivo de manera correcta.";
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
               echo json_encode($data_result);
             }
-          /*}
+
+          }
           else {
-            $data_result["message"] = "cantArchivoExcedido";
+            $pdo->rollBack();
+            $data_result["message"] = "saveError";
+            $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+            $data_result["dataModal_2"] = 'Información';
+            $data_result["dataModal_3"] = "No se guardo el archivo de manera correcta.";
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
             echo json_encode($data_result);
-          }*/
+          }
 
         }
         else {
           $data_result["message"] = "extNoPermitida";
+          $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+          $data_result["dataModal_2"] = 'Información';
+          $data_result["dataModal_3"] = "Extensión de firma electrónica no es permitida.";
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
           echo json_encode($data_result);
         }
       }
       else {
         $data_result["message"] = "tamanoNoPermitida";
+        $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+        $data_result["dataModal_2"] = 'Información';
+        $data_result["dataModal_3"] = "El tamaño de la firma electrónica no es el admitido.";
+        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
         echo json_encode($data_result);
       }
     }
     else {
       $data_result["message"] = "noExisteArhivo";
+      $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+      $data_result["dataModal_2"] = 'Información';
+      $data_result["dataModal_3"] = "Se requiere que suba un archivo.";
+      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
       echo json_encode($data_result);
     }
 
-
   } catch (\PDOException $e) {
-      $pdo->rollBack();
-      throw $e;
-      echo $e->getMessage();
+    echo $e->getMessage();
   }
 ?> 

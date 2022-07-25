@@ -330,18 +330,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="em_pass_fct_elec" class="control-label">Contraseña Firma</label>
+            <label for="em_pass_fct_elec" class="control-label">Contraseña Firma Electrónica</label>
             <input type="password" class="form-control" id="em_pass_fct_elec" name="em_pass_fct_elec" maxlength="40" required minlength="3">
              <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="em_pass_fct_recon" class="control-label">Confirmar Contraseña Firma</label>
-            <input type="password" class="form-control" id="em_pass_fct_recon" name="em_pass_fct_recon" maxlength="40" required minlength="3">
+            <input type="password" class="form-control" id="em_pass_fct_recon" name="em_pass_fct_recon" maxlength="40" required minlength="3"
+            data-match="#em_pass_fct_elec" data-match-error="Las contraseñas no coinciden.">
              <div class="help-block with-errors"></div>
           </div>
         </div>
         <div class="form-group modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>

@@ -850,8 +850,14 @@ $(document).ready(function() {
   $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaFirmaEdit', function (e) {
     e.preventDefault();
     window.temp_emp_id_empresa_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
+    window.temp_emp_ruc_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[1];
     document.getElementById("formCargaArchivoEmpresa").reset();
     $('#myModalSistemaEmpresaArchivo').modal('show');
+  });
+  $('#em_archivo_fact_elec').change( function () {
+    if ($("#em_archivo_fact_elec").val() != "") {
+      $('.custom-file-input').next('.form-control-file').addClass("selected").html($("#em_archivo_fact_elec").val());
+    }
   });
   $('#formSistemaEmpresa').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
@@ -901,7 +907,6 @@ $(document).ready(function() {
             $('#ctg_id_catalogo').val("");
             $('#myModalSistemaEmpresa').modal('show');
             document.getElementById("formSistemaEmpresa").reset();
-            $('#myModalSistemaEmpresa').modal('show');
             break;
           default:
             $("span#idCodErrorGeneral").empty().prepend("2515");
@@ -911,17 +916,16 @@ $(document).ready(function() {
       }
     });
   });
-  $('#formCargaArchivoProceso').validator().on('submit', function (e) {
+  $('#formCargaArchivoEmpresa').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       var formData = new FormData(this);
-      var files = $('#arc_nombre_archivo')[0].files;
+      var files = $('#em_archivo_fact_elec')[0].files;
       if(files.length > 0 ){
-        formData.append('arc_nombre_archivo',files[0]);
-        formData.append('cod_system_user',$('#cod_system_user').val());
-        formData.append('id_cabecera_proceso',temp_id_cabecera_proceso_4);
-        formData.append('id_fase_proceso',temp_id_fase_proceso_4);
-        formData.append('id_responsable_proceso',temp_id_responsable_proceso_4);
+        formData.append('em_archivo_fact_elec',files[0]);
+        formData.append('em_pass_fct_elec',$('#em_pass_fct_elec').val());
+        formData.append('emp_id_empresa',temp_emp_id_empresa_2);
+        formData.append('emp_ruc',temp_emp_ruc_2);
         $.ajax({
           url: '../../beans/manejoSistema/cargaArchivoEmpresa.php',
           type: 'POST',
@@ -930,25 +934,21 @@ $(document).ready(function() {
           processData: false,
           success: function(result){
             var result = eval('('+result+')');
-            document.getElementById("formCargaArchivoProceso").reset();
+            document.getElementById("formCargaArchivoEmpresa").reset();
             $('.custom-file-input').next('.form-control-file').addClass("selected").html("");
+            $('#myModalSistemaEmpresaArchivo').modal('hide');
             switch (result.message) {
               case "saveOK":
-                renderizarTimeLine (temp_id_cabecera_proceso_4,temp_id_fase_proceso_4);
-                $('#myModalFlujoDocumentalArchivo').modal('hide');
-                $('#myModalRegistroOK').modal('show');
-                break;
               case "saveError":
-                alert("No se pudo realizar la transacción debido al leer el archivo.");
               case "extNoPermitida":
-                alert("Extension de archivo no permitida");
               case "tamanoNoPermitida":
-                alert("Tamaño de archivo excede lo admitido");
               case "noExisteArhivo":
-                alert("No existe archivo, seleccione uno.");
+                dtSistemaEmpresa.ajax.reload();
+                modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                alert("No se pudo realizar la transacción debido al leer el archivo.");
+                $("span#idCodErrorGeneral").empty().prepend("2515");
+                $('#myModalErrorGeneral').modal('show');
                 break;
             }
           },
