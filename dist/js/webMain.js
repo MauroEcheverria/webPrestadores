@@ -673,7 +673,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:
@@ -770,7 +770,7 @@ $(document).ready(function() {
               var sms_dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
               var sms_dataModal_2 = 'Información';
               var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
+              var sms_dataModal_4 = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
               modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
               break;
             default:
@@ -850,7 +850,8 @@ $(document).ready(function() {
   $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaFirmaEdit', function (e) {
     e.preventDefault();
     window.temp_emp_id_empresa_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
-    
+    document.getElementById("formCargaArchivoEmpresa").reset();
+    $('#myModalSistemaEmpresaArchivo').modal('show');
   });
   $('#formSistemaEmpresa').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
@@ -909,6 +910,54 @@ $(document).ready(function() {
         }
       }
     });
+  });
+  $('#formCargaArchivoProceso').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      var files = $('#arc_nombre_archivo')[0].files;
+      if(files.length > 0 ){
+        formData.append('arc_nombre_archivo',files[0]);
+        formData.append('cod_system_user',$('#cod_system_user').val());
+        formData.append('id_cabecera_proceso',temp_id_cabecera_proceso_4);
+        formData.append('id_fase_proceso',temp_id_fase_proceso_4);
+        formData.append('id_responsable_proceso',temp_id_responsable_proceso_4);
+        $.ajax({
+          url: '../../beans/manejoSistema/cargaArchivoEmpresa.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(result){
+            var result = eval('('+result+')');
+            document.getElementById("formCargaArchivoProceso").reset();
+            $('.custom-file-input').next('.form-control-file').addClass("selected").html("");
+            switch (result.message) {
+              case "saveOK":
+                renderizarTimeLine (temp_id_cabecera_proceso_4,temp_id_fase_proceso_4);
+                $('#myModalFlujoDocumentalArchivo').modal('hide');
+                $('#myModalRegistroOK').modal('show');
+                break;
+              case "saveError":
+                alert("No se pudo realizar la transacción debido al leer el archivo.");
+              case "extNoPermitida":
+                alert("Extension de archivo no permitida");
+              case "tamanoNoPermitida":
+                alert("Tamaño de archivo excede lo admitido");
+              case "noExisteArhivo":
+                alert("No existe archivo, seleccione uno.");
+                break;
+              default:
+                alert("No se pudo realizar la transacción debido al leer el archivo.");
+                break;
+            }
+          },
+       });
+      }
+      else{
+        alert("Debe seleccionar un archivo para poder continuar.");
+      }
+    }
   });
 
 });

@@ -17,7 +17,7 @@
         </div>
         <div class="modal-body"><strong>Se ha detectado 2 horas de inactividad, por su seguridad se procederá a cerrar su sesión actual.</strong></div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onClick="location.href = '../../../'">Cerrar</button>
+          <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal" onClick="location.href = '../../../'">Cerrar</button>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="modal-body">Se ha detectado un error al procesar la solicitud requerida. Código de error: <strong><span id="idCodErrorGeneral"></span></strong>, por favor enviar un correo electrónico a <strong>info@dreconstec.com</strong> indicando la novedad presentada.</div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-danger" onClick="location.reload();">Cerrar</button>
+          <button type="button" class="btn btn-danger btn-dreconstec" onClick="location.reload();">Cerrar</button>
         </div>
       </div>
     </div>

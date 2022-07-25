@@ -195,8 +195,8 @@
           </div>
           <div class="modal-footer centralFooter">
             <div class="form-group">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
             </div>
           </div>
         </form>
@@ -231,8 +231,8 @@
           </div>
           <div class="modal-footer centralFooter">
             <div class="form-group">
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-warning">Resetear</button>
+              <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning btn-dreconstec">Resetear</button>
             </div>
           </div>
         </form>

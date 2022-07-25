@@ -166,14 +166,14 @@ $(document).ready(function() {
                       var dataModal_1 = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
                       var dataModal_2 = 'Información';
                       var dataModal_3 = 'Se ha enviado una notificación a su cuenta de correo electrónico <span class="linkCorreo">'+result.usr_correo+'</span> con las instrucciones para que pueda ingresar su nueva contraseña.<br><p><strong>Favor revisar su bandeja de entrada o spam.</strong></p>';
-                      var dataModal_4 = '<button type="button" class="btn btn-success" onClick="location.href = '+"'"+'../login'+"'"+'">Cerrar</button>';
+                      var dataModal_4 = '<button type="button" class="btn btn-success btn-dreconstec" onClick="location.href = '+"'"+'../login'+"'"+'">Cerrar</button>';
                       modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
                     }
                     else {
                       var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                       var dataModal_2 = 'Información';
                       var dataModal_3 = 'No se pudo enviar el correo con su clave de acceso. Intentelo de nuevo por favor.';
-                      var dataModal_4 = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
+                      var dataModal_4 = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
                       modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
                     } 
                 }
@@ -181,7 +181,7 @@ $(document).ready(function() {
                   var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                   var dataModal_2 = 'Información';
                   var dataModal_3 = 'Aún tiene un ticket vigente, revise su correo electrónico y siga los pasos indicados.';
-                  var dataModal_4 = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
+                  var dataModal_4 = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
                   modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
                 }
               }
@@ -189,7 +189,7 @@ $(document).ready(function() {
                 var dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                 var dataModal_2 = 'Información';
                 var dataModal_3 = 'No se encontró ningún usuario que coincida con ese número de cédula';
-                var dataModal_4 = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
+                var dataModal_4 = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
                 modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
               }
               break;

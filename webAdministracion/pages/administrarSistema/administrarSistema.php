@@ -177,8 +177,8 @@
         </div>
         <div class="modal-footer">
           <div class="form-group">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success">Asignar</button>
+            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Asignar</button>
           </div>
         </div>
       </form>
@@ -212,8 +212,8 @@
         </div>
         <div class="modal-footer">
           <div class="form-group">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success">Asignar</button>
+            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Asignar</button>
           </div>
         </div>
       </form>
@@ -292,6 +292,56 @@
         </div>
         <div class="modal-footer centralFooter">
           <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaEmpresaArchivo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">X</span>
+        </button>
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11" style="width: 430px;">
+            <h4 class="modal-title" id="myModalLabel"><strong>Subir Archivo PDF</strong></h4>
+          </div>
+        </div>
+      </div>
+      <form id="formCargaArchivoEmpresa" class="formModalPages" data-toggle="validator" role="form" autocomplete="false" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label">Consideraciones para Carga de Archivo: </label>
+            <div>
+              <ul>
+                <li> Solo formato <code>.p12</code></li>
+                <li> Tamaño máximo por archivo de 3MB</li>
+              </ul>
+            </div>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="em_archivo_fact_elec" name="em_archivo_fact_elec" required="">
+              <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="em_pass_fct_elec" class="control-label">Contraseña Firma</label>
+            <input type="password" class="form-control" id="em_pass_fct_elec" name="em_pass_fct_elec" maxlength="40" required minlength="3">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="em_pass_fct_recon" class="control-label">Confirmar Contraseña Firma</label>
+            <input type="password" class="form-control" id="em_pass_fct_recon" name="em_pass_fct_recon" maxlength="40" required minlength="3">
+             <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="form-group modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>

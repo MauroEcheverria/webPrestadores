@@ -71,7 +71,7 @@
                                     <div class="slider_text slider_text_bscar_por">
                                         <p>Su cuenta ha sido activada de manera correcta. <br>Diríjase a la página principal para iniciar su sesión.</p>
                                         <div class="btn_buscar_por">
-                                          <button type="button" class="btn btn-success" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
+                                          <button type="button" class="btn btn-success btn-dreconstec" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                     <div class="slider_text slider_text_bscar_por">
                                         <p>Se ha detectado un error al procesar la solicitud requerida. <br>Contáctate con nosotros para indicarnos de esta novedad.</p>
                                         <div class="btn_buscar_por">
-                                          <button type="button" class="btn btn-success" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
+                                          <button type="button" class="btn btn-success btn-dreconstec" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                 <div class="slider_text slider_text_bscar_por">
                                     <p>El link de activación ya ha sido usado, por favor inicie sesión.</p>
                                     <div class="btn_buscar_por">
-                                      <button type="button" class="btn btn-success" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
+                                      <button type="button" class="btn btn-success btn-dreconstec" onclick="window.location.href = '../../pages/login/';">Iniciar Sesión</button>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                               <div class="slider_text slider_text_bscar_por">
                                   <p>El link de activación no se encuentra registrado. <br>Contáctate con nosotros para indicarnos de esta novedad.</p>
                                   <div class="btn_buscar_por">
-                                    <button type="button" class="btn btn-success" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
+                                    <button type="button" class="btn btn-success btn-dreconstec" onclick="window.location.href = '../../../contactanos/';">Contáctanos</button>
                                   </div>
                               </div>
                           </div>

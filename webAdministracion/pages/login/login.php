@@ -124,8 +124,8 @@
           <div class="modal-footer">
             <hr>
             <div class="form-group">
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-warning">Guardar</button>
+              <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning btn-dreconstec">Guardar</button>
             </div>
           </div>
         </form>
