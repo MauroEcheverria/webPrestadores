@@ -193,11 +193,6 @@
     </section>
   </div>
 
-  <div class="poppupAlert" id="alertNewClaveParametros">
-    <a href="#" class="close aAlert" data-dismiss="alert">&times;</a>
-    <strong>La clave debe cumplir todos los parámetros.
-  </div>
-
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

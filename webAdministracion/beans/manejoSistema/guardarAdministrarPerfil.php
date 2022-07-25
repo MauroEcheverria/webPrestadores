@@ -3,6 +3,7 @@
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
   require_once("../../../controller/sesion.class.php");
+	require_once('../../../plugins/apiWhatsapp/ultramsg.class.php');
 	app_error_reporting($app_error_reporting);
 	try {
     $sesion = new sesion();
@@ -12,6 +13,15 @@
 		$pdo->beginTransaction();
 
 		if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
+
+			if (strlen($_POST["adi_celular"]) == 10) {
+				$celular_numero = "593".intval($_POST["adi_celular"]);
+			}
+			else {
+				$celular_numero = $_POST["adi_celular"];
+			}
+			
+
 			if ($_POST["tipo_form"] == "New") {
 				$sql_2="INSERT INTO dct_sistema_tbl_usuario_adicional(usr_cod_usuario, adi_fecha_nacimiento, adi_sexo, 
 					adi_estado_civil, adi_instruccion, adi_tipo_sangre, adi_celular, adi_provincia, adi_canton, adi_parroquia, 
@@ -26,7 +36,7 @@
 		    $query_2->bindValue(':adi_estado_civil',cleanData("siLimite",12,"noMayuscula",$_POST["adi_estado_civil"]),PDO::PARAM_STR); 
 		    $query_2->bindValue(':adi_instruccion',cleanData("siLimite",11,"noMayuscula",$_POST["adi_instruccion"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_tipo_sangre',cleanData("siLimite",9,"noMayuscula",$_POST["adi_tipo_sangre"]),PDO::PARAM_STR);
-		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$_POST["adi_celular"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$celular_numero),PDO::PARAM_INT);
 		    $query_2->bindValue(':adi_provincia',cleanData("siLimite",5,"noMayuscula",$_POST["adi_provincia"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_canton',cleanData("siLimite",7,"noMayuscula",$_POST["adi_canton"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_parroquia',cleanData("siLimite",9,"noMayuscula",$_POST["adi_parroquia"]),PDO::PARAM_STR);
@@ -37,12 +47,18 @@
 		    $query_2->execute();
 
 		    if($query_2) {
+
+		    	/*$client = new UltraMsg\WhatsAppApi($ultramsg_token,$instance_id);
+					$body="📲 Su registro a sido guardado correctamente ✔"; 
+					$api=$client->sendChatMessage($celular_numero,$body);
+					$data_result["sendChatMessage"] = $api["message"];*/
+
 					$pdo->commit();
 					$data_result["message"] = "saveOK";
 					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
 		      $data_result["dataModal_2"] = 'Información';
 		      $data_result["dataModal_3"] = 'Perfíl registado de manera correcta.';
-		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>';
+		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
 					echo json_encode($data_result);
 				}
 				else {
@@ -66,7 +82,7 @@
 		    $query_2->bindValue(':adi_estado_civil',cleanData("siLimite",12,"noMayuscula",$_POST["adi_estado_civil"]),PDO::PARAM_STR); 
 		    $query_2->bindValue(':adi_instruccion',cleanData("siLimite",11,"noMayuscula",$_POST["adi_instruccion"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_tipo_sangre',cleanData("siLimite",9,"noMayuscula",$_POST["adi_tipo_sangre"]),PDO::PARAM_STR);
-		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$_POST["adi_celular"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':adi_celular',cleanData("siLimite",13,"noMayuscula",$celular_numero),PDO::PARAM_INT);
 		    $query_2->bindValue(':adi_provincia',cleanData("siLimite",5,"noMayuscula",$_POST["adi_provincia"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_canton',cleanData("siLimite",7,"noMayuscula",$_POST["adi_canton"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':adi_parroquia',cleanData("siLimite",9,"noMayuscula",$_POST["adi_parroquia"]),PDO::PARAM_STR);
@@ -77,12 +93,18 @@
 		    $query_2->execute();
 
 		    if($query_2) {
+
+		    	/*$client = new UltraMsg\WhatsAppApi($ultramsg_token,$instance_id);
+		    	$body="📲 Su registro a sido actualizado correctamente ✔"; 
+					$api=$client->sendChatMessage($celular_numero,$body);
+					$data_result["sendChatMessage"] = $api["message"];*/
+
 					$pdo->commit();
 					$data_result["message"] = "saveOK";
 					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
 		      $data_result["dataModal_2"] = 'Información';
 		      $data_result["dataModal_3"] = 'Perfíl modificado de manera correcta.';
-		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>';
+		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>';
 					echo json_encode($data_result);
 				}
 				else {

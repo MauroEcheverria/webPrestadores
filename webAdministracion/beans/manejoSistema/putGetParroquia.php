@@ -12,15 +12,23 @@
 						AND dvp_codigo_canton = :codigo_canton
 						ORDER BY 1;" ;
 		$query_par=$pdo->prepare($sql_par);
-		$query_par->bindValue(':codigo_provincia', $_POST["adi_provincia"]);
-		$query_par->bindValue(':codigo_canton', $_POST["adi_canton"]);
+		$query_par->bindValue(':codigo_provincia',$_POST["adi_provincia"],PDO::PARAM_STR);
+		$query_par->bindValue(':codigo_canton',$_POST["adi_canton"],PDO::PARAM_STR);
     $query_par->execute();
     $row_par = $query_par->fetchAll();
     $rpta="<option value=''>Seleccione una opción</option>";
     foreach ($row_par as $row_par) {
     	$rpta.="<option value='".$row_par["dvp_codigo_parroquia"]."'>".$row_par["dvp_parroquia"]."</option>";
     }
-		echo json_encode(array('message'=>"saveOK",'rpta'=>$rpta));
+
+    $data_result["rpta"] = $rpta;
+    $data_result["message"] = "saveOK";
+
+    if (isset($_POST["adi_parroquia"])) {
+    	$data_result["adi_parroquia"] = $_POST["adi_parroquia"];
+    }
+    
+    echo json_encode($data_result);
 	}
 	catch(SoapFault $exception){
 	    echo $exception->getMessage();  

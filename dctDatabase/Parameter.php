@@ -35,4 +35,7 @@
 	$version_css_js = "?dct_1.0";
 	/****************** URL ACTUAL *************************/
 	$url_actual = "$http$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	/****************** WHATSAPP *************************/
+	$ultramsg_token="glpr98u1bxxd6job";
+	$instance_id="instance12736";
 ?>
