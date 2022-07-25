@@ -1,5 +1,5 @@
 function fnSistemaEmpresa() {
-  var dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
+  window.dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
     bRetrive: true,
     processing: true,
     serverSide: false,
@@ -11,10 +11,10 @@ function fnSistemaEmpresa() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [1,3,4,5,6]
+        aTargets: [1,3,4,5,6,7,8]
       },
       {
-        "targets": [0],
+        "targets": [0,9],
         "visible": false,
         "searchable": false
       }
@@ -25,6 +25,8 @@ function fnSistemaEmpresa() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Vigencia Desde</div>' },
       { title: '<div class="tituloColumnasDT">Vigencia Hasta</div>' },
+      { title: '<div class="tituloColumnasDT">Tipo Plan</div>' },
+      { title: '<div class="tituloColumnasDT">Archivo Firma Electrónica</div>' },
       { title: '<div class="tituloColumnasDT">Estado </div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
@@ -32,6 +34,8 @@ function fnSistemaEmpresa() {
         mRender: function (data, type, row) {
           var acciones = '';
           acciones  = '<a class="iconDtSistemaEmpresaModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="iconDtSistemaEmpresaFirmaEdit" title="Asignar Firma Electrónica"><i class="fas fa-file-invoice-dollar iconDTicon"></i></i></a>';
           return acciones
         }
       },
@@ -49,17 +53,17 @@ function fnSistemaEmpresa() {
       timeout: 60000
     },
     createdRow: function ( row, data, index ) {
-      if ( data[5] == 1 ) {
-        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      if ( data[7] == 1 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
       }
-      if ( data[5] == 0 ) {
-        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      if ( data[7] == 0 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
       }
     }
   });
 }
 function fnSistemaAplicacion() {
-  var dtSistemaAplicacion = $('#dtSistemaAplicacion').DataTable( {
+  window.dtSistemaAplicacion = $('#dtSistemaAplicacion').DataTable( {
     bRetrive: true,
     processing: true,
     serverSide: false,
@@ -121,7 +125,7 @@ function fnSistemaAplicacion() {
   });
 }
 function fnSistemaRol() {
-  var dtSistemaRol = $('#dtSistemaRol').DataTable( {
+  window.dtSistemaRol = $('#dtSistemaRol').DataTable( {
     bRetrive: true,
     processing: true,
     serverSide: false,
@@ -178,7 +182,7 @@ function fnSistemaRol() {
   });
 }
 function fnSistemaOpcion() {
-  var dtSistemaOpcion = $('#dtSistemaOpcion').DataTable( {
+  window.dtSistemaOpcion = $('#dtSistemaOpcion').DataTable( {
     bRetrive: true,
     processing: true,
     serverSide: false,
@@ -238,23 +242,6 @@ function fnSistemaOpcion() {
   });
 }
 $(document).ready(function() {
-
-	/*$.isPlainObject('object');$(".aAlert").click(function(){
-    $(this).parent().hide();
-    return false;
-  });
-
-  var forms = document.querySelectorAll('.needs-validation')
-  Array.prototype.slice.call(forms)
-  .forEach(function (form) {
-    form.addEventListener('submit', function (event) {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-      form.classList.add('was-validated')
-    }, false)
-  });*/
 
   var dtUsuarios = $('#dtUsuarios').DataTable( {
     bRetrive: true,
@@ -798,11 +785,9 @@ $(document).ready(function() {
       $('#myModalNoSelected').modal('show');
     }
   });
-
   if($('div#appAdministrarSistema').hasClass('appAdministrarSistema')) {
     fnSistemaEmpresa();
   }
-
   $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href")
     if (target == "#idTogglable_1") {
@@ -820,6 +805,110 @@ $(document).ready(function() {
     if (target == "#idTogglable_5") {
       //fnSistemaOpcion();
     }
+  });
+  $('#emp_vigencia_desde,#emp_vigencia_hasta').datepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    autoclose: true,
+    format: 'yyyy-mm-dd',
+    language: 'es',
+    /*startDate: '+0d',
+    endDate: '+0d',*/
+  });
+  $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaModificar', function (e) {
+    e.preventDefault();
+    window.temp_emp_id_empresa_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
+    window.temp_ctg_id_catalogo_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[9]
+    $('#emp_empresa').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[2]);
+    $('#emp_ruc').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[1]);
+    $('#emp_estado').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[7]);
+    $('#emp_vigencia_desde').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
+    $('#emp_vigencia_hasta').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
+    $('#emp_vigencia_desde').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
+    $('#emp_vigencia_hasta').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
+    $('#tipo_form').val("Old");
+    $.ajax({
+      url: '../../beans/manejoSistema/obtenerCatalogoEmpresas.php',
+      type: 'POST',
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#ctg_id_catalogo").empty().prepend(result.catag);
+            $('#ctg_id_catalogo').val(temp_ctg_id_catalogo_1);
+            $('#myModalSistemaEmpresa').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
+  });
+  $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaFirmaEdit', function (e) {
+    e.preventDefault();
+    window.temp_emp_id_empresa_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
+    
+  });
+  $('#formSistemaEmpresa').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form').val() == "Old") {
+        $params = $('#formSistemaEmpresa').serialize()+"&emp_id_empresa="+temp_emp_id_empresa_1;
+      }
+      else {
+        $params = $('#formSistemaEmpresa').serialize();
+      }
+      $.ajax({
+        url: '../../beans/manejoSistema/guardarSistemaEmpresa.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaEmpresa').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaEmpresa.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#btnNuevaSistemaEmpresa').click( function () {
+    $.ajax({
+      url: '../../beans/manejoSistema/obtenerCatalogoEmpresas.php',
+      type: 'POST',
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $('#tipo_form').val("New");
+            $("#ctg_id_catalogo").empty().prepend(result.catag);
+            $('#ctg_id_catalogo').val("");
+            $('#myModalSistemaEmpresa').modal('show');
+            document.getElementById("formSistemaEmpresa").reset();
+            $('#myModalSistemaEmpresa').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
   });
 
 });

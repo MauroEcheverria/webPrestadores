@@ -67,6 +67,7 @@ $(document).ready(function() {
         $('#adi_direccion').val(result.data_row["adi_direccion"]);
         $('#adi_referencia').val(result.data_row["adi_referencia"]);
         $('#adi_fecha_nacimiento').val(result.data_row["adi_fecha_nacimiento"]);
+        $('#adi_fecha_nacimiento').datepicker('setDate', result.data_row["adi_fecha_nacimiento"]);
         $('#adi_estado_civil').val(result.data_row["adi_estado_civil"]);
         $('#adi_celular').val(result.data_row["adi_celular"]);
         $('#adi_instruccion').val(result.data_row["adi_instruccion"]);

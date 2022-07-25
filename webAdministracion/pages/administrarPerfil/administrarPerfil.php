@@ -34,7 +34,6 @@
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-
               <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
@@ -76,8 +75,6 @@
                             </div>
                             <div class="help-block with-errors"></div>
                           </div>
-
-
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
@@ -140,10 +137,8 @@
                       </div>
                     </form> 
                   </div>
-
                 </div>
               </div>
-
               <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">

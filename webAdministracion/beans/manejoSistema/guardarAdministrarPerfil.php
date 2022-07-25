@@ -21,7 +21,6 @@
 				$celular_numero = $_POST["adi_celular"];
 			}
 			
-
 			if ($_POST["tipo_form"] == "New") {
 				$sql_2="INSERT INTO dct_sistema_tbl_usuario_adicional(usr_cod_usuario, adi_fecha_nacimiento, adi_sexo, 
 					adi_estado_civil, adi_instruccion, adi_tipo_sangre, adi_celular, adi_provincia, adi_canton, adi_parroquia, 

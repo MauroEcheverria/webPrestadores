@@ -63,7 +63,7 @@
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                   <a href="#" class="dropdown-item">
                     <div class="media">
-                      <img src="../../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                      <img src="../../../dist/img/dct_sin_imagen.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                       <div class="media-body">
                         <h3 class="dropdown-item-title">
                           Brad Diesel
@@ -77,7 +77,7 @@
                   <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item">
                     <div class="media">
-                      <img src="../../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <img src="../../../dist/img/dct_sin_imagen.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
                       <div class="media-body">
                         <h3 class="dropdown-item-title">
                           John Pierce
@@ -91,7 +91,7 @@
                   <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item">
                     <div class="media">
-                      <img src="../../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                      <img src="../../../dist/img/dct_sin_imagen.png" alt="User Avatar" class="img-size-50 img-circle mr-3">
                       <div class="media-body">
                         <h3 class="dropdown-item-title">
                           Nora Silvester
@@ -148,7 +148,7 @@
             <div class="sidebar">
               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                  <img src="../../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                  <img src="../../../dist/img/dct_sin_imagen.png" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                   <a href="#" class="d-block">Alexander Pierce</a>
