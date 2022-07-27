@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-07-2022 a las 06:29:04
+-- Tiempo de generación: 27-07-2022 a las 07:13:42
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1762,7 +1762,8 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-25 23:23:23', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, '2022-07-22', 0, 0, '2022-07-25', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-27 03:19:41', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, '2022-07-22', 0, 0, '2022-07-26', '0919664854', '0919664854', '2021-05-19 10:20:25', '2021-05-19 10:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('1308041134001', 'MERY', 'JAZMIN', 'REINA', 'CEVALLOS', 'dFRhNUVWRHFGaVBBVER4N2g4TnI0UllEaHdkZG9nV0oxWmRRa1dOMFZmK0wwbWpGRWxkYzROaVRyNWNYcEZUUQ==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 3, 1, 1, '2022-07-26', 0, 1, NULL, '0919664854', NULL, '2022-07-27 03:14:48', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1806,15 +1807,13 @@ INSERT INTO `dct_sistema_tbl_usuario_adicional` (`usr_cod_usuario`, `adi_fecha_n
 -- Indices de la tabla `dct_sistema_tbl_aplicacion`
 --
 ALTER TABLE `dct_sistema_tbl_aplicacion`
-  ADD PRIMARY KEY (`apl_id_aplicacion`),
-  ADD UNIQUE KEY `apl_aplicacion` (`apl_aplicacion`,`apl_ruta`);
+  ADD PRIMARY KEY (`apl_id_aplicacion`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_aplicacion_empresa`
 --
 ALTER TABLE `dct_sistema_tbl_aplicacion_empresa`
-  ADD PRIMARY KEY (`ape_id_aplicacion`,`ape_id_empresa`),
-  ADD KEY `ape_id_empresa` (`ape_id_empresa`);
+  ADD PRIMARY KEY (`ape_id_aplicacion`,`ape_id_empresa`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_catalogo`
@@ -1838,8 +1837,7 @@ ALTER TABLE `dct_sistema_tbl_empresa`
 -- Indices de la tabla `dct_sistema_tbl_opcion`
 --
 ALTER TABLE `dct_sistema_tbl_opcion`
-  ADD PRIMARY KEY (`opc_id_opcion`),
-  ADD KEY `opc_id_aplicacion` (`opc_id_aplicacion`);
+  ADD PRIMARY KEY (`opc_id_opcion`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_rol`
@@ -1851,17 +1849,15 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- Indices de la tabla `dct_sistema_tbl_rol_aplicacion`
 --
 ALTER TABLE `dct_sistema_tbl_rol_aplicacion`
-  ADD PRIMARY KEY (`rla_id`),
-  ADD KEY `dct_sistema_tbl_rol_aplicacion_ibfk_1` (`rla_id_rol`),
-  ADD KEY `dct_sistema_tbl_rol_aplicacion_ibfk_2` (`rla_id_aplicacion`);
+  ADD PRIMARY KEY (`rla_id`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_rol_opcion`
 --
 ALTER TABLE `dct_sistema_tbl_rol_opcion`
   ADD PRIMARY KEY (`rlo_id`),
-  ADD KEY `dct_sistema_tbl_rol_opcion_ibfk_1` (`rlo_id_rol`),
-  ADD KEY `dct_sistema_tbl_rol_opcion_ibfk_2` (`rlo_id_opcion`);
+  ADD KEY `rlo_id_opcion_fk` (`rlo_id_opcion`),
+  ADD KEY `rlo_id_rol_fk` (`rlo_id_rol`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_token`
@@ -1874,7 +1870,9 @@ ALTER TABLE `dct_sistema_tbl_token`
 -- Indices de la tabla `dct_sistema_tbl_usuario`
 --
 ALTER TABLE `dct_sistema_tbl_usuario`
-  ADD PRIMARY KEY (`usr_cod_usuario`);
+  ADD PRIMARY KEY (`usr_cod_usuario`),
+  ADD KEY `usr_id_rol_fk` (`usr_id_rol`),
+  ADD KEY `usr_id_empresa_fk` (`usr_id_empresa`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_usuario_adicional`
@@ -1939,6 +1937,44 @@ ALTER TABLE `dct_sistema_tbl_rol_opcion`
 --
 ALTER TABLE `dct_sistema_tbl_token`
   MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `dct_sistema_tbl_aplicacion_empresa`
+--
+ALTER TABLE `dct_sistema_tbl_aplicacion_empresa`
+  ADD CONSTRAINT `ape_id_aplicacion_fk` FOREIGN KEY (`ape_id_aplicacion`) REFERENCES `dct_sistema_tbl_aplicacion` (`apl_id_aplicacion`),
+  ADD CONSTRAINT `ape_id_empresa_fk` FOREIGN KEY (`ape_id_empresa`) REFERENCES `dct_sistema_tbl_empresa` (`emp_id_empresa`);
+
+--
+-- Filtros para la tabla `dct_sistema_tbl_rol_aplicacion`
+--
+ALTER TABLE `dct_sistema_tbl_rol_aplicacion`
+  ADD CONSTRAINT `rla_id_aplicacion_fk` FOREIGN KEY (`rla_id_aplicacion`) REFERENCES `dct_sistema_tbl_aplicacion` (`apl_id_aplicacion`),
+  ADD CONSTRAINT `rla_id_rol_fk` FOREIGN KEY (`rla_id_rol`) REFERENCES `dct_sistema_tbl_rol` (`rol_id_rol`);
+
+--
+-- Filtros para la tabla `dct_sistema_tbl_rol_opcion`
+--
+ALTER TABLE `dct_sistema_tbl_rol_opcion`
+  ADD CONSTRAINT `rlo_id_opcion_fk` FOREIGN KEY (`rlo_id_opcion`) REFERENCES `dct_sistema_tbl_opcion` (`opc_id_opcion`),
+  ADD CONSTRAINT `rlo_id_rol_fk` FOREIGN KEY (`rlo_id_rol`) REFERENCES `dct_sistema_tbl_rol` (`rol_id_rol`);
+
+--
+-- Filtros para la tabla `dct_sistema_tbl_usuario`
+--
+ALTER TABLE `dct_sistema_tbl_usuario`
+  ADD CONSTRAINT `usr_id_empresa_fk` FOREIGN KEY (`usr_id_empresa`) REFERENCES `dct_sistema_tbl_empresa` (`emp_id_empresa`),
+  ADD CONSTRAINT `usr_id_rol_fk` FOREIGN KEY (`usr_id_rol`) REFERENCES `dct_sistema_tbl_rol` (`rol_id_rol`);
+
+--
+-- Filtros para la tabla `dct_sistema_tbl_usuario_adicional`
+--
+ALTER TABLE `dct_sistema_tbl_usuario_adicional`
+  ADD CONSTRAINT `usr_cod_usuario_fk` FOREIGN KEY (`usr_cod_usuario`) REFERENCES `dct_sistema_tbl_usuario` (`usr_cod_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
