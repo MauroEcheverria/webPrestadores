@@ -62,68 +62,6 @@ function fnSistemaEmpresa() {
     }
   });
 }
-function fnSistemaAplicacion() {
-  window.dtSistemaAplicacion = $('#dtSistemaAplicacion').DataTable( {
-    bRetrive: true,
-    processing: true,
-    serverSide: false,
-    bDestroy: true,
-    responsive: false,
-    paging: true,
-    searching: true,
-    scrollX: true,
-    aoColumnDefs: [
-      { 
-        sClass: "centrarContent", 
-        aTargets: [3,4,5,6,7,8]
-      },
-      {
-        "targets": [0],
-        "visible": false,
-        "searchable": false
-      }
-    ],
-    columns: [
-      { title: '<div class="tituloColumnasDT">apl_id_aplicacion</div>' },
-      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
-      { title: '<div class="tituloColumnasDT">Ruta</div>' },
-      { title: '<div class="tituloColumnasDT">Nombre Superior</div>' },
-      { title: '<div class="tituloColumnasDT">Nombre Inferior</div>' },
-      { title: '<div class="tituloColumnasDT">HTML </div>' },
-      { title: '<div class="tituloColumnasDT">Imagen </div>' },
-      { title: '<div class="tituloColumnasDT">Estado </div>' },
-      { 
-        title: '<div class="tituloColumnasDT">Acciones</div>',
-        width: "80",
-        mRender: function (data, type, row) {
-          var acciones = '';
-          acciones  = '<a class="iconDtSistemaAplicacionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
-          return acciones
-        }
-      },
-    ],
-    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
-    lengthMenu: [5,10,15,20,30],
-    order: [[ 1, "asc" ]],
-    ajax:{
-      url:'../../beans/manejoSistema/obtenerSistemaAplicacion.php',
-      type: "post",
-      data: null,
-      dataSrc: function (json) {
-        return json.data;
-      },
-      timeout: 60000
-    },
-    createdRow: function ( row, data, index ) {
-      if ( data[7] == 1 ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
-      }
-      if ( data[7] == 0 ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
-      }
-    }
-  });
-}
 function fnSistemaRol() {
   window.dtSistemaRol = $('#dtSistemaRol').DataTable( {
     bRetrive: true,
@@ -177,66 +115,6 @@ function fnSistemaRol() {
       }
       if ( data[2] == 0 ) {
         $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
-      }
-    }
-  });
-}
-function fnSistemaOpcion() {
-  window.dtSistemaOpcion = $('#dtSistemaOpcion').DataTable( {
-    bRetrive: true,
-    processing: true,
-    serverSide: false,
-    bDestroy: true,
-    responsive: false,
-    paging: true,
-    searching: true,
-    scrollX: true,
-    aoColumnDefs: [
-      { 
-        sClass: "centrarContent", 
-        aTargets: [1,3,4,5,6]
-      },
-      {
-        "targets": [0,7],
-        "visible": false,
-        "searchable": false
-      }
-    ],
-    columns: [
-      { title: '<div class="tituloColumnasDT">opc_id_opcion</div>' },
-      { title: '<div class="tituloColumnasDT">Opción</div>' },
-      { title: '<div class="tituloColumnasDT">Ruta</div>' },
-      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
-      { title: '<div class="tituloColumnasDT">Orden</div>' },
-      { title: '<div class="tituloColumnasDT">Estado</div>' },
-      { 
-        title: '<div class="tituloColumnasDT">Acciones</div>',
-        width: "80",
-        mRender: function (data, type, row) {
-          var acciones = '';
-          acciones  = '<a class="iconDtSistemaOpcionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
-          return acciones
-        }
-      },
-    ],
-    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
-    lengthMenu: [5,10,15,20,30],
-    order: [[ 3, "asc" ],[ 4, "asc" ]],
-    ajax:{
-      url:'../../beans/manejoSistema/obtenerSistemaOpcion.php',
-      type: "post",
-      data: null,
-      dataSrc: function (json) {
-        return json.data;
-      },
-      timeout: 60000
-    },
-    createdRow: function ( row, data, index ) {
-      if ( data[5] == 1 ) {
-        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
-      }
-      if ( data[5] == 0 ) {
-        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
       }
     }
   });
@@ -793,14 +671,8 @@ $(document).ready(function() {
     if (target == "#idTogglable_1") {
       fnSistemaEmpresa();
     }
-    if (target == "#idTogglable_2") {
-      fnSistemaAplicacion();
-    }
     if (target == "#idTogglable_3") {
       fnSistemaRol();
-    }
-    if (target == "#idTogglable_4") {
-      fnSistemaOpcion();
     }
     if (target == "#idTogglable_5") {
       //fnSistemaOpcion();

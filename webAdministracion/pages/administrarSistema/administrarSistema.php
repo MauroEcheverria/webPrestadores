@@ -33,13 +33,7 @@
               <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Aplicaciones</a>
-            </li>
-            <li class="nav-item" role="presentation">
               <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="true">Roles</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_4-tab" data-bs-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Opciones</a>
             </li>
             <li class="nav-item" role="presentation">
               <a class="nav-link" id="idTogglable_5-tab" data-bs-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Accesos</a>
@@ -58,18 +52,6 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
-              <div class="divPanelTogglable">
-                <div class="toggle_dentro_panel">
-                  
-                  <div class="seccionBtnAccion">
-                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaAplicacion">Crear Aplicacion</button>
-                  </div>
-                  <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
-
-                </div>
-              </div>
-            </div>
             <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
@@ -78,18 +60,6 @@
                     <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear Rol</button>
                   </div>
                   <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
-
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
-              <div class="divPanelTogglable">
-                <div class="toggle_dentro_panel">
-                   
-                  <div class="seccionBtnAccion">
-                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaOpcion">Crear Opcion</button>
-                  </div>
-                  <table id="dtSistemaOpcion" class="cell-border" cellspacing="0" width="100%"></table>
 
                 </div>
               </div>
