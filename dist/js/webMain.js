@@ -34,8 +34,6 @@ function fnSistemaEmpresa() {
         mRender: function (data, type, row) {
           var acciones = '';
           acciones  = '<a class="iconDtSistemaEmpresaModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
-          acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="iconDtSistemaEmpresaFirmaEdit" title="Asignar Firma Electrónica"><i class="fas fa-file-invoice-dollar iconDTicon"></i></i></a>';
           return acciones
         }
       },
@@ -719,18 +717,6 @@ $(document).ready(function() {
       }
     });
   });
-  $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaFirmaEdit', function (e) {
-    e.preventDefault();
-    window.temp_emp_id_empresa_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
-    window.temp_emp_ruc_2 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[1];
-    document.getElementById("formCargaArchivoEmpresa").reset();
-    $('#myModalSistemaEmpresaArchivo').modal('show');
-  });
-  $('#em_archivo_fact_elec').change( function () {
-    if ($("#em_archivo_fact_elec").val() != "") {
-      $('.custom-file-input').next('.form-control-file').addClass("selected").html($("#em_archivo_fact_elec").val());
-    }
-  });
   $('#formSistemaEmpresa').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
@@ -787,49 +773,6 @@ $(document).ready(function() {
         }
       }
     });
-  });
-  $('#formCargaArchivoEmpresa').validator().on('submit', function (e) {
-    if (!e.isDefaultPrevented()) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      var files = $('#em_archivo_fact_elec')[0].files;
-      if(files.length > 0 ){
-        formData.append('em_archivo_fact_elec',files[0]);
-        formData.append('em_pass_fct_elec',$('#em_pass_fct_elec').val());
-        formData.append('emp_id_empresa',temp_emp_id_empresa_2);
-        formData.append('emp_ruc',temp_emp_ruc_2);
-        $.ajax({
-          url: '../../beans/manejoSistema/cargaArchivoEmpresa.php',
-          type: 'POST',
-          data: formData,
-          contentType: false,
-          processData: false,
-          success: function(result){
-            var result = eval('('+result+')');
-            document.getElementById("formCargaArchivoEmpresa").reset();
-            $('.custom-file-input').next('.form-control-file').addClass("selected").html("");
-            $('#myModalSistemaEmpresaArchivo').modal('hide');
-            switch (result.message) {
-              case "saveOK":
-              case "saveError":
-              case "extNoPermitida":
-              case "tamanoNoPermitida":
-              case "noExisteArhivo":
-                dtSistemaEmpresa.ajax.reload();
-                modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-                break;
-              default:
-                $("span#idCodErrorGeneral").empty().prepend("2515");
-                $('#myModalErrorGeneral').modal('show');
-                break;
-            }
-          },
-       });
-      }
-      else{
-        alert("Debe seleccionar un archivo para poder continuar.");
-      }
-    }
   });
 
 });

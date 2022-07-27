@@ -1,20 +1,25 @@
 <?php 
-  function administrarUsuarios($pdo,$dataSesion){ 
+  function registroFirmaEC($pdo,$dataSesion){ 
   include("../../../template/templateHead.php");
   include("../../../template/templateFooter.php");
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
-  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
-  $js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js'.$dataSesion["version_css_js"].'"></script>';
-  $js_dreconstec[] = '<script src="../../../plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
-  $js_dreconstec[] = '<script src="../../../dist/js/webMain.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webRegistroFirmaEC.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
+
+   $sql="SELECT um.usr_correo, CONCAT(um.usr_nombre_1,' ',um.usr_nombre_2,' ',um.usr_apellido_1,' ', um.usr_apellido_2) usr_nom_completos
+          FROM dct_sistema_tbl_usuario um
+          WHERE um.usr_cod_usuario = :usr_cod_usuario;";
+    $query=$pdo->prepare($sql);
+    $query->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);
+    $query->execute();
+    $row = $query->fetch(\PDO::FETCH_ASSOC);
+    
 ?>
 
   <div class="content-wrapper">
@@ -22,222 +27,84 @@
       <div class="container container_main">
         <div class="card">
           <div class="card-header">
-            <span class="panel-title"><b>Administración de Usuarios</b></span>
+            <span class="panel-title"><b>Administración de Firma Electrónica</b></span>
           </div>
           <div class="card-body">
-            <div class="seccionBtnAccion">
-              <button type="button" class="btn btn-success btn-dreconstec" id="btnUserNuevo">Crear Usuario</button>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Firma Registrada</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Registrar Firma</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
+                <div class="divPanelTogglable">
+                  <div class="toggle_dentro_panel">
+
+                   
+                    <h3>Firma Registrada</h3>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
+                <div class="divPanelTogglable">
+                  <div class="toggle_dentro_panel">
+
+                    <form id="formCargaArchivoEmpresa" class="formModalPages" data-toggle="validator" role="form" autocomplete="false" enctype="multipart/form-data">
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label class="control-label">Consideraciones para Carga de Archivo: </label>
+                          <div>
+                            <ul>
+                              <li> Solo formato <code>.p12</code></li>
+                              <li> Tamaño máximo por archivo de 3MB</li>
+                            </ul>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="em_archivo_fact_elec" name="em_archivo_fact_elec" required="">
+                            <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="em_pass_fct_elec" class="control-label">Contraseña Firma Electrónica</label>
+                          <input type="password" class="form-control" id="em_pass_fct_elec" name="em_pass_fct_elec" maxlength="40" required minlength="3">
+                           <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                          <label for="em_pass_fct_recon" class="control-label">Confirmar Contraseña Firma</label>
+                          <input type="password" class="form-control" id="em_pass_fct_recon" name="em_pass_fct_recon" maxlength="40" required minlength="3"
+                          data-match="#em_pass_fct_elec" data-match-error="Las contraseñas no coinciden.">
+                           <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="form-group modal-footer centralFooter">
+                        <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+                      </div>
+                    </form>
+
+
+                  </div>
+                </div>
+              </div>
             </div>
-            <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
+
+
+
+
+
+
+                      
+
+
+
           </div>
         </div>
       </div>
     </section>
-  </div>
-    
-  <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modalLogin">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <div class="col-md-1">
-              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
-            </div>
-            <div class="col-md-11">
-              <h4 class="modal-title">Nuevo Usuario</h4>
-            </div>
-          </div>
-        </div>
-        <form id="formUserNew" class="formModalPages" data-toggle="validator" role="form">
-          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-          <div class="modal-body">
-            <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
-              El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-            </div>
-
-            <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
-              La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="usr_cod_usuario" class="control-label">Cédula</label>
-                  <input type="text" class="form-control" id="usr_cod_usuario" name="usr_cod_usuario" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_nombre_1" class="control-label">Primer Nombre</label>
-                  <input type="text" class="form-control" id="usr_nombre_1" name="usr_nombre_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_apellido_1" class="control-label">Primer Apellido</label>
-                  <input type="text" class="form-control" id="usr_apellido_1" name="usr_apellido_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_id_rol" class="control-label">Tipo Rol</label>
-                  <select name="usr_id_rol" id="usr_id_rol" class="form-control" required style="width: 100%;"></select>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="usr_correo" class="control-label">Correo</label>
-                  <input type="email" class="form-control" id="usr_correo" name="usr_correo" maxlength="60" 
-                  data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_nombre_2" class="control-label">Segundo Nombre</label>
-                  <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" minlength="2" required oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_apellido_2" class="control-label">Segundo Apellido</label>
-                  <input type="text" class="form-control" id="usr_apellido_2" name="usr_apellido_2" maxlength="15" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="usr_id_empresa" class="control-label">Empresa</label>
-                  <select name="usr_id_empresa" id="usr_id_empresa" class="form-control" required style="width: 100%;"></select>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer centralFooter">
-            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="myModalEditUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modalLogin">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <div class="col-md-1">
-              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
-            </div>
-            <div class="col-md-11">
-              <h4 class="modal-title">Editar Usuario</h4>
-            </div>
-          </div>
-        </div>
-        <form id="formUserMod" class="formModalPages" data-toggle="validator" role="form">
-          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-          <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistradoEdit">
-            El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-          </div>
-          <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistradoEdit">
-            La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="" class="control-label">Cédula</label>
-              <h3 class="editCedula adminRoles_2"></h3>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="edit_usr_nombre_1" class="control-label">Primer Nombre</label>
-                  <input type="text" class="form-control" id="edit_usr_nombre_1" name="edit_usr_nombre_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="edit_usr_apellido_1" class="control-label">Primer Apellido</label>
-                  <input type="text" class="form-control" id="edit_usr_apellido_1" name="edit_usr_apellido_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group adminUser_2">
-                  <label for="edit_usr_id_rol" class="control-label">Tipo Rol</label>
-                  <select name="edit_usr_id_rol" id="edit_usr_id_rol" class="form-control" required style="width: 100%;">
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="edit_usr_estado" class="control-label">Estado</label>
-                  <select name="edit_usr_estado" id="edit_usr_estado" class="form-control" required>
-                    <option value="">Selecione una opción</option>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group labelUser">
-                  <label for="edit_usr_nombre_2" class="control-label">Segundo Nombre</label>
-                  <input type="text" class="form-control" id="edit_usr_nombre_2" name="edit_usr_nombre_2" maxlength="15" required minlength="2" oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group labelUser">
-                  <label for="edit_usr_apellido_2" class="control-label">Segundo Apellido</label>
-                  <input type="text" class="form-control" id="edit_usr_apellido_2" name="edit_usr_apellido_2" maxlength="15" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="edit_usr_id_empresa" class="control-label">Empresa</label>
-                  <select name="edit_usr_id_empresa" id="edit_usr_id_empresa" class="form-control" required style="width: 100%;"></select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="edit_usr_correo" class="control-label">Correo Electrónico</label>
-                  <input type="email" class="form-control" id="edit_usr_correo" name="edit_usr_correo" maxlength="60" 
-                  required oninput="this.value = this.value.toLowerCase()" minlength="6" data-error="Formato de Correo inválido.">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer centralFooter">
-            <div class="form-group">
-              <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="myModalPassUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <div class="col-md-1">
-              <img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">
-            </div>
-            <div class="col-md-11">
-              <h4 class="modal-title">Resetear Contraseña</h4>
-            </div>
-          </div>
-        </div>
-        <form id="formUserPass" class="formModalPages" data-toggle="validator" role="form">
-          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-          <div class="modal-body">
-                <div class="form-group">
-                  <label for="" class="control-label">Cédula:</label>
-                  <h3 class="passCedula adminRoles_2"></h3>
-                </div>
-                <div class="form-group">
-                  <label for="" class="control-label">Nombres:</label>
-                  <h3 class="passNombres adminRoles_2"></h3>
-                </div>
-                <div><span>La contraseña se reseteará y será su mismo número de cédula. Al inicio de sesión este le pedirá realizar el respectivo cambio de contraseña para así personalizarlo a su preferencia.</span></div><br>
-          </div>
-          <div class="modal-footer centralFooter">
-            <div class="form-group">
-              <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-warning btn-dreconstec">Resetear</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
   </div>
 <?php 
   modalViews();

@@ -27,7 +27,7 @@
 
           $temp_nombre_archivo = $_POST["emp_ruc"].".p12";
           //$location = __DIR__."../../../uploadP12/".$temp_nombre_archivo;
-          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\uploadP12\\\\".$temp_nombre_archivo;
+          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\webPosOperaciones\\\\uploadP12\\\\".$temp_nombre_archivo;
 
           $sql_up="UPDATE dct_sistema_tbl_empresa 
                   SET em_archivo_fact_elec=:em_archivo_fact_elec,em_pass_fct_elec=:em_pass_fct_elec,
