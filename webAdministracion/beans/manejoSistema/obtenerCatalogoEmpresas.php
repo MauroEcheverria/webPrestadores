@@ -11,7 +11,7 @@
     $sql_1="SELECT ctg_id_catalogo,ctg_descripcion 
           FROM dct_sistema_tbl_catalogo
           WHERE ctg_estado = 1
-          AND ctg_tipo = 'EMPRE';";
+          AND ctg_tipo = 'POS';";
     $query_1=$pdo->prepare($sql_1);
     $query_1->execute();
     $row_1 = $query_1->fetchAll();
