@@ -1,5 +1,23 @@
+function fnContenidoFirmaEC () {
+  $.ajax({
+    url: '../../beans/manejoFirmaEC/obtenerContenidoFirmaEC.php',
+    type: 'POST',
+    dataType: 'html',
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          $("#idContenidoFirmaEC").empty().prepend(result.contenidoFirmaEC);
+          break;
+        default:
+          $("span#idCodErrorGeneral").empty().prepend("2515");
+          $('#myModalErrorGeneral').modal('show');
+          break;
+      }
+    }
+  });
+}
 $(document).ready(function() {
-
 	$('#formCargaArchivoEmpresa').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
@@ -45,5 +63,11 @@ $(document).ready(function() {
       $('.custom-file-input').next('.form-control-file').addClass("selected").html($("#em_archivo_fact_elec").val());
     }
   });
-
+  fnContenidoFirmaEC();
+  $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href")
+    if (target == "#idTogglable_1") {
+      fnContenidoFirmaEC();
+    }
+  });
 });

@@ -151,7 +151,7 @@ $(document).ready(function() {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       $.ajax({
-        url: '../../beans/manejoSistema/saveRestarPass.php',
+        url: '../../beans/manejoSistema/guardarRestarPass.php',
         type: 'POST',
         dataType: 'html',
         data:$("#formReestaPass").serialize(),
@@ -206,7 +206,7 @@ $(document).ready(function() {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
         $.ajax({
-          url: '../../beans/manejoSistema/saveTokenRestarPass.php',
+          url: '../../beans/manejoSistema/guardarTokenRestarPass.php',
           type: 'POST',
           dataType: 'html',
           data:$("#formTokenReestaPass").serialize(),

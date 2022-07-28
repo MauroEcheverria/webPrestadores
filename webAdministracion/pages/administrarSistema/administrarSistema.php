@@ -33,84 +33,69 @@
               <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="true">Roles</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_5-tab" data-bs-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Accesos</a>
+              <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="true">Accesos</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
-
                   <div class="seccionBtnAccion">
                     <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresa">Crear Empresa</button>
                   </div>
                   <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
-
                 </div>
               </div>
             </div>
             <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
-
-                  <div class="seccionBtnAccion">
-                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear Rol</button>
-                  </div>
-                  <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
-
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_5-tab">
-              <div class="divPanelTogglable">
-                <div class="toggle_dentro_panel">
-                  
-                  <div class="form-group">
-                    <select class="form-control" name= "sys_selec_roles" id="sys_selec_roles" data-placeholder="Lista de Roles">
-                    </select>
-                  </div>
-                  <div id="panelAdminRoles" class="criteriosOcultar">
-                    <span class="panel-title">Roles - Aplicativos</span>
-                    <div>
-                      <button type="button" class="btn btn-success btn-dreconstec" id="sys_btn_asignar_app">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Asignar
-                      </button>
-                      <button type="button" class="btn btn-success btn-dreconstec" id="sys_btn_desvincular_app" disabled="">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Desvincular
-                      </button>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="centrarContent">
+                        <strong>Creación de Roles</strong>
+                      </div>
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
+                      </div>
+                      <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
                     </div>
-                    <table id="sys_dt_roles_app" class="cell-border" cellspacing="0" width="100%">  
-                      <thead>
-                        <tr>
-                          <th><div class="tituloColumnasDT">Cod. Aplicativo</div></th>
-                          <th><div class="tituloColumnasDT">Descripción</div></th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <hr>
-                    <span class="panel-title">Roles - Opciones</span>
-                    <div>
-                      <button type="button" class="btn btn-success btn-dreconstec" id="sys_btn_asignar_opt">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Asignar
-                      </button>
-                      <button type="button" class="btn btn-success btn-dreconstec" id="sys_btn_desvincular_opt" disabled="">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Desvincular
-                      </button>
+                    <div class="col-md-6">
+                      <div class="centrarContent">
+                        <strong>Vinculo Empresa - Aplicativo</strong>
+                      </div>
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
+                      </div>
+                      <table id="dtSistemaEmpresaAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
                     </div>
-                    <table id="sys_dt_roles_option" class="cell-border" cellspacing="0" width="100%">  
-                      <thead>
-                        <tr>
-                          <th><div class="tituloColumnasDT">Cod. Opción</div></th>
-                          <th><div class="tituloColumnasDT">Aplicativo</div></th>
-                          <th><div class="tituloColumnasDT">Descripción</div></th>
-                        </tr>
-                      </thead>
-                    </table> 
                   </div>
-
+                  <div>
+                    <strong>Seleccion de Rol</strong>
+                    <div>
+                      <select class="form-control" name= "sys_selec_roles" id="sys_selec_roles" data-placeholder="Lista de Roles"></select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="centrarContent">
+                        <strong>Vinculo Rol - Aplicativo</strong>
+                      </div>
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
+                      </div>
+                      <table id="dtSistemaRolAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="centrarContent">
+                        <strong>Vinculo Rol - Opción</strong>
+                      </div>
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
+                      </div>
+                      <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

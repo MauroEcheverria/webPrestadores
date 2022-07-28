@@ -568,7 +568,7 @@ $(document).ready(function() {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       $.ajax({
-        url: '../../beans/manejoSistema/saveRoleApp.php',
+        url: '../../beans/manejoSistema/guardarRolAplicativo.php',
         type: 'POST',
         dataType: 'html',
         data:$("#formSysApp").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),
@@ -610,7 +610,7 @@ $(document).ready(function() {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
       $.ajax({
-        url: '../../beans/manejoSistema/saveRoleOption.php',
+        url: '../../beans/manejoSistema/guardarRolOpcion.php',
         type: 'POST',
         dataType: 'html',
         data:$("#formSysOption").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),

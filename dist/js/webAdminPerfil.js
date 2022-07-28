@@ -12,7 +12,7 @@ $(document).ready(function() {
     endDate: '+0d',
   });
   $.ajax({
-    url: '../../beans/manejoSistema/putGetProvincia.php',
+    url: '../../beans/manejoSistema/obtenerProvincia.php',
     type: 'POST',
     dataType: 'html',
     success: function(result){
@@ -27,7 +27,7 @@ $(document).ready(function() {
         $('#adi_provincia').val(result.data_row["adi_provincia"]).trigger("change");
         $params = {'adi_provincia':$('#adi_provincia').val(),'adi_canton':result.data_row["adi_canton"],'adi_parroquia':result.data_row["adi_parroquia"]};
         $.ajax({
-          url: '../../beans/manejoSistema/putGetCanton.php',
+          url: '../../beans/manejoSistema/obtenerCanton.php',
           type: 'POST',
           dataType: 'html',
           data:$params,
@@ -39,7 +39,7 @@ $(document).ready(function() {
                 $('#adi_canton').val(result.adi_canton).trigger("change");
                 $params = {'adi_canton':$('#adi_canton').val(), 'adi_provincia':$('#adi_provincia').val(),'adi_parroquia':result.adi_parroquia};
                   $.ajax({
-                    url: '../../beans/manejoSistema/putGetParroquia.php',
+                    url: '../../beans/manejoSistema/obtenerParroquia.php',
                     type: 'POST',
                     dataType: 'html',
                     data:$params,
@@ -80,7 +80,7 @@ $(document).ready(function() {
   $('#adi_provincia').change( function () {
     $params = {'adi_provincia':$('#adi_provincia').val()};
     $.ajax({
-      url: '../../beans/manejoSistema/putGetCanton.php',
+      url: '../../beans/manejoSistema/obtenerCanton.php',
       type: 'POST',
       dataType: 'html',
       data:$params,
@@ -101,7 +101,7 @@ $(document).ready(function() {
   $('#adi_canton').change( function () {
     $params = {'adi_canton':$('#adi_canton').val(), 'adi_provincia':$('#adi_provincia').val()};
     $.ajax({
-      url: '../../beans/manejoSistema/putGetParroquia.php',
+      url: '../../beans/manejoSistema/obtenerParroquia.php',
       type: 'POST',
       dataType: 'html',
       data:$params,

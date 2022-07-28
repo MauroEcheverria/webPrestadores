@@ -7,7 +7,6 @@
       $database = 'bd_prestadores';
       $user = 'root';
       $password = 'Dreconstec2022';
-      //$password = 'mauro';
       
       /*
       $database = 'dreconst_prestadores_iess';

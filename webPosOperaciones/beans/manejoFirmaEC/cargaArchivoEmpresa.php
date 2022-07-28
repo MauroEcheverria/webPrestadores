@@ -20,12 +20,25 @@
       4 MB-> BIT =  4194304
       5 MB-> BIT =  5242880
       */
-      if ($_FILES["em_archivo_fact_elec"]["size"] <= 3145728) {
+      if ($_FILES["em_archivo_fact_elec"]["size"] <= 2097152) {
         $valid_extensions = array("P12","p12");
         $imageFileType = strtolower(pathinfo($_FILES['em_archivo_fact_elec']['name'],PATHINFO_EXTENSION));
         if(in_array(strtolower($imageFileType), $valid_extensions)) {
 
-          $temp_nombre_archivo = $_POST["emp_ruc"].".p12";
+          
+
+          $sql="SELECT emp_id_empresa, emp_ruc 
+            FROM dct_sistema_tbl_empresa 
+            WHERE emp_id_empresa = 
+            (SELECT usr_id_empresa 
+              FROM dct_sistema_tbl_usuario 
+              WHERE usr_cod_usuario = :usr_cod_usuario);";
+          $query=$pdo->prepare($sql);
+          $query->bindValue(':usr_cod_usuario',$dataSesion["cod_system_user"],PDO::PARAM_INT);
+          $query->execute();
+          $row = $query->fetch(\PDO::FETCH_ASSOC);
+
+          $temp_nombre_archivo = $row["emp_ruc"].".p12";
           //$location = __DIR__."../../../uploadP12/".$temp_nombre_archivo;
           $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\webPosOperaciones\\\\uploadP12\\\\".$temp_nombre_archivo;
 
@@ -35,7 +48,7 @@
                   em_fecha_modificacion=now(),em_ip_modificacion=:em_ip_modificacion 
                   WHERE emp_id_empresa = :emp_id_empresa";
           $query_up=$pdo->prepare($sql_up);
-          $query_up->bindValue(':emp_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["emp_id_empresa"]),PDO::PARAM_INT);
+          $query_up->bindValue(':emp_id_empresa',$row["emp_id_empresa"],PDO::PARAM_INT);
           $query_up->bindValue(':em_archivo_fact_elec',cleanData("siLimite",17,"noMayuscula",$temp_nombre_archivo),PDO::PARAM_STR);
           $query_up->bindValue(':em_pass_fct_elec',cleanData("siLimite",40,"noMayuscula",$_POST["em_pass_fct_elec"]),PDO::PARAM_STR);
           $query_up->bindValue(':em_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 

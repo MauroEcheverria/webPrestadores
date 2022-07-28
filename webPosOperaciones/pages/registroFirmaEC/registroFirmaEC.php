@@ -11,15 +11,6 @@
   $js_dreconstec[] = '<script src="../../../dist/js/webRegistroFirmaEC.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
-
-   $sql="SELECT um.usr_correo, CONCAT(um.usr_nombre_1,' ',um.usr_nombre_2,' ',um.usr_apellido_1,' ', um.usr_apellido_2) usr_nom_completos
-          FROM dct_sistema_tbl_usuario um
-          WHERE um.usr_cod_usuario = :usr_cod_usuario;";
-    $query=$pdo->prepare($sql);
-    $query->bindValue(':usr_cod_usuario',$cedOlvPass,PDO::PARAM_INT);
-    $query->execute();
-    $row = $query->fetch(\PDO::FETCH_ASSOC);
-    
 ?>
 
   <div class="content-wrapper">
@@ -42,10 +33,7 @@
               <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
-
-                   
-                    <h3>Firma Registrada</h3>
-
+                    <div id="idContenidoFirmaEC"></div>
                   </div>
                 </div>
               </div>
@@ -56,11 +44,11 @@
                     <form id="formCargaArchivoEmpresa" class="formModalPages" data-toggle="validator" role="form" autocomplete="false" enctype="multipart/form-data">
                       <div class="modal-body">
                         <div class="form-group">
-                          <label class="control-label">Consideraciones para Carga de Archivo: </label>
+                          <label class="control-label">Consideraciones para carga de archivo: </label>
                           <div>
                             <ul>
                               <li> Solo formato <code>.p12</code></li>
-                              <li> Tamaño máximo por archivo de 3MB</li>
+                              <li> Tamaño máximo por archivo de 2MB</li>
                             </ul>
                           </div>
                           <div class="custom-file">
