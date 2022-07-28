@@ -33,7 +33,22 @@
               <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="true">Accesos</a>
+              <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Aplicaciones</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Opciones</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="idTogglable_4-tab" data-bs-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Roles</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="idTogglable_5-tab" data-bs-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Empresa - Aplicativo</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="idTogglable_6-tab" data-bs-toggle="tab" href="#idTogglable_6" role="tab" aria-controls="idTogglable_6" aria-selected="true">Rol - Aplicativo</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="idTogglable_7-tab" data-bs-toggle="tab" href="#idTogglable_7" role="tab" aria-controls="idTogglable_7" aria-selected="true">Rol - Opción</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -41,61 +56,67 @@
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
                   <div class="seccionBtnAccion">
-                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresa">Crear Empresa</button>
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresa">Crear</button>
                   </div>
                   <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
+              <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                  <div class="seccionBtnAccion">
+                  </div>
+                  <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
                 </div>
               </div>
             </div>
             <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="centrarContent">
-                        <strong>Creación de Roles</strong>
-                      </div>
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
-                      </div>
-                      <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="centrarContent">
-                        <strong>Vinculo Empresa - Aplicativo</strong>
-                      </div>
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
-                      </div>
-                      <table id="dtSistemaEmpresaAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
+                  <div class="seccionBtnAccion">
                   </div>
-                  <div>
-                    <strong>Seleccion de Rol</strong>
-                    <div>
-                      <select class="form-control" name= "sys_selec_roles" id="sys_selec_roles" data-placeholder="Lista de Roles"></select>
-                    </div>
+                  <table id="dtSistemaOpcion" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
+              <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                  <div class="seccionBtnAccion">
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="centrarContent">
-                        <strong>Vinculo Rol - Aplicativo</strong>
-                      </div>
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
-                      </div>
-                      <table id="dtSistemaRolAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="centrarContent">
-                        <strong>Vinculo Rol - Opción</strong>
-                      </div>
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
-                      </div>
-                      <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
+                  <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_5-tab">
+              <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                  <div class="seccionBtnAccion">
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresaAplicativo">Crear</button>
                   </div>
+                  <table id="dtSistemaEmpresaAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_6" role="tabpanel" aria-labelledby="idTogglable_6-tab">
+              <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                  <div class="seccionBtnAccion">
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolAplicativo">Crear</button>
+                  </div>
+                  <table id="dtSistemaRolAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_7" role="tabpanel" aria-labelledby="idTogglable_7-tab">
+              <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                  <div class="seccionBtnAccion">
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoSistemaRolOpcion">Crear</button>
+                  </div>
+                  <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
                 </div>
               </div>
             </div>
@@ -104,76 +125,6 @@
       </div>
     </div>
   </section>
-</div>
-<div class="modal fade" id="myModalSysRoleApp" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="row">
-          <div class="col-md-1">
-            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
-          </div>
-          <div class="col-md-11">
-            <h4 class="modal-title">Asignación de App según Rol</h4>
-          </div>
-        </div>
-      </div>
-      <form id="formSysApp" class="formModalPages" data-toggle="validator" role="form">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="" class="control-label">Rol Seleccionado:</label>
-            <h3 class="passSysRoles adminRoles_2"></h3>
-          </div>
-          <div class="form-group">
-            <select class="form-control select2" name= "sys_selec_app[]" id="sys_selec_app" data-placeholder="Seleccione una App" multiple="multiple" required="" style="width: 100%;">
-            </select>
-            <div class="help-block with-errors"></div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="form-group">
-            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success btn-dreconstec">Asignar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="myModalSysRoleOpt" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="row">
-          <div class="col-md-1">
-            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
-          </div>
-          <div class="col-md-11">
-            <h4 class="modal-title">Asignación de Opciones según Rol</h4>
-          </div>
-        </div>
-      </div>
-      <form id="formSysOption" class="formModalPages" data-toggle="validator" role="form">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="" class="control-label">Rol Seleccionado:</label>
-            <h3 class="passSysRoles adminRoles_2"></h3>
-          </div>
-          <div class="form-group">
-            <select class="form-control select2" name= "sys_selec_option[]" id="sys_selec_option" data-placeholder="Seleccione una App" multiple="multiple" required="" style="width: 100%;">
-            </select>
-            <div class="help-block with-errors"></div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="form-group">
-            <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success btn-dreconstec">Asignar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>
 <div class="modal fade" id="myModalSistemaEmpresa" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modalLogin">
@@ -190,7 +141,7 @@
       </div>
       <form id="formSistemaEmpresa" class="formModalPages" data-toggle="validator" role="form">
         <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-        <input type="hidden" name="tipo_form" id="tipo_form">
+        <input type="hidden" name="tipo_form_sist_empre" id="tipo_form_sist_empre">
         <div class="modal-body">
           <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
             El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
@@ -253,6 +204,262 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModalSistemaRol" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Roles</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaRol" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_rol" id="tipo_form_sist_rol">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="rol_rol " class="control-label">Rol</label>
+            <input type="text" class="form-control" id="rol_rol" name="rol_rol" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="rol_estado" class="control-label">Estado</label>
+            <select name="rol_estado" id="rol_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaAplicacion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Aplicativo</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaAplicacion" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_apl" id="tipo_form_sist_apl">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="apl_aplicacion " class="control-label">Aplicativo</label>
+            <input type="text" class="form-control" id="apl_aplicacion" name="apl_aplicacion" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="apl_estado" class="control-label">Estado</label>
+            <select name="apl_estado" id="apl_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaOpcion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Opciones</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaOpcion" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_opc" id="tipo_form_sist_opc">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="opc_opcion " class="control-label">Opción</label>
+            <input type="text" class="form-control" id="opc_opcion" name="opc_opcion" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="opc_estado" class="control-label">Estado</label>
+            <select name="opc_estado" id="opc_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaEmpresaAplicativo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Empresa Aplicativo</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaEmpresaAplicativo" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_emp_apl" id="tipo_form_sist_emp_apl">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="emp_empresa_1" class="control-label">Empresa</label>
+            <input type="text" class="form-control" id="emp_empresa_1" name="emp_empresa_1" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="apl_aplicacion_1" class="control-label">Aplicación</label>
+            <input type="text" class="form-control" id="apl_aplicacion_1" name="apl_aplicacion_1" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="ape_estado" class="control-label">Estado</label>
+            <select name="ape_estado" id="ape_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaRolAplicativo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Rol Aplicativo</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaRolAplicativo" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_rol_apl" id="tipo_form_sist_rol_apl">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="rol_rol_2" class="control-label">Rol</label>
+            <input type="text" class="form-control" id="rol_rol_2" name="rol_rol_2" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="apl_aplicacion_2" class="control-label">Aplicación</label>
+            <input type="text" class="form-control" id="apl_aplicacion_2" name="apl_aplicacion_2" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="rla_estado" class="control-label">Estado</label>
+            <select name="rla_estado" id="rla_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalSistemaRolOpcion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Gestión de Rol Opción</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formSistemaRolOpcion" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <input type="hidden" name="tipo_form_sist_rol_opc" id="tipo_form_sist_rol_opc">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="rol_rol_3" class="control-label">Rol</label>
+            <input type="text" class="form-control" id="rol_rol_3" name="rol_rol_3" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="opc_opcion_3" class="control-label">Opción</label>
+            <input type="text" class="form-control" id="opc_opcion_3" name="opc_opcion_3" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
+             <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="rlo_estado" class="control-label">Estado</label>
+            <select name="rlo_estado" id="rlo_estado" class="form-control" required>
+              <option value="">Selecione una opción</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

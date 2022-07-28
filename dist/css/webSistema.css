@@ -104,3 +104,7 @@
 .formSelect2,.select2-container {
   width: 100% !important;
 }
+.cursorPointerDT {
+  cursor: pointer;
+  cursor: hand;
+}

@@ -1,4 +1,5 @@
 <?php
+  require_once("../../../controller/sesion.class.php");
   require_once("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Connection.php");
   require_once("../../../dctDatabase/Parameter.php");
@@ -6,24 +7,25 @@
   try {
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
-    $pdo->beginTransaction();
-    $sql="SELECT ro.rlo_id_opcion, app.apl_aplicacion, opt.opc_opcion
-          FROM dct_sistema_tbl_rol_opcion ro, dct_sistema_tbl_opcion opt, dct_sistema_tbl_aplicacion app
-          WHERE ro.rlo_id_opcion = opt.opc_id_opcion
-          AND opt.opc_id_aplicacion = app.apl_id_aplicacion
-          AND ro.rlo_id_rol = :rlo_id_rol
-          AND ro.rlo_estado = 1
-          ORDER BY 2,3;";
+    $sql="SELECT 
+          ape_id_empresa, 
+          ape_id_aplicacion,
+          (SELECT emp.emp_empresa FROM dct_sistema_tbl_empresa emp WHERE emp.emp_id_empresa = ape_id_empresa) emp_empresa,
+          (SELECT apl.apl_aplicacion FROM dct_sistema_tbl_aplicacion apl WHERE apl.apl_id_aplicacion  = ape_id_aplicacion) apl_aplicacion,
+          ape_estado
+          FROM dct_sistema_tbl_aplicacion_empresa;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':rlo_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
     $query->execute();
     $row = $query->fetchAll();
     $return_array = array();
 		$return= array();
 		foreach ($row as $row) {
-			$return_array[0] = $row["rlo_id_opcion"];
-			$return_array[1] = $row["apl_aplicacion"];
-      $return_array[2] = $row["opc_opcion"];
+			$return_array[0] = $row["ape_id_empresa"];
+			$return_array[1] = $row["ape_id_aplicacion"];
+			$return_array[2] = $row["emp_empresa"];
+      $return_array[3] = $row["apl_aplicacion"];
+      $return_array[4] = $row["ape_estado"];
+      $return_array[5] = null;
 			array_push($return,$return_array);
 		}
 		$return = array(

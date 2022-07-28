@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2022 a las 07:10:34
+-- Tiempo de generación: 28-07-2022 a las 23:41:37
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1457,16 +1457,22 @@ CREATE TABLE `dct_sistema_tbl_aplicacion` (
   `apl_nom_superior` varchar(40) NOT NULL,
   `apl_nom_inferior` varchar(40) NOT NULL,
   `apl_id_htm` varchar(20) NOT NULL,
-  `apl_id_imagen` varchar(50) NOT NULL
+  `apl_id_imagen` varchar(50) NOT NULL,
+  `apl_usuario_creacion` varchar(13) DEFAULT NULL,
+  `apl_usuario_modificacion` varchar(13) DEFAULT NULL,
+  `apl_fecha_creacion` timestamp NULL DEFAULT NULL,
+  `apl_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `apl_ip_creacion` varchar(100) DEFAULT NULL,
+  `apl_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_aplicacion`
 --
 
-INSERT INTO `dct_sistema_tbl_aplicacion` (`apl_id_aplicacion`, `apl_aplicacion`, `apl_ruta`, `apl_estado`, `apl_nom_superior`, `apl_nom_inferior`, `apl_id_htm`, `apl_id_imagen`) VALUES
-(1, 'Administración', '../../../webAdministracion', 1, 'Administración', 'Web', 'indexLinkTics', 'fa fa-laptop'),
-(2, 'POS Operaciones', '../../../webPosOperaciones', 1, 'POS', 'Operacionoes', 'indexLinkFacturacion', 'fa fa-laptop');
+INSERT INTO `dct_sistema_tbl_aplicacion` (`apl_id_aplicacion`, `apl_aplicacion`, `apl_ruta`, `apl_estado`, `apl_nom_superior`, `apl_nom_inferior`, `apl_id_htm`, `apl_id_imagen`, `apl_usuario_creacion`, `apl_usuario_modificacion`, `apl_fecha_creacion`, `apl_fecha_modificacion`, `apl_ip_creacion`, `apl_ip_modificacion`) VALUES
+(1, 'Administración', '../../../webAdministracion', 1, 'Administración', 'Web', 'indexLinkTics', 'fa fa-laptop', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'POS Operaciones', '../../../webPosOperaciones', 1, 'POS', 'Operacionoes', 'indexLinkFacturacion', 'fa fa-laptop', NULL, '0919664854', NULL, '2022-07-28 21:20:48', NULL, '::1');
 
 -- --------------------------------------------------------
 
@@ -1492,7 +1498,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
 
 INSERT INTO `dct_sistema_tbl_aplicacion_empresa` (`ape_id_aplicacion`, `ape_id_empresa`, `ape_estado`, `ape_usuario_creacion`, `ape_usuario_modificacion`, `ape_fecha_creacion`, `ape_fecha_modificacion`, `ape_ip_creacion`, `ape_ip_modificacion`) VALUES
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(2, 1, 1, NULL, '0919664854', NULL, '2022-07-28 20:22:59', NULL, '::1');
 
 -- --------------------------------------------------------
 
@@ -1579,7 +1585,7 @@ CREATE TABLE `dct_sistema_tbl_empresa` (
 
 INSERT INTO `dct_sistema_tbl_empresa` (`emp_id_empresa`, `emp_empresa`, `emp_ruc`, `emp_estado`, `emp_vigencia_desde`, `emp_vigencia_hasta`, `em_archivo_fact_elec`, `em_pass_fct_elec`, `ctg_id_catalogo`, `em_usuario_creacion`, `em_usuario_modificacion`, `em_fecha_creacion`, `em_fecha_modificacion`, `em_ip_creacion`, `em_ip_modificacion`) VALUES
 (1, 'DRECONSTEC', '0919664854001', 1, '2022-07-25', '2032-07-31', '0919664854001.p12', '123', 5, NULL, '0919664854', NULL, '2022-07-28 04:38:24', NULL, '::1'),
-(4, '24234324', '4556456456464', 1, '2022-07-19', '2022-08-31', NULL, NULL, 12, '0919664854', '0919664854', '2022-07-28 04:36:12', '2022-07-28 04:36:22', '::1', '::1');
+(4, 'UROCORP', '4556456456464', 1, '2022-07-19', '2022-08-31', NULL, NULL, 12, '0919664854', '0919664854', '2022-07-28 04:36:12', '2022-07-28 19:30:30', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -1593,26 +1599,32 @@ CREATE TABLE `dct_sistema_tbl_opcion` (
   `opc_estado` tinyint(1) NOT NULL,
   `opc_ruta` varchar(50) NOT NULL,
   `opc_id_aplicacion` int(11) NOT NULL,
-  `opc_orden` int(11) NOT NULL
+  `opc_orden` int(11) NOT NULL,
+  `opc_usuario_creacion` varchar(13) DEFAULT NULL,
+  `opc_usuario_modificacion` varchar(13) DEFAULT NULL,
+  `opc_fecha_creacion` timestamp NULL DEFAULT NULL,
+  `opc_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `opc_ip_creacion` varchar(100) DEFAULT NULL,
+  `opc_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_opcion`
 --
 
-INSERT INTO `dct_sistema_tbl_opcion` (`opc_id_opcion`, `opc_opcion`, `opc_estado`, `opc_ruta`, `opc_id_aplicacion`, `opc_orden`) VALUES
-(1, 'Bienvenido', 1, '/pages/principal', 1, 1),
-(2, 'Usuarios', 1, '/pages/administrarUsuarios', 1, 2),
-(3, 'Sistema', 1, '/pages/administrarSistema', 1, 3),
-(4, 'Perfíl', 1, '/pages/administrarPerfil', 1, 4),
-(5, 'Principal', 1, '/pages/principal', 2, 1),
-(6, 'Transacciones', 1, '/pages/transacciones', 2, 2),
-(7, 'Arqueo de Caja', 1, '/pages/arqueoCaja', 2, 5),
-(8, 'Apertura de Caja', 1, '/pages/aperturaCaja', 2, 3),
-(9, 'Cierre de Caja', 1, '/pages/cierreCaja', 2, 4),
-(10, 'Clientes', 1, '/pages/clientes', 2, 6),
-(11, 'Fidelización', 1, '/pages/fidelizacion', 2, 7),
-(12, 'Registro FirmaEC', 1, '/pages/registroFirmaEC', 2, 8);
+INSERT INTO `dct_sistema_tbl_opcion` (`opc_id_opcion`, `opc_opcion`, `opc_estado`, `opc_ruta`, `opc_id_aplicacion`, `opc_orden`, `opc_usuario_creacion`, `opc_usuario_modificacion`, `opc_fecha_creacion`, `opc_fecha_modificacion`, `opc_ip_creacion`, `opc_ip_modificacion`) VALUES
+(1, 'Bienvenido', 1, '/pages/principal', 1, 1, NULL, '0919664854', NULL, '2022-07-28 20:05:06', NULL, '::1'),
+(2, 'Usuarios', 1, '/pages/administrarUsuarios', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Sistema', 1, '/pages/administrarSistema', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Perfíl', 1, '/pages/administrarPerfil', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Principal', 1, '/pages/principal', 2, 1, NULL, '0919664854', NULL, '2022-07-28 21:21:01', NULL, '::1'),
+(6, 'Transacciones', 1, '/pages/transacciones', 2, 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Arqueo de Caja', 1, '/pages/arqueoCaja', 2, 5, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Apertura de Caja', 1, '/pages/aperturaCaja', 2, 3, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Cierre de Caja', 1, '/pages/cierreCaja', 2, 4, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Clientes', 1, '/pages/clientes', 2, 6, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 'Fidelización', 1, '/pages/fidelizacion', 2, 7, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'Registro FirmaEC', 1, '/pages/registroFirmaEC', 2, 8, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1637,10 +1649,8 @@ CREATE TABLE `dct_sistema_tbl_rol` (
 --
 
 INSERT INTO `dct_sistema_tbl_rol` (`rol_id_rol`, `rol_rol`, `rol_estado`, `rol_usuario_creacion`, `rol_usuario_modificacion`, `rol_fecha_creacion`, `rol_fecha_modificacion`, `rol_ip_creacion`, `rol_ip_modificacion`) VALUES
-(1, 'Developer', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Administrador', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Ventas', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'Reportes', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'DEVELOPER', 1, NULL, '0919664854', NULL, '2022-07-28 14:50:22', NULL, '::1'),
+(9, 'POS - ADMINISTRACION', 1, '0919664854', '0919664854', '2022-07-28 14:51:07', '2022-07-28 21:21:22', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -1666,7 +1676,7 @@ CREATE TABLE `dct_sistema_tbl_rol_aplicacion` (
 
 INSERT INTO `dct_sistema_tbl_rol_aplicacion` (`rla_id_rol`, `rla_id_aplicacion`, `rla_estado`, `rla_usuario_creacion`, `rla_usuario_modificacion`, `rla_fecha_creacion`, `rla_fecha_modificacion`, `rla_ip_creacion`, `rla_ip_modificacion`) VALUES
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 2, 1, NULL, '0919664854', NULL, '2022-07-28 20:31:00', NULL, '::1');
 
 -- --------------------------------------------------------
 
@@ -1691,7 +1701,7 @@ CREATE TABLE `dct_sistema_tbl_rol_opcion` (
 --
 
 INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id_rol`, `rlo_id_opcion`, `rlo_estado`, `rlo_usuario_creacion`, `rlo_usuario_modificacion`, `rlo_fecha_creacion`, `rlo_fecha_modificacion`, `rlo_ip_creacion`, `rlo_ip_modificacion`) VALUES
-(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 1, 1, NULL, '0919664854', NULL, '2022-07-28 21:18:15', NULL, '::1'),
 (1, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 4, 1, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1756,7 +1766,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-28 05:01:12', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, '2022-07-22', 0, 0, '2022-07-27', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-28 21:38:48', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, '2022-07-22', 0, 0, '2022-07-28', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('1308041134001', 'MERY', 'JAZMIN', 'REINA', 'CEVALLOS', 'dFRhNUVWRHFGaVBBVER4N2g4TnI0UllEaHdkZG9nV0oxWmRRa1dOMFZmK0wwbWpGRWxkYzROaVRyNWNYcEZUUQ==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 3, 1, 1, '2022-07-26', 0, 1, NULL, '0919664854', NULL, '2022-07-27 08:14:48', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
@@ -1907,7 +1917,7 @@ ALTER TABLE `dct_sistema_tbl_opcion`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_rol`
 --
 ALTER TABLE `dct_sistema_tbl_rol`
-  MODIFY `rol_id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rol_id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`

@@ -1,4 +1,5 @@
 <?php
+  require_once("../../../controller/sesion.class.php");
   require_once("../../../controller/funcionesCore.php");
   require_once("../../../dctDatabase/Connection.php");
   require_once("../../../dctDatabase/Parameter.php");
@@ -6,16 +7,8 @@
   try {
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
-    $pdo->beginTransaction();
-    $sql="SELECT app.apl_id_aplicacion, app.apl_aplicacion
-          FROM dct_sistema_tbl_aplicacion app, dct_sistema_tbl_rol_aplicacion rp
-          WHERE app.apl_id_aplicacion = rp.rla_id_aplicacion
-          AND rp.rla_id_rol = :rla_id_rol
-          AND app.apl_estado = 1
-          AND rp.rla_estado = 1
-          ORDER BY 1;";
+    $sql="SELECT * FROM dct_sistema_tbl_aplicacion;";
     $query=$pdo->prepare($sql);
-    $query->bindValue(':rla_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["sys_selec_roles"]),PDO::PARAM_INT); 
     $query->execute();
     $row = $query->fetchAll();
     $return_array = array();
@@ -23,6 +16,13 @@
 		foreach ($row as $row) {
 			$return_array[0] = $row["apl_id_aplicacion"];
 			$return_array[1] = $row["apl_aplicacion"];
+			$return_array[2] = $row["apl_ruta"];
+			$return_array[3] = $row["apl_nom_superior"];
+      $return_array[4] = $row["apl_nom_inferior"];
+			$return_array[5] = $row["apl_id_htm"];
+			$return_array[6] = $row["apl_id_imagen"];
+			$return_array[7] = $row["apl_estado"];
+      $return_array[8] = null;
 			array_push($return,$return_array);
 		}
 		$return = array(

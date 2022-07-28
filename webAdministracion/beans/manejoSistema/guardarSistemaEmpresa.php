@@ -14,7 +14,7 @@
 
 		if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
 			
-			if ($_POST["tipo_form"] == "New") {
+			if ($_POST["tipo_form_sist_empre"] == "New") {
 				$sql_2="INSERT INTO dct_sistema_tbl_empresa(emp_empresa, emp_ruc, emp_estado, emp_vigencia_desde, emp_vigencia_hasta, 
 					ctg_id_catalogo, em_usuario_creacion, em_fecha_creacion, em_ip_creacion)
 			    	VALUES (:emp_empresa, :emp_ruc, :emp_estado, :emp_vigencia_desde, :emp_vigencia_hasta, 
@@ -45,7 +45,7 @@
 					echo json_encode($data_result);
 				}
 			}
-			else if ($_POST["tipo_form"] == "Old") {
+			else if ($_POST["tipo_form_sist_empre"] == "Old") {
 				$sql_2="UPDATE dct_sistema_tbl_empresa 
 				SET emp_empresa=:emp_empresa,emp_ruc=:emp_ruc,emp_estado=:emp_estado,emp_vigencia_desde=:emp_vigencia_desde,
 				emp_vigencia_hasta=:emp_vigencia_hasta,ctg_id_catalogo=:ctg_id_catalogo,em_usuario_modificacion=:em_usuario_modificacion,
