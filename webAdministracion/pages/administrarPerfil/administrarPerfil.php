@@ -162,13 +162,13 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        <div id="">
+                        <div>
                           <h4>La contraseña debe cumplir los siguientes requerimientos:</h4>
                           <ul>
-                              <li id="letter" class="invalid_pass">Al menos debería tener <strong>una letra</strong></li>
-                              <li id="capital" class="invalid_pass">Al menos debería tener <strong>una letra en mayúsculas</strong></li>
-                              <li id="number" class="invalid_pass">Al menos debería tener <strong>un número</strong></li>
-                              <li id="length" class="invalid_pass">Debe tener <strong>5 carácteres</strong> como mínimo</li>
+                              <li id="reset_letter" class="invalid_pass">Al menos debería tener <strong>una letra</strong></li>
+                              <li id="reset_capital" class="invalid_pass">Al menos debería tener <strong>una letra en mayúsculas</strong></li>
+                              <li id="reset_number" class="invalid_pass">Al menos debería tener <strong>un número</strong></li>
+                              <li id="reset_length" class="invalid_pass">Debe tener <strong>5 carácteres</strong> como mínimo</li>
                           </ul>
                         </div>
                       </div>

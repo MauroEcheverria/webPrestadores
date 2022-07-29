@@ -5,14 +5,14 @@
   require_once("../../../dctDatabase/Parameter.php");
   app_error_reporting($app_error_reporting);
   try {
+    $sesion = new sesion();
+    $dataSesion = $sesion->get('dataSesion');
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
-    $sesion = new sesion();
-    $dataSesion = $sesion->get('dataSesion');
 
     $validacionUsuario = new ValidacionUsuario();
-    $nueva_contrasena = $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"])); 
+    $nueva_contrasena = $validacionUsuario->setPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"])); 
 
     $sql_1="SELECT usr_contrasenia 
             FROM dct_sistema_tbl_usuario 
@@ -21,7 +21,7 @@
     $query_1->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
     $query_1->execute();
     $row_1 = $query_1->fetch(\PDO::FETCH_ASSOC);
-    if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPacienteAnt"]),$row_1["usr_contrasenia"])) { 
+    if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassAnt"]),$row_1["usr_contrasenia"])) { 
 
       $sql_2="SELECT cts_contrasenia
             FROM dct_sistema_tbl_contrasenia
@@ -33,7 +33,7 @@
       $return_2 = array();
       $countSi = 0;
       foreach ($row_2 as $row_2) {
-        if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["valPaciente"]),$row_2["cts_contrasenia"])) { 
+        if($validacionUsuario->verifyPassword(cleanData("noLimite",0,"noMayuscula",$_POST["passPassNew"]),$row_2["cts_contrasenia"])) { 
           $countSi += 1;
         }
         if ($countSi == 1) { break; }

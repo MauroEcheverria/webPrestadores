@@ -71,7 +71,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="row">
+          <div class="row width_100">
             <div class="col-md-1">
               <img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">
             </div>
@@ -82,7 +82,7 @@
         </div>
         <form id="formExpirePass" class="formModalPages" data-toggle="validator" role="form">
           <div class="modal-body">
-            <input type="hidden" name="_token" value="<?php echo $dataSesion['getToken']; ?>">
+            <input type="hidden" name="csrf" value="<?php echo $data_template['token_csrf']; ?>">
             <div class="form-group">
               <label for="" class="control-label">Cédula:</label>
               <h3 id="idPassCedula" class="adminRoles_2"></h3>
@@ -110,7 +110,7 @@
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <div id="">
+              <div>
                 <h4>La contraseña debe cumplir los siguientes requerimientos:</h4>
                 <ul>
                     <li id="reset_letter" class="invalid_pass">Al menos debería tener <strong>una letra</strong></li>
@@ -121,8 +121,7 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <hr>
+          <div class="modal-footer centralFooter">
             <div class="form-group">
               <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-warning btn-dreconstec">Guardar</button>

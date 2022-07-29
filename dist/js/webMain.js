@@ -714,43 +714,6 @@ $(document).ready(function() {
       });
     }
   });
-  $('#formExpirePassPerfil').validator().on('submit', function (e) {
-    if (!e.isDefaultPrevented()) {
-      e.preventDefault();
-      $.ajax({
-        url: '../../beans/manejoSistema/expirarPassAdminPerfil.php',
-        type: 'POST',
-        dataType: 'html',
-        data:$("#formExpirePassPerfil").serialize()+"&cod_system_user="+
-        $('#idPassCedula').val()+"&valPaciente="+
-        $.md5($('#passPassNew').val(),'M@rut0')+"&valPacienteAnt="+
-        $.md5($('#passPassAnt').val(),'M@rut0'),
-        success: function(result){
-          var result = eval('('+result+')');
-          document.getElementById('formExpirePassPerfil').reset();
-          $('#myModal_expire_pass').modal('hide');
-          switch (result.message) {
-            case "updateOk":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "updateError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "passRegistradaAnteriormentes":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "passOriginalError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1405");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    }
-  });
   if($('div#appAdministrarSistema').hasClass('appAdministrarSistema')) {
     fnSistemaEmpresa();
   }
@@ -1250,6 +1213,6 @@ $(document).ready(function() {
       });
     }
   });
-
+  
 
 });

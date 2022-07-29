@@ -20,8 +20,8 @@
         ?>
       </head>
       <body class="hold-transition login-page">
-      <div id="loading">
-        <img src="../../../dist/img/loading.gif" style="margin-top: 15%;"/>
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div>
 <?php 
   } 

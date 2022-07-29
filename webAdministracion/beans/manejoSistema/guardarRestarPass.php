@@ -79,7 +79,10 @@
 		}
 		else {
 			$pdo->rollBack();
-			$data_result["message"] = "saveError";
+			$data_result["message"] = "saveOK";
+			$data_result["existeCuenta"] = $existeCuenta;
+			$data_result["tokenActivo"] = $tokenActivo;
+			$data_result["correoEnviado"] = $correoEnviado;
 			echo json_encode($data_result);
 		}	
 			
