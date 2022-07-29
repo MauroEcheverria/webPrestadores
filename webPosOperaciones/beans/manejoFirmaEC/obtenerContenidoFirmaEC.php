@@ -28,11 +28,13 @@
         $data_result["contenidoFirmaEC"] = "<div><img src='../../../dist/img/modal_alerta.png' width='30px' heigth='20px'> Al momento <strong>NO </strong> cuenta con una Firma Electrónica registrada, por favor registre una en la siguiente pestaña.</div>";
       }
       $data_result["message"] = "saveOK";
-      echo json_encode($data_result);
+      $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
     }
     else {
       $data_result["message"] = "saveError";
-      echo json_encode($data_result);
+      $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
     }
 
 
@@ -41,6 +43,7 @@
     $data_result["message"] = "salidaExcepcionCatch";
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
-    echo json_encode($data_result);
+    $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
   }
 ?>

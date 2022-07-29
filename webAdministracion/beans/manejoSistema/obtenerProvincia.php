@@ -34,11 +34,13 @@
       $data_result["rpta"] = $rpta;
       $data_result["data_count"] = $query->rowCount();
       $data_result["data_row"] = $row;
-      echo json_encode($data_result);
+      $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
     }
     else {
       $data_result["message"] = "saveError";
-      echo json_encode($data_result);
+      $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
     }
       
 	}
@@ -46,6 +48,7 @@
     $data_result["message"] = "salidaExcepcionCatch";
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
-    echo json_encode($data_result);
+    $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
   }
 ?>

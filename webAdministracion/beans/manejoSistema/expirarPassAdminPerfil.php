@@ -44,7 +44,8 @@
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = 'Se ha detectado que la contraseña ingresada ya ha sido usada anteriormente, favor ingresar una nueva.';
         $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-        echo json_encode($data_result);
+        $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
       }
       else {
         $sql_3="UPDATE dct_sistema_tbl_usuario 
@@ -83,7 +84,8 @@
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'La clave ha sido actualizada correctamente.';
           $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" onClick="location.href = '."'".'../principal'."'".'">Cerrar</button>';
-          echo json_encode($data_result);
+          $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 
         }
         else {
@@ -93,7 +95,8 @@
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'Se ha detectado un error en la acción requerida, favor escribenos a info@dreconstec.com';
           $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-          echo json_encode($data_result);
+          $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
         }
       }
     }
@@ -103,12 +106,14 @@
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'La actual clave no es la correcta, ingrese la clave nuevamente.';
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-      echo json_encode($data_result);
+      $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
     } 
   } catch (Exception $ex) {
     $data_result["message"] = "salidaExcepcionCatch";
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
-    echo json_encode($data_result);
+    $data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
   }
 ?>

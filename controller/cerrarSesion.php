@@ -39,6 +39,7 @@
 		$data_result["message"] = "salidaExcepcionCatch";
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
-		echo json_encode($data_result);
+		$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	}
 ?>

@@ -33,12 +33,14 @@
 	      $data_result["dataModal_2"] = 'Información';
 	      $data_result["dataModal_3"] = 'El reseteo la contraseña de manera correcta.';
 	      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-				echo json_encode($data_result);
+				$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	    }
 	    else {
 	      $pdo->rollBack();
 	      $data_result["message"] = "saveError";
-				echo json_encode($data_result);
+				$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	    }
 		}
 		else {
@@ -47,13 +49,15 @@
 			$data_result["dataModal_2"] = 'Información';
 			$data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
 			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-			echo json_encode($data_result);
+			$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 		}	
 
 	} catch (Exception $ex) {
 		$data_result["message"] = "salidaExcepcionCatch";
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
-		echo json_encode($data_result);
+		$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	}
 ?>

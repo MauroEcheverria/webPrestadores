@@ -30,12 +30,14 @@
 		      $data_result["dataModal_2"] = 'Información';
 		      $data_result["dataModal_3"] = 'Rol registado de manera correcta.';
 		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-					echo json_encode($data_result);
+					$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 				}
 				else {
 					$pdo->rollBack();
 					$data_result["message"] = "saveError";
-					echo json_encode($data_result);
+					$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 				}
 			}
 			else if ($_POST["tipo_form_sist_rol"] == "Old") {
@@ -57,12 +59,14 @@
 		      $data_result["dataModal_2"] = 'Información';
 		      $data_result["dataModal_3"] = 'Rol modificado de manera correcta.';
 		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-					echo json_encode($data_result);
+					$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 				}
 				else {
 					$pdo->rollBack();
 					$data_result["message"] = "saveError";
-					echo json_encode($data_result);
+					$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 				}
 			}
 			else {
@@ -71,7 +75,8 @@
 				$data_result["dataModal_2"] = 'Información';
 				$data_result["dataModal_3"] = "Se presentó un inconveninete al registar al perfíl. Refresque el APP Web e intentelo nuevamente.";
 				$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-				echo json_encode($data_result);
+				$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 			}	
 				
 		}
@@ -81,13 +86,15 @@
 			$data_result["dataModal_2"] = 'Información';
 			$data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
 			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
-			echo json_encode($data_result);
+			$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 		}		
 
 	} catch (Exception $ex) {
 		$data_result["message"] = "salidaExcepcionCatch";
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
-		echo json_encode($data_result);
+		$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	}
 ?>

@@ -75,7 +75,8 @@
 			$data_result["tokenActivo"] = $tokenActivo;
 			$data_result["correoEnviado"] = $correoEnviado;
 			$data_result["usr_correo"] = $row["usr_correo"];
-			echo json_encode($data_result);
+			$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 		}
 		else {
 			$pdo->rollBack();
@@ -83,13 +84,15 @@
 			$data_result["existeCuenta"] = $existeCuenta;
 			$data_result["tokenActivo"] = $tokenActivo;
 			$data_result["correoEnviado"] = $correoEnviado;
-			echo json_encode($data_result);
+			$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 		}	
 			
 	} catch (Exception $ex) {
 		$data_result["message"] = "salidaExcepcionCatch";
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
-		echo json_encode($data_result);
+		$data_result["numLineaCodigo"] = __LINE__;
+echo json_encode($data_result);
 	}
 ?>
