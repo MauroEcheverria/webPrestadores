@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2022 a las 06:48:58
+-- Tiempo de generación: 29-07-2022 a las 23:18:49
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1547,6 +1547,14 @@ CREATE TABLE `dct_sistema_tbl_contrasenia` (
   `cts_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_contrasenia`
+--
+
+INSERT INTO `dct_sistema_tbl_contrasenia` (`cts_id_contrasenia`, `cts_contrasenia`, `cts_cod_usuario`, `cts_fecha_cambio`, `cts_estado`, `cts_usuario_creacion`, `cts_usuario_modificacion`, `cts_fecha_creacion`, `cts_fecha_modificacion`, `cts_ip_creacion`, `cts_ip_modificacion`) VALUES
+(22, 'dFoxdnY4cjZ0d1BFNWRBZmxUL1ZLUW9QaWRUalJQZEU4SWFPQVNuS1ovRXNOYzlGMURSVFJuRGVNVHZ6ajBtRQ==', '1234567891', '2022-03-18 23:57:03', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 'QWJkeEVnd0NTZ2k0Y2QybkhwVG9MeTBCVnJzUjk4OHd6L1NRWUk1TS9xUjVUeGZ1U0pTQk5pZXhrb2huVFB0TA==', '1234567891', '2022-03-18 23:57:05', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1668,8 +1676,7 @@ CREATE TABLE `dct_sistema_tbl_rol_aplicacion` (
 
 INSERT INTO `dct_sistema_tbl_rol_aplicacion` (`rla_id_rol`, `rla_id_aplicacion`, `rla_estado`, `rla_usuario_creacion`, `rla_usuario_modificacion`, `rla_fecha_creacion`, `rla_fecha_modificacion`, `rla_ip_creacion`, `rla_ip_modificacion`) VALUES
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 2, 1, NULL, '0919664854', NULL, '2022-07-28 20:31:00', NULL, '::1'),
-(9, 1, 1, '0919664854', NULL, '2022-07-29 02:33:08', NULL, '::1', NULL);
+(1, 2, 1, NULL, '0919664854', NULL, '2022-07-28 20:31:00', NULL, '::1');
 
 -- --------------------------------------------------------
 
@@ -1698,9 +1705,7 @@ INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id_rol`, `rlo_id_opcion`, `rlo_es
 (1, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 4, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 12, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 1, 1, '0919664854', NULL, '2022-07-29 02:46:24', NULL, '::1', NULL),
-(9, 2, 1, '0919664854', NULL, '2022-07-29 02:47:07', NULL, '::1', NULL);
+(1, 12, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1741,6 +1746,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
   `usr_ip_pc_acceso` varchar(100) DEFAULT NULL,
   `usr_fecha_acceso` timestamp NULL DEFAULT NULL,
   `usr_correo` varchar(60) NOT NULL,
+  `usr_estado_correo` tinyint(4) NOT NULL,
   `usr_id_rol` int(11) NOT NULL,
   `usr_estado_contrasenia` tinyint(1) NOT NULL,
   `usr_id_empresa` int(11) NOT NULL,
@@ -1760,9 +1766,9 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 -- Volcado de datos para la tabla `dct_sistema_tbl_usuario`
 --
 
-INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-29 04:46:38', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, '2022-07-28', 0, 0, '2022-07-28', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
-('1308041134001', 'MERY', 'JAZMIN', 'REINA', 'CEVALLOS', 'dFRhNUVWRHFGaVBBVER4N2g4TnI0UllEaHdkZG9nV0oxWmRRa1dOMFZmK0wwbWpGRWxkYzROaVRyNWNYcEZUUQ==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 3, 1, 1, '2022-07-26', 0, 1, NULL, '0919664854', NULL, '2022-07-27 08:14:48', NULL, '::1', NULL);
+INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 0, 1, NULL, NULL, 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-22', 0, 0, '2022-07-29', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('1308041134001', 'MERY', 'JAZMIN', 'REINA', 'CEVALLOS', 'dFRhNUVWRHFGaVBBVER4N2g4TnI0UllEaHdkZG9nV0oxWmRRa1dOMFZmK0wwbWpGRWxkYzROaVRyNWNYcEZUUQ==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 0, 3, 1, 1, '2022-07-26', 0, 1, NULL, '0919664854', NULL, '2022-07-27 08:14:48', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1894,7 +1900,7 @@ ALTER TABLE `dct_sistema_tbl_catalogo`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_contrasenia`
 --
 ALTER TABLE `dct_sistema_tbl_contrasenia`
-  MODIFY `cts_id_contrasenia` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `cts_id_contrasenia` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_empresa`
@@ -1918,7 +1924,7 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`
 --
 ALTER TABLE `dct_sistema_tbl_token`
-  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
