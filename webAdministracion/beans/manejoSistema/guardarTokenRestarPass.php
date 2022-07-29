@@ -143,7 +143,10 @@
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
       echo json_encode($data_result);
     }	
-	} catch (\PDOException $e) {
-	    echo $e->getMessage();
-	}
+	} catch (Exception $ex) {
+    $data_result["message"] = "salidaExcepcionCatch";
+    $data_result["codError"] = $ex->getCode();
+    $data_result["msjError"] = $ex->getMessage();
+    echo json_encode($data_result);
+  }
 ?>

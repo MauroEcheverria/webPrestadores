@@ -284,8 +284,8 @@ $(document).ready(function() {
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-              $("span#idCodErrorGeneral").empty().prepend("1003");
-              $('#myModalErrorGeneral').modal('show');
+                $("span#idCodErrorGeneral").empty().prepend("1003");
+                $('#myModalErrorGeneral').modal('show');
                 break;
             }
           }

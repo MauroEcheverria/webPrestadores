@@ -18,6 +18,7 @@
 	$passSince = "T6YQuertyreu53&%1";
 	$mailSince = "app-web@dreconstec.com";
 	$deCorreo = "app-web@dreconstec.com";
+	$nombreSetFrom = "APP Dreconstec";
 	/****************** TOKEN ************/
 	$token_csrf = bin2hex(openssl_random_pseudo_bytes(32));
 	/****************** ERROR REPORTING *************************/

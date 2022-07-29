@@ -25,16 +25,27 @@
     $query_pro->execute();
     $row_pro = $query_pro->fetchAll();
 
-    $rpta="<option value=''>Seleccione una opción</option>";
-    foreach ($row_pro as $row_pro) {
-    	$rpta.="<option value='".$row_pro["dvp_codigo_provincia"]."'>".$row_pro["dvp_provincia"]."</option>";
+    if($query && $query_pro) {
+      $rpta="<option value=''>Seleccione una opción</option>";
+      foreach ($row_pro as $row_pro) {
+        $rpta.="<option value='".$row_pro["dvp_codigo_provincia"]."'>".$row_pro["dvp_provincia"]."</option>";
+      }
+      $data_result["message"] = "saveOK";
+      $data_result["rpta"] = $rpta;
+      $data_result["data_count"] = $query->rowCount();
+      $data_result["data_row"] = $row;
+      echo json_encode($data_result);
     }
-    $data_result["rpta"] = $rpta;
-    $data_result["data_count"] = $query->rowCount();
-    $data_result["data_row"] = $row;
+    else {
+      $data_result["message"] = "saveError";
+      echo json_encode($data_result);
+    }
+      
+	}
+	catch (Exception $ex) {
+    $data_result["message"] = "salidaExcepcionCatch";
+    $data_result["codError"] = $ex->getCode();
+    $data_result["msjError"] = $ex->getMessage();
     echo json_encode($data_result);
-	}
-	catch(SoapFault $exception){
-	    echo $exception->getMessage();  
-	}
+  }
 ?>

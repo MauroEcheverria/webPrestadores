@@ -558,11 +558,19 @@ $(document).ready(function() {
         data:{ 'cedula' : $("#usr_cod_usuario").val() },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            $("#usr_cod_usuario").val("").focus();
-            $("#loginUsuarioRegistrado").show();
-            ocultarPoppupAlert();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#usr_cod_usuario").val("").focus();
+              $("#loginUsuarioRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
@@ -577,11 +585,19 @@ $(document).ready(function() {
         data:{ 'usr_correo' : $("#usr_correo").val(), 'usr_cod_usuario' : $("#usr_cod_usuario").val(), 'tipo_val' : 'NUE' },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            $("#usr_correo").val("").focus();
-            $("#loginCorreoRegistrado").show();
-            ocultarPoppupAlert();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#usr_correo").val("").focus();
+              $("#loginCorreoRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
@@ -596,11 +612,19 @@ $(document).ready(function() {
         data:{ 'usr_correo' : $("#edit_usr_correo").val(), 'usr_cod_usuario' : temp_usr_cod_usuario_1, 'tipo_val' : 'PAS' },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            $("#edit_usr_correo").val("").focus();
-            $("#loginCorreoRegistradoEdit").show();
-            ocultarPoppupAlert();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#edit_usr_correo").val("").focus();
+              $("#loginCorreoRegistradoEdit").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
@@ -994,10 +1018,6 @@ $(document).ready(function() {
       });
     }
   });
-
-
-
-
   $('#dtSistemaEmpresaAplicativo').on('click','.iconDtSistemaEmpresaAplicativoModificar', function (e) {
     e.preventDefault();
     window.temp_ape_id_empresa_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[0];
@@ -1059,18 +1079,22 @@ $(document).ready(function() {
         data:{ 'emp_empresa_1' : $("#emp_empresa_1").val(),'apl_aplicacion_1' : $("#apl_aplicacion_1").val() },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.data_testeo == "regRepetido") {
-            $('#myModalSistemaEmpresaAplicativo').modal('hide');
-            modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaEmpresaAplicativo').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
     }
   });
-
-
-
-
   $('#dtSistemaRolAplicativo').on('click','.iconDtSistemaRolAplicativoModificar', function (e) {
     e.preventDefault();
     window.temp_rla_id_rol_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[0];
@@ -1132,18 +1156,22 @@ $(document).ready(function() {
         data:{ 'rol_rol_2' : $("#rol_rol_2").val(),'apl_aplicacion_2' : $("#apl_aplicacion_2").val() },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.data_testeo == "regRepetido") {
-            $('#myModalSistemaRolAplicativo').modal('hide');
-            modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaRolAplicativo').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
     }
   });
-
-
-
-
   $('#dtSistemaRolOpcion').on('click','.iconDtSistemaRolOpcionModificar', function (e) {
     e.preventDefault();
     window.temp_rlo_id_rol_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[0];
@@ -1205,9 +1233,17 @@ $(document).ready(function() {
         data:{ 'rol_rol_3' : $("#rol_rol_3").val(),'opc_opcion_3' : $("#opc_opcion_3").val() },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.data_testeo == "regRepetido") {
-            $('#myModalSistemaRolOpcion').modal('hide');
-            modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaRolOpcion').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });

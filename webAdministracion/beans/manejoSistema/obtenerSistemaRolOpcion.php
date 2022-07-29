@@ -36,7 +36,10 @@
 					"data"            => $return
 		);	
 		echo json_encode($return);
-  } catch (\PDOException $e) {
-      echo $e->getMessage();
+  } catch (Exception $ex) {
+    $data_result["message"] = "salidaExcepcionCatch";
+    $data_result["codError"] = $ex->getCode();
+    $data_result["msjError"] = $ex->getMessage();
+    echo json_encode($data_result);
   }
 ?>

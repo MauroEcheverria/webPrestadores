@@ -17,18 +17,21 @@
     $query->execute();
     $row = $query->fetch(\PDO::FETCH_ASSOC);
     if ($query->rowCount() == 0) {
-      $data_result["data_testeo"] = "regNulo";
+      $data_result["message"] = "regNulo";
       echo json_encode($data_result);
     }
     else {
-      $data_result["data_testeo"] = "regRepetido";
+      $data_result["message"] = "regRepetido";
       $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'Las opciones seleccionadas ya se encuentran registradas, revise la tabla.';
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
       echo json_encode($data_result);
     }
-  } catch (\PDOException $e) {
-      echo $e->getMessage();
+  } catch (Exception $ex) {
+    $data_result["message"] = "salidaExcepcionCatch";
+    $data_result["codError"] = $ex->getCode();
+    $data_result["msjError"] = $ex->getMessage();
+    echo json_encode($data_result);
   }
 ?>

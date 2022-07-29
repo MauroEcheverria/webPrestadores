@@ -26,7 +26,10 @@
         $pdo = new \PDO($dsn, $user, $password, $options);
         return $pdo;
       } catch (\PDOException $e) {
-        throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        $data_result["message"] = "salidaExcepcionCatch";
+        $data_result["codError"] = $ex->getCode();
+        $data_result["msjError"] = $ex->getMessage();
+        echo json_encode($data_result);
       }
     }
   }

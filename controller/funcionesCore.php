@@ -113,8 +113,11 @@
 		    	return "statusPassFalse"; // clave inhabilitada por intentos excedidos
 				}
 			  return "cedulaNoRegistrada";
-			} catch (\PDOException $e) {
-			  echo $e->getMessage();
+			} catch (Exception $ex) {
+				$data_result["message"] = "salidaExcepcionCatch";
+				$data_result["codError"] = $ex->getCode();
+				$data_result["msjError"] = $ex->getMessage();
+				echo json_encode($data_result);
 			}
     }
 	}
@@ -255,8 +258,11 @@
 
 			return $dataSesion;
 
-		} catch (\PDOException $e) {
-		  echo $e->getMessage();
+		} catch (Exception $ex) {
+			$data_result["message"] = "salidaExcepcionCatch";
+			$data_result["codError"] = $ex->getCode();
+			$data_result["msjError"] = $ex->getMessage();
+			echo json_encode($data_result);
 		}
 	}
 
@@ -292,7 +298,7 @@
 	  $mail->Password = $passSince;
 	  $mail->SMTPSecure = $mailSMTP;
 	  $mail->Port = $mailPort;
-	  $mail->setFrom($deCorreo);
+	  $mail->setFrom($deCorreo,$nombreSetFrom);
 	  $mail->SMTPOptions = array(
 	    'ssl' => array(
       'verify_peer' => false,
@@ -303,7 +309,7 @@
 
 	  switch ($arrayMail["tipoCorreo"]) {
 	  	case 'htmlResetPass':
-					$mail->addAddress($arrayMail["paraCorreo"]);
+					$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
@@ -311,14 +317,14 @@
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
 	  		break;
 	  	case 'htmlResetPassConfirmacion':
-	  			$mail->addAddress($arrayMail["paraCorreo"]);
+	  			$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
 	  		break;
 	  	case 'htmlBienvenida':
-	  			$mail->addAddress($arrayMail["paraCorreo"]);
+	  			$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
