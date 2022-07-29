@@ -114,7 +114,7 @@
               <div class="divPanelTogglable">
                 <div class="toggle_dentro_panel">
                   <div class="seccionBtnAccion">
-                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoSistemaRolOpcion">Crear</button>
+                    <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolOpcion">Crear</button>
                   </div>
                   <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
                 </div>
@@ -343,13 +343,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="emp_empresa_1" class="control-label">Empresa</label>
-            <input type="text" class="form-control" id="emp_empresa_1" name="emp_empresa_1" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="emp_empresa_1" id="emp_empresa_1" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="apl_aplicacion_1" class="control-label">Aplicación</label>
-            <input type="text" class="form-control" id="apl_aplicacion_1" name="apl_aplicacion_1" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="apl_aplicacion_1" id="apl_aplicacion_1" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="ape_estado" class="control-label">Estado</label>
@@ -388,13 +388,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="rol_rol_2" class="control-label">Rol</label>
-            <input type="text" class="form-control" id="rol_rol_2" name="rol_rol_2" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="rol_rol_2" id="rol_rol_2" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="apl_aplicacion_2" class="control-label">Aplicación</label>
-            <input type="text" class="form-control" id="apl_aplicacion_2" name="apl_aplicacion_2" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="apl_aplicacion_2" id="apl_aplicacion_2" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="rla_estado" class="control-label">Estado</label>
@@ -433,13 +433,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="rol_rol_3" class="control-label">Rol</label>
-            <input type="text" class="form-control" id="rol_rol_3" name="rol_rol_3" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="rol_rol_3" id="rol_rol_3" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="opc_opcion_3" class="control-label">Opción</label>
-            <input type="text" class="form-control" id="opc_opcion_3" name="opc_opcion_3" maxlength="30" minlength="5" oninput="this.value = this.value.toUpperCase()">
-             <div class="help-block with-errors"></div>
+            <select name="opc_opcion_3" id="opc_opcion_3" class="form-control" required></select>
+            <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="rlo_estado" class="control-label">Estado</label>

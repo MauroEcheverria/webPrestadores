@@ -15,12 +15,13 @@
 		if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
 			
 			if ($_POST["tipo_form_sist_rol_apl"] == "New") {
-				$sql_2="INSERT INTO dct_sistema_tbl_rol(rol_rol,rol_estado,rol_usuario_creacion,rol_fecha_creacion,rol_ip_creacion)
-			    	VALUES (:rol_rol,1,:rol_usuario_creacion,now(),:rol_ip_creacion);";
+				$sql_2="INSERT INTO dct_sistema_tbl_rol_aplicacion(rla_id_rol,rla_id_aplicacion,rla_estado,rla_usuario_creacion,rla_fecha_creacion,rla_ip_creacion)
+			    	VALUES (:rla_id_rol,:rla_id_aplicacion,1,:rla_usuario_creacion,now(),:rla_ip_creacion);";
 		    $query_2=$pdo->prepare($sql_2);          
-		    $query_2->bindValue(':rol_rol',cleanData("siLimite",30,"noMayuscula",$_POST["rol_rol"]),PDO::PARAM_STR);
-		    $query_2->bindValue(':rol_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-		    $query_2->bindValue(':rol_ip_creacion',getRealIP(),PDO::PARAM_STR);
+		    $query_2->bindValue(':rla_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["rol_rol_2"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':rla_id_aplicacion',cleanData("noLimite",0,"noMayuscula",$_POST["apl_aplicacion_2"]),PDO::PARAM_INT);
+		    $query_2->bindValue(':rla_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+		    $query_2->bindValue(':rla_ip_creacion',getRealIP(),PDO::PARAM_STR);
 		    $query_2->execute();
 
 		    if($query_2) {
