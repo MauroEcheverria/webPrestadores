@@ -29,7 +29,7 @@
 	    	$pdo->commit();
         $url = new sesion();
         $url->set("linkTemp",$url_actual);
-	    	header("location: ../webAdministracion/pages/login");
+	    	header("location: ../");
 	    }
 	    else {
 		  	$pdo->rollBack();
