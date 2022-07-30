@@ -59,13 +59,13 @@
 		      $data_result["dataModal_3"] = 'Perfíl registado de manera correcta.';
 		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
 					$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+					echo json_encode($data_result);
 				}
 				else {
 					$pdo->rollBack();
 					$data_result["message"] = "saveError";
 					$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+					echo json_encode($data_result);
 				}
 			}
 			else if ($_POST["tipo_form"] == "Old") {
@@ -107,13 +107,13 @@ echo json_encode($data_result);
 		      $data_result["dataModal_3"] = 'Perfíl modificado de manera correcta.';
 		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
 					$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+					echo json_encode($data_result);
 				}
 				else {
 					$pdo->rollBack();
 					$data_result["message"] = "saveError";
 					$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+					echo json_encode($data_result);
 				}
 			}
 			else {
@@ -123,7 +123,7 @@ echo json_encode($data_result);
 				$data_result["dataModal_3"] = "Se presentó un inconveninete al registar al perfíl. Refresque el APP Web e intentelo nuevamente.";
 				$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
 				$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+				echo json_encode($data_result);
 			}	
 				
 		}
@@ -134,7 +134,7 @@ echo json_encode($data_result);
 			$data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
 			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
 			$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+			echo json_encode($data_result);
 		}		
 
 	} catch (Exception $ex) {
@@ -142,6 +142,6 @@ echo json_encode($data_result);
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
 		$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+		echo json_encode($data_result);
 	}
 ?>

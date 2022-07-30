@@ -99,7 +99,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1000");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -159,7 +159,7 @@ $(document).ready(function() {
               }
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1002");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -247,7 +247,7 @@ $(document).ready(function() {
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                $("span#idCodErrorGeneral").empty().prepend("1001");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
                 break;
             }
@@ -284,7 +284,7 @@ $(document).ready(function() {
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                $("span#idCodErrorGeneral").empty().prepend("1003");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
                 break;
             }

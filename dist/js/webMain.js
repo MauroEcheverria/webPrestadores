@@ -568,7 +568,7 @@ $(document).ready(function() {
               return false;
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -595,7 +595,7 @@ $(document).ready(function() {
               return false;
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -622,7 +622,7 @@ $(document).ready(function() {
               return false;
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -652,7 +652,7 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -696,7 +696,7 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1403");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -730,7 +730,7 @@ $(document).ready(function() {
                   modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                  $("span#idCodErrorGeneral").empty().prepend("1404");
+                  $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                   $('#myModalErrorGeneral').modal('show');
                 break;
             }
@@ -781,7 +781,7 @@ $(document).ready(function() {
           $("select#opc_opcion_3").empty().prepend(result.dataOpcion);
           break;
         default:
-          $("span#idCodErrorGeneral").empty().prepend("2515");
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
           $('#myModalErrorGeneral').modal('show');
           break;
       }
@@ -821,7 +821,7 @@ $(document).ready(function() {
             $('#myModalSistemaEmpresa').modal('show');
             break;
           default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
             $('#myModalErrorGeneral').modal('show');
             break;
         }
@@ -854,7 +854,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -878,7 +878,7 @@ $(document).ready(function() {
             document.getElementById("formSistemaEmpresa").reset();
             break;
           default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
             $('#myModalErrorGeneral').modal('show');
             break;
         }
@@ -919,7 +919,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -968,7 +968,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1010,7 +1010,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1054,7 +1054,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1087,7 +1087,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1131,7 +1131,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1164,7 +1164,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1208,7 +1208,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -1241,7 +1241,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }

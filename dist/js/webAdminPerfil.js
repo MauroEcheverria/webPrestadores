@@ -53,7 +53,7 @@ $(document).ready(function() {
                               $('#adi_parroquia').val(result.adi_parroquia).trigger("change");
                               break;
                             default:
-                              $("span#idCodErrorGeneral").empty().prepend("2001");
+                              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                               $('#myModalErrorGeneral').modal('show');
                               break;
                           }
@@ -61,7 +61,7 @@ $(document).ready(function() {
                       });
                     break;
                   default:
-                    $("span#idCodErrorGeneral").empty().prepend("2001");
+                    $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                     $('#myModalErrorGeneral').modal('show');
                     break;
                 }
@@ -79,7 +79,7 @@ $(document).ready(function() {
           }
           break;
         default:
-          $("span#idCodErrorGeneral").empty().prepend("2001");
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
           $('#myModalErrorGeneral').modal('show');
           break;
       }    
@@ -99,7 +99,7 @@ $(document).ready(function() {
             $("select#adi_canton").empty().prepend(result.rpta);
             break;
           default:
-            $("span#idCodErrorGeneral").empty().prepend("2001");
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
             $('#myModalErrorGeneral').modal('show');
             break;
         }
@@ -120,7 +120,7 @@ $(document).ready(function() {
             $("select#adi_parroquia").empty().prepend(result.rpta);
             break;
           default:
-            $("span#idCodErrorGeneral").empty().prepend("2001");
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
             $('#myModalErrorGeneral').modal('show');
             break;
         }
@@ -146,7 +146,7 @@ $(document).ready(function() {
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-                $("span#idCodErrorGeneral").empty().prepend("1404");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -235,7 +235,7 @@ $(document).ready(function() {
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                $("span#idCodErrorGeneral").empty().prepend("1405");
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                 $('#myModalErrorGeneral').modal('show');
                 break;
             }

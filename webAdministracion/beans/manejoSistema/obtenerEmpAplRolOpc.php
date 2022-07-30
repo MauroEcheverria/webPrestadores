@@ -62,12 +62,12 @@
       $data_result["dataRol"] = $rpta_3;
       $data_result["dataOpcion"] = $rpta_4;
       $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+      echo json_encode($data_result);
     }
     else {
       $data_result["message"] = "saveError";
       $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+      echo json_encode($data_result);
     }
 
   } catch (Exception $ex) {
@@ -75,6 +75,6 @@ echo json_encode($data_result);
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
     $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+    echo json_encode($data_result);
   }
 ?> 

@@ -76,7 +76,7 @@
 			$data_result["correoEnviado"] = $correoEnviado;
 			$data_result["usr_correo"] = $row["usr_correo"];
 			$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+			echo json_encode($data_result);
 		}
 		else {
 			$pdo->rollBack();
@@ -85,7 +85,7 @@ echo json_encode($data_result);
 			$data_result["tokenActivo"] = $tokenActivo;
 			$data_result["correoEnviado"] = $correoEnviado;
 			$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+			echo json_encode($data_result);
 		}	
 			
 	} catch (Exception $ex) {
@@ -93,6 +93,6 @@ echo json_encode($data_result);
 		$data_result["codError"] = $ex->getCode();
 		$data_result["msjError"] = $ex->getMessage();
 		$data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+		echo json_encode($data_result);
 	}
 ?>

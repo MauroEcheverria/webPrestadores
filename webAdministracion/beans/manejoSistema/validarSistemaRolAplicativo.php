@@ -19,7 +19,7 @@
     if ($query->rowCount() == 0) {
       $data_result["message"] = "regNulo";
       $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+      echo json_encode($data_result);
     }
     else {
       $data_result["message"] = "regRepetido";
@@ -28,13 +28,13 @@ echo json_encode($data_result);
       $data_result["dataModal_3"] = 'Las opciones seleccionadas ya se encuentran registradas, revise la tabla.';
       $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
       $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+      echo json_encode($data_result);
     }
   } catch (Exception $ex) {
     $data_result["message"] = "salidaExcepcionCatch";
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
     $data_result["numLineaCodigo"] = __LINE__;
-echo json_encode($data_result);
+    echo json_encode($data_result);
   }
 ?>
