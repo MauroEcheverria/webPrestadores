@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2022 a las 23:18:49
+-- Tiempo de generación: 31-07-2022 a las 08:11:03
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1498,7 +1498,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
 
 INSERT INTO `dct_sistema_tbl_aplicacion_empresa` (`ape_id_aplicacion`, `ape_id_empresa`, `ape_estado`, `ape_usuario_creacion`, `ape_usuario_modificacion`, `ape_fecha_creacion`, `ape_fecha_modificacion`, `ape_ip_creacion`, `ape_ip_modificacion`) VALUES
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 1, NULL, '0919664854', NULL, '2022-07-28 20:22:59', NULL, '::1');
+(2, 1, 1, '0919664854', NULL, '2022-07-31 01:54:45', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1676,7 +1676,8 @@ CREATE TABLE `dct_sistema_tbl_rol_aplicacion` (
 
 INSERT INTO `dct_sistema_tbl_rol_aplicacion` (`rla_id_rol`, `rla_id_aplicacion`, `rla_estado`, `rla_usuario_creacion`, `rla_usuario_modificacion`, `rla_fecha_creacion`, `rla_fecha_modificacion`, `rla_ip_creacion`, `rla_ip_modificacion`) VALUES
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 2, 1, NULL, '0919664854', NULL, '2022-07-28 20:31:00', NULL, '::1');
+(1, 2, 1, NULL, '0919664854', NULL, '2022-07-28 20:31:00', NULL, '::1'),
+(9, 1, 1, '0919664854', NULL, '2022-07-31 02:01:10', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1705,7 +1706,7 @@ INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id_rol`, `rlo_id_opcion`, `rlo_es
 (1, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 4, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, 12, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 12, 1, '0919664854', NULL, '2022-07-31 02:07:28', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1727,6 +1728,15 @@ CREATE TABLE `dct_sistema_tbl_token` (
   `tok_ip_creacion` varchar(100) DEFAULT NULL,
   `tok_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_sistema_tbl_token`
+--
+
+INSERT INTO `dct_sistema_tbl_token` (`tok_id_token`, `tok_token`, `tok_tipo`, `tok_cedula`, `tok_fecha`, `tok_estado`, `tok_usuario_creacion`, `tok_usuario_modificacion`, `tok_fecha_creacion`, `tok_fecha_modificacion`, `tok_ip_creacion`, `tok_ip_modificacion`) VALUES
+(26, 'YjZNQnNMYS84b2ZhT012TWIxckVsN2trYUd2cG8xelVPVWZERkx4UGZqWkhoWCtsM2NPTTRQbGtTQmFEUUt5cw==', 'ACTIVACION', '1308041134', '2022-07-31 04:00:03', 0, '0919664854', NULL, '2022-07-31 04:00:03', NULL, '::1', NULL),
+(27, 'MXEyV2dYVm4vb3AvWDJmczlOZDdKR01BRkxlelhaN054RU1lbXhWTzBlRnA2VmhtRFhTSW9wWFBpd3NGK1FGYQ==', 'ACTIVACION', '1308041134', '2022-07-31 05:38:00', 0, '0919664854', NULL, '2022-07-31 05:38:00', NULL, '::1', NULL),
+(28, 'VGgwU1ZMeVRkdk9FYWE5NFhpaThiZ2t1WmI1aFRQa2FWNHIxT2RrME5zam1ET3NkZHg0dTBhU1E5dWxDdGhKMA==', 'ACTIVACION', '45677686788', '2022-07-31 06:03:09', 1, '0919664854', NULL, '2022-07-31 06:03:09', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1767,8 +1777,9 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 0, 1, NULL, NULL, 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-22', 0, 0, '2022-07-29', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
-('1308041134001', 'MERY', 'JAZMIN', 'REINA', 'CEVALLOS', 'dFRhNUVWRHFGaVBBVER4N2g4TnI0UllEaHdkZG9nV0oxWmRRa1dOMFZmK0wwbWpGRWxkYzROaVRyNWNYcEZUUQ==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 0, 3, 1, 1, '2022-07-26', 0, 1, NULL, '0919664854', NULL, '2022-07-27 08:14:48', NULL, '::1', NULL);
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-31 06:04:15', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-22', 0, 0, '2022-07-31', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('1308041134', 'DFGDFG', 'DFGDFG', 'DFGDF', 'GDFGDFG', 'UC9lVXBPVXUyeUV5TVlTbUlRNlh0UGh4bUw4bTJqZXVDQ1JPY0tOVG5rRDlMUHQxMU1TZFFMbkhHTjFQWHhYMw==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 1, 9, 1, 4, '2022-07-31', 0, 1, NULL, '0919664854', '1308041134', '2022-07-31 05:38:00', '2022-07-31 05:46:04', '::1', '::1'),
+('45677686788', 'SDFSDF', 'SDFSDFDS', 'SDFSDF', 'SDF', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'maurnon@hotmail.com', 0, 9, 1, 4, '2022-07-31', 0, 1, NULL, '0919664854', NULL, '2022-07-31 06:03:09', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1924,7 +1935,7 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`
 --
 ALTER TABLE `dct_sistema_tbl_token`
-  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
