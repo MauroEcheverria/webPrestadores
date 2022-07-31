@@ -15,7 +15,7 @@
 			if ($row["usr_cod_usuario"] == $_POST["cedula"]) {$cont++;}
 		}
 		if($cont==0) {		
-      $data_result["message"] = "userOK";
+      $data_result["message"] = "saveOK";
       $data_result["numLineaCodigo"] = __LINE__;
       echo json_encode($data_result);
 		}
@@ -24,7 +24,7 @@
       $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com';
-      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
       $data_result["numLineaCodigo"] = __LINE__;
       echo json_encode($data_result);
 		}	

@@ -24,7 +24,7 @@
 			if ($row["usr_correo"] == $_POST["usr_correo"]) {$cont++;}
 		}
 		if($cont==0) {		
-      $data_result["message"] = "userOK";
+      $data_result["message"] = "saveOK";
       $data_result["numLineaCodigo"] = __LINE__;
       echo json_encode($data_result);
 		}

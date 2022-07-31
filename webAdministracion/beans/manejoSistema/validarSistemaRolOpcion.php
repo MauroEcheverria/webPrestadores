@@ -26,7 +26,7 @@
       $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = 'Las opciones seleccionadas ya se encuentran registradas, revise la tabla.';
-      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
       $data_result["numLineaCodigo"] = __LINE__;
       echo json_encode($data_result);
     }

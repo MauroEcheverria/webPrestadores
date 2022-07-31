@@ -27,10 +27,10 @@
           <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Datos Personales</a>
+                <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Datos Personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Actualizar Contraseña</a>
+                <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="true">Actualizar Contraseña</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">

@@ -123,7 +123,7 @@
           </div>
           <div class="modal-footer centralFooter">
             <div class="form-group">
-              <button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
               <button type="submit" class="btn btn-warning btn-dreconstec">Guardar</button>
             </div>
           </div>

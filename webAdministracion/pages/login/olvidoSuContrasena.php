@@ -30,8 +30,7 @@
           <form id="formReestaPass" class="formModalPages" data-toggle="validator" role="form">
             <div class="form-group">
               <label for="cedOlvPass" class="control-label">Ingrese su cédula</label>
-              <input type="text" class="form-control inputOlvidoPass" id="cedOlvPass" name="cedOlvPass" required 
-              maxlength="10" onkeypress='validateOnlyNumber(event)'>
+              <input type="text" class="form-control inputOlvidoPass" id="cedOlvPass" name="cedOlvPass" required maxlength="13" onkeypress='validateOnlyNumber(event)'>
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">

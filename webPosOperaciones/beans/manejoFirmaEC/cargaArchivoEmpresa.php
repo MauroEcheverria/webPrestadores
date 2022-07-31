@@ -63,7 +63,7 @@
               $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
               $data_result["dataModal_2"] = 'Información';
               $data_result["dataModal_3"] = 'Firma Electrónica registrada de manera correcta.';
-              $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>';
               $data_result["numLineaCodigo"] = __LINE__;
               echo json_encode($data_result);
             }
@@ -73,7 +73,7 @@
               $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               $data_result["dataModal_2"] = 'Información';
               $data_result["dataModal_3"] = "No se guardo el archivo de manera correcta.";
-              $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
               $data_result["numLineaCodigo"] = __LINE__;
               echo json_encode($data_result);
             }
@@ -85,7 +85,7 @@
             $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
             $data_result["dataModal_2"] = 'Información';
             $data_result["dataModal_3"] = "No se guardo el archivo de manera correcta.";
-            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
             $data_result["numLineaCodigo"] = __LINE__;
             echo json_encode($data_result);
           }
@@ -96,7 +96,7 @@
           $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = "Extensión de firma electrónica no es permitida.";
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
           $data_result["numLineaCodigo"] = __LINE__;
           echo json_encode($data_result);
         }
@@ -106,7 +106,7 @@
         $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = "El tamaño de la firma electrónica no es el admitido.";
-        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
         $data_result["numLineaCodigo"] = __LINE__;
         echo json_encode($data_result);
       }
@@ -116,7 +116,7 @@
       $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
       $data_result["dataModal_2"] = 'Información';
       $data_result["dataModal_3"] = "Se requiere que suba un archivo.";
-      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
+      $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
       $data_result["numLineaCodigo"] = __LINE__;
       echo json_encode($data_result);
     }

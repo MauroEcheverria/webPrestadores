@@ -30,25 +30,25 @@
         <div class="card-body">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="idTogglable_1-tab" data-bs-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
+              <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_2-tab" data-bs-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Aplicaciones</a>
+              <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Aplicaciones</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_3-tab" data-bs-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Opciones</a>
+              <a class="nav-link" id="idTogglable_3-tab" data-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Opciones</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_4-tab" data-bs-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Roles</a>
+              <a class="nav-link" id="idTogglable_4-tab" data-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Roles</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_5-tab" data-bs-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Empresa - Aplicativo</a>
+              <a class="nav-link" id="idTogglable_5-tab" data-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Empresa - Aplicativo</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_6-tab" data-bs-toggle="tab" href="#idTogglable_6" role="tab" aria-controls="idTogglable_6" aria-selected="true">Rol - Aplicativo</a>
+              <a class="nav-link" id="idTogglable_6-tab" data-toggle="tab" href="#idTogglable_6" role="tab" aria-controls="idTogglable_6" aria-selected="true">Rol - Aplicativo</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="idTogglable_7-tab" data-bs-toggle="tab" href="#idTogglable_7" role="tab" aria-controls="idTogglable_7" aria-selected="true">Rol - Opción</a>
+              <a class="nav-link" id="idTogglable_7-tab" data-toggle="tab" href="#idTogglable_7" role="tab" aria-controls="idTogglable_7" aria-selected="true">Rol - Opción</a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -197,7 +197,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -237,7 +237,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -277,7 +277,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -317,7 +317,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -362,7 +362,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -407,7 +407,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>
@@ -452,7 +452,7 @@
           </div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
         </div>
       </form>

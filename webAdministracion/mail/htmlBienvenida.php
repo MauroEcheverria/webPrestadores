@@ -57,13 +57,24 @@
                                                       <strong>Hola %%nombres%%</strong>
                                                     </div>
                                      
-                                                    Es un gusto poder contar con tu compa&ntilde;ia. 😃 <br>
+                                                    Es un gusto poder contar con tu compa&ntilde;ia. 😃 <br> 
 
-                                                    Si tienes alguna duda o comentario no dudes en comunicarte con nosotros. 💪
+                                                    Si tienes alguna duda o comentario no dudes en comunicarte con nosotros. 💪<br><br>
+
+                                                    A continuaci&oacute;n proceda a verificar tu cuenta de correo electr&oacute;nico dando clic en el bot&oacute;n que se muestra a continuaci&oacute;n.
+
                                          
                                                   </span>
                                                 </p>
                                     
+                                            </div>
+
+                                            <div >
+                                              <h2 style="text-align: justify; padding: 15px;">
+                                                  <a href="http://localhost/GIT/webPrestadores/webAdministracion/pages/login/verificarCuentaCorreo.php?linkToken=%%linkReset%%">
+                                                    <button style="display: inline-block;font-weight: 400;color: #212529;text-align: center;vertical-align: middle;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-color: transparent;border: 1px solid transparent;padding: 0.375rem 0.75rem;font-size: 1rem;line-height: 1.5;border-radius: 0.25rem;transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; width: 155px;margin-bottom: 20px;background-color: #009fae;border-color: #009fae;color: #fff;">Clic Aqui</button>
+                                                </a>
+                                              </h2>
                                             </div>
 
                                             <div>

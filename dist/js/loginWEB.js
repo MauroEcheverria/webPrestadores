@@ -259,7 +259,7 @@ $(document).ready(function() {
         var dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
         var dataModal_2 = 'Información';
         var dataModal_3 = 'La contraseña ingresada no cumple con los criterios de seguridad establecidos.';
-        var dataModal_4 = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
+        var dataModal_4 = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
         modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
       } 
     }
@@ -296,7 +296,7 @@ $(document).ready(function() {
         var dataModal_1 = '<img src="../../../dist/img/dct_alert.png" width="30px" heigth="20px">';
         var dataModal_2 = 'Información';
         var dataModal_3 = 'La contraseña ingresada no cumple con los criterios de seguridad establecidos.';
-        var dataModal_4 = '<button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>';
+        var dataModal_4 = '<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>';
         modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
       }
     }
