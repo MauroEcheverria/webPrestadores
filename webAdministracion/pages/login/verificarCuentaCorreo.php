@@ -33,7 +33,8 @@
     $sql_1="SELECT tok_cedula, tok_estado
           FROM dct_sistema_tbl_token
           WHERE tok_token = :tok_token
-          AND tok_tipo = 'ACTIVACION';";
+          AND tok_tipo = 'ACTIVACION'
+          AND tok_estado = 1;";
     $query_1=$pdo->prepare($sql_1);
     $query_1->bindValue(':tok_token',$_GET["linkToken"],PDO::PARAM_STR);
     $query_1->execute();
@@ -58,15 +59,19 @@
             if ($tokenUsado == "NO") {
 
                 $sql_3="UPDATE dct_sistema_tbl_token 
-                        SET tok_estado=0
+                        SET tok_estado=0,tok_usuario_modificacion=:tok_usuario_modificacion,
+                        tok_fecha_modificacion=now(),tok_ip_modificacion=:tok_ip_modificacion
                         WHERE tok_token = :tok_token
-                        AND tok_tipo = 'ACTIVACION';";
+                        AND tok_tipo = 'ACTIVACION'
+                        AND tok_estado = 1;";
                 $query_3=$pdo->prepare($sql_3);
                 $query_3->bindValue(':tok_token',$_GET["linkToken"],PDO::PARAM_STR);
+                $query_3->bindValue(':tok_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$row_1["tok_cedula"]),PDO::PARAM_INT); 
+                $query_3->bindValue(':tok_ip_modificacion',getRealIP(),PDO::PARAM_STR);
                 $query_3->execute();
 
                 $sql_2="UPDATE dct_sistema_tbl_usuario 
-                       SET usr_estado_correo=TRUE,
+                       SET usr_estado_correo=1,
                        usr_usuario_modificacion=:usr_usuario_modificacion,
                        usr_fecha_modificacion=now(),
                        usr_ip_modificacion=:usr_ip_modificacion

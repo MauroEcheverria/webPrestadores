@@ -488,10 +488,10 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [0,3,4,5,6,9]
+        aTargets: [0,3,4,5,6,10]
       },
       {
-        "targets": [7,8,10,11,12,13],
+        "targets": [8,9,11,12,13,14],
         "visible": false,
         "searchable": false
       }
@@ -504,6 +504,7 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
       { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
+      { title: '<div class="tituloColumnasDT">Estado Correo</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
       { 
@@ -542,6 +543,12 @@ $(document).ready(function() {
       }
       if ( data[6] == 0 ) {
         $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 1 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 0 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
       }
     }
   });
@@ -684,12 +691,12 @@ $(document).ready(function() {
     $("h3.editCedula").empty().prepend(dtUsuarios.row($(this).parents('tr').first()).data()[0]);
     $('#edit_usr_correo').val(dtUsuarios.row($(this).parents('tr').first()).data()[2]);
     $('#edit_usr_estado').val(dtUsuarios.row($(this).parents('tr').first()).data()[5]);
-    $('#edit_usr_id_empresa').val(dtUsuarios.row($(this).parents('tr').first()).data()[7]);
-    $("#edit_usr_id_rol").val(dtUsuarios.row($(this).parents('tr').first()).data()[8]);
-    $('#edit_usr_nombre_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[10]);
-    $('#edit_usr_nombre_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[11]);
-    $('#edit_usr_apellido_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[12]);
-    $('#edit_usr_apellido_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[13]);
+    $('#edit_usr_id_empresa').val(dtUsuarios.row($(this).parents('tr').first()).data()[8]);
+    $("#edit_usr_id_rol").val(dtUsuarios.row($(this).parents('tr').first()).data()[9]);
+    $('#edit_usr_nombre_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[11]);
+    $('#edit_usr_nombre_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[12]);
+    $('#edit_usr_apellido_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[13]);
+    $('#edit_usr_apellido_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[14]);
     $('#myModalEditUser').modal('show');
   });
   $('#formUserMod').validator().on('submit', function (e) {

@@ -10,7 +10,7 @@
     $sql="SELECT u.usr_cod_usuario,u.usr_correo,
           r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
           u.usr_estado_contrasenia,
-          u.usr_estado,
+          u.usr_estado,u.usr_estado_correo,
           CONCAT(IFNULL(usr_nombre_1,''),' ',IFNULL(usr_nombre_2,''),' ',IFNULL(usr_apellido_1,''),' ',IFNULL(usr_apellido_2,'')) usr_nom_completos,
           u.usr_nombre_1,u.usr_nombre_2,u.usr_apellido_1,u.usr_apellido_2
           FROM dct_sistema_tbl_usuario u,dct_sistema_tbl_rol r,dct_sistema_tbl_empresa m
@@ -30,13 +30,14 @@
       $return_array[4] = $row["emp_empresa"];
 			$return_array[5] = $row["usr_estado"];
       $return_array[6] = $row["usr_estado_contrasenia"];
-      $return_array[7] = $row["usr_id_empresa"];
-      $return_array[8] = $row["usr_id_rol"];
-      $return_array[9] = null;
-      $return_array[10] = $row["usr_nombre_1"];
-      $return_array[11] = $row["usr_nombre_2"];
-      $return_array[12] = $row["usr_apellido_1"];
-      $return_array[13] = $row["usr_apellido_2"];
+      $return_array[7] = $row["usr_estado_correo"];
+      $return_array[8] = $row["usr_id_empresa"];
+      $return_array[9] = $row["usr_id_rol"];
+      $return_array[10] = null;
+      $return_array[11] = $row["usr_nombre_1"];
+      $return_array[12] = $row["usr_nombre_2"];
+      $return_array[13] = $row["usr_apellido_1"];
+      $return_array[14] = $row["usr_apellido_2"];
 			array_push($return,$return_array);
 		}
 		$return = array(

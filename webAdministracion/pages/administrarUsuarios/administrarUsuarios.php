@@ -76,8 +76,8 @@
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
-                  <label for="usr_id_rol" class="control-label">Tipo Rol</label>
-                  <select name="usr_id_rol" id="usr_id_rol" class="form-control" required style="width: 100%;"></select>
+                  <label for="usr_id_empresa" class="control-label">Empresa</label>
+                  <select name="usr_id_empresa" id="usr_id_empresa" class="form-control" required style="width: 100%;"></select>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
@@ -99,8 +99,8 @@
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
-                  <label for="usr_id_empresa" class="control-label">Empresa</label>
-                  <select name="usr_id_empresa" id="usr_id_empresa" class="form-control" required style="width: 100%;"></select>
+                  <label for="usr_id_rol" class="control-label">Tipo Rol</label>
+                  <select name="usr_id_rol" id="usr_id_rol" class="form-control" required style="width: 100%;"></select>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
@@ -152,10 +152,9 @@
                   <input type="text" class="form-control" id="edit_usr_apellido_1" name="edit_usr_apellido_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
                   <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group adminUser_2">
-                  <label for="edit_usr_id_rol" class="control-label">Tipo Rol</label>
-                  <select name="edit_usr_id_rol" id="edit_usr_id_rol" class="form-control" required style="width: 100%;">
-                  </select>
+                <div class="form-group">
+                  <label for="edit_usr_id_empresa" class="control-label">Empresa</label>
+                  <select name="edit_usr_id_empresa" id="edit_usr_id_empresa" class="form-control" required style="width: 100%;"></select>
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
@@ -179,9 +178,10 @@
                   <input type="text" class="form-control" id="edit_usr_apellido_2" name="edit_usr_apellido_2" maxlength="15" oninput="this.value = this.value.toUpperCase()">
                   <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group">
-                  <label for="edit_usr_id_empresa" class="control-label">Empresa</label>
-                  <select name="edit_usr_id_empresa" id="edit_usr_id_empresa" class="form-control" required style="width: 100%;"></select>
+                <div class="form-group adminUser_2">
+                  <label for="edit_usr_id_rol" class="control-label">Tipo Rol</label>
+                  <select name="edit_usr_id_rol" id="edit_usr_id_rol" class="form-control" required style="width: 100%;">
+                  </select>
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
