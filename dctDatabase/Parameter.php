@@ -34,6 +34,8 @@
 	$param_timeout = 2700;
 	/****************** VERSIONES CSS Y JS *************************/
 	$version_css_js = "?dct_1.0";
+	/****************** REESTABLECIMIENTO PASS *************************/
+	$reestablecimeinto_pass = 90;
 	/****************** URL ACTUAL *************************/
 	$url_actual = "$http$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	/****************** WHATSAPP *************************/

@@ -16,7 +16,7 @@ try {
 
   if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
     $validacionUsuario = new ValidacionUsuario();
-    $return_login = $validacionUsuario->login($userSystem, $contrasena, $pdo);
+    $return_login = $validacionUsuario->login($userSystem, $contrasena, $pdo, $reestablecimeinto_pass);
     switch ($return_login) {
       case 'pasoTodo':
       case 'passNecesitaCambio':  
@@ -91,7 +91,7 @@ try {
                   $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                   $data_result["dataModal_2"] = 'Información';
                   $data_result["dataModal_3"] = 'La licencia del aplicativo ha caducado...!!!';
-                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+                  $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
                   $data_result["numLineaCodigo"] = __LINE__;
                   echo json_encode($data_result);
                 }
@@ -101,7 +101,7 @@ try {
                 $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
                 $data_result["dataModal_2"] = 'Información';
                 $data_result["dataModal_3"] = 'El estado la de empresa en el sistema se encuentra inactivo...!!!';
-                $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+                $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
                 $data_result["numLineaCodigo"] = __LINE__;
                 echo json_encode($data_result);
               }
@@ -111,7 +111,7 @@ try {
               $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
               $data_result["dataModal_2"] = 'Información';
               $data_result["dataModal_3"] = 'Su rol asignado se encuentra inactivo...!!!';
-              $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+              $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
               $data_result["numLineaCodigo"] = __LINE__;
               echo json_encode($data_result);
             }
@@ -123,7 +123,7 @@ try {
           $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = 'Su cuenta se encuentra inactiva...!!!';
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
           $data_result["numLineaCodigo"] = __LINE__;
           echo json_encode($data_result);
         }
@@ -134,7 +134,7 @@ try {
         $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = 'Su cuenta ha sido inactivada por ingresos fallidos en su contraseña o por que realizó una solicitud de reestablecimiento de contraseña.<br><br>Verifique su correo electrónico por favor.';
-        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
         $data_result["numLineaCodigo"] = __LINE__;
         echo json_encode($data_result);
         break;
@@ -143,7 +143,7 @@ try {
         $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
         $data_result["dataModal_3"] = 'El usuario ingresado no se encuentra registrado en el sistema.';
-        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+        $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
         $data_result["numLineaCodigo"] = __LINE__;
         echo json_encode($data_result);
         break;
@@ -175,7 +175,7 @@ try {
           $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
           $data_result["dataModal_2"] = 'Información';
           $data_result["dataModal_3"] = "Ingresó una contraseña incorrecta. Intento fallido " . ($claveNoIgual[1] + 1) . " de 3. Al tercer intento fallido se bloqueará el acceso al aplicativo web.";
-          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+          $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
           $data_result["numLineaCodigo"] = __LINE__;
           echo json_encode($data_result);
         } else {
@@ -193,7 +193,7 @@ try {
     $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
     $data_result["dataModal_2"] = 'Información';
     $data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
-    $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+    $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>';
     $data_result["numLineaCodigo"] = __LINE__;
     echo json_encode($data_result);
   }

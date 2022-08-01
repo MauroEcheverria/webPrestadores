@@ -58,7 +58,7 @@
         $query->bindValue(':usr_ultimo_acceso',$fechaActual_4,PDO::PARAM_STR);
 				$query->execute(); $pdo->commit();
 
-        $sql_pass="SELECT (CURRENT_DATE - usr_fecha_cambio_contrasenia) dias_pass
+        $sql_pass="SELECT TIMESTAMPDIFF(DAY,usr_fecha_cambio_contrasenia,CURRENT_DATE) dias_pass
                   FROM dct_sistema_tbl_usuario
                   WHERE usr_cod_usuario = :usr_cod_usuario;";
         $query_pass=$pdo->prepare($sql_pass);
@@ -66,8 +66,8 @@
         $query_pass->execute();
         $row_pass = $query_pass->fetch(\PDO::FETCH_ASSOC);
 
-        if($row_pass["dias_pass"] < 30) {
-          $diferencia_pass = 30 - $row_pass["dias_pass"];
+        if($row_pass["dias_pass"] < $reestablecimeinto_pass) {
+          $diferencia_pass = $reestablecimeinto_pass - $row_pass["dias_pass"];
         }
         else {
           $diferencia_pass = 0;

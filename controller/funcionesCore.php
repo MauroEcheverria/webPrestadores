@@ -89,9 +89,9 @@
       }
       return false;
     }
-    public function login($userSystem,$password,$pdo) {
+    public function login($userSystem,$password,$pdo,$reestablecimeinto_pass) {
       try {
-				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_contador_error_contrasenia,(CURRENT_DATE - usr_fecha_cambio_contrasenia) dias_pass
+				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_contador_error_contrasenia,TIMESTAMPDIFF(DAY,usr_fecha_cambio_contrasenia,CURRENT_DATE) dias_pass
 							FROM dct_sistema_tbl_usuario
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
 		    $query=$pdo->prepare($sql);
@@ -101,7 +101,7 @@
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
 		    	if ($row["usr_estado_contrasenia"] == 1) {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
-              if ($row["dias_pass"] < 30) {
+              if ($row["dias_pass"] < $reestablecimeinto_pass) {
                 return "pasoTodo";
               }
               else {
