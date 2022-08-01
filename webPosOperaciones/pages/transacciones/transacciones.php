@@ -8,7 +8,7 @@
   //$css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
-  //$js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../dist/js/webPOSTransacciones.js'.$dataSesion["version_css_js"].'"></script>';
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
@@ -36,7 +36,16 @@
               <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
                 <div class="divPanelTogglable">
                   <div class="toggle_dentro_panel">
-                    Facturación
+
+
+                    <form id="formPOSTransaccionesNuevo" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <div class="modal-footer centralFooter">
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+                      </div>
+                    </form>
+
+
                   </div>
                 </div>
               </div>

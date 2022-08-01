@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-07-2022 a las 08:11:03
+-- Tiempo de generación: 01-08-2022 a las 23:40:59
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1618,10 +1618,10 @@ INSERT INTO `dct_sistema_tbl_opcion` (`opc_id_opcion`, `opc_opcion`, `opc_estado
 (3, 'Sistema', 1, '/pages/administrarSistema', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'Perfíl', 1, '/pages/administrarPerfil', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'Principal', 1, '/pages/principal', 2, 1, NULL, '0919664854', NULL, '2022-07-28 21:21:01', NULL, '::1'),
-(6, 'Transacciones', 1, '/pages/transacciones', 2, 2, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'Arqueo de Caja', 1, '/pages/arqueoCaja', 2, 5, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'Apertura de Caja', 1, '/pages/aperturaCaja', 2, 3, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 'Cierre de Caja', 1, '/pages/cierreCaja', 2, 4, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Transacciones', 1, '/pages/transacciones', 2, 3, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Arqueo de Caja', 1, '/pages/arqueoCaja', 2, 4, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Apertura de Caja', 1, '/pages/aperturaCaja', 2, 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Cierre de Caja', 1, '/pages/cierreCaja', 2, 5, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, 'Clientes', 1, '/pages/clientes', 2, 6, NULL, NULL, NULL, NULL, NULL, NULL),
 (11, 'Fidelización', 1, '/pages/fidelizacion', 2, 7, NULL, NULL, NULL, NULL, NULL, NULL),
 (12, 'Registro FirmaEC', 1, '/pages/registroFirmaEC', 2, 8, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1706,6 +1706,13 @@ INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id_rol`, `rlo_id_opcion`, `rlo_es
 (1, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL),
 (1, 4, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 5, 1, '0919664854', NULL, '2022-08-01 16:29:41', NULL, '::1', NULL),
+(1, 6, 1, '0919664854', NULL, '2022-08-01 16:29:49', NULL, '::1', NULL),
+(1, 7, 1, '0919664854', NULL, '2022-08-01 16:38:56', NULL, '::1', NULL),
+(1, 8, 1, '0919664854', NULL, '2022-08-01 16:39:02', NULL, '::1', NULL),
+(1, 9, 1, '0919664854', NULL, '2022-08-01 16:39:06', NULL, '::1', NULL),
+(1, 10, 1, '0919664854', NULL, '2022-08-01 16:39:12', NULL, '::1', NULL),
+(1, 11, 1, '0919664854', NULL, '2022-08-01 16:39:15', NULL, '::1', NULL),
 (1, 12, 1, '0919664854', NULL, '2022-07-31 02:07:28', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
@@ -1777,9 +1784,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-07-31 06:04:15', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-22', 0, 0, '2022-07-31', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
-('1308041134', 'DFGDFG', 'DFGDFG', 'DFGDF', 'GDFGDFG', 'UC9lVXBPVXUyeUV5TVlTbUlRNlh0UGh4bUw4bTJqZXVDQ1JPY0tOVG5rRDlMUHQxMU1TZFFMbkhHTjFQWHhYMw==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 1, 9, 1, 4, '2022-07-31', 0, 1, NULL, '0919664854', '1308041134', '2022-07-31 05:38:00', '2022-07-31 05:46:04', '::1', '::1'),
-('45677686788', 'SDFSDF', 'SDFSDFDS', 'SDFSDF', 'SDF', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'maurnon@hotmail.com', 0, 9, 1, 4, '2022-07-31', 0, 1, NULL, '0919664854', NULL, '2022-07-31 06:03:09', NULL, '::1', NULL);
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-01 20:52:19', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-01', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 -- --------------------------------------------------------
 
