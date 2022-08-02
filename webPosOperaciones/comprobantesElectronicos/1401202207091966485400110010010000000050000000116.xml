@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>asdsa</razonSocial>
+        <nombreComercial>asdasd</nombreComercial>
+        <ruc>0919664854001</ruc>
+        <claveAcceso>1401202207091966485400110010010000000050000000116</claveAcceso>
+        <codDoc>07</codDoc>
+        <estab>001</estab>
+        <ptoEmi>001</ptoEmi>
+        <secuencial>000000005</secuencial>
+        <dirMatriz>asdasd</dirMatriz>
+        </infoTributaria><infoCompRetencion>
+        <fechaEmision>14/01/2022</fechaEmision>
+        <dirEstablecimiento>Conjunto Brasil 2 Casa 32</dirEstablecimiento>
+        <obligadoContabilidad>SI</obligadoContabilidad>       
+        <tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+        
+        <razonSocialSujetoRetenido>dfgfdgfdg</razonSocialSujetoRetenido>
+        <identificacionSujetoRetenido>1792206375001</identificacionSujetoRetenido>
+        <periodoFiscal>01/2022</periodoFiscal></infoCompRetencion><impuestos></impuestos>
+    <infoAdicional>
+        <campoAdicional nombre="Direccion">Conjunto Brasil 2 Casa 32</campoAdicional>
+        <campoAdicional nombre="Telefono">2419867</campoAdicional>        
+        <campoAdicional nombre="Email">kaceto104@gmail.com</campoAdicional>
+    </infoAdicional>
+</comprobanteRetencion>

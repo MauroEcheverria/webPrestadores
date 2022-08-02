@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaDebito id="comprobante" version="1.0.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>DIANA KARINA GUERRA LOPEZ</razonSocial>
+        <nombreComercial>GYG</nombreComercial>
+        <ruc>0919664854001</ruc>
+        <claveAcceso>1602202205091966485400110010020000071890000000116</claveAcceso>
+        <codDoc>05</codDoc>
+        <estab>001</estab>
+        <ptoEmi>002</ptoEmi>
+        <secuencial>000007189</secuencial>
+        <dirMatriz>CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN</dirMatriz>
+    </infoTributaria>
+    <infoNotaDebito>
+        <fechaEmision>16/02/2022</fechaEmision>
+        <dirEstablecimiento>CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN</dirEstablecimiento>
+            <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+            <razonSocialComprador>aaaa</razonSocialComprador>
+                <identificacionComprador>1706034756</identificacionComprador>
+            
+             
+        <obligadoContabilidad>SI</obligadoContabilidad>       
+        
+        
+        <codDocModificado>01</codDocModificado>
+        <numDocModificado>001-002-000222323</numDocModificado>
+        <fechaEmisionDocSustento>01/02/2019</fechaEmisionDocSustento><totalSinImpuestos>11.0000</totalSinImpuestos>       
+        <impuestos>
+        <impuesto>
+                        <codigo>2</codigo>
+                        <codigoPorcentaje>0</codigoPorcentaje>
+                         <tarifa>0</tarifa>
+                        <baseImponible>11.0000</baseImponible>               
+                        <valor>0.00</valor>
+                    </impuesto>
+ </impuestos>        
+                    <valorTotal>11.0000</valorTotal>
+                    <pagos>
+                        <pago>
+                            <formaPago>01</formaPago>
+                            <total>11.0000</total>
+                            <plazo>12</plazo>
+                            <unidadTiempo>Días</unidadTiempo>
+                        </pago>
+                    </pagos>
+                    </infoNotaDebito>
+                    <motivos>
+        <motivo>
+            <razon>RIDE</razon>
+            <valor>11.0000</valor>
+        </motivo>
+    </motivos>
+    <infoAdicional>
+        <campoAdicional nombre="Direccion">Conjunto Brasil 2 Casa 32</campoAdicional>
+        <campoAdicional nombre="Telefono">2419867</campoAdicional>        
+        <campoAdicional nombre="Email">kaceto104@gmail.com</campoAdicional>
+    </infoAdicional>
+</notaDebito>

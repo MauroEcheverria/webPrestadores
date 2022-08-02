@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision id="comprobante" version="1.0.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>prueba</razonSocial>
+        <nombreComercial>asdasd</nombreComercial>
+        <ruc>0919664854001</ruc>
+        <claveAcceso>0911202006091966485400110010020000000040000000118</claveAcceso>
+        <codDoc>06</codDoc>
+        <estab>001</estab>
+        <ptoEmi>002</ptoEmi>
+        <secuencial>000000004</secuencial>
+        <dirMatriz>PASAJE A LOTE 2 S/N Y 4 DE MARZO</dirMatriz>
+    </infoTributaria>
+    <infoGuiaRemision>
+        <dirEstablecimiento>Conjunto Brasil 2 Casa 32</dirEstablecimiento>
+        <dirPartida>asd</dirPartida>       
+        <razonSocialTransportista>d</razonSocialTransportista>
+        <tipoIdentificacionTransportista>04</tipoIdentificacionTransportista>
+            <rucTransportista>1716762396001</rucTransportista>
+        <obligadoContabilidad>SI</obligadoContabilidad>
+        <fechaIniTransporte>09/11/2020</fechaIniTransporte>
+        <fechaFinTransporte>12/11/2020</fechaFinTransporte>
+        <placa>001XYZ</placa></infoGuiaRemision><destinatarios>
+                     <destinatario>
+                        <identificacionDestinatario>1717091506001</identificacionDestinatario>
+                        <razonSocialDestinatario>aaa</razonSocialDestinatario>
+                        <dirDestinatario>aaaa</dirDestinatario>
+                        <motivoTraslado>d</motivoTraslado>                
+                        <docAduaneroUnico>99999999999999999</docAduaneroUnico>
+                        <codEstabDestino>999</codEstabDestino>
+                        <ruta>RUTA_1</ruta>
+                        <codDocSustento>01</codDocSustento>
+                        <numDocSustento>001-002-000000004</numDocSustento>
+                        <numAutDocSustento>2323232323233333333333333332222222222222222222222</numAutDocSustento>
+                        <fechaEmisionDocSustento>09/11/2020</fechaEmisionDocSustento>
+                    <detalles></detalles>
+                </destinatario>
+                </destinatarios>
+    <infoAdicional>
+        <campoAdicional nombre="Direccion">Conjunto Brasil 2 Casa 32</campoAdicional>
+        <campoAdicional nombre="Telefono">2419867</campoAdicional>        
+        <campoAdicional nombre="Email">kaceto104@gmail.com</campoAdicional>
+    </infoAdicional>
+</guiaRemision>

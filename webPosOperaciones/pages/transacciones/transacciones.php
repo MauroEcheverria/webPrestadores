@@ -43,10 +43,43 @@
                   <div class="toggle_dentro_panel">
 
 
-                    <form id="formPOSTransaccionesNuevo" class="formModalPages" data-toggle="validator" role="form">
+                    <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
                       <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipoComprobante" value="1">
                       <div class="modal-footer centralFooter">
-                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar Factura</button>
+                      </div>
+                    </form>
+
+                    <form id="formPOSTransGenerarNotaCredito" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipoComprobante" value="4">
+                      <div class="modal-footer centralFooter">
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar Nota Credito</button>
+                      </div>
+                    </form>
+
+                    <form id="formPOSTransGenerarNotaDebito" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipoComprobante" value="5">
+                      <div class="modal-footer centralFooter">
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar Nota Debito</button>
+                      </div>
+                    </form>
+
+                    <form id="formPOSTransGenerarGuiaRemision" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipoComprobante" value="6">
+                      <div class="modal-footer centralFooter">
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar Guia Remision</button>
+                      </div>
+                    </form>
+
+                    <form id="formPOSTransGenerarRetencion" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <input type="hidden" name="tipoComprobante" value="7">
+                      <div class="modal-footer centralFooter">
+                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar Retencion</button>
                       </div>
                     </form>
 

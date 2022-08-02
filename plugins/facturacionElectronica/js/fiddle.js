@@ -1,4 +1,4 @@
-function obtenerComprobanteFirmado_sri(clave_acceso_sri,ruta_certificado,pwd_p12,ruta_factura,id) {
+function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,pwd_p12,ruta_factura) {
     var response = [];
     $.ajax({
         url: "../../../plugins/facturacionElectronica/leerFactura.php",

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notaCredito id="comprobante" version="1.0.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>DIANA KARINA GUERRA LOPEZ</razonSocial>
+        <nombreComercial>GYG</nombreComercial>
+        <ruc>0919664854001</ruc>
+        <claveAcceso>0208202204091966485400110010020000000020000000110</claveAcceso>
+        <codDoc>04</codDoc>
+        <estab>001</estab>
+        <ptoEmi>002</ptoEmi>
+        <secuencial>000000002</secuencial>
+        <dirMatriz>PASAJE A LOTE 2 S/N Y 4 DE MARZO</dirMatriz>
+    </infoTributaria>
+    <infoNotaCredito>
+        <fechaEmision>02/08/2022</fechaEmision>
+        <dirEstablecimiento>PASAJE A LOTE 2 S/N Y 4 DE MARZO</dirEstablecimiento>
+            <tipoIdentificacionComprador>04</tipoIdentificacionComprador>
+            <razonSocialComprador>COQUE TENORIO MARIA YOLANDA</razonSocialComprador>
+                <identificacionComprador>1716762396001</identificacionComprador>
+            
+             
+        <obligadoContabilidad>SI</obligadoContabilidad>       
+        
+        
+        <codDocModificado>01</codDocModificado>
+        <numDocModificado>001-002-000022323</numDocModificado>
+        <fechaEmisionDocSustento>02/02/2019</fechaEmisionDocSustento><totalSinImpuestos>11.0000</totalSinImpuestos><valorModificacion>11.0000</valorModificacion><moneda>DOLAR</moneda>       
+        <totalConImpuestos>
+        <totalImpuesto>
+                        <codigo>2</codigo>
+                        <codigoPorcentaje>0</codigoPorcentaje>
+                        <baseImponible>11.0000</baseImponible>               
+                        <valor>0.00</valor>
+                    </totalImpuesto> </totalConImpuestos>        
+                    <motivo>PRUEBA NC</motivo>
+                    </infoNotaCredito>
+                    <detalles><detalle>
+            <codigoInterno>1</codigoInterno>
+            <codigoAdicional>1</codigoAdicional>
+            <descripcion>1</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>11.0000</precioUnitario>            
+            <descuento>0</descuento>
+            <precioTotalSinImpuesto>11.0000</precioTotalSinImpuesto>
+            <detallesAdicionales>
+                <detAdicional nombre="honorario" valor="1"></detAdicional>
+            </detallesAdicionales>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>0</codigoPorcentaje>
+                    <tarifa>0</tarifa>
+                    <baseImponible>11.0000</baseImponible>
+                    <valor>0.00</valor>
+                </impuesto>
+            </impuestos>
+            </detalle>
+            </detalles>
+    <infoAdicional>
+        <campoAdicional nombre="Direccion">Conjunto Brasil 2 Casa 32</campoAdicional>
+        <campoAdicional nombre="Telefono">2419867</campoAdicional>        
+        <campoAdicional nombre="Email">kaceto104@gmail.com</campoAdicional>
+    </infoAdicional>
+</notaCredito>

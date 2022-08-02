@@ -16,28 +16,6 @@
 		$validacionUsuario = new ValidacionUsuario();
 
 		if (isset($_POST["csrf"]) && hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
-		
-			/*$sql_1="INSERT INTO dct_sistema_tbl_token(tok_token,tok_cedula,tok_fecha,tok_estado,tok_tipo,tok_usuario_creacion,tok_fecha_creacion,tok_ip_creacion) 
-								VALUES (:tok_token,:tok_cedula,now(),1,'ACTIVACION',:tok_usuario_creacion,now(),:tok_ip_creacion);";
-	    $query_1=$pdo->prepare($sql_1);
-	    $query_1->bindValue(':tok_token', $validacionUsuario->setPassword($tokenAsignado));
-	    $query_1->bindValue(':tok_cedula', $usr_cedula);
-	    $query_1->bindValue(':tok_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-	    $query_1->bindValue(':tok_ip_creacion',getRealIP(),PDO::PARAM_STR);
-	    $query_1->execute();
-		
-			if($query_1) {
-				$pdo->commit();
-				$data_result["message"] = "saveOK";
-				$data_result["numLineaCodigo"] = __LINE__;
-				echo json_encode($data_result);
-			}
-			else {
-				$pdo->rollBack();
-				$data_result["message"] = "saveError";
-				$data_result["numLineaCodigo"] = __LINE__;
-				echo json_encode($data_result);
-			}*/
 
 			$sql_fe="SELECT em_archivo_fact_elec,em_pass_fct_elec
 						FROM dct_sistema_tbl_empresa 
@@ -50,7 +28,7 @@
 	    $row_fe = $query_fe->fetch(\PDO::FETCH_ASSOC);
 
 			$enviarXML=new enviarXML();
-      $dataXML = $enviarXML->envioXML(1,1,$pdo);
+      $dataXML = $enviarXML->envioXML(5,$_POST["tipoComprobante"],$pdo);
       $clave_acceso_sri = explode("&&&&",$dataXML);
 
 			if ($clave_acceso_sri[0] == "cargaOK") {

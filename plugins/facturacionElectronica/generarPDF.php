@@ -354,7 +354,7 @@ class generarPDF {
     }
 
     public function notaDebitoPDF($document, $claveAcceso) {
-        $pdf = new FPDF();
+        $pdf = new PDF_Code();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 8);
 //$pdf->Cell(40, 10, 'Hello World!');
@@ -365,7 +365,7 @@ class generarPDF {
             $contabilidad = "Obligado a llevar contabilidad : NO";
         }
         $pdf->SetXY(10, 0);
-        $pdf->image('uploads/logo.jpg', null, null, 80, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 80, 30);
 
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
@@ -403,8 +403,7 @@ class generarPDF {
         //Codigo de barras
 
         $pdf->SetXY(110, 45);
-        $this->generarCodigoBarras($claveAcceso);
-        $pdf->image('uploads/codigo_mod.png', null, null, 100, 20);
+        $pdf->Code128(110,45,$claveAcceso,100,20);
         $pdf->SetXY(110, 63);
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0, 0, 0);
@@ -676,12 +675,12 @@ class generarPDF {
 
         $email = new sendEmail();
 
-        $pdf->Output('../../comprobantes/' . $claveAcceso . '.pdf', 'F');
+        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
         $email->enviarCorreo('Nota Debito', $document->infoNotaDebito->razonSocialComprador, $claveAcceso, $correo);
     }
 
     public function guiaRemisionPDF($document, $claveAcceso) {
-        $pdf = new FPDF();
+        $pdf = new PDF_Code();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 8);
 //$pdf->Cell(40, 10, 'Hello World!');
@@ -693,7 +692,7 @@ class generarPDF {
         }
 
         $pdf->SetXY(10, 0);
-        $pdf->image('uploads/logo.jpg', null, null, 50, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 50, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);
@@ -730,8 +729,7 @@ class generarPDF {
         //Codigo de barras
 
         $pdf->SetXY(110, 45);
-        $this->generarCodigoBarras($claveAcceso);
-        $pdf->image('uploads/codigo_mod.png', null, null, 100, 20);
+        $pdf->Code128(110,45,$claveAcceso,100,20);
         $pdf->SetXY(110, 63);
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0, 0, 0);
@@ -858,13 +856,13 @@ class generarPDF {
         // Pie de pagina
 
 
-        $pdf->Output('../../comprobantes/' . $claveAcceso . '.pdf', 'F');
+        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
         $email = new sendEmail();
         $email->enviarCorreo('Guia Remision', $document->infoGuiaRemision->razonSocialTransportista, $claveAcceso, $correo);
     }
 
     public function comprobanteRetencionPDF($document, $claveAcceso) {
-        $pdf = new FPDF();
+        $pdf = new PDF_Code();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 8);
 //$pdf->Cell(40, 10, 'Hello World!');
@@ -875,7 +873,7 @@ class generarPDF {
             $contabilidad = "Obligado a llevar contabilidad : NO";
         }
         $pdf->SetXY(10, 0);
-        $pdf->image('uploads/logo.jpg', null, null, 50, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 50, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);
@@ -912,8 +910,7 @@ class generarPDF {
         //Codigo de barras
 
         $pdf->SetXY(110, 45);
-        $this->generarCodigoBarras($claveAcceso);
-        $pdf->image('uploads/codigo_mod.png', null, null, 100, 20);
+        $pdf->Code128(110,45,$claveAcceso,100,20);
         $pdf->SetXY(110, 63);
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0, 0, 0);
@@ -1024,13 +1021,13 @@ class generarPDF {
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
 
-        $pdf->Output('../../comprobantes/' . $claveAcceso . '.pdf', 'F');
+        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
         $email = new sendEmail();
         $email->enviarCorreo('Comprobante de Retencion', $document->infoCompRetencion->razonSocialSujetoRetenido, $claveAcceso, $correo);
     }
 
     public function notaCreditoPDF($document, $claveAcceso) {
-        $pdf = new FPDF();
+        $pdf = new PDF_Code();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 8);
 //$pdf->Cell(40, 10, 'Hello World!');
@@ -1042,7 +1039,7 @@ class generarPDF {
         }
 
         $pdf->SetXY(10, 0);
-        $pdf->image('uploads/logo.jpg', null, null, 80, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 80, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);
@@ -1079,8 +1076,7 @@ class generarPDF {
         //Codigo de barras
 
         $pdf->SetXY(110, 45);
-        $this->generarCodigoBarras($claveAcceso);
-        $pdf->image('uploads/codigo_mod.png', null, null, 100, 20);
+        $pdf->Code128(110,45,$claveAcceso,100,20);
         $pdf->SetXY(110, 63);
         $pdf->SetFillColor(255, 255, 255);
         $pdf->SetTextColor(0, 0, 0);
@@ -1252,7 +1248,7 @@ class generarPDF {
 
         $email = new sendEmail();
 
-        $pdf->Output('../../comprobantes/' . $claveAcceso . '.pdf', 'F');
+        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
         $email->enviarCorreo('Nota Credito', $document->infoNotaCredito->razonSocialComprador, $claveAcceso, $correo);
     }
 
@@ -1267,12 +1263,14 @@ class generarPDF {
         $code->setBackgroundColor($colorBack);
         $code->parse($claveAcceso);
 
-        $drawing = new BCGDrawing('uploads/codigo.png', $colorBack);
+        $codigobarrasMod = "../../webPosOperaciones/codigoBarras/".$claveAcceso."_mod.png";
+        $codigobarras = "../../webPosOperaciones/codigoBarras/".$claveAcceso.".png";
+        $drawing = new BCGDrawing($codigobarrasMod,$colorBack);
         $drawing->setBarcode($code);
 
         $drawing->draw();
         $drawing->finish(BCGDrawing::IMG_FORMAT_PNG);
-        $this->redim('uploads/codigo.png', 'uploads/codigo_mod.png', 1000, 200);
+        $this->redim($codigobarrasMod,$codigobarras, 1000, 200);
     }
 
     public function redim($ruta1, $ruta2, $ancho, $alto) {
