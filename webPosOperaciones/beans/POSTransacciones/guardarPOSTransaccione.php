@@ -4,7 +4,7 @@
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
 
-	include_once('generar_xml.php');
+	include_once('../../../plugins/facturacionElectronica/generarXML.php');
 
 	app_error_reporting($app_error_reporting);
 	try {
@@ -40,15 +40,25 @@
 			}*/
 
 			$enviarXML=new enviarXML();
-      $clave_acceso_sri = $enviarXML->envioXML($_POST['secuencial'],$_POST['comprobante']);
+      $dataXML = $enviarXML->envioXML(1,1,$pdo);
+      $clave_acceso_sri = explode("&&&&",$dataXML);
 
-      $data_result["message"] = "saveOK";
-      $data_result["clave_acceso_sri"] = $clave_acceso_sri;
-      $data_result["ruta_factura"] = $ruta_factura;
-      $data_result["ruta_certificado"] = $ruta_certificado;
-      $data_result["contraseña"] =$contraseña;
-			$data_result["numLineaCodigo"] = __LINE__;
-			echo json_encode($data_result);
+			if ($clave_acceso_sri[0] == "cargaOK") {
+				$pdo->commit();
+	      $data_result["message"] = "saveOK";
+	      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
+	      $data_result["ruta_factura"] = "http://localhost/GIT/webPrestadores/webPosOperaciones/comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
+	      $data_result["ruta_certificado"] = "http://localhost/GIT/webPrestadores/webPosOperaciones/cargaFirmaArchivo/0919664854001.p12";
+	      $data_result["contrasenia_archivo"] = "Maruto1984";
+				$data_result["numLineaCodigo"] = __LINE__;
+				echo json_encode($data_result);
+			}
+			else {
+				$pdo->rollBack();
+	      $data_result["message"] = "saveError";
+				$data_result["numLineaCodigo"] = __LINE__;
+				echo json_encode($data_result);
+			}     
 
 		}
 		else {

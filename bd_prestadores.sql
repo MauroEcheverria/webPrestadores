@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-08-2022 a las 23:40:59
+-- Tiempo de generación: 02-08-2022 a las 07:51:36
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -20,6 +20,47 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_prestadores`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_cabecera_electronica`
+--
+
+CREATE TABLE `datos_cabecera_electronica` (
+  `id` int(11) NOT NULL,
+  `id_comprobante` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `orden_no` int(11) NOT NULL,
+  `cliente` varchar(50) NOT NULL,
+  `direccion` varchar(250) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `ruc` varchar(20) NOT NULL,
+  `tipo_comporbante` int(11) NOT NULL,
+  `tipo_identificacion` int(11) NOT NULL,
+  `correo` varchar(45) NOT NULL,
+  `establecimiento` varchar(45) DEFAULT NULL,
+  `punto_emi` varchar(45) DEFAULT NULL,
+  `ruc_empresa` varchar(45) DEFAULT NULL,
+  `ambiente` varchar(45) DEFAULT NULL,
+  `razon_social` varchar(45) DEFAULT NULL,
+  `nombre_comercial` varchar(45) DEFAULT NULL,
+  `secuencial` int(11) DEFAULT NULL,
+  `direccion_matriz` varchar(45) DEFAULT NULL,
+  `obligado` varchar(2) DEFAULT NULL,
+  `nota_no` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `datos_cabecera_electronica`
+--
+
+INSERT INTO `datos_cabecera_electronica` (`id`, `id_comprobante`, `fecha`, `orden_no`, `cliente`, `direccion`, `telefono`, `ruc`, `tipo_comporbante`, `tipo_identificacion`, `correo`, `establecimiento`, `punto_emi`, `ruc_empresa`, `ambiente`, `razon_social`, `nombre_comercial`, `secuencial`, `direccion_matriz`, `obligado`, `nota_no`) VALUES
+(1, 1, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1080, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(9, 2, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(10, 3, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(11, 4, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(12, 5, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1);
 
 -- --------------------------------------------------------
 
@@ -1784,7 +1825,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-01 20:52:19', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-01', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-02 05:49:48', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-01', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 -- --------------------------------------------------------
 
@@ -1820,9 +1861,53 @@ CREATE TABLE `dct_sistema_tbl_usuario_adicional` (
 INSERT INTO `dct_sistema_tbl_usuario_adicional` (`usr_cod_usuario`, `adi_fecha_nacimiento`, `adi_sexo`, `adi_estado_civil`, `adi_instruccion`, `adi_tipo_sangre`, `adi_celular`, `adi_provincia`, `adi_canton`, `adi_parroquia`, `adi_direccion`, `adi_referencia`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
 ('0919664854', '1984-08-22', 'MASCULINO', 'CASADO/A', 'SUPERIOR', 'O +', '593960939030', 'PR_09', 'CN_0901', 'PQ_090114', 'LOS ESTEROS POPULAR', 'EN EL PARQUEO DE LA ESCUELS ROBERTO GILBERT', '0919664854', '0919664854', '2022-07-25 08:20:27', '2022-07-28 04:39:57', '::1', '::1');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_factura_electronica`
+--
+
+CREATE TABLE `detalle_factura_electronica` (
+  `id_tabla` int(11) NOT NULL,
+  `orden_no` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `item` varchar(50) NOT NULL,
+  `precio_u` decimal(19,2) NOT NULL,
+  `total` decimal(19,2) NOT NULL,
+  `iva` decimal(10,0) NOT NULL DEFAULT 0,
+  `ice` decimal(10,0) NOT NULL DEFAULT 0,
+  `irbpnr` decimal(10,0) NOT NULL DEFAULT 0,
+  `codigo_ice` varchar(50) NOT NULL DEFAULT '3',
+  `codigoPorcentaje_ice` varchar(50) NOT NULL DEFAULT '0',
+  `baseImponible_ice` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `tarifa_ice` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `valor_ice` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `codigo_irbpnr` varchar(50) NOT NULL DEFAULT '5',
+  `codigoPorcentaje_irbpnr` varchar(50) NOT NULL DEFAULT '0',
+  `tarifa_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `baseImponible_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `valor_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_factura_electronica`
+--
+
+INSERT INTO `detalle_factura_electronica` (`id_tabla`, `orden_no`, `cantidad`, `item`, `precio_u`, `total`, `iva`, `ice`, `irbpnr`, `codigo_ice`, `codigoPorcentaje_ice`, `baseImponible_ice`, `tarifa_ice`, `valor_ice`, `codigo_irbpnr`, `codigoPorcentaje_irbpnr`, `tarifa_irbpnr`, `baseImponible_irbpnr`, `valor_irbpnr`) VALUES
+(25, 1, 2, 'Pulpa de COCO', '3.37', '6.74', '0', '0', '0', '3', '0', '0.00', '5.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
+(26, 1, 900, 'Pulpa de NARANJILLA CMP', '0.25', '225.00', '0', '0', '0', '3', '0', '0.00', '0.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
+(27, 1, 1600, 'Pulpa de GUANABANA CMP', '0.31', '496.00', '0', '0', '0', '3', '0', '0.00', '5.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
+(28, 1, 1600, 'Pulpa de MORA CAMP', '0.27', '432.00', '0', '0', '0', '3', '0', '0.00', '0.00', '0.00', '5', '0', '5.00', '5.00', '5.00');
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `datos_cabecera_electronica`
+--
+ALTER TABLE `datos_cabecera_electronica`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `dct_sistema_tbl_aplicacion`

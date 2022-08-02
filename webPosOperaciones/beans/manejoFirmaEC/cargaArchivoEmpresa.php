@@ -39,8 +39,8 @@
           $row = $query->fetch(\PDO::FETCH_ASSOC);
 
           $temp_nombre_archivo = $row["emp_ruc"].".p12";
-          //$location = __DIR__."../../../uploadP12/".$temp_nombre_archivo;
-          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\webPosOperaciones\\\\uploadP12\\\\".$temp_nombre_archivo;
+          //$location = __DIR__."../../../cargaFirmaArchivo/".$temp_nombre_archivo;
+          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\webPosOperaciones\\\\cargaFirmaArchivo\\\\".$temp_nombre_archivo;
 
           $sql_up="UPDATE dct_sistema_tbl_empresa 
                   SET em_archivo_fact_elec=:em_archivo_fact_elec,em_pass_fct_elec=:em_pass_fct_elec,

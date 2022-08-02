@@ -21,17 +21,15 @@ $(document).ready(function() {
         data:$("#formPOSTransaccionesNuevo").serialize(),
         success: function(result){
         var result = eval('('+result+')');
-          $('#myModalNuevoUser').modal('hide');
           switch (result.message) {
             case "saveOK":
-              //obtenerComprobanteFirmado_sri("' . $ruta_certificado . '","' . $contraseña . '","' .$ruta_respuesta. '","' . $ruta_factura .'","'. $id .'")
+              obtenerComprobanteFirmado_sri(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura,1)
             case "token_csrf_error":
-              dtUsuarios.ajax.reload();
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');
+              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');*/
               break;
           }
         }
