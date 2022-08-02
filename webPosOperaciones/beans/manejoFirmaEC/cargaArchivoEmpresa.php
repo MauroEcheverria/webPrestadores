@@ -25,8 +25,6 @@
         $imageFileType = strtolower(pathinfo($_FILES['em_archivo_fact_elec']['name'],PATHINFO_EXTENSION));
         if(in_array(strtolower($imageFileType), $valid_extensions)) {
 
-          
-
           $sql="SELECT emp_id_empresa, emp_ruc 
             FROM dct_sistema_tbl_empresa 
             WHERE emp_id_empresa = 
@@ -39,8 +37,7 @@
           $row = $query->fetch(\PDO::FETCH_ASSOC);
 
           $temp_nombre_archivo = $row["emp_ruc"].".p12";
-          //$location = __DIR__."../../../cargaFirmaArchivo/".$temp_nombre_archivo;
-          $location = "C:\\\\xampp\\\\htdocs\\\\GIT\\\\webPrestadores\\\\webPosOperaciones\\\\cargaFirmaArchivo\\\\".$temp_nombre_archivo;
+          $location = "../../cargaFirmaArchivo/".$temp_nombre_archivo;
 
           $sql_up="UPDATE dct_sistema_tbl_empresa 
                   SET em_archivo_fact_elec=:em_archivo_fact_elec,em_pass_fct_elec=:em_pass_fct_elec,
@@ -56,7 +53,6 @@
           $query_up->execute();
 
           if($query_up) {
-
             if(move_uploaded_file($_FILES['em_archivo_fact_elec']['tmp_name'],$location)){
               $pdo->commit();
               $data_result["message"] = "saveOK";

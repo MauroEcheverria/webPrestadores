@@ -26,7 +26,7 @@
 			$nombres = new sesion();
 			$nombres->set("userSystem",$userSystem);
 			$nombres->set("timeoutSession",time());
-			echo "<SCRIPT LANGUAGE='javascript'>location.href = '../../pages/bienvenido';</SCRIPT>";
+			echo "<SCRIPT LANGUAGE='javascript'>location.href = '../../pages/principal';</SCRIPT>";
 		}
 	    else {
 		  	$pdo->rollBack();

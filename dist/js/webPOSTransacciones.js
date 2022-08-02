@@ -23,7 +23,7 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              obtenerComprobanteFirmado_sri(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura,1)
+              obtenerComprobanteFirmado_sri(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura,1);
             case "token_csrf_error":
               //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;

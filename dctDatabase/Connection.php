@@ -2,18 +2,16 @@
   class ConnectionDB {
     private static $conn;
     public function connect() {
-      $host = 'localhost';
-      
+
       $database = 'bd_prestadores';
       $user = 'root';
       $password = 'Dreconstec2022';
       
-      /*
-      $database = 'dreconst_prestadores_iess';
-      $user = 'dreconst_admin';
-      $password = 'D%#(#74hT3cf4#';
-      */
+      /*$database = 'dreconst_prestadores';
+      $user = 'dreconst_usuario';
+      $password = 'aJlYi)]BVgjt';*/
       
+      $host = 'localhost';
       $charset = 'utf8mb4';
       $dsn = "mysql:host=$host;dbname=$database;port=3306;charset=$charset;options='--client_encoding=UTF8'";
       $options = [

@@ -1,16 +1,15 @@
 <?php
-
 class enviarXML {
-
     public function envioXML($id,$comprobante,$pdo) {
 
         if ($comprobante == 1) {
 
-            $sql = "select * from datos_cabecera_electronica  inner join detalle_factura_electronica on datos_cabecera_electronica.orden_no = detalle_factura_electronica.orden_no where datos_cabecera_electronica.id_comprobante=" . $id;
+            $sql = "select * 
+                    from datos_cabecera_electronica 
+                    inner join detalle_factura_electronica on datos_cabecera_electronica.orden_no = detalle_factura_electronica.orden_no
+                    where datos_cabecera_electronica.id_comprobante=" . $id;
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-
-            // Store the list in the array
             $array = $stmt->fetchAll();
 
             $xml_detalles = '';
@@ -30,262 +29,202 @@ class enviarXML {
             $array_cod_ice= array();
             $array_ice = array();
             foreach ($array as $campo) {
-                $sub_total += $campo['total'];
-                $denominacion_comercial = $campo['item'];
-
-                $xml_detalles .='<detalle>
-            <codigoPrincipal>' . $campo['id_tabla'] . '</codigoPrincipal>
-            <codigoAuxiliar>' . $campo['id_tabla'] . '</codigoAuxiliar>
-            <descripcion>' . $denominacion_comercial . '</descripcion>
-            <cantidad>' . $campo['cantidad'] . '</cantidad>
-            <precioUnitario>' . $campo['precio_u'] . '</precioUnitario>            
-            <descuento>0</descuento>
-            <precioTotalSinImpuesto>' . $campo['total'] . '</precioTotalSinImpuesto>
-            <detallesAdicionales>
-                <detAdicional nombre="denominacion_tipo_producto" valor="Tipo Producto"></detAdicional>
-                <detAdicional nombre="denominacion_categoria" valor="Categoria"></detAdicional>
-            </detallesAdicionales>';
-            
-                $xml_detalles .= '<impuestos>';
-            if($campo['iva'] == '0'){
+              $sub_total += $campo['total'];
+              $denominacion_comercial = $campo['item'];
+              $xml_detalles .='<detalle>
+                              <codigoPrincipal>' . $campo['id_tabla'] . '</codigoPrincipal>
+                              <codigoAuxiliar>' . $campo['id_tabla'] . '</codigoAuxiliar>
+                              <descripcion>' . $denominacion_comercial . '</descripcion>
+                              <cantidad>' . $campo['cantidad'] . '</cantidad>
+                              <precioUnitario>' . $campo['precio_u'] . '</precioUnitario>            
+                              <descuento>0</descuento>
+                              <precioTotalSinImpuesto>' . $campo['total'] . '</precioTotalSinImpuesto>
+                              <detallesAdicionales>
+                                  <detAdicional nombre="denominacion_tipo_producto" valor="Tipo Producto"></detAdicional>
+                                  <detAdicional nombre="denominacion_categoria" valor="Categoria"></detAdicional>
+                              </detallesAdicionales>';
+              $xml_detalles .= '<impuestos>';
+              if($campo['iva'] == '0') {
                 $base_imponible_0 += $campo['total'];
-                $xml_detalles .= '
-                <impuesto>
-                    <codigo>2</codigo>
-                    <codigoPorcentaje>0</codigoPorcentaje>
-                    <tarifa>0</tarifa>
-                    <baseImponible>' . $campo['total'] . '</baseImponible>
-                    <valor>0</valor>
-                </impuesto>
-            ';
-            }else{
+                $xml_detalles .= '<impuesto>
+                                  <codigo>2</codigo>
+                                  <codigoPorcentaje>0</codigoPorcentaje>
+                                  <tarifa>0</tarifa>
+                                  <baseImponible>' . $campo['total'] . '</baseImponible>
+                                  <valor>0</valor>
+                                  </impuesto>';
+              }
+              else {
                 $totalProductoConImpuesto = $campo['total'] * $campo['iva'];
                 $totalProductoConImpuesto = $totalProductoConImpuesto/100;
                 $total_iva_12 += $totalProductoConImpuesto;
                 $base_imponible_12 += $campo['total'];
-                $xml_detalles .= '
-                    <impuesto>
-                        <codigo>2</codigo>
-                        <codigoPorcentaje>2</codigoPorcentaje>
-                        <tarifa>12</tarifa>
-                        <baseImponible>' . $campo['total'] . '</baseImponible>
-                        <valor>'.$totalProductoConImpuesto.'</valor>
-                    </impuesto>
-                ';
-            }
-            
-            if($campo['ice'] == '1'){
-                
+                $xml_detalles .= '<impuesto>
+                                  <codigo>2</codigo>
+                                  <codigoPorcentaje>2</codigoPorcentaje>
+                                  <tarifa>12</tarifa>
+                                  <baseImponible>' . $campo['total'] . '</baseImponible>
+                                  <valor>'.$totalProductoConImpuesto.'</valor>
+                                  </impuesto>';
+              }
+              if($campo['ice'] == '1') {
                 $impuesto_ice = true;
-                
-                $xml_detalles .= '
-                    <impuesto>
-                        <codigo>' . $campo['codigo_ice'] . '</codigo>
-                        <codigoPorcentaje>' . $campo['codigoPorcentaje_ice'] . '</codigoPorcentaje>
-                        <tarifa>' . $campo['tarifa_ice'] . '</tarifa>
-                        <baseImponible>' . $campo['baseImponible_ice'] . '</baseImponible>
-                        <valor>'.$campo['valor_ice'].'</valor>
-                    </impuesto>
-                ';
-                
+                $xml_detalles .= '<impuesto>
+                                  <codigo>' . $campo['codigo_ice'] . '</codigo>
+                                  <codigoPorcentaje>' . $campo['codigoPorcentaje_ice'] . '</codigoPorcentaje>
+                                  <tarifa>' . $campo['tarifa_ice'] . '</tarifa>
+                                  <baseImponible>' . $campo['baseImponible_ice'] . '</baseImponible>
+                                  <valor>'.$campo['valor_ice'].'</valor>
+                                  </impuesto>';
                 array_push($array_cod_ice,  $campo['codigoPorcentaje_ice'] );
                 $codigoPorcentaje_ice = $campo['codigoPorcentaje_ice'];
                 $cod_porce = array_search($campo['codigoPorcentaje_ice'], $array_cod_ice);
-                
-                    
-                    $array_ice[$codigoPorcentaje_ice]['base_imponible'] += $campo['baseImponible_ice'];
-                    $array_ice[$codigoPorcentaje_ice]['valor'] += $campo['valor_ice'];
-                    $array_ice[$codigoPorcentaje_ice]['tarifa'] = $campo['tarifa_ice'];
-                
-            }
-            
-            
-           if($campo['irbpnr'] == '1'){
-               
+                $array_ice[$codigoPorcentaje_ice]['base_imponible'] += $campo['baseImponible_ice'];
+                $array_ice[$codigoPorcentaje_ice]['valor'] += $campo['valor_ice'];
+                $array_ice[$codigoPorcentaje_ice]['tarifa'] = $campo['tarifa_ice'];
+              }
+              if($campo['irbpnr'] == '1'){
                 $impuesto_irbpnr = true;
                 $base_imponible_irbpnr += $campo['baseImponible_irbpnr'];
                 $valor_irbpnr += $campo['valor_irbpnr'];
-                $xml_detalles .= '
-                    <impuesto>
-                        <codigo>' . $campo['codigo_irbpnr'] . '</codigo>
-                        <codigoPorcentaje>' . $campo['codigoPorcentaje_irbpnr'] . '</codigoPorcentaje>
-                        <tarifa>' . $campo['tarifa_irbpnr'] . '</tarifa>
-                        <baseImponible>' . $campo['baseImponible_irbpnr'] . '</baseImponible>
-                        <valor>'.$campo['valor_irbpnr'].'</valor>
-                    </impuesto>
-                ';
-                
-                
+                $xml_detalles .= '<impuesto>
+                                  <codigo>' . $campo['codigo_irbpnr'] . '</codigo>
+                                  <codigoPorcentaje>' . $campo['codigoPorcentaje_irbpnr'] . '</codigoPorcentaje>
+                                  <tarifa>' . $campo['tarifa_irbpnr'] . '</tarifa>
+                                  <baseImponible>' . $campo['baseImponible_irbpnr'] . '</baseImponible>
+                                  <valor>'.$campo['valor_irbpnr'].'</valor>
+                                  </impuesto>';
                 $impuesto_cabecera_irbpnr .= '<codigo>' . $campo['codigo_irbpnr'] . '</codigo>
-                        <codigoPorcentaje>' . $campo['codigoPorcentaje_irbpnr'] . '</codigoPorcentaje>                        
-                        <baseImponible>' . $campo['baseImponible_irbpnr'] . '</baseImponible>
-                        <tarifa>' . $campo['tarifa_irbpnr'] . '</tarifa>
-                        <valor>'.$campo['valor_irbpnr'].'</valor>
-                        ';
-                
-            }
-            
-            
-            
-                $xml_detalles .= '</impuestos></detalle>';
+                                              <codigoPorcentaje>' . $campo['codigoPorcentaje_irbpnr'] . '</codigoPorcentaje>                        
+                                              <baseImponible>' . $campo['baseImponible_irbpnr'] . '</baseImponible>
+                                              <tarifa>' . $campo['tarifa_irbpnr'] . '</tarifa>
+                                              <valor>'.$campo['valor_irbpnr'].'</valor>';
+              }
+              $xml_detalles .= '</impuestos></detalle>';
             }
             
             $sql = "select * from datos_cabecera_electronica where datos_cabecera_electronica.id_comprobante='$id' ";
-
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
-
-            // Store the list in the array
             $factura = $stmt->fetchAll();
             foreach ($factura as $campo) {
-                $campo['tipo_comporbante'] = 1;
-                $nombre_comercial_empresa = $campo['nombre_comercial'];
-                $razon_social_empresa = $campo['razon_social'];
-                $direccion_empresa = $campo['direccion_matriz'];
-                $direccion_sucursal = $campo['direccion_matriz'];
-                $telefono_empresa = $campo['telefono'];
-                $email_empresa = $campo['correo'];
-                $nro_documento_empresa = $campo['ruc_empresa'];
-                $obligado_llevar_contabilidad = $campo['obligado'];
+              $campo['tipo_comporbante'] = 1;
+              $nombre_comercial_empresa = $campo['nombre_comercial'];
+              $razon_social_empresa = $campo['razon_social'];
+              $direccion_empresa = $campo['direccion_matriz'];
+              $direccion_sucursal = $campo['direccion_matriz'];
+              $telefono_empresa = $campo['telefono'];
+              $email_empresa = $campo['correo'];
+              $nro_documento_empresa = $campo['ruc_empresa'];
+              $obligado_llevar_contabilidad = $campo['obligado'];
+              $nro_comprovante = $campo['secuencial'];
+              $codigo_establecimiento = $campo['establecimiento'];
+              $codigo_punto_emision = $campo['punto_emi'];
+              $fecha_emision = $campo['fecha'];
+              $id_tipo_ambiente = $campo['ambiente'];
+              $id_tipo_emision = 1;
+              $id_tipo_documento = str_pad($campo['tipo_identificacion'], '1', '0', STR_PAD_LEFT);
+              $razon_social = $campo['razon_social'];
+              $razon_social_comprador = $campo['cliente'];
+              $nro_documento = $campo['ruc'];
+              $direccion = $campo['direccion'];
+              $subtotal_sin_impuesto = $sub_total;
+              $totaliva = 0;
+              $descuento = 0;
+              $subtotal_con_impuesto = $sub_total;
+              $impuesto = 0;
+              $total = $sub_total;
+              $direccion = $campo['direccion'];
+              $telefono = $campo['telefono'];
+              $email = $campo['correo'];
 
-                $nro_comprovante = $campo['secuencial'];
-                $codigo_establecimiento = $campo['establecimiento'];
-                $codigo_punto_emision = $campo['punto_emi'];
-                $fecha_emision = $campo['fecha'];
-
-
-                $id_tipo_ambiente = $campo['ambiente'];
-                $id_tipo_emision = 1;
-
-                $id_tipo_documento = str_pad($campo['tipo_identificacion'], '1', '0', STR_PAD_LEFT);
-                $razon_social = $campo['razon_social'];
-                $razon_social_comprador = $campo['cliente'];
-                $nro_documento = $campo['ruc'];
-                $direccion = $campo['direccion'];
-                $subtotal_sin_impuesto = $sub_total;
-                $totaliva = 0;
-                $descuento = 0;
-                $subtotal_con_impuesto = $sub_total;
-                $impuesto = 0;
-                $total = $sub_total;
-
-                $direccion = $campo['direccion'];
-                $telefono = $campo['telefono'];
-                $email = $campo['correo'];
-
-                //Datos para la clave de acceso
-
-                $clave = "" . date('dmY', strtotime($campo['fecha'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "";
-                $digito_verificador_clave = $this->validar_clave($clave);
-                $clave_acceso = "" . date('dmY', strtotime($campo['fecha'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "" . $digito_verificador_clave . "";
+              $clave = "" . date('dmY', strtotime($campo['fecha'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "";
+              $digito_verificador_clave = $this->validar_clave($clave);
+              $clave_acceso = "" . date('dmY', strtotime($campo['fecha'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "" . $digito_verificador_clave . "";
             }
 
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
-<factura id="comprobante" version="1.0.0">
-    <infoTributaria>
-        <ambiente>' . $id_tipo_ambiente . '</ambiente>
-        <tipoEmision>' . $id_tipo_emision . '</tipoEmision>
-        <razonSocial>' . $razon_social_empresa . '</razonSocial>
-        <nombreComercial>' . $nombre_comercial_empresa . '</nombreComercial>
-        <ruc>' . $nro_documento_empresa . '</ruc>
-        <claveAcceso>' . $clave_acceso . '</claveAcceso>
-        <codDoc>01</codDoc>
-        <estab>' . $codigo_establecimiento . '</estab>
-        <ptoEmi>' . $codigo_punto_emision . '</ptoEmi>
-        <secuencial>' . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . '</secuencial>
-        <dirMatriz>' . $direccion_empresa . '</dirMatriz>
-    </infoTributaria>
-    <infoFactura>
-        <fechaEmision>' . date("d/m/Y", strtotime($fecha_emision)) . '</fechaEmision>
-        <dirEstablecimiento>' . $direccion_sucursal . '</dirEstablecimiento>
-        <obligadoContabilidad>' . $obligado_llevar_contabilidad . '</obligadoContabilidad>       
-        <tipoIdentificacionComprador>0' . $id_tipo_documento . '</tipoIdentificacionComprador>
-        
-        <razonSocialComprador>' . $razon_social_comprador . '</razonSocialComprador>
-        <identificacionComprador>' . $nro_documento . '</identificacionComprador>
-        <direccionComprador>' . $direccion . '</direccionComprador>';
-
-
-            $xml.='<totalSinImpuestos>' . $total . '</totalSinImpuestos>';
-
-
+                    <factura id="comprobante" version="1.0.0">
+                    <infoTributaria>
+                        <ambiente>' . $id_tipo_ambiente . '</ambiente>
+                        <tipoEmision>' . $id_tipo_emision . '</tipoEmision>
+                        <razonSocial>' . $razon_social_empresa . '</razonSocial>
+                        <nombreComercial>' . $nombre_comercial_empresa . '</nombreComercial>
+                        <ruc>' . $nro_documento_empresa . '</ruc>
+                        <claveAcceso>' . $clave_acceso . '</claveAcceso>
+                        <codDoc>01</codDoc>
+                        <estab>' . $codigo_establecimiento . '</estab>
+                        <ptoEmi>' . $codigo_punto_emision . '</ptoEmi>
+                        <secuencial>' . str_pad($campo['secuencial'], '9', '0', STR_PAD_LEFT) . '</secuencial>
+                        <dirMatriz>' . $direccion_empresa . '</dirMatriz>
+                    </infoTributaria>
+                    <infoFactura>
+                        <fechaEmision>' . date("d/m/Y", strtotime($fecha_emision)) . '</fechaEmision>
+                        <dirEstablecimiento>' . $direccion_sucursal . '</dirEstablecimiento>
+                        <obligadoContabilidad>' . $obligado_llevar_contabilidad . '</obligadoContabilidad>       
+                        <tipoIdentificacionComprador>0' . $id_tipo_documento . '</tipoIdentificacionComprador>
+                        <razonSocialComprador>' . $razon_social_comprador . '</razonSocialComprador>
+                        <identificacionComprador>' . $nro_documento . '</identificacionComprador>
+                        <direccionComprador>' . $direccion . '</direccionComprador>';
+            $xml .= '<totalSinImpuestos>' . $total . '</totalSinImpuestos>';
             $xml .= '<totalDescuento>' . $descuento . '</totalDescuento>';        
-            
-            
-            
-        $xml .= '<totalConImpuestos>
-        <totalImpuesto>
+            $xml .= '<totalConImpuestos>
+                      <totalImpuesto>
+                          <codigo>2</codigo>
+                          <codigoPorcentaje>0</codigoPorcentaje>
+                          <baseImponible>' . $base_imponible_0 . '</baseImponible>
+                          <tarifa>0</tarifa>                
+                          <valor>0.00</valor>
+                      </totalImpuesto>';
+            if($total_iva_12>0) {
+              $xml .= '<totalImpuesto>
                         <codigo>2</codigo>
-                        <codigoPorcentaje>0</codigoPorcentaje>
-                        <baseImponible>' . $base_imponible_0 . '</baseImponible>
+                        <codigoPorcentaje>2</codigoPorcentaje>
+                        <baseImponible>' . $base_imponible_12 . '</baseImponible>
                         <tarifa>0</tarifa>                
-                        <valor>0.00</valor>
-                    </totalImpuesto>';
-        
-             if($total_iva_12>0){
-                 
-                  $xml .= '<totalImpuesto>
-                            <codigo>2</codigo>
-                            <codigoPorcentaje>2</codigoPorcentaje>
-                            <baseImponible>' . $base_imponible_12 . '</baseImponible>
-                            <tarifa>0</tarifa>                
-                            <valor>'.$total_iva_12.'</valor>
-                        </totalImpuesto>';
-             }
-             
-             if($impuesto_ice == true){
-                            foreach($array_ice as $k => $v){
-                                
-                                $impuesto_cabecera_ice = '<codigo>3</codigo>
-                                <codigoPorcentaje>' . $k . '</codigoPorcentaje>                        
-                                <baseImponible>' . $v['base_imponible'] . '</baseImponible>
-                                <tarifa>' . $v['tarifa'] . '</tarifa>
-                                <valor>'.$v['valor'].'</valor>';
-                                $xml .= '<totalImpuesto>'.$impuesto_cabecera_ice.'</totalImpuesto>';
-                            }
-                          
-                          
-                          
-             }
-             if($impuesto_irbpnr== true){
-                 $xml .= '<totalImpuesto>'.$impuesto_cabecera_irbpnr.'</totalImpuesto>';
-             }
-                 
-
-
-             $importeTotal = $base_imponible_0 + $base_imponible_12 + $total_iva_12;
-
-            $xml.='
-         </totalConImpuestos>        
-        <propina>0.00</propina>        
-        <importeTotal>' . $importeTotal . '</importeTotal>
-        <moneda>DOLAR</moneda>
-        <pagos>
-            <pago>
-                <formaPago>20</formaPago>
-                <total>' . $importeTotal . '</total>
-                <plazo>1</plazo>
-                <unidadTiempo>Dias</unidadTiempo>
-            </pago>            
-        </pagos>
-        <valorRetIva>0.00</valorRetIva>
-        <valorRetRenta>0.00</valorRetRenta>
-    </infoFactura>
-    <detalles>';
-
+                        <valor>'.$total_iva_12.'</valor>
+                      </totalImpuesto>';
+            }
+            if($impuesto_ice == true) {
+              foreach($array_ice as $k => $v) {
+                $impuesto_cabecera_ice = '<codigo>3</codigo>
+                <codigoPorcentaje>' . $k . '</codigoPorcentaje>                        
+                <baseImponible>' . $v['base_imponible'] . '</baseImponible>
+                <tarifa>' . $v['tarifa'] . '</tarifa>
+                <valor>'.$v['valor'].'</valor>';
+                $xml .= '<totalImpuesto>'.$impuesto_cabecera_ice.'</totalImpuesto>';
+              }
+            }
+            if($impuesto_irbpnr== true) {
+              $xml .= '<totalImpuesto>'.$impuesto_cabecera_irbpnr.'</totalImpuesto>';
+            } 
+            $importeTotal = $base_imponible_0 + $base_imponible_12 + $total_iva_12;
+            $xml.='</totalConImpuestos>        
+                      <propina>0.00</propina>        
+                      <importeTotal>' . $importeTotal . '</importeTotal>
+                      <moneda>DOLAR</moneda>
+                      <pagos>
+                          <pago>
+                              <formaPago>20</formaPago>
+                              <total>' . $importeTotal . '</total>
+                              <plazo>1</plazo>
+                              <unidadTiempo>Dias</unidadTiempo>
+                          </pago>            
+                      </pagos>
+                      <valorRetIva>0.00</valorRetIva>
+                      <valorRetRenta>0.00</valorRetRenta>
+                  </infoFactura>
+                  <detalles>';
             $xml.=$xml_detalles;
-
-
-
             $xml.='</detalles>
-    <infoAdicional>
-        <campoAdicional nombre="Direccion">' . $direccion . '</campoAdicional>
-        <campoAdicional nombre="Telefono">' . $telefono . '</campoAdicional>        
-        <campoAdicional nombre="Email">' . $email . '</campoAdicional>
-    </infoAdicional>
-</factura>';
+                      <infoAdicional>
+                          <campoAdicional nombre="Direccion">' . $direccion . '</campoAdicional>
+                          <campoAdicional nombre="Telefono">' . $telefono . '</campoAdicional>        
+                          <campoAdicional nombre="Email">' . $email . '</campoAdicional>
+                      </infoAdicional>
+                  </factura>';
 
-            $nombre = "../../comprobantesElectronicos/" . $clave_acceso . ".xml";
+            $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";
@@ -296,6 +235,7 @@ class enviarXML {
               $data_result["clave_acceso_sri"] = "";
             }
             fclose($archivo);
+
             return $data_result["cargaXML"]."&&&&".$data_result["clave_acceso_sri"];
         }
         if ($comprobante == 6) {

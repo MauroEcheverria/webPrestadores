@@ -12,8 +12,10 @@
 	$fechaActual_8 = $hora->format("H:i");
 	$fechaActual_9 = $hora->format("Y-m-d H:i:s.u");
 	/****************** Mail ************/
-	$mailSMTP = 'ssl';
-	$mailPort = 465;
+	$mailSMTP = 'tls';
+	$mailPort = 587;
+	/*$mailSMTP = 'ssl';
+	$mailPort = 465;*/
 	$hostSince = "mail.dreconstec.com";
 	$passSince = "T6YQuertyreu53&%1";
 	$mailSince = "app-web@dreconstec.com";
@@ -41,4 +43,6 @@
 	/****************** WHATSAPP *************************/
 	$ultramsg_token="glpr98u1bxxd6job";
 	$instance_id="instance12736";
+	/****************** URL POS *************************/
+	$host="http://localhost/GIT/webPrestadores/webPosOperaciones/";
 ?>

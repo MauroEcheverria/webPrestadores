@@ -39,6 +39,16 @@
 				echo json_encode($data_result);
 			}*/
 
+			$sql_fe="SELECT em_archivo_fact_elec,em_pass_fct_elec
+						FROM dct_sistema_tbl_empresa 
+						WHERE emp_id_empresa = (SELECT usr_id_empresa
+	          FROM dct_sistema_tbl_usuario
+	          WHERE usr_cod_usuario = :usr_cod_usuario);";
+	    $query_fe=$pdo->prepare($sql_fe);
+	    $query_fe->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
+	    $query_fe->execute();
+	    $row_fe = $query_fe->fetch(\PDO::FETCH_ASSOC);
+
 			$enviarXML=new enviarXML();
       $dataXML = $enviarXML->envioXML(1,1,$pdo);
       $clave_acceso_sri = explode("&&&&",$dataXML);
@@ -47,9 +57,9 @@
 				$pdo->commit();
 	      $data_result["message"] = "saveOK";
 	      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-	      $data_result["ruta_factura"] = "http://localhost/GIT/webPrestadores/webPosOperaciones/comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
-	      $data_result["ruta_certificado"] = "http://localhost/GIT/webPrestadores/webPosOperaciones/cargaFirmaArchivo/0919664854001.p12";
-	      $data_result["contrasenia_archivo"] = "Maruto1984";
+	      $data_result["ruta_factura"] = $host."comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
+	      $data_result["ruta_certificado"] = $host."cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
+	      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
 				$data_result["numLineaCodigo"] = __LINE__;
 				echo json_encode($data_result);
 			}
