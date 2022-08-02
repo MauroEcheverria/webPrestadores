@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2022 a las 07:51:36
+-- Tiempo de generación: 02-08-2022 a las 23:44:32
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -56,11 +56,190 @@ CREATE TABLE `datos_cabecera_electronica` (
 --
 
 INSERT INTO `datos_cabecera_electronica` (`id`, `id_comprobante`, `fecha`, `orden_no`, `cliente`, `direccion`, `telefono`, `ruc`, `tipo_comporbante`, `tipo_identificacion`, `correo`, `establecimiento`, `punto_emi`, `ruc_empresa`, `ambiente`, `razon_social`, `nombre_comercial`, `secuencial`, `direccion_matriz`, `obligado`, `nota_no`) VALUES
-(1, 1, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1080, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(1, 1, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1100, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (9, 2, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
-(10, 3, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(10, 3, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1102, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (11, 4, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (12, 5, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_guia_electronica`
+--
+
+CREATE TABLE `datos_guia_electronica` (
+  `id` int(11) NOT NULL,
+  `ambiente` int(11) DEFAULT NULL,
+  `id_comprobante` int(11) DEFAULT NULL,
+  `tipo_emision` int(11) DEFAULT NULL,
+  `razon_social` varchar(45) DEFAULT NULL,
+  `nombre_comercial` varchar(45) DEFAULT NULL,
+  `cod_doc` int(11) DEFAULT NULL,
+  `ruc` varchar(45) DEFAULT NULL,
+  `establecimiento` varchar(4) DEFAULT NULL,
+  `pto_emi` varchar(3) DEFAULT NULL,
+  `secuencial` varchar(45) DEFAULT NULL,
+  `dir_matriz` varchar(45) DEFAULT NULL,
+  `orden_no` int(11) NOT NULL,
+  `t_nombre` varchar(50) NOT NULL,
+  `t_ci` varchar(13) NOT NULL,
+  `motivo_translado` varchar(250) NOT NULL,
+  `fecha` date NOT NULL,
+  `comprobante_venta` int(11) NOT NULL,
+  `tipo_ident_transport` int(11) DEFAULT NULL,
+  `t_contabilidad` varchar(3) DEFAULT NULL,
+  `t_f_inicio` date NOT NULL,
+  `t_f_final` date NOT NULL,
+  `t_placa` varchar(9) NOT NULL,
+  `punto_partida` varchar(250) NOT NULL,
+  `d_ruc` varchar(13) NOT NULL,
+  `d_razon_social` varchar(250) NOT NULL,
+  `d_punto_llegada` varchar(250) NOT NULL,
+  `tipo_comprobante` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='		';
+
+--
+-- Volcado de datos para la tabla `datos_guia_electronica`
+--
+
+INSERT INTO `datos_guia_electronica` (`id`, `ambiente`, `id_comprobante`, `tipo_emision`, `razon_social`, `nombre_comercial`, `cod_doc`, `ruc`, `establecimiento`, `pto_emi`, `secuencial`, `dir_matriz`, `orden_no`, `t_nombre`, `t_ci`, `motivo_translado`, `fecha`, `comprobante_venta`, `tipo_ident_transport`, `t_contabilidad`, `t_f_inicio`, `t_f_final`, `t_placa`, `punto_partida`, `d_ruc`, `d_razon_social`, `d_punto_llegada`, `tipo_comprobante`) VALUES
+(1, 1, 4, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1', 'adsad', 1, 'd', '1716762396001', 'd', '2020-11-09', 1, 4, 'SI', '2020-11-09', '2020-11-12', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6),
+(2, 1, 23, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1', 'adsad', 12249, 'd', '1716762396001', 'd', '2022-01-14', 1, 4, 'SI', '2022-01-14', '2022-01-14', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_nota_credito`
+--
+
+CREATE TABLE `datos_nota_credito` (
+  `id` int(11) NOT NULL,
+  `id_comprobante` int(11) NOT NULL DEFAULT 0,
+  `ambiente` int(11) DEFAULT NULL,
+  `tipoEmision` int(11) DEFAULT NULL,
+  `razonSocial` varchar(45) DEFAULT NULL,
+  `nombreComercial` varchar(45) DEFAULT NULL,
+  `ruc` varchar(45) DEFAULT NULL,
+  `cod_doc` int(11) DEFAULT NULL,
+  `establecimiento` varchar(45) DEFAULT NULL,
+  `ptoEmi` varchar(45) DEFAULT NULL,
+  `secuencial` int(11) DEFAULT NULL,
+  `dirMatriz` varchar(45) DEFAULT NULL,
+  `fecha_emision` date DEFAULT NULL,
+  `dirEstablecimiento` varchar(45) DEFAULT NULL,
+  `tipoIdentificacionComprador` int(11) DEFAULT NULL,
+  `identificacionComprador` varchar(45) DEFAULT NULL,
+  `codDocmodificado` int(11) DEFAULT NULL,
+  `numDocModificado` varchar(50) DEFAULT NULL,
+  `contribuyenteEspecial` int(11) DEFAULT NULL,
+  `obligadoContabilidad` varchar(45) DEFAULT NULL,
+  `rise` varchar(45) DEFAULT NULL,
+  `fechaEmisionDocSustento` date DEFAULT NULL,
+  `total_sin_impuestos` decimal(19,4) DEFAULT NULL,
+  `valorModificacion` decimal(19,4) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `codigoPorcentaje` int(11) DEFAULT NULL,
+  `baseImponible` int(11) DEFAULT NULL,
+  `valor` decimal(19,4) DEFAULT NULL,
+  `motivo` varchar(45) DEFAULT NULL,
+  `nota_no` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `datos_nota_credito`
+--
+
+INSERT INTO `datos_nota_credito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocial`, `nombreComercial`, `ruc`, `cod_doc`, `establecimiento`, `ptoEmi`, `secuencial`, `dirMatriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `rise`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `valorModificacion`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `motivo`, `nota_no`) VALUES
+(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1002, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_nota_debito`
+--
+
+CREATE TABLE `datos_nota_debito` (
+  `id` int(11) NOT NULL,
+  `id_comprobante` int(11) NOT NULL DEFAULT 0,
+  `ambiente` int(11) DEFAULT NULL,
+  `tipoEmision` int(11) DEFAULT NULL,
+  `razonSocialComprador` varchar(45) DEFAULT NULL,
+  `nombreComercial` varchar(45) DEFAULT NULL,
+  `cod_doc` int(11) DEFAULT NULL,
+  `establecimiento` varchar(45) DEFAULT NULL,
+  `secuencial` int(11) DEFAULT NULL,
+  `direccion_matriz` varchar(45) DEFAULT NULL,
+  `fecha_emision` date DEFAULT NULL,
+  `dirEstablecimiento` varchar(45) DEFAULT NULL,
+  `tipoIdentificacionComprador` int(11) DEFAULT NULL,
+  `identificacionComprador` varchar(45) DEFAULT NULL,
+  `codDocmodificado` int(11) DEFAULT NULL,
+  `numDocModificado` varchar(50) DEFAULT NULL,
+  `contribuyenteEspecial` int(11) DEFAULT NULL,
+  `obligadoContabilidad` varchar(45) DEFAULT NULL,
+  `fechaEmisionDocSustento` date DEFAULT NULL,
+  `total_sin_impuestos` decimal(19,4) DEFAULT NULL,
+  `codigo` int(2) DEFAULT NULL,
+  `codigoPorcentaje` int(11) DEFAULT NULL,
+  `baseImponible` int(11) DEFAULT NULL,
+  `valor` decimal(19,4) DEFAULT NULL,
+  `tarifa` decimal(19,4) DEFAULT NULL,
+  `valorTotal` decimal(19,4) DEFAULT NULL,
+  `formapago` int(2) DEFAULT NULL,
+  `total` decimal(19,4) DEFAULT NULL,
+  `plazo` int(2) DEFAULT NULL,
+  `unidadTiempo` varchar(45) DEFAULT NULL,
+  `razonDescripcion` varchar(45) DEFAULT NULL,
+  `valorModificado` decimal(19,4) DEFAULT NULL,
+  `campoAdiconalDirecci` varchar(300) DEFAULT NULL,
+  `campoAdicionalMail` varchar(300) DEFAULT NULL,
+  `campoAdionalFono` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `datos_nota_debito`
+--
+
+INSERT INTO `datos_nota_debito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocialComprador`, `nombreComercial`, `cod_doc`, `establecimiento`, `secuencial`, `direccion_matriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `tarifa`, `valorTotal`, `formapago`, `total`, `plazo`, `unidadTiempo`, `razonDescripcion`, `valorModificado`, `campoAdiconalDirecci`, `campoAdicionalMail`, `campoAdionalFono`) VALUES
+(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 7189, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_retencion_electronica`
+--
+
+CREATE TABLE `datos_retencion_electronica` (
+  `id` int(11) NOT NULL,
+  `ambiente` int(3) NOT NULL,
+  `id_comprobante` int(5) NOT NULL,
+  `orden_no` int(5) NOT NULL,
+  `tipo_emision` int(3) DEFAULT NULL,
+  `razon_social` varchar(100) DEFAULT NULL,
+  `nombre_comercial` varchar(45) DEFAULT NULL,
+  `ruc` varchar(45) DEFAULT NULL,
+  `cod_doc` int(11) DEFAULT NULL,
+  `estab` varchar(45) DEFAULT NULL,
+  `pto_emi` varchar(45) DEFAULT NULL,
+  `secuencial` int(11) DEFAULT NULL,
+  `dir_matriz` varchar(100) DEFAULT NULL,
+  `fecha_emision` date DEFAULT NULL,
+  `dir_establecimiento` varchar(100) DEFAULT NULL,
+  `contribuyente_especial` varchar(45) DEFAULT NULL,
+  `obligado_contabilidad` varchar(2) DEFAULT NULL,
+  `tipo_identificacion_sujeto_retenido` int(11) DEFAULT NULL,
+  `razon_social_sujeto_retenido` varchar(100) DEFAULT NULL,
+  `identificacion_sujeto_retenido` varchar(45) DEFAULT NULL,
+  `periodo_fiscal` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `datos_retencion_electronica`
+--
+
+INSERT INTO `datos_retencion_electronica` (`id`, `ambiente`, `id_comprobante`, `orden_no`, `tipo_emision`, `razon_social`, `nombre_comercial`, `ruc`, `cod_doc`, `estab`, `pto_emi`, `secuencial`, `dir_matriz`, `fecha_emision`, `dir_establecimiento`, `contribuyente_especial`, `obligado_contabilidad`, `tipo_identificacion_sujeto_retenido`, `razon_social_sujeto_retenido`, `identificacion_sujeto_retenido`, `periodo_fiscal`) VALUES
+(1, 1, 26, 1, 1, 'asdsa', 'asdasd', '123123213', 7, '001', '001', 12344, 'asdasd', '2022-01-14', 'a', NULL, 'SI', 4, 'dfgfdgfdg', '1792206375001', '2022-01-14');
 
 -- --------------------------------------------------------
 
@@ -1625,7 +1804,7 @@ CREATE TABLE `dct_sistema_tbl_empresa` (
 --
 
 INSERT INTO `dct_sistema_tbl_empresa` (`emp_id_empresa`, `emp_empresa`, `emp_ruc`, `emp_estado`, `emp_vigencia_desde`, `emp_vigencia_hasta`, `em_archivo_fact_elec`, `em_pass_fct_elec`, `ctg_id_catalogo`, `em_usuario_creacion`, `em_usuario_modificacion`, `em_fecha_creacion`, `em_fecha_modificacion`, `em_ip_creacion`, `em_ip_modificacion`) VALUES
-(1, 'DRECONSTEC', '0919664854001', 1, '2022-07-25', '2032-07-31', '0919664854001.p12', '123', 5, NULL, '0919664854', NULL, '2022-07-28 04:38:24', NULL, '::1'),
+(1, 'DRECONSTEC', '0919664854001', 1, '2022-07-25', '2032-07-31', '0919664854001.p12', 'Maruto1984', 5, NULL, '0919664854', NULL, '2022-08-02 15:48:07', NULL, '::1'),
 (4, 'UROCORP', '4556456456464', 1, '2022-07-19', '2022-08-31', NULL, NULL, 12, '0919664854', '0919664854', '2022-07-28 04:36:12', '2022-07-28 19:30:30', '::1', '::1');
 
 -- --------------------------------------------------------
@@ -1825,7 +2004,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-02 05:49:48', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-01', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-02 21:39:53', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-02', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 -- --------------------------------------------------------
 
@@ -1899,6 +2078,75 @@ INSERT INTO `detalle_factura_electronica` (`id_tabla`, `orden_no`, `cantidad`, `
 (27, 1, 1600, 'Pulpa de GUANABANA CMP', '0.31', '496.00', '0', '0', '0', '3', '0', '0.00', '5.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
 (28, 1, 1600, 'Pulpa de MORA CAMP', '0.27', '432.00', '0', '0', '0', '3', '0', '0.00', '0.00', '0.00', '5', '0', '5.00', '5.00', '5.00');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_guia_electronica`
+--
+
+CREATE TABLE `detalle_guia_electronica` (
+  `orden_no` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `unidad` varchar(50) NOT NULL,
+  `productos` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_guia_electronica`
+--
+
+INSERT INTO `detalle_guia_electronica` (`orden_no`, `cantidad`, `unidad`, `productos`, `id`) VALUES
+(12249, 1, '1', '1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_nota_electronica`
+--
+
+CREATE TABLE `detalle_nota_electronica` (
+  `id_tabla` int(11) NOT NULL,
+  `nota_no` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `item` varchar(50) NOT NULL,
+  `precio_u` decimal(19,4) NOT NULL,
+  `total` decimal(19,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_nota_electronica`
+--
+
+INSERT INTO `detalle_nota_electronica` (`id_tabla`, `nota_no`, `cantidad`, `item`, `precio_u`, `total`) VALUES
+(1, 1, 1, '1', '11.0000', '11.0000'),
+(3, 2, 1, '1', '11.0000', '11.0000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_retencion_electronica`
+--
+
+CREATE TABLE `detalle_retencion_electronica` (
+  `id` int(11) NOT NULL,
+  `orden_no` int(11) DEFAULT NULL,
+  `codigo` int(11) DEFAULT NULL,
+  `codigo_retencion` int(11) DEFAULT NULL,
+  `base_imponible` decimal(19,4) DEFAULT NULL,
+  `porcentaje_retencion` int(11) DEFAULT NULL,
+  `valor_retenido` decimal(19,4) DEFAULT NULL,
+  `tipo_comprobante` varchar(45) DEFAULT NULL,
+  `impuesto` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_retencion_electronica`
+--
+
+INSERT INTO `detalle_retencion_electronica` (`id`, `orden_no`, `codigo`, `codigo_retencion`, `base_imponible`, `porcentaje_retencion`, `valor_retenido`, `tipo_comprobante`, `impuesto`) VALUES
+(1, 1, 1, 332, '3280.0000', 0, '0.0000', '01', '100');
+
 --
 -- Índices para tablas volcadas
 --
@@ -1907,6 +2155,12 @@ INSERT INTO `detalle_factura_electronica` (`id_tabla`, `orden_no`, `cantidad`, `
 -- Indices de la tabla `datos_cabecera_electronica`
 --
 ALTER TABLE `datos_cabecera_electronica`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `datos_nota_credito`
+--
+ALTER TABLE `datos_nota_credito`
   ADD PRIMARY KEY (`id`);
 
 --
