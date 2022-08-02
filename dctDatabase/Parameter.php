@@ -44,5 +44,5 @@
 	$ultramsg_token="glpr98u1bxxd6job";
 	$instance_id="instance12736";
 	/****************** URL POS *************************/
-	$host="http://localhost/GIT/webPrestadores/webPosOperaciones/";
+	$host="http://localhost/GIT/webPrestadores/";
 ?>

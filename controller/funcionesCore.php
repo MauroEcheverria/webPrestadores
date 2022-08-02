@@ -285,8 +285,7 @@
 		/*'%Y años %m meses %d days %H horas %i minutos %s segundos'*/
 		return $interval->format('%Y AÑOS %M MESES %D DÍAS');
 	}
-	function phpMailer($arrayMail)
-	{
+	function phpMailer($arrayMail) {
 		include("../../../dctDatabase/Parameter.php");
 		require_once('../../../plugins/PHPSendMail/PHPMailerAutoload.php');
 	  $mail = new PHPMailer;

@@ -35,8 +35,8 @@
 				$pdo->commit();
 	      $data_result["message"] = "saveOK";
 	      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-	      $data_result["ruta_factura"] = $host."comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
-	      $data_result["ruta_certificado"] = $host."cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
+	      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
+	      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
 	      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
 				$data_result["numLineaCodigo"] = __LINE__;
 				echo json_encode($data_result);
