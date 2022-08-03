@@ -20,7 +20,7 @@
         ?>
       </head>
       <body>
-        <div id="loading"><img src="../../../dist/img/loading.gif"/></div>
+        <div id="loading"><img src="dist/img/loading.gif"/></div>
         <header>
           <div class="collapse bg-dark" id="navbarHeader">
             <div class="container">

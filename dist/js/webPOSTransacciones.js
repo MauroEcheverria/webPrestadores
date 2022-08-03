@@ -14,7 +14,6 @@ $(document).ready(function() {
   $('#formPOSTransGenerarFactura').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
-      $('#myModalRegistroTransacciones').modal('show');
       $.ajax({
         url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
         type: 'POST',
@@ -24,13 +23,32 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              $('#myModalRegistroTransacciones').modal('show');
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura);
+              break;
+            case "noPoseeFirma":
+              $('#myModalRegistroTransacciones').modal('show');
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>No posee una firma electrónica registrada en el sistema.</div>" );
+              break; 
+            case "saveDbError":
+              $('#myModalRegistroTransacciones').modal('show');
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+              break;
+            case "saveXmlError":
+              $('#myModalRegistroTransacciones').modal('show');
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+              break;
             case "token_csrf_error":
-              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');*/
+              
               break;
           }
         }
@@ -49,13 +67,21 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura);
+            case "saveDbError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+              break;
+            case "saveXmlError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+              break;
             case "token_csrf_error":
-              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');*/
+              
               break;
           }
         }
@@ -74,13 +100,21 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura);
+            case "saveDbError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+              break;
+            case "saveXmlError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+              break;
             case "token_csrf_error":
-              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');*/
+              
               break;
           }
         }
@@ -99,13 +133,21 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura);
+            case "saveDbError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+              break;
+            case "saveXmlError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+              break;
             case "token_csrf_error":
-              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');*/
+              
               break;
           }
         }
@@ -124,13 +166,21 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              $("#dataPOSTransacciones").empty().prepend("");
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_factura);
+            case "saveDbError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+              break;
+            case "saveXmlError":
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+              break;
             case "token_csrf_error":
-              //modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              /*$("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');*/
+              
               break;
           }
         }

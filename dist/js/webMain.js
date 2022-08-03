@@ -504,7 +504,7 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
       { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
-      { title: '<div class="tituloColumnasDT">Estado Correo</div>' },
+      { title: '<div class="tituloColumnasDT">Verificación Correo</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
       { 

@@ -1,111 +1,140 @@
-function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,pwd_p12,ruta_factura) {
-    var response = [];
-    $.ajax({
-        url: "../../../plugins/facturacionElectronica/leerFactura.php",
-        type: 'POST',
-        data: {
-          'ruta_factura': ruta_factura
-        },
-        context: document.body
-    }).done(function (respuesta) {
-      window.contenido_comprobante = respuesta;
-      var oReq = new XMLHttpRequest();
-      oReq.open("GET", ruta_certificado, true);
-      oReq.responseType = "arraybuffer";
-      oReq.onload = function (oEvent) {
-        var blob = new Blob([oReq.response], {type: "application/x-pkcs12"});
-        window.contenido_p12 = [oReq.response];
-        var comprobanteFirmado_xml = firmarComprobante(window.contenido_p12[0],pwd_p12,window.contenido_comprobante);
-        $.ajax({
-          url: "../../../plugins/facturacionElectronica/firmarXML.php",
-          type: 'POST',
-          data: {
-            'mensaje': comprobanteFirmado_xml,
-            'clave_acceso': clave_acceso_sri
-          },
-          context: document.body
-        }).done(function (respuesta) {
-          xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
-          $.ajax({
-            type: 'POST',
-            url: "../../../plugins/facturacionElectronica/validarComprobante.php",
-            data: {
-              'claveAcceso': $claveAcceso.text()
-            },
-            context: document.body
-          }).done(function (respuestaValidarComprobante) {
-            respuesta = decodeURIComponent(respuestaValidarComprobante);
-            respuesta = respuesta.toString();
-            var validar_comprobante = respuestaValidarComprobante;
-            if (/RECIBIDA/i.test(respuesta) || /CLAVE ACCESO REGISTRADA/i.test(respuesta)) {
-              service = 'Autorizacion Comprobante';
-              xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
-              $.ajax({
-                type: 'POST',
-                url: "../../../plugins/facturacionElectronica/autorizacionComprobante.php",
-                data: {
-                  'claveAcceso': $claveAcceso.text()
-                },
-                context: document.body
-              }).done(function (respuestaAutorizacionComprobante) {
-                var autorizacion_comprobante = respuestaAutorizacionComprobante;
-                response[0] = validar_comprobante;
-                response[1] = autorizacion_comprobante;
-              });
-            } else {
-              response[0] = validar_comprobante;
-            }
-          });
-        });
-      }
-      oReq.send();
-    }
-  );
-}
-function fechas_certificado(ruta_certificado, mi_pwd_p12, ruta_respuesta) {
+function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p12,ruta_factura) {
   var response = [];
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", ruta_certificado, true);
-  oReq.responseType = "arraybuffer";
-  oReq.onload = function (oEvent) {
-    var blob = new Blob([oReq.response], {type: "application/x-pkcs12"});
-    window.contenido_p12 = [oReq.response];
-    var arrayUint8 = new Uint8Array(window.contenido_p12[0]);
-    var p12B64 = forge.util.binary.base64.encode(arrayUint8);
-    var p12Der = forge.util.decode64(p12B64);
-    var p12Asn1 = forge.asn1.fromDer(p12Der);
-    var p12 = forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
-    var certBags = p12.getBags({bagType: forge.pki.oids.certBag})
-    var cert = certBags[forge.oids.certBag][0].cert;
-    //Validar Fecha de vencimiento del p12
-    var fechaInicio = cert.validity['notBefore'];
-    var fechaFin = cert.validity['notAfter'];
-    var response = [];
-    response[0] = fechaInicio;
-    response[1] = fechaFin;
-    $.ajax({
+  $.ajax({
+      url: "../../../plugins/facturacionElectronica/leerFactura.php",
       type: 'POST',
-      url: "../../../plugins/facturacionElectronica/validarFechaCertificado.php",
       data: {
-          'fechaInicio': fechaInicio,
-          'fechaFin': fechaFin
+        'ruta_factura': ruta_factura
       },
       context: document.body
-    }).done(function (respuesta) {
-      response[2] = respuesta;
-      $.ajax({
-        type: 'POST',
-        url: ruta_respuesta,
-        data: {'respuestaValidarVigencia': response},
-        context: document.body
-      }).done(function (respuesta) {
-        return true;
-      });
-    });
-  }
-  oReq.send();
+  }).done(function (respuesta) {
+    window.contenido_comprobante = respuesta;
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", ruta_certificado, true);
+    oReq.responseType = "arraybuffer";
+    oReq.onload = function (oEvent) {
+      var blob = new Blob([oReq.response], {type: "application/x-pkcs12"});
+      window.contenido_p12 = [oReq.response];
+      if (fechas_certificado(window.contenido_p12[0],mi_pwd_p12)) {
+        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Fecha de certificado electrónico vigente</div>" );
+        //if (validar_pwrd(window.contenido_p12[0],mi_pwd_p12)) {
+          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Contraseña de certificado electrónico válida</div>" );
+          var comprobanteFirmado_xml = firmarComprobante(window.contenido_p12[0],mi_pwd_p12,window.contenido_comprobante);
+          $.ajax({
+            url: "../../../plugins/facturacionElectronica/firmarXML.php",
+            type: 'POST',
+            data: {
+              'mensaje': comprobanteFirmado_xml,
+              'clave_acceso': clave_acceso_sri
+            },
+            context: document.body
+          }).done(function (respuesta) {
+            $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se firma electrónicamente archivo XML.</div>" );
+            xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
+            $.ajax({
+              type: 'POST',
+              url: "../../../plugins/facturacionElectronica/validarComprobante.php",
+              data: {
+                'claveAcceso': $claveAcceso.text()
+              },
+              context: document.body
+            }).done(function (respuestaValidarComprobante) {
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se vilida comprobante contra SRI.</div>" );
+              respuesta = decodeURIComponent(respuestaValidarComprobante);
+              respuesta = respuesta.toString();
+              var validar_comprobante = respuestaValidarComprobante;
+              if (/RECIBIDA/i.test(respuesta) || /CLAVE ACCESO REGISTRADA/i.test(respuesta)) {
+                service = 'Autorizacion Comprobante';
+                xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
+                $.ajax({
+                  type: 'POST',
+                  url: "../../../plugins/facturacionElectronica/autorizacionComprobante.php",
+                  data: {
+                    'claveAcceso': $claveAcceso.text()
+                  },
+                  context: document.body
+                }).done(function (respuestaAutorizacionComprobante) {
+                  $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba comprobante con SRI</div>" );
+                  var autorizacion_comprobante = respuestaAutorizacionComprobante;
+                  response[0] = validar_comprobante;
+                  response[1] = autorizacion_comprobante;
+                });
+              } else {
+                response[0] = validar_comprobante;
+              }
+            });
+          });
+        /*}
+        else {
+          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Contraseña de certificado electrónico inválida</div>" );
+        }*/
+      }
+      else {
+        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Fecha de certificado electrónico extemporáneo</div>" );
+      }    
+    }
+    oReq.send();
+  });
 }
-function validar_pwrd(ruta_certificado, mi_pwd_p12, ruta_respuesta) {
+function fechas_certificado(ruta_certificado,mi_pwd_p12) {
+  var arrayUint8 = new Uint8Array(ruta_certificado);
+  var p12B64 = forge.util.binary.base64.encode(arrayUint8);
+  var p12Der = forge.util.decode64(p12B64);
+  var p12Asn1 = forge.asn1.fromDer(p12Der);
+  var p12 = forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
+  var certBags = p12.getBags({bagType: forge.pki.oids.certBag})
+  var signaturesQuantity = certBags[forge.oids.certBag];
+  var count = 0;
+  var positionSignature = 0;
+  var entidad = signaturesQuantity[0].attributes.friendlyName[0];
+  if (/BANCO CENTRAL/i.test(entidad)) {
+    entidad = 'BANCO_CENTRAL';
+    var certBags = p12.getBags({bagType: forge.pki.oids.certBag})
+    var cert = certBags[forge.oids.certBag][1].cert;
+    var issuerName = 'CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC';
+  } else if (/SECURITY DATA/i.test(entidad)) {
+    entidad = 'SECURITY_DATA';
+    var contador = 0;
+    var max = 0;
+    var attributes_array=[];        
+    certBags[forge.oids.certBag].forEach(function (entry) {
+      var bag = entry.cert;
+      var attributes = bag.extensions;
+      attributes_array[contador] = attributes;
+      attributes_array.sort().reverse();
+      max = attributes_array[0].length;
+      contador++;
+    });
+    certBags[forge.oids.certBag].forEach(function (entry) {
+        var bag = entry.cert;
+        var attributes = bag.extensions;
+        if (attributes.length >= max) {
+          cert = bag;
+        }
+    });
+    var issuerName = 'CN=AUTORIDAD DE CERTIFICACION SUB SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A.,C=EC';
+  } else {
+    var cert = certBags[forge.oids.certBag][0].cert;
+    var tipoSecurityData = certBags[forge.oids.certBag][0].cert.extensions[3].value;
+    if(/SUBCA-2/i.test(tipoSecurityData)) {
+      var issuerName = 'CN=AUTORIDAD DE CERTIFICACION SUBCA-2 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 2,C=EC';
+    }else if(/SUBCA-3/i.test(tipoSecurityData)){
+      var issuerName = 'CN=AUTORIDAD DE CERTIFICACION SUBCA-3 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 3,C=EC';
+    }else{
+      var issuerName = 'CN=AUTORIDAD DE CERTIFICACION SUBCA-1 SECURITY DATA,OU=ENTIDAD DE CERTIFICACION DE INFORMACION,O=SECURITY DATA S.A. 1,C=EC';
+    }
+    entidad = 'SECURITY_DATA'; 
+  }
+  var fechaFin = cert.validity['notAfter'];
+  var fechaHoy = new Date();
+  if (fechaHoy <= fechaFin) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+function validar_pwrd(ruta_certificado,mi_pwd_p12) {
   var oReq = new XMLHttpRequest();
   oReq.open("GET", ruta_certificado, true);
   oReq.responseType = "arraybuffer";
@@ -117,24 +146,10 @@ function validar_pwrd(ruta_certificado, mi_pwd_p12, ruta_respuesta) {
     var p12Der = forge.util.decode64(p12B64);
     var p12Asn1 = forge.asn1.fromDer(p12Der);
     try {
-        forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
-        $.ajax({
-            type: 'POST',
-            url: ruta_respuesta,
-            data: {'respuestaValidarContraseña': 'Contraseña Correcta'},
-            context: document.body
-        }).done(function (respuesta) {
-            return "contraseña valida"
-        });
+      forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
+      return true;
     } catch (err) {
-      $.ajax({
-        type: 'POST',
-        url: ruta_respuesta,
-        data: {'respuestaValidarContraseña': 'Contraseña Invalida'},
-        context: document.body
-      }).done(function (respuesta) {
-        return "contraseña invalida"
-      });
+      return false;
     }
   }
   oReq.send();
@@ -190,19 +205,6 @@ function firmarComprobante(mi_contenido_p12, mi_pwd_p12, comprobante) {
     }
     entidad = 'SECURITY_DATA'; 
   }
-  var fechaInicio = cert.validity['notBefore'];
-  var fechaFin = cert.validity['notAfter'];
-  $.ajax({
-      type: 'POST',
-      url: "../../../plugins/facturacionElectronica/validarFechaCertificado.php",
-      data: {
-        'fechaInicio': fechaInicio,
-        'fechaFin': fechaFin
-      },
-      context: document.body
-  }).done(function (respuesta) {
-
-  });
   var pkcs8bags = p12.getBags({bagType: forge.pki.oids.pkcs8ShroudedKeyBag});
   if (entidad == 'BANCO_CENTRAL') {
     var pkcs8 = pkcs8bags[forge.oids.pkcs8ShroudedKeyBag][1];

@@ -5,7 +5,7 @@
   include("../../../dialogs/modalViews.php"); 
 
   $css_dreconstec = array();
-  //$css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../dist/css/webPOSTransacciones.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
@@ -17,7 +17,6 @@
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
-
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main">
@@ -113,7 +112,7 @@
         <div class="modal-header">
           <div class="row">
             <div class="col-md-1">
-              <img src="../../../dist/img/modal_advertencia.png" width="30px" heigth="20px">
+              <i class='fas fa-spinner fa-spin fa-2x'></i>
             </div>
             <div class="col-md-11">
               <h4 class="modal-title">Informe de Proceso</h4>
@@ -121,13 +120,10 @@
           </div>
         </div>
         <div class="modal-body">
-          * nOeefe<br>
-          *sdfsdf<br>
-          *sdf;lsdkfsd<br>
-          *sdfsdfs<br>
+          <div id="dataPOSTransacciones"></div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-info btn-dreconstec" data-dismiss="modal" 
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal" 
           id="idCerrarRegistroTransacciones">Cerrar</button>
         </div>
       </div>
