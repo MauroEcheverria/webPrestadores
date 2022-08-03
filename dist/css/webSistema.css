@@ -122,3 +122,9 @@
   color:#3a7d34;
   text-align: left;
 }
+.main-sidebar, .sidebar, .nav-sidebar {
+  font-size: 13px;
+}
+.cell-border, .dataTable, .no-footer {
+  font-size: 13px;
+}
