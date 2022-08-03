@@ -107,6 +107,32 @@
       </div>
     </section>
   </div>
+  <div class="modal fade" id="myModalRegistroTransacciones" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <div class="col-md-1">
+              <img src="../../../dist/img/modal_advertencia.png" width="30px" heigth="20px">
+            </div>
+            <div class="col-md-11">
+              <h4 class="modal-title">Informe de Proceso</h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          * nOeefe<br>
+          *sdfsdf<br>
+          *sdf;lsdkfsd<br>
+          *sdfsdfs<br>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-info btn-dreconstec" data-dismiss="modal" 
+          id="idCerrarRegistroTransacciones">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <?php 
   modalViews();

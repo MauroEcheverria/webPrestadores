@@ -14,6 +14,7 @@ $(document).ready(function() {
   $('#formPOSTransGenerarFactura').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
+      $('#myModalRegistroTransacciones').modal('show');
       $.ajax({
         url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
         type: 'POST',

@@ -89,15 +89,10 @@ $(document).ready(function() {
     }
   }*/
 
+  $('#loading').hide();  
   $(document)
-  .ajaxStart(function(){
-    $('.preloader').css('height', '100vh');
-    $('.preloader').children().show();
-  })
-  .ajaxStop(function(){
-    $('.preloader').css('height', '0');
-    $('.preloader').children().hide();
-  });
+  .ajaxStart(function(){$('#loading').show();})
+  .ajaxStop(function(){$('#loading').hide();});
 
   window.dct_width_page = $(window).width();
   window.dct_height_page = $(window).height();
