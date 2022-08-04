@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2022 a las 23:44:32
+-- Tiempo de generación: 04-08-2022 a las 05:25:48
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -56,11 +56,11 @@ CREATE TABLE `datos_cabecera_electronica` (
 --
 
 INSERT INTO `datos_cabecera_electronica` (`id`, `id_comprobante`, `fecha`, `orden_no`, `cliente`, `direccion`, `telefono`, `ruc`, `tipo_comporbante`, `tipo_identificacion`, `correo`, `establecimiento`, `punto_emi`, `ruc_empresa`, `ambiente`, `razon_social`, `nombre_comercial`, `secuencial`, `direccion_matriz`, `obligado`, `nota_no`) VALUES
-(1, 1, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1100, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
-(9, 2, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
-(10, 3, '2022-08-02', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1102, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
-(11, 4, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
-(12, 5, '2022-02-16', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1);
+(1, 1, '2022-08-03', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1109, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(9, 2, '2022-08-03', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1010, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(10, 3, '2022-08-03', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1102, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(11, 4, '2022-08-03', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1001, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(12, 5, '2022-08-03', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 7199, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1);
 
 -- --------------------------------------------------------
 
@@ -104,8 +104,8 @@ CREATE TABLE `datos_guia_electronica` (
 --
 
 INSERT INTO `datos_guia_electronica` (`id`, `ambiente`, `id_comprobante`, `tipo_emision`, `razon_social`, `nombre_comercial`, `cod_doc`, `ruc`, `establecimiento`, `pto_emi`, `secuencial`, `dir_matriz`, `orden_no`, `t_nombre`, `t_ci`, `motivo_translado`, `fecha`, `comprobante_venta`, `tipo_ident_transport`, `t_contabilidad`, `t_f_inicio`, `t_f_final`, `t_placa`, `punto_partida`, `d_ruc`, `d_razon_social`, `d_punto_llegada`, `tipo_comprobante`) VALUES
-(1, 1, 4, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1', 'adsad', 1, 'd', '1716762396001', 'd', '2020-11-09', 1, 4, 'SI', '2020-11-09', '2020-11-12', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6),
-(2, 1, 23, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1', 'adsad', 12249, 'd', '1716762396001', 'd', '2022-01-14', 1, 4, 'SI', '2022-01-14', '2022-01-14', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6);
+(1, 1, 4, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1001', 'adsad', 200, 'd', '1716762396001', 'd', '2022-08-02', 1, 4, 'SI', '2022-08-02', '2022-08-03', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6),
+(2, 1, 4, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1001', 'adsad', 1, 'd', '1716762396001', 'd', '2022-08-02', 1, 4, 'SI', '2022-08-02', '2022-08-02', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6);
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ CREATE TABLE `datos_nota_credito` (
 --
 
 INSERT INTO `datos_nota_credito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocial`, `nombreComercial`, `ruc`, `cod_doc`, `establecimiento`, `ptoEmi`, `secuencial`, `dirMatriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `rise`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `valorModificacion`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `motivo`, `nota_no`) VALUES
-(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1002, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
+(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1003, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE `datos_nota_debito` (
 --
 
 INSERT INTO `datos_nota_debito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocialComprador`, `nombreComercial`, `cod_doc`, `establecimiento`, `secuencial`, `direccion_matriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `tarifa`, `valorTotal`, `formapago`, `total`, `plazo`, `unidadTiempo`, `razonDescripcion`, `valorModificado`, `campoAdiconalDirecci`, `campoAdicionalMail`, `campoAdionalFono`) VALUES
-(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 7189, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 1000, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE `datos_retencion_electronica` (
 --
 
 INSERT INTO `datos_retencion_electronica` (`id`, `ambiente`, `id_comprobante`, `orden_no`, `tipo_emision`, `razon_social`, `nombre_comercial`, `ruc`, `cod_doc`, `estab`, `pto_emi`, `secuencial`, `dir_matriz`, `fecha_emision`, `dir_establecimiento`, `contribuyente_especial`, `obligado_contabilidad`, `tipo_identificacion_sujeto_retenido`, `razon_social_sujeto_retenido`, `identificacion_sujeto_retenido`, `periodo_fiscal`) VALUES
-(1, 1, 26, 1, 1, 'asdsa', 'asdasd', '123123213', 7, '001', '001', 12344, 'asdasd', '2022-01-14', 'a', NULL, 'SI', 4, 'dfgfdgfdg', '1792206375001', '2022-01-14');
+(1, 1, 5, 1, 1, 'asdsa', 'asdasd', '123123213', 7, '001', '001', 1001, 'asdasd', '2022-08-02', 'a', NULL, 'SI', 4, 'dfgfdgfdg', '1792206375001', '2022-01-14');
 
 -- --------------------------------------------------------
 
@@ -1804,7 +1804,7 @@ CREATE TABLE `dct_sistema_tbl_empresa` (
 --
 
 INSERT INTO `dct_sistema_tbl_empresa` (`emp_id_empresa`, `emp_empresa`, `emp_ruc`, `emp_estado`, `emp_vigencia_desde`, `emp_vigencia_hasta`, `em_archivo_fact_elec`, `em_pass_fct_elec`, `ctg_id_catalogo`, `em_usuario_creacion`, `em_usuario_modificacion`, `em_fecha_creacion`, `em_fecha_modificacion`, `em_ip_creacion`, `em_ip_modificacion`) VALUES
-(1, 'DRECONSTEC', '0919664854001', 1, '2022-07-25', '2032-07-31', '0919664854001.p12', 'Maruto1984', 5, NULL, '0919664854', NULL, '2022-08-02 15:48:07', NULL, '::1'),
+(1, 'DRECONSTEC', '0919664854001', 1, '2022-07-25', '2032-07-31', '0919664854001.p12', 'Maruto1984', 5, NULL, '0919664854', NULL, '2022-08-03 20:55:52', NULL, '::1'),
 (4, 'UROCORP', '4556456456464', 1, '2022-07-19', '2022-08-31', NULL, NULL, 12, '0919664854', '0919664854', '2022-07-28 04:36:12', '2022-07-28 19:30:30', '::1', '::1');
 
 -- --------------------------------------------------------
@@ -1963,7 +1963,13 @@ CREATE TABLE `dct_sistema_tbl_token` (
 INSERT INTO `dct_sistema_tbl_token` (`tok_id_token`, `tok_token`, `tok_tipo`, `tok_cedula`, `tok_fecha`, `tok_estado`, `tok_usuario_creacion`, `tok_usuario_modificacion`, `tok_fecha_creacion`, `tok_fecha_modificacion`, `tok_ip_creacion`, `tok_ip_modificacion`) VALUES
 (26, 'YjZNQnNMYS84b2ZhT012TWIxckVsN2trYUd2cG8xelVPVWZERkx4UGZqWkhoWCtsM2NPTTRQbGtTQmFEUUt5cw==', 'ACTIVACION', '1308041134', '2022-07-31 04:00:03', 0, '0919664854', NULL, '2022-07-31 04:00:03', NULL, '::1', NULL),
 (27, 'MXEyV2dYVm4vb3AvWDJmczlOZDdKR01BRkxlelhaN054RU1lbXhWTzBlRnA2VmhtRFhTSW9wWFBpd3NGK1FGYQ==', 'ACTIVACION', '1308041134', '2022-07-31 05:38:00', 0, '0919664854', NULL, '2022-07-31 05:38:00', NULL, '::1', NULL),
-(28, 'VGgwU1ZMeVRkdk9FYWE5NFhpaThiZ2t1WmI1aFRQa2FWNHIxT2RrME5zam1ET3NkZHg0dTBhU1E5dWxDdGhKMA==', 'ACTIVACION', '45677686788', '2022-07-31 06:03:09', 1, '0919664854', NULL, '2022-07-31 06:03:09', NULL, '::1', NULL);
+(28, 'VGgwU1ZMeVRkdk9FYWE5NFhpaThiZ2t1WmI1aFRQa2FWNHIxT2RrME5zam1ET3NkZHg0dTBhU1E5dWxDdGhKMA==', 'ACTIVACION', '45677686788', '2022-07-31 06:03:09', 1, '0919664854', NULL, '2022-07-31 06:03:09', NULL, '::1', NULL),
+(29, 'enhPMVJLMno3QXAwRXdqUk02b0R5V1VjMUNkRHNCdzAwRHpheUdLdTRYUFZzV3MzSkQxcTNCV3FZSjBtWlRHUA==', 'ACTIVACION', '1308041134', '2022-08-02 23:06:11', 0, '0919664854', '1308041134', '2022-08-02 23:06:11', '2022-08-02 23:06:45', '::1', '::1'),
+(30, 'RGxtaEI3cytwbVBqOS9pSmtjdlpJb1U0VW9lcDBaNFNkNWR3eVc5UlAzWjFXazRFQ1p3VkFXOU1RMUI2VERjOA==', 'ACTIVACION', '1308041134', '2022-08-02 23:22:38', 1, '0919664854', NULL, '2022-08-02 23:22:38', NULL, '::1', NULL),
+(31, 'bU9ybm41aW1teExnZi9UZHE2NldnZ1NlbXhSNzRYV0pvR0NXRnBYdkJ3RnZHOUJQcDhUZjZ3dS9OSlpGYlhLdg==', 'ACTIVACION', '1308041134', '2022-08-02 23:24:09', 1, '0919664854', NULL, '2022-08-02 23:24:09', NULL, '::1', NULL),
+(32, 'aHZCWDRkaUR3alIyTlZFWGdBdFFYbGRHc0JWUzd0MUtlMnAzbHlBT0dKVzk0S1l3NGl0cDZGZUx2cnliWEFxVQ==', 'ACTIVACION', '1308041134', '2022-08-02 23:28:06', 1, '0919664854', NULL, '2022-08-02 23:28:06', NULL, '::1', NULL),
+(33, 'bWJMWDZTdWJMeC9QRHZYS1FWeDFsT1p3bGhISDRJTStNYlFjQ0FxK05xMG16MnphU3RRL3djMVg0UG9XUC92Ug==', 'ACTIVACION', '1308041134', '2022-08-02 23:29:17', 1, '0919664854', NULL, '2022-08-02 23:29:17', NULL, '::1', NULL),
+(34, 'bzRGSWp6QU11aXFBRmYrYzlETjZmWmpyZFkwdlplY3RveE56ZXJRcEE1cERUOXNGNWxkVk1nUERaalBpckFFcQ==', 'ACTIVACION', '1308041134', '2022-08-02 23:35:56', 1, '0919664854', NULL, '2022-08-02 23:35:56', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -2004,7 +2010,8 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-02 21:39:53', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-02', '0919664854', '0919664854', '2021-05-19 15:20:25', '2021-05-19 15:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-03 21:50:23', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-03', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('1308041134', 'WEQWEQWE', 'QWEQWE', 'QEQWE', 'QWEQWE', 'UC9lVXBPVXUyeUV5TVlTbUlRNlh0UGh4bUw4bTJqZXVDQ1JPY0tOVG5rRDlMUHQxMU1TZFFMbkhHTjFQWHhYMw==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 0, 9, 1, 4, '2022-08-02', 0, 1, NULL, '0919664854', NULL, '2022-08-02 23:35:56', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -2097,7 +2104,7 @@ CREATE TABLE `detalle_guia_electronica` (
 --
 
 INSERT INTO `detalle_guia_electronica` (`orden_no`, `cantidad`, `unidad`, `productos`, `id`) VALUES
-(12249, 1, '1', '1', 1);
+(1, 1, '1', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -2158,9 +2165,27 @@ ALTER TABLE `datos_cabecera_electronica`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `datos_guia_electronica`
+--
+ALTER TABLE `datos_guia_electronica`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `datos_nota_credito`
 --
 ALTER TABLE `datos_nota_credito`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `datos_nota_debito`
+--
+ALTER TABLE `datos_nota_debito`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `datos_retencion_electronica`
+--
+ALTER TABLE `datos_retencion_electronica`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2236,6 +2261,12 @@ ALTER TABLE `dct_sistema_tbl_usuario_adicional`
   ADD PRIMARY KEY (`usr_cod_usuario`);
 
 --
+-- Indices de la tabla `detalle_guia_electronica`
+--
+ALTER TABLE `detalle_guia_electronica`
+  ADD PRIMARY KEY (`orden_no`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -2279,7 +2310,7 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`
 --
 ALTER TABLE `dct_sistema_tbl_token`
-  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
