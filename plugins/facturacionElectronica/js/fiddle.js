@@ -15,10 +15,10 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
     oReq.onload = function (oEvent) {
       var blob = new Blob([oReq.response], {type: "application/x-pkcs12"});
       window.contenido_p12 = [oReq.response];
-      if (fechas_certificado(window.contenido_p12[0],mi_pwd_p12)) {
-        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Fecha de certificado electrónico vigente</div>" );
-        //if (validar_pwrd(window.contenido_p12[0],mi_pwd_p12)) {
-          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Contraseña de certificado electrónico válida</div>" );
+      if (validar_contrasena_certificado(window.contenido_p12[0],mi_pwd_p12)) {
+        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Contraseña de certificado electrónico válida</div>" );
+        if (validar_fechas_certificado(window.contenido_p12[0],mi_pwd_p12)) {
+          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Fecha de certificado electrónico vigente</div>" );
           var comprobanteFirmado_xml = firmarComprobante(window.contenido_p12[0],mi_pwd_p12,window.contenido_comprobante);
           $.ajax({
             url: "../../../plugins/facturacionElectronica/firmarXML.php",
@@ -39,7 +39,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               },
               context: document.body
             }).done(function (respuestaValidarComprobante) {
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se vilida comprobante contra SRI.</div>" );
+              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida comprobante contra SRI.</div>" );
               respuesta = decodeURIComponent(respuestaValidarComprobante);
               respuesta = respuesta.toString();
               var validar_comprobante = respuestaValidarComprobante;
@@ -64,19 +64,19 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               }
             });
           });
-        /*}
+        }
         else {
-          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Contraseña de certificado electrónico inválida</div>" );
-        }*/
+          $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Fecha de certificado electrónico extemporáneo</div>" );
+        }
       }
       else {
-        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Fecha de certificado electrónico extemporáneo</div>" );
+        $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Contraseña de certificado electrónico inválida</div>" );
       }    
     }
     oReq.send();
   });
 }
-function fechas_certificado(ruta_certificado,mi_pwd_p12) {
+function validar_fechas_certificado(ruta_certificado,mi_pwd_p12) {
   var arrayUint8 = new Uint8Array(ruta_certificado);
   var p12B64 = forge.util.binary.base64.encode(arrayUint8);
   var p12Der = forge.util.decode64(p12B64);
@@ -134,25 +134,17 @@ function fechas_certificado(ruta_certificado,mi_pwd_p12) {
     return false;
   }
 }
-function validar_pwrd(ruta_certificado,mi_pwd_p12) {
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", ruta_certificado, true);
-  oReq.responseType = "arraybuffer";
-  oReq.onload = function (oEvent) {
-    var blob = new Blob([oReq.response], {type: "application/x-pkcs12"});
-    window.contenido_p12 = [oReq.response];
-    var arrayUint8 = new Uint8Array(window.contenido_p12[0]);
-    var p12B64 = forge.util.binary.base64.encode(arrayUint8);
-    var p12Der = forge.util.decode64(p12B64);
-    var p12Asn1 = forge.asn1.fromDer(p12Der);
-    try {
-      forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
-      return true;
-    } catch (err) {
-      return false;
-    }
+function validar_contrasena_certificado(ruta_certificado,mi_pwd_p12) {
+  var arrayUint8 = new Uint8Array(ruta_certificado);
+  var p12B64 = forge.util.binary.base64.encode(arrayUint8);
+  var p12Der = forge.util.decode64(p12B64);
+  var p12Asn1 = forge.asn1.fromDer(p12Der);
+  try {
+    forge.pkcs12.pkcs12FromAsn1(p12Asn1, mi_pwd_p12);
+    return true;
+  } catch (error) {
+    return false;
   }
-  oReq.send();
 }
 var contenido_p12 = null;
 function firmarComprobante(mi_contenido_p12, mi_pwd_p12, comprobante) {

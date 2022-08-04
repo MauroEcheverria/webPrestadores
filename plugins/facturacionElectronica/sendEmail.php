@@ -3,19 +3,19 @@ require_once('../PHPSendMail/PHPMailerAutoload.php');
 class sendEmail {
   public function enviarCorreo($tipo, $nombre,$claveAcceso,$email) {
 
-    /*$mailSMTP = 'tls';
-    $mailPort = 587;*/
+    $mailSMTP = 'tls';
+    $mailPort = 587;
 
-    $mailSMTP = 'ssl';
-    $mailPort = 465;
+    /*$mailSMTP = 'ssl';
+    $mailPort = 465;*/
 
-    $hostSince = "mail.dreconstec.com";
+    /*$hostSince = "mail.dreconstec.com";
     $passSince = "T6YQuertyreu53&%1";
-    $mailSince = "app-web@dreconstec.com";
+    $mailSince = "app-web@dreconstec.com";*/
 
-    /*$hostSince = "smtp.office365.com";
+    $hostSince = "smtp.office365.com";
     $passSince = "Vinicio1984";
-    $mailSince = "app.ceibos@iess.gob.ec";*/
+    $mailSince = "app.ceibos@iess.gob.ec";
 
     $mail = new PHPMailer;
     $mail->SMTPDebug = 0;
@@ -29,13 +29,13 @@ class sendEmail {
     $mail->SMTPSecure = $mailSMTP;
     $mail->Port = $mailPort;
     $mail->setFrom($mailSince);
-    $mail->SMTPOptions = array(
+    /*$mail->SMTPOptions = array(
       'ssl' => array(
       'verify_peer' => false,
       'verify_peer_name' => false,
       'allow_self_signed' => true
       )
-    );
+    );*/
 
     $bodyContent = "Estimado(a):<br><bold> " . $nombre . "</bold><br> Le informamos que su comprobante electronico ha sido emitido exitosamente y se encuentra adjunto al presente correo.";
 
