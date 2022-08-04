@@ -43,8 +43,8 @@ class sendEmail {
     $mail->Subject = $tipo . ' Facturacion Electronica';
     $body = $bodyContent;
 
-    $mail->addAttachment('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf');
-    $mail->addAttachment('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'_aprobada.xml');
+    $mail->addAttachment('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf');
+    $mail->addAttachment('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.xml');
 
     $mail->MsgHTML($body);
     $mail->IsHTML(true);

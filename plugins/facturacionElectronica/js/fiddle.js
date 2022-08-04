@@ -39,11 +39,9 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               },
               context: document.body
             }).done(function (respuestaValidarComprobante) {
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida comprobante contra SRI.</div>" );
-              respuesta = decodeURIComponent(respuestaValidarComprobante);
-              respuesta = respuesta.toString();
-              var validar_comprobante = respuestaValidarComprobante;
-              if (/RECIBIDA/i.test(respuesta) || /CLAVE ACCESO REGISTRADA/i.test(respuesta)) {
+              respuestaValidarComprobante = JSON.parse(respuestaValidarComprobante);
+              if (respuestaValidarComprobante.dataValidacion.estado == "RECIBIDA" ) {
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida de manera correcta comprobante electrónico.</div>" );
                 service = 'Autorizacion Comprobante';
                 xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
                 $.ajax({
@@ -54,13 +52,16 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   },
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
-                  $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba comprobante con SRI</div>" );
-                  var autorizacion_comprobante = respuestaAutorizacionComprobante;
-                  response[0] = validar_comprobante;
-                  response[1] = autorizacion_comprobante;
+                  respuestaAutorizacionComprobante = JSON.parse(respuestaAutorizacionComprobante);
+                  if (respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.estado == "AUTORIZADO") {
+                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba de manera correcta comprobante electrónico</div>" );
+                  }
+                  else {
+                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.mensajes.mensaje.mensaje+". Cod Error SRI ("+respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.mensajes.mensaje.identificador+")</div>" );
+                  }
                 });
               } else {
-                response[0] = validar_comprobante;
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.dataValidacion.comprobantes.comprobante.mensajes.mensaje.mensaje+". Cod Error SRI ("+respuestaValidarComprobante.dataValidacion.comprobantes.comprobante.mensajes.mensaje.identificador+")</div>" );
               }
             });
           });

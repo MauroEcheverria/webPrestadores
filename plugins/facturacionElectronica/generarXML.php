@@ -224,7 +224,7 @@ class enviarXML {
                       </infoAdicional>
                   </factura>';
 
-            $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
+            $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";
@@ -411,7 +411,7 @@ class enviarXML {
     </infoAdicional>
 </notaCredito>';
 
-            $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
+            $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";
@@ -571,7 +571,7 @@ class enviarXML {
     </infoAdicional>
 </notaDebito>';
 
-           $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
+           $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";
@@ -740,7 +740,7 @@ class enviarXML {
 </guiaRemision>';
 
 
-          $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
+          $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";
@@ -875,7 +875,7 @@ class enviarXML {
     </infoAdicional>
 </comprobanteRetencion>';
 
-           $nombre = "../../comprobantesElectronicos/".$clave_acceso.".xml";
+           $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
             $archivo = fopen($nombre, "w+");
             if (fwrite($archivo, $xml)) {
               $data_result["cargaXML"] = "cargaOK";

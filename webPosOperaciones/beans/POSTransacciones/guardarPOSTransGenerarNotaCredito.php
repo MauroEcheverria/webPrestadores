@@ -27,27 +27,47 @@
 	    $query_fe->execute();
 	    $row_fe = $query_fe->fetch(\PDO::FETCH_ASSOC);
 
-			$enviarXML=new enviarXML();
-      $dataXML = $enviarXML->envioXML(3,$_POST["tipoComprobante"],$pdo);
-      $clave_acceso_sri = explode("&&&&",$dataXML);
+	    if ($row_fe["em_archivo_fact_elec"] != "") {
 
-			if ($clave_acceso_sri[0] == "cargaOK") {
-				$pdo->commit();
-	      $data_result["message"] = "saveOK";
-	      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-	      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
-	      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
-	      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
+
+
+	    	$query_inster_bd = true;
+
+
+
+				if ($query_inster_bd) {
+					$pdo->commit();
+					$enviarXML=new enviarXML();
+		      $dataXML = $enviarXML->envioXML(3,$_POST["tipoComprobante"],$pdo);
+		      $clave_acceso_sri = explode("&&&&",$dataXML);
+					if ($clave_acceso_sri[0] == "cargaOK") {
+			      $data_result["message"] = "saveOK";
+			      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
+			      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesTransacciones/".$clave_acceso_sri[1].".xml";
+			      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
+			      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
+						$data_result["numLineaCodigo"] = __LINE__;
+						echo json_encode($data_result);
+					}
+					else {
+			      $data_result["message"] = "saveXmlError";
+						$data_result["numLineaCodigo"] = __LINE__;
+						echo json_encode($data_result);
+					}
+				}
+				else {
+					$pdo->rollBack();
+					$data_result["message"] = "saveDbError";
+					$data_result["numLineaCodigo"] = __LINE__;
+					echo json_encode($data_result);
+				}
+	    }
+	    else {
+	    	$pdo->rollBack();
+				$data_result["message"] = "noPoseeFirma";
 				$data_result["numLineaCodigo"] = __LINE__;
 				echo json_encode($data_result);
-			}
-			else {
-				$pdo->rollBack();
-	      $data_result["message"] = "saveError";
-				$data_result["numLineaCodigo"] = __LINE__;
-				echo json_encode($data_result);
-			}     
-
+	    }    
 		}
 		else {
 			$data_result["message"] = "token_csrf_error";
@@ -57,8 +77,7 @@
 			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
 			$data_result["numLineaCodigo"] = __LINE__;
 			echo json_encode($data_result);
-		}
-			
+		}	
 	} catch (Exception $ex) {
 		$data_result["message"] = "salidaExcepcionCatch";
 		$data_result["codError"] = $ex->getCode();

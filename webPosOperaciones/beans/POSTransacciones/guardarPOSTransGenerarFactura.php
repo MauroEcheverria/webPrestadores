@@ -43,7 +43,7 @@
 					if ($clave_acceso_sri[0] == "cargaOK") {
 			      $data_result["message"] = "saveOK";
 			      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-			      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesElectronicos/".$clave_acceso_sri[1].".xml";
+			      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesTransacciones/".$clave_acceso_sri[1].".xml";
 			      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
 			      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
 						$data_result["numLineaCodigo"] = __LINE__;

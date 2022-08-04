@@ -6,7 +6,6 @@ require_once('barcode/class/BCGcode128.barcode.php');
 require_once('barcode/class/BCGColor.php');
 require_once('barcode/class/BCGDrawing.php');
 require_once('barcode/class/BCGFontFile.php');
-require_once('sendEmail.php');
 
 class generarPDF {
 
@@ -346,10 +345,10 @@ class generarPDF {
 		$pdf->SetFont('Arial', '', 7);
 		$pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
              
-        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
-
-        $email = new sendEmail();
-        $email->enviarCorreo('Factura', $document->infoFactura->razonSocialComprador, $claveAcceso, $correo);
+    $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
+    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
+    /*$data_result["message"] = "pdf_ok";
+    echo json_encode($data_result);*/
 
     }
 
@@ -357,7 +356,7 @@ class generarPDF {
         $pdf = new PDF_Code();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 8);
-//$pdf->Cell(40, 10, 'Hello World!');
+				//$pdf->Cell(40, 10, 'Hello World!');
         if ($document->infoNotaDebito->obligadoContabilidad == 'SI') {
 
             $contabilidad = "Obligado a llevar contabilidad : SI";
@@ -673,10 +672,10 @@ class generarPDF {
         $pdf->SetFont('Arial', '', 7);
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
-        $email = new sendEmail();
-
-        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
-        $email->enviarCorreo('Nota Debito', $document->infoNotaDebito->razonSocialComprador, $claveAcceso, $correo);
+        $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
+	    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
+	    /*$data_result["message"] = "pdf_ok";
+	    echo json_encode($data_result);*/
     }
 
     public function guiaRemisionPDF($document, $claveAcceso) {
@@ -851,14 +850,10 @@ class generarPDF {
         $pdf->SetFont('Arial', '', 7);
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
-
-
-        // Pie de pagina
-
-
-        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
-        $email = new sendEmail();
-        $email->enviarCorreo('Guia Remision', $document->infoGuiaRemision->razonSocialTransportista, $claveAcceso, $correo);
+				$pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
+		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
+		    /*$data_result["message"] = "pdf_ok";
+		    echo json_encode($data_result);*/
     }
 
     public function comprobanteRetencionPDF($document, $claveAcceso) {
@@ -1021,9 +1016,10 @@ class generarPDF {
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
 
-        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
-        $email = new sendEmail();
-        $email->enviarCorreo('Comprobante de Retencion', $document->infoCompRetencion->razonSocialSujetoRetenido, $claveAcceso, $correo);
+        $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
+		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
+		    /*$data_result["message"] = "pdf_ok";
+		    echo json_encode($data_result);*/
     }
 
     public function notaCreditoPDF($document, $claveAcceso) {
@@ -1246,10 +1242,10 @@ class generarPDF {
         $pdf->SetFont('Arial', '', 7);
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
-        $email = new sendEmail();
-
-        $pdf->Output('../../webPosOperaciones/comprobantesElectronicos/'.$claveAcceso.'.pdf','F');
-        $email->enviarCorreo('Nota Credito', $document->infoNotaCredito->razonSocialComprador, $claveAcceso, $correo);
+        $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
+		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
+		    /*$data_result["message"] = "pdf_ok";
+		    echo json_encode($data_result);*/
     }
 
     public function generarCodigoBarras($claveAcceso) {
