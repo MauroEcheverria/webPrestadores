@@ -17,9 +17,9 @@
 	/*$mailSMTP = 'ssl';
 	$mailPort = 465;*/
 	$hostSince = "mail.dreconstec.com";
-	$passSince = "T6YQuertyreu53&%1";
-	$mailSince = "app-web@dreconstec.com";
-	$deCorreo = "app-web@dreconstec.com";
+	$passSince = "?}24zK&m;_UU";
+	$mailSince = "app.web@dreconstec.com";
+	$deCorreo = "app.web@dreconstec.com";
 	$nombreSetFrom = "APP Dreconstec";
 	/****************** TOKEN ************/
 	$token_csrf = bin2hex(openssl_random_pseudo_bytes(32));

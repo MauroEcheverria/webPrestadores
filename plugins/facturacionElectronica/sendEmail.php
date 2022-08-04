@@ -9,13 +9,13 @@ class sendEmail {
     /*$mailSMTP = 'ssl';
     $mailPort = 465;*/
 
-    /*$hostSince = "mail.dreconstec.com";
-    $passSince = "T6YQuertyreu53&%1";
-    $mailSince = "app-web@dreconstec.com";*/
+    $hostSince = "mail.dreconstec.com";
+    $passSince = "?}24zK&m;_UU";
+    $mailSince = "app.web@dreconstec.com";
 
-    $hostSince = "smtp.office365.com";
+    /*$hostSince = "smtp.office365.com";
     $passSince = "Vinicio1984";
-    $mailSince = "app.ceibos@iess.gob.ec";
+    $mailSince = "app.ceibos@iess.gob.ec";*/
 
     $mail = new PHPMailer;
     $mail->SMTPDebug = 0;
