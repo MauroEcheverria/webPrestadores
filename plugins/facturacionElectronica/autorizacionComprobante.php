@@ -76,8 +76,8 @@ if ($client->fault) {
       }
       fclose($file_comprobante);
 
-      //unlink("../../webPosOperaciones/comprobantesTransacciones/".$result['claveAccesoConsultada'].".xml");
-      //unlink("../../webPosOperaciones/comprobantesTransacciones/".$result['claveAccesoConsultada']."_firmada.xml");
+      unlink("../../webPosOperaciones/comprobantesTransacciones/".$result['claveAccesoConsultada'].".xml");
+      unlink("../../webPosOperaciones/comprobantesTransacciones/".$result['claveAccesoConsultada']."_firmada.xml");
       
       $dataComprobante = simplexml_load_string($result['autorizaciones']['autorizacion']['comprobante']);
       if ($dataComprobante->infoFactura) {
