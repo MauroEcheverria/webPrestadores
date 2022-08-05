@@ -7,4 +7,5 @@ if (fwrite($archivo,$_POST['mensaje'].PHP_EOL)) {
 else {
   $data_result["cargaXML"] = "cargaError";
 }
+echo json_encode($data_result);
 fclose($archivo);

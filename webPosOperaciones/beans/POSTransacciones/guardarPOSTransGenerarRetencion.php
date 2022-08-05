@@ -38,7 +38,7 @@
 				if ($query_inster_bd) {
 					$pdo->commit();
 					$enviarXML=new enviarXML();
-		      $dataXML = $enviarXML->envioXML(5,$_POST["tipoComprobante"],$pdo);
+		      $dataXML = $enviarXML->envioXML(27,$_POST["tipoComprobante"],$pdo);
 		      $clave_acceso_sri = explode("&&&&",$dataXML);
 					if ($clave_acceso_sri[0] == "cargaOK") {
 			      $data_result["message"] = "saveOK";

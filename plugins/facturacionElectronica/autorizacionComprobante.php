@@ -10,7 +10,43 @@ $client = new nusoap_client($servicio);
 $error = $client->getError();
 $client->soap_defencoding = 'utf-8';
 $result = $client->call("autorizacionComprobante",$parametros,"http://ec.gob.sri.ws.autorizacion");
-$data_result["dataValidacion"] = $result;
+
+if (!empty($result['autorizaciones']['autorizacion']['estado'])) {
+  $sri_estado = utf8_decode($result['autorizaciones']['autorizacion']['estado']);
+}
+else {
+  $sri_estado = "";
+}
+if (!empty($result['autorizaciones']['autorizacion']['numeroAutorizacion'])) {
+  $sri_num_autorizacion = utf8_decode($result['autorizaciones']['autorizacion']['numeroAutorizacion']);
+}
+else {
+  $sri_num_autorizacion = "";
+}
+if (!empty($result['autorizaciones']['autorizacion']['ambiente'])) {
+  $sri_ambiente = utf8_decode($result['autorizaciones']['autorizacion']['ambiente']);
+}
+else {
+  $sri_ambiente = "";
+}
+if (!empty($result['autorizaciones']['autorizacion']['fechaAutorizacion'])) {
+  $sri_fecha_autorizacion = utf8_decode($result['autorizaciones']['autorizacion']['fechaAutorizacion']);
+}
+else {
+  $sri_fecha_autorizacion = "";
+}
+if (!empty($result['autorizaciones']['autorizacion']['mensajes'])) {
+  $sri_mensaje = utf8_decode($result['autorizaciones']['autorizacion']['mensajes']);
+}
+else {
+  $sri_mensaje = "";
+}
+
+$data_result["sri_estado"] = $sri_estado;
+$data_result["sri_num_autorizacion"] = $sri_num_autorizacion;
+$data_result["sri_ambiente"] = $sri_ambiente;
+$data_result["sri_fecha_autorizacion"] = $sri_fecha_autorizacion;
+$data_result["sri_mensaje"] = $sri_mensaje;
 
 if ($client->fault) {
   $data_result["message"] = "error_client_default";
@@ -70,7 +106,6 @@ if ($client->fault) {
       echo json_encode($data_result);
     }
     else if ($result['autorizaciones']['autorizacion']['estado'] == 'NO AUTORIZADO') {
-
       echo json_encode($data_result);
     }
     else {

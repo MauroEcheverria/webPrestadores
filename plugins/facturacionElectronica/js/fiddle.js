@@ -40,7 +40,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               context: document.body
             }).done(function (respuestaValidarComprobante) {
               respuestaValidarComprobante = JSON.parse(respuestaValidarComprobante);
-              if (respuestaValidarComprobante.dataValidacion.estado == "RECIBIDA" ) {
+              if (respuestaValidarComprobante.sri_estado == "RECIBIDA" ) {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida de manera correcta comprobante electrónico.</div>" );
                 service = 'Autorizacion Comprobante';
                 xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");
@@ -53,15 +53,15 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
                   respuestaAutorizacionComprobante = JSON.parse(respuestaAutorizacionComprobante);
-                  if (respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.estado == "AUTORIZADO") {
+                  if (respuestaAutorizacionComprobante.sri_estado == "AUTORIZADO") {
                     $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba de manera correcta comprobante electrónico</div>" );
                   }
                   else {
-                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.mensajes.mensaje.mensaje+". Cod Error SRI ("+respuestaAutorizacionComprobante.dataValidacion.autorizaciones.autorizacion.mensajes.mensaje.identificador+")</div>" );
+                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.sri_mensaje+". Cod Error SRI ()</div>" );
                   }
                 });
               } else {
-                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.dataValidacion.comprobantes.comprobante.mensajes.mensaje.mensaje+". Cod Error SRI ("+respuestaValidarComprobante.dataValidacion.comprobantes.comprobante.mensajes.mensaje.identificador+")</div>" );
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.sri_mensaje+". Cod Error SRI ("+respuestaValidarComprobante.sri_identificador+")</div>" );
               }
             });
           });
