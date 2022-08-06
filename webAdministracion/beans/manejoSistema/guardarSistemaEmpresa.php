@@ -20,7 +20,7 @@
 			    	VALUES (:emp_empresa, :emp_ruc, :emp_estado, :emp_vigencia_desde, :emp_vigencia_hasta, 
 			    		:ctg_id_catalogo, :em_usuario_creacion, now(), :em_ip_creacion);";
 		    $query_2=$pdo->prepare($sql_2);          
-		    $query_2->bindValue(':emp_empresa',cleanData("siLimite",80,"noMayuscula",$_POST["emp_empresa"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':emp_empresa',cleanData("siLimite",300,"noMayuscula",$_POST["emp_empresa"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':emp_ruc',cleanData("siLimite",13,"noMayuscula",$_POST["emp_ruc"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':emp_estado',cleanData("siLimite",1,"noMayuscula",$_POST["emp_estado"]),PDO::PARAM_INT); 
 		    $query_2->bindValue(':emp_vigencia_desde',cleanData("noLimite",0,"noMayuscula",$_POST["emp_vigencia_desde"]),PDO::PARAM_STR);
@@ -55,7 +55,7 @@
 				WHERE emp_id_empresa = :emp_id_empresa";
 		    $query_2=$pdo->prepare($sql_2);
 		    $query_2->bindValue(':emp_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["emp_id_empresa"]),PDO::PARAM_INT); 
-		    $query_2->bindValue(':emp_empresa',cleanData("siLimite",80,"noMayuscula",$_POST["emp_empresa"]),PDO::PARAM_STR);
+		    $query_2->bindValue(':emp_empresa',cleanData("siLimite",300,"noMayuscula",$_POST["emp_empresa"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':emp_ruc',cleanData("siLimite",13,"noMayuscula",$_POST["emp_ruc"]),PDO::PARAM_STR);
 		    $query_2->bindValue(':emp_estado',cleanData("siLimite",1,"noMayuscula",$_POST["emp_estado"]),PDO::PARAM_INT); 
 		    $query_2->bindValue(':emp_vigencia_desde',cleanData("noLimite",0,"noMayuscula",$_POST["emp_vigencia_desde"]),PDO::PARAM_STR);

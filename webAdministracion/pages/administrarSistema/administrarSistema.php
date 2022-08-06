@@ -139,16 +139,10 @@
           </div>
         </div>
       </div>
-      <form id="formSistemaEmpresa" class="formModalPages" data-toggle="validator" role="form">
+      <form id="formSistemaEmpresa" class="formModalPages" data-toggle="validator" role="form" utocomplete="false" enctype="multipart/form-data">
         <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
         <input type="hidden" name="tipo_form_sist_empre" id="tipo_form_sist_empre">
         <div class="modal-body">
-          <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
-            El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-          </div>
-          <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
-            La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
-          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -157,9 +151,63 @@
                 <div class="help-block with-errors"></div>
               </div>
               <div class="form-group">
-                <label for="emp_empresa" class="control-label">Empresa</label>
-                <input type="text" class="form-control" id="emp_empresa" name="emp_empresa" maxlength="80" required minlength="3" oninput="this.value = this.value.toUpperCase()">
+                <label for="emp_empresa" class="control-label">Nombres/Razón Social</label>
+                <input type="text" class="form-control" id="emp_empresa" name="emp_empresa" maxlength="300" required minlength="3" oninput="this.value = this.value.toUpperCase()">
                  <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="emp_nom_comercial" class="control-label">Nombre Comercial</label>
+                <input type="text" class="form-control" id="emp_nom_comercial" name="emp_nom_comercial" maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
+                 <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="emp_direccion_matriz" class="control-label">Dirección Matriz</label>
+                <input type="text" class="form-control" id="emp_direccion_matriz" name="emp_direccion_matriz" required maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
+                 <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="emp_contr_esp" class="control-label">Contribuyente Especial</label>
+                <input type="text" class="form-control" id="emp_contr_esp" name="emp_contr_esp" maxlength="5" minlength="3"  onkeypress="return soloNumeros(event);">
+                 <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="emp_obli_contabilidad" class="control-label">Obligado a llevar contabilidad</label>
+                <select name="emp_obli_contabilidad" id="emp_obli_contabilidad" class="form-control" required>
+                  <option value="">Selecione una opción</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Consideraciones para carga de archivo: </label>
+                <div>
+                  <ul>
+                    <li> Solo formato <code>.p12</code></li>
+                    <li> Tamaño máximo por archivo de 2MB</li>
+                  </ul>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="em_logo" name="em_logo" required="">
+                  <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="em_tipo_ambiente" class="control-label">Tipo Ambiente</label>
+                <select name="em_tipo_ambiente" id="em_tipo_ambiente" class="form-control" required>
+                  <option value="">Selecione una opción</option>
+                  <option value="1" selected="">PRUEBAS</option>
+                  <option value="2">PRODUCCION</option>
+                </select>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="em_tipo_emision" class="control-label">Tipo Emisión</label>
+                <select name="em_tipo_emision" id="em_tipo_emision" class="form-control" required>
+                  <option value="">Selecione una opción</option>
+                  <option value="1" selected>NORMAL</option>
+                </select>
+                <div class="help-block with-errors"></div>
               </div>
               <div class="form-group">
                 <label for="emp_vigencia_desde" class="control-label">Vigencia Desde</label>
