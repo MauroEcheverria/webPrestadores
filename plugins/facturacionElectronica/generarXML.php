@@ -725,10 +725,6 @@ class enviarXML {
                             $sri_clave_acceso_cod_numerico.
                             $sri_clave_acceso_tipo_emision.
                             $sri_clave_acceso_verificador;
-
-        $clave = "" . . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($id, '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "";
-        $digito_verificador_clave = $this->validar_clave($clave);
-        $clave_acceso = "" . date('dmY', strtotime($campo['fecha'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($id, '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "" . $digito_verificador_clave . "";
       }
 
       $xml = '<?xml version="1.0" encoding="UTF-8"?>
@@ -739,11 +735,11 @@ class enviarXML {
                   <razonSocial>' . $razon_social_empresa . '</razonSocial>
                   <nombreComercial>' . $nombre_comercial_empresa . '</nombreComercial>
                   <ruc>' . $nro_documento_empresa . '</ruc>
-                  <claveAcceso>' . $clave_acceso . '</claveAcceso>
+                  <claveAcceso>' . $sri_clave_acceso . '</claveAcceso>
                   <codDoc>06</codDoc>
                   <estab>' . $codigo_establecimiento . '</estab>
                   <ptoEmi>' . $codigo_punto_emision . '</ptoEmi>
-                  <secuencial>' . str_pad($id, '9', '0', STR_PAD_LEFT) . '</secuencial>
+                  <secuencial>' . str_pad($campo['secuencial'],'9','0',STR_PAD_LEFT) . '</secuencial>
                   <dirMatriz>' . $direccion_empresa . '</dirMatriz>
               </infoTributaria>
               <infoGuiaRemision>
@@ -781,11 +777,11 @@ class enviarXML {
               </infoAdicional>
               </guiaRemision>';
 
-      $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
+      $nombre = "../../comprobantesTransacciones/".$sri_clave_acceso.".xml";
       $archivo = fopen($nombre, "w+");
       if (fwrite($archivo, $xml)) {
         $data_result["cargaXML"] = "cargaOK";
-        $data_result["clave_acceso_sri"] = $clave_acceso;
+        $data_result["clave_acceso_sri"] = $sri_clave_acceso;
       }
       else {
         $data_result["cargaXML"] = "cargaError";
@@ -831,46 +827,71 @@ class enviarXML {
       $stmt->execute();
       $factura = $stmt->fetchAll();
       foreach ($factura as $campo) {
-          $campo['tipo_comporbante'] = 7;
-          $nombre_comercial_empresa = $campo['nombre_comercial'];
-          $razon_social_empresa = $campo['razon_social'];
-          $direccion_empresa = $campo['direccion'];
-          $direccion_sucursal = $campo['dir_matriz'];
-          $telefono_empresa = $campo['telefono'];
-          $email_empresa = $campo['correo'];
-          $nro_documento_empresa = $campo['ruc_empresa'];
-          $obligado_llevar_contabilidad = $campo['obligado_contabilidad'];
+        $campo['tipo_comporbante'] = 7;
+        $nombre_comercial_empresa = $campo['nombre_comercial'];
+        $razon_social_empresa = $campo['razon_social'];
+        $direccion_empresa = $campo['direccion'];
+        $direccion_sucursal = $campo['dir_matriz'];
+        $telefono_empresa = $campo['telefono'];
+        $email_empresa = $campo['correo'];
+        $nro_documento_empresa = $campo['ruc_empresa'];
+        $obligado_llevar_contabilidad = $campo['obligado_contabilidad'];
 
-          $nro_comprovante = $campo['secuencial'];
-          $codigo_establecimiento = str_pad($campo['estab'], '3', '0', STR_PAD_LEFT);
-          $codigo_punto_emision = str_pad($campo['pto_emi'], '3', '0', STR_PAD_LEFT);
-          $fecha_emision = $campo['fecha_emision'];
-          $periodoFiscal = $campo['periodo_fiscal'];
-          $tipoIdentificacionSujetoRetenido = str_pad($campo['tipo_identificacion_sujeto_retenido'], '2', '0', STR_PAD_LEFT);
-          $razonSocialSujetoRetenido = $campo['razon_social_sujeto_retenido'];
-          $identificación_sujeto_retenido = $campo['identificacion_sujeto_retenido'];
+        $nro_comprovante = $campo['secuencial'];
+        $codigo_establecimiento = str_pad($campo['estab'], '3', '0', STR_PAD_LEFT);
+        $codigo_punto_emision = str_pad($campo['pto_emi'], '3', '0', STR_PAD_LEFT);
+        $fecha_emision = $campo['fecha_emision'];
+        $periodoFiscal = $campo['periodo_fiscal'];
+        $tipoIdentificacionSujetoRetenido = str_pad($campo['tipo_identificacion_sujeto_retenido'], '2', '0', STR_PAD_LEFT);
+        $razonSocialSujetoRetenido = $campo['razon_social_sujeto_retenido'];
+        $identificación_sujeto_retenido = $campo['identificacion_sujeto_retenido'];
 
-          $id_tipo_ambiente = $campo['ambiente'];
-          $id_tipo_emision = 1;
+        $id_tipo_ambiente = $campo['ambiente'];
+        $id_tipo_emision = 1;
 
-          $id_tipo_documento = str_pad($campo['tipo_identificacion'], '1', '0', STR_PAD_LEFT);
-          $razon_social = $campo['razon_social'];
-          $nro_documento = $campo['ruc'];
-          $direccion = $campo['direccion'];
-          $subtotal_sin_impuesto = $sub_total;
-          $totaliva = 0;
-          $descuento = 0;
-          $subtotal_con_impuesto = $sub_total;
-          $impuesto = 0;
-          $total = $sub_total;
+        $id_tipo_documento = str_pad($campo['tipo_identificacion'], '1', '0', STR_PAD_LEFT);
+        $razon_social = $campo['razon_social'];
+        $nro_documento = $campo['ruc'];
+        $direccion = $campo['direccion'];
+        $subtotal_sin_impuesto = $sub_total;
+        $totaliva = 0;
+        $descuento = 0;
+        $subtotal_con_impuesto = $sub_total;
+        $impuesto = 0;
+        $total = $sub_total;
 
-          $direccion = $campo['direccion'];
-          $telefono = $campo['telefono'];
-          $email = $campo['correo'];
+        $direccion = $campo['direccion'];
+        $telefono = $campo['telefono'];
+        $email = $campo['correo'];
 
-          $clave = "" . date('dmY', strtotime($campo['fecha_emision'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($id, '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "";
-          $digito_verificador_clave = $this->validar_clave($clave);
-          $clave_acceso = "" . date('dmY', strtotime($campo['fecha_emision'])) . "" . str_pad($campo['tipo_comporbante'], '2', '0', STR_PAD_LEFT) . "" . $campo['ruc_empresa'] . "" . $campo['ambiente'] . "" . $campo['establecimiento'] . "" . $campo['punto_emi'] . "" . str_pad($id, '9', '0', STR_PAD_LEFT) . "" . str_pad($campo['id'], '8', '0', STR_PAD_LEFT) . "" . $id_tipo_emision . "" . $digito_verificador_clave . "";
+        $sri_clave_acceso_fecha_emison = date('dmY', strtotime($campo['fecha']));
+        $sri_clave_acceso_tipo_comprobante = str_pad($campo['tipo_comporbante'],'2','0',STR_PAD_LEFT);
+        $sri_clave_acceso_ruc = $campo['ruc_empresa'];
+        $sri_clave_acceso_tipo_ambiente = $campo['ambiente'];
+        $sri_clave_acceso_serie_establecimiento = $campo['establecimiento'];
+        $sri_clave_acceso_serie_punto_emision = $campo['punto_emi'];
+        $sri_clave_acceso_secuencial = str_pad($campo['secuencial'],'9','0',STR_PAD_LEFT);
+        $sri_clave_acceso_cod_numerico = str_pad($campo['id'],'8','0',STR_PAD_LEFT);
+        $sri_clave_acceso_tipo_emision = 1;
+        $sri_clave_acceso_verificador = $this->validar_clave($sri_clave_acceso_fecha_emison.
+                                                            $sri_clave_acceso_tipo_comprobante.
+                                                            $sri_clave_acceso_ruc.
+                                                            $sri_clave_acceso_tipo_ambiente.
+                                                            $sri_clave_acceso_serie_establecimiento.
+                                                            $sri_clave_acceso_serie_punto_emision.
+                                                            $sri_clave_acceso_secuencial.
+                                                            $sri_clave_acceso_cod_numerico.
+                                                            $sri_clave_acceso_tipo_emision);
+        $sri_clave_acceso = $sri_clave_acceso_fecha_emison.
+                            $sri_clave_acceso_tipo_comprobante.
+                            $sri_clave_acceso_ruc.
+                            $sri_clave_acceso_tipo_ambiente.
+                            $sri_clave_acceso_serie_establecimiento.
+                            $sri_clave_acceso_serie_punto_emision.
+                            $sri_clave_acceso_secuencial.
+                            $sri_clave_acceso_cod_numerico.
+                            $sri_clave_acceso_tipo_emision.
+                            $sri_clave_acceso_verificador;
       }
 
       $xml = '<?xml version="1.0" encoding="UTF-8"?>
@@ -881,14 +902,14 @@ class enviarXML {
                         <razonSocial>' . $razon_social_empresa . '</razonSocial>
                         <nombreComercial>' . $nombre_comercial_empresa . '</nombreComercial>
                         <ruc>' . $nro_documento_empresa . '</ruc>
-                        <claveAcceso>' . $clave_acceso . '</claveAcceso>
+                        <claveAcceso>' . $sri_clave_acceso . '</claveAcceso>
                         <codDoc>07</codDoc>
                         <estab>' . $codigo_establecimiento . '</estab>
                         <ptoEmi>' . $codigo_punto_emision . '</ptoEmi>
-                        <secuencial>' . str_pad($id, '9', '0', STR_PAD_LEFT) . '</secuencial>
+                        <secuencial>' . str_pad($campo['secuencial'],'9','0',STR_PAD_LEFT) . '</secuencial>
                         <dirMatriz>' . $direccion_sucursal . '</dirMatriz>
                         </infoTributaria><infoCompRetencion>
-                        <fechaEmision>' . date("d/m/Y", strtotime($fecha_emision)) . '</fechaEmision>
+                        <fechaEmision>' . date("d/m/Y", strtotime($campo['fecha'])) . '</fechaEmision>
                         <dirEstablecimiento>' . $direccion_empresa . '</dirEstablecimiento>
                         <obligadoContabilidad>' . $obligado_llevar_contabilidad . '</obligadoContabilidad>       
                         <tipoIdentificacionSujetoRetenido>' . $tipoIdentificacionSujetoRetenido . '</tipoIdentificacionSujetoRetenido>
@@ -906,11 +927,11 @@ class enviarXML {
               </infoAdicional>
           </comprobanteRetencion>';
 
-     $nombre = "../../comprobantesTransacciones/".$clave_acceso.".xml";
+     $nombre = "../../comprobantesTransacciones/".$sri_clave_acceso.".xml";
       $archivo = fopen($nombre, "w+");
       if (fwrite($archivo, $xml)) {
         $data_result["cargaXML"] = "cargaOK";
-        $data_result["clave_acceso_sri"] = $clave_acceso;
+        $data_result["clave_acceso_sri"] = $sri_clave_acceso;
       }
       else {
         $data_result["cargaXML"] = "cargaError";
