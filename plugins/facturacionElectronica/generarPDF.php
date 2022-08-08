@@ -22,7 +22,7 @@ class generarPDF {
 		$pdf->SetXY(10, 107);
 		$pdf->Cell(190, 18, "", 1);
 		$pdf->SetXY(15, 20);
-        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 70, 23);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.png', null, null, 70, 23);
 
         if ($document->infoFactura->obligadoContabilidad == 'SI') {
 			$contabilidad = "SI";
@@ -363,7 +363,7 @@ class generarPDF {
             $contabilidad = "Obligado a llevar contabilidad : NO";
         }
         $pdf->SetXY(10, 0);
-        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 80, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.png', null, null, 80, 30);
 
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
@@ -689,7 +689,7 @@ class generarPDF {
         }
 
         $pdf->SetXY(10, 0);
-        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 50, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.png', null, null, 50, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);
@@ -865,7 +865,7 @@ class generarPDF {
             $contabilidad = "Obligado a llevar contabilidad : NO";
         }
         $pdf->SetXY(10, 0);
-        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 50, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.png', null, null, 50, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);
@@ -1031,7 +1031,7 @@ class generarPDF {
         }
 
         $pdf->SetXY(10, 0);
-        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.jpg', null, null, 80, 30);
+        $pdf->image('../../webPosOperaciones/logosEmpresas/0919664854001.png', null, null, 80, 30);
         $pdf->SetXY(110, 10);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetFillColor(255, 255, 255);

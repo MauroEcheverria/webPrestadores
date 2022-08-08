@@ -1,5 +1,32 @@
 <?php
 
+	function validar_clave_sri($clave) {
+    if ($clave == "") {
+      $verificado = false;
+      return $verificado;
+    }
+    $x = 2;
+    $sumatoria = 0;
+    for ($i = strlen($clave) - 1; $i >= 0; $i--) {
+      if ($x > 7) {
+          $x = 2;
+      }
+      $sumatoria = $sumatoria + ($clave[$i] * $x);
+      $x++;
+    }
+    $digito = $sumatoria % 11;
+    $digito = 11 - $digito;
+    switch ($digito) {
+      case 10:
+        $digito = "1";
+        break;
+      case 11:
+        $digito = "0";
+        break;
+    }
+    return $digito;
+  }
+
 	function restarDias($numDias, $fecha) {
 		$dias = "-".intval($numDias)." day";
 		$nuevafecha = strtotime($dias,strtotime($fecha));
