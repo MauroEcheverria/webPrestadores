@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2022 a las 07:48:27
+-- Tiempo de generación: 08-08-2022 a las 20:04:44
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -56,7 +56,7 @@ CREATE TABLE `datos_cabecera_electronica` (
 --
 
 INSERT INTO `datos_cabecera_electronica` (`id`, `id_comprobante`, `fecha`, `orden_no`, `cliente`, `direccion`, `telefono`, `ruc`, `tipo_comporbante`, `tipo_identificacion`, `correo`, `establecimiento`, `punto_emi`, `ruc_empresa`, `ambiente`, `razon_social`, `nombre_comercial`, `secuencial`, `direccion_matriz`, `obligado`, `nota_no`) VALUES
-(1, 1, '2022-08-04', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1162, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
+(1, 1, '2022-08-08', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'Dreconstec', 'Dreconstec', 1173, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (9, 2, '2022-08-04', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1143, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (10, 3, '2022-08-04', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 4, 4, 'kaceto104@gmail.com', '001', '002', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1143, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
 (11, 4, '2022-08-04', 1, 'Alexandra Albornoz Ortiz', 'Conjunto Brasil 2 Casa 32', 2419867, '0919664854001', 5, 5, 'kaceto104@gmail.com', '001', '001', '0919664854001', '1', 'DIANA KARINA GUERRA LOPEZ', 'GYG', 1142, 'PASAJE A LOTE 2 S/N Y 4 DE MARZO', 'SI', 1),
@@ -104,7 +104,7 @@ CREATE TABLE `datos_guia_electronica` (
 --
 
 INSERT INTO `datos_guia_electronica` (`id`, `ambiente`, `id_comprobante`, `tipo_emision`, `razon_social`, `nombre_comercial`, `cod_doc`, `ruc`, `establecimiento`, `pto_emi`, `secuencial`, `dir_matriz`, `orden_no`, `t_nombre`, `t_ci`, `motivo_translado`, `fecha`, `comprobante_venta`, `tipo_ident_transport`, `t_contabilidad`, `t_f_inicio`, `t_f_final`, `t_placa`, `punto_partida`, `d_ruc`, `d_razon_social`, `d_punto_llegada`, `tipo_comprobante`) VALUES
-(2, 1, 25, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1146', 'adsad', 1, 'd', '1716762396001', 'd', '2022-08-05', 1, 4, 'SI', '2022-08-05', '2022-08-05', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6);
+(2, 1, 25, 1, 'prueba', 'asdasd', 1, '1716762396001', '001', '001', '1147', 'adsad', 1, 'd', '1716762396001', 'd', '2022-08-05', 1, 4, 'SI', '2022-08-05', '2022-08-05', '001XYZ', 'asd', '1717091506001', 'aaa', 'aaaa', 6);
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE `datos_nota_credito` (
 --
 
 INSERT INTO `datos_nota_credito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocial`, `nombreComercial`, `ruc`, `cod_doc`, `establecimiento`, `ptoEmi`, `secuencial`, `dirMatriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `rise`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `valorModificacion`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `motivo`, `nota_no`) VALUES
-(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1011, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
+(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1012, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,7 @@ CREATE TABLE `datos_nota_debito` (
 --
 
 INSERT INTO `datos_nota_debito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocialComprador`, `nombreComercial`, `cod_doc`, `establecimiento`, `secuencial`, `direccion_matriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `tarifa`, `valorTotal`, `formapago`, `total`, `plazo`, `unidadTiempo`, `razonDescripcion`, `valorModificado`, `campoAdiconalDirecci`, `campoAdicionalMail`, `campoAdionalFono`) VALUES
-(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 1006, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 1007, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,7 @@ CREATE TABLE `datos_retencion_electronica` (
 --
 
 INSERT INTO `datos_retencion_electronica` (`id`, `ambiente`, `id_comprobante`, `orden_no`, `tipo_emision`, `razon_social`, `nombre_comercial`, `ruc`, `cod_doc`, `estab`, `pto_emi`, `secuencial`, `dir_matriz`, `fecha_emision`, `dir_establecimiento`, `contribuyente_especial`, `obligado_contabilidad`, `tipo_identificacion_sujeto_retenido`, `razon_social_sujeto_retenido`, `identificacion_sujeto_retenido`, `periodo_fiscal`) VALUES
-(2, 1, 25, 1, 1, 'asdsa', 'asdasd', '123123213', 7, '001', '001', 1143, 'asdasd', '2022-08-05', 'a', NULL, 'SI', 4, 'dfgfdgfdg', '1792206375001', '2022-08-05');
+(2, 1, 25, 1, 1, 'asdsa', 'asdasd', '123123213', 7, '001', '001', 1144, 'asdasd', '2022-08-05', 'a', NULL, 'SI', 4, 'dfgfdgfdg', '1792206375001', '2022-08-05');
 
 -- --------------------------------------------------------
 
@@ -1669,7 +1669,7 @@ INSERT INTO `dct_parametro_tbl_div_politica` (`dvp_codigo_provincia`, `dvp_provi
 --
 
 CREATE TABLE `dct_pos_tbl_cientes` (
-  `cli_id_cliente` bigint(20) NOT NULL,
+  `cli_id_cliente` int(11) NOT NULL,
   `cli_tipo_identificacion` varchar(3) NOT NULL,
   `cli_identificacion` varchar(13) NOT NULL,
   `cli_nombres` varchar(300) NOT NULL,
@@ -1685,6 +1685,13 @@ CREATE TABLE `dct_pos_tbl_cientes` (
   `cli_ip_creacion` varchar(100) DEFAULT NULL,
   `cli_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_cientes`
+--
+
+INSERT INTO `dct_pos_tbl_cientes` (`cli_id_cliente`, `cli_tipo_identificacion`, `cli_identificacion`, `cli_nombres`, `cli_direccion`, `cli_telefono`, `cli_placa`, `emp_id_empresa`, `cli_estado`, `cli_usuario_creacion`, `cli_usuario_modificacion`, `cli_fecha_creacion`, `cli_fecha_modificacion`, `cli_ip_creacion`, `cli_ip_modificacion`) VALUES
+(1, 'CED', '1308041134', 'MERY JAZMIN REINA CEVALLOS', 'LOS ESTEROS', '0960939030', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1801,6 +1808,61 @@ INSERT INTO `dct_pos_tbl_empresa_serial` (`ser_id_empresa_serial`, `emp_id_empre
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `dct_pos_tbl_factura_detalle`
+--
+
+CREATE TABLE `dct_pos_tbl_factura_detalle` (
+  `fdt_id_factura_detalle` bigint(20) NOT NULL,
+  `ftr_id_factura_transaccion` bigint(20) NOT NULL,
+  `prs_id_prod_serv` bigint(20) NOT NULL,
+  `fdt_cantidad` int(11) NOT NULL,
+  `fdt_estado_transaccion` varchar(3) NOT NULL,
+  `fdt_estado` tinyint(1) NOT NULL,
+  `fdt_usuario_creacion` varchar(13) DEFAULT NULL,
+  `fdt_usuario_modificacion` varchar(13) DEFAULT NULL,
+  `fdt_fecha_creacion` timestamp NULL DEFAULT NULL,
+  `fdt_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `fdt_ip_creacion` varchar(100) DEFAULT NULL,
+  `fdt_ip_modificacion` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_factura_detalle`
+--
+
+INSERT INTO `dct_pos_tbl_factura_detalle` (`fdt_id_factura_detalle`, `ftr_id_factura_transaccion`, `prs_id_prod_serv`, `fdt_cantidad`, `fdt_estado_transaccion`, `fdt_estado`, `fdt_usuario_creacion`, `fdt_usuario_modificacion`, `fdt_fecha_creacion`, `fdt_fecha_modificacion`, `fdt_ip_creacion`, `fdt_ip_modificacion`) VALUES
+(1, 1, 1, 1, 'TMP', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dct_pos_tbl_factura_transaccion`
+--
+
+CREATE TABLE `dct_pos_tbl_factura_transaccion` (
+  `ftr_id_factura_transaccion` bigint(20) NOT NULL,
+  `emp_id_empresa` int(11) NOT NULL,
+  `usr_cod_usuario` varchar(13) NOT NULL,
+  `ftr_estado_transaccion` varchar(3) NOT NULL,
+  `ftr_estado` tinyint(1) NOT NULL,
+  `ftr_usuario_creacion` varchar(13) DEFAULT NULL,
+  `ftr_usuario_modificacion` varchar(13) DEFAULT NULL,
+  `ftr_fecha_creacion` timestamp NULL DEFAULT NULL,
+  `ftr_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `ftr_ip_creacion` varchar(100) DEFAULT NULL,
+  `ftr_ip_modificacion` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_factura_transaccion`
+--
+
+INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `emp_id_empresa`, `usr_cod_usuario`, `ftr_estado_transaccion`, `ftr_estado`, `ftr_usuario_creacion`, `ftr_usuario_modificacion`, `ftr_fecha_creacion`, `ftr_fecha_modificacion`, `ftr_ip_creacion`, `ftr_ip_modificacion`) VALUES
+(1, 1, '0919664854', 'TMP', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `dct_pos_tbl_forma_pago`
 --
 
@@ -1838,7 +1900,8 @@ INSERT INTO `dct_pos_tbl_forma_pago` (`fop_id_forma_pago`, `fop_descripcion`, `f
 --
 
 CREATE TABLE `dct_pos_tbl_producto_servicio` (
-  `prs_id_prod_serv` int(11) NOT NULL,
+  `prs_id_prod_serv` bigint(20) NOT NULL,
+  `emp_id_empresa` int(11) NOT NULL,
   `prs_codigo_item` varchar(5) NOT NULL,
   `prs_descripcion_item` varchar(200) NOT NULL,
   `prs_valor_unitario` double NOT NULL,
@@ -1858,8 +1921,8 @@ CREATE TABLE `dct_pos_tbl_producto_servicio` (
 -- Volcado de datos para la tabla `dct_pos_tbl_producto_servicio`
 --
 
-INSERT INTO `dct_pos_tbl_producto_servicio` (`prs_id_prod_serv`, `prs_codigo_item`, `prs_descripcion_item`, `prs_valor_unitario`, `prs_descuento`, `prs_impuesto`, `prs_tarifa_impuesto`, `prs_estado`, `prs_usuario_creacion`, `prs_usuario_modificacion`, `prs_fecha_creacion`, `prs_fecha_modificacion`, `prs_ip_creacion`, `prs_ip_modificacion`) VALUES
-(1, 'C001', 'Prestación de servicios profesionales', 500, 0, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dct_pos_tbl_producto_servicio` (`prs_id_prod_serv`, `emp_id_empresa`, `prs_codigo_item`, `prs_descripcion_item`, `prs_valor_unitario`, `prs_descuento`, `prs_impuesto`, `prs_tarifa_impuesto`, `prs_estado`, `prs_usuario_creacion`, `prs_usuario_modificacion`, `prs_fecha_creacion`, `prs_fecha_modificacion`, `prs_ip_creacion`, `prs_ip_modificacion`) VALUES
+(1, 0, 'C001', 'Prestación de servicios profesionales', 500, 0, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1871,7 +1934,8 @@ CREATE TABLE `dct_pos_tbl_ws_sri` (
   `wsr_id_ws_sri` int(11) NOT NULL,
   `wsr_tipo_ambiente` int(11) NOT NULL,
   `wsr_descripcion` varchar(30) NOT NULL,
-  `wsr_url` varchar(200) NOT NULL,
+  `wsr_url_1` varchar(200) NOT NULL,
+  `wsr_url_2` varchar(100) NOT NULL,
   `wsr_estado` tinyint(1) NOT NULL,
   `wsr_usuario_creacion` varchar(13) DEFAULT NULL,
   `wsr_usuario_modificacion` varchar(13) DEFAULT NULL,
@@ -1885,11 +1949,11 @@ CREATE TABLE `dct_pos_tbl_ws_sri` (
 -- Volcado de datos para la tabla `dct_pos_tbl_ws_sri`
 --
 
-INSERT INTO `dct_pos_tbl_ws_sri` (`wsr_id_ws_sri`, `wsr_tipo_ambiente`, `wsr_descripcion`, `wsr_url`, `wsr_estado`, `wsr_usuario_creacion`, `wsr_usuario_modificacion`, `wsr_fecha_creacion`, `wsr_fecha_modificacion`, `wsr_ip_creacion`, `wsr_ip_modificacion`) VALUES
-(1, 1, 'PRUEBAS-RECEPCION', 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 'PRUEBAS-AUTORIZACION', 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 2, 'PRODUCCION-RECEPCION', 'https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 2, 'PRODUCCION-AUTORIZACION', 'https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dct_pos_tbl_ws_sri` (`wsr_id_ws_sri`, `wsr_tipo_ambiente`, `wsr_descripcion`, `wsr_url_1`, `wsr_url_2`, `wsr_estado`, `wsr_usuario_creacion`, `wsr_usuario_modificacion`, `wsr_fecha_creacion`, `wsr_fecha_modificacion`, `wsr_ip_creacion`, `wsr_ip_modificacion`) VALUES
+(1, 1, 'RECEPCION', 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl', 'http://ec.gob.sri.ws.recepcion', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 'AUTORIZACION', 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl', 'http://ec.gob.sri.ws.autorizacion', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 2, 'RECEPCION', 'https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl', 'http://ec.gob.sri.ws.recepcion', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 2, 'AUTORIZACION', 'https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl', 'http://ec.gob.sri.ws.autorizacion', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1982,7 +2046,7 @@ INSERT INTO `dct_sistema_tbl_catalogo` (`ctg_id_catalogo`, `ctg_tipo`, `ctg_key`
 --
 
 CREATE TABLE `dct_sistema_tbl_contrasenia` (
-  `cts_id_contrasenia` bigint(20) NOT NULL,
+  `cts_id_contrasenia` int(11) NOT NULL,
   `cts_contrasenia` varchar(150) NOT NULL,
   `cts_cod_usuario` varchar(13) NOT NULL,
   `cts_fecha_cambio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -2176,7 +2240,7 @@ INSERT INTO `dct_sistema_tbl_rol_opcion` (`rlo_id_rol`, `rlo_id_opcion`, `rlo_es
 --
 
 CREATE TABLE `dct_sistema_tbl_token` (
-  `tok_id_token` bigint(20) NOT NULL,
+  `tok_id_token` int(11) NOT NULL,
   `tok_token` varchar(150) DEFAULT NULL,
   `tok_tipo` varchar(10) DEFAULT NULL,
   `tok_cedula` varchar(13) DEFAULT NULL,
@@ -2244,7 +2308,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-06 05:45:00', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-06', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-08 17:58:52', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-08', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('1308041134', 'WEQWEQWE', 'QWEQWE', 'QEQWE', 'QWEQWE', 'UC9lVXBPVXUyeUV5TVlTbUlRNlh0UGh4bUw4bTJqZXVDQ1JPY0tOVG5rRDlMUHQxMU1TZFFMbkhHTjFQWHhYMw==', 0, 1, NULL, NULL, 'kaceto104@gmail.com', 0, 9, 1, 4, '2022-08-02', 0, 1, NULL, '0919664854', NULL, '2022-08-02 23:35:56', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
@@ -2429,6 +2493,12 @@ ALTER TABLE `dct_pos_tbl_cientes`
   ADD PRIMARY KEY (`cli_id_cliente`);
 
 --
+-- Indices de la tabla `dct_pos_tbl_clave_acceso`
+--
+ALTER TABLE `dct_pos_tbl_clave_acceso`
+  ADD PRIMARY KEY (`cla_id_clave_acceso`);
+
+--
 -- Indices de la tabla `dct_pos_tbl_empresa_establecimiento`
 --
 ALTER TABLE `dct_pos_tbl_empresa_establecimiento`
@@ -2445,6 +2515,18 @@ ALTER TABLE `dct_pos_tbl_empresa_punto_emision`
 --
 ALTER TABLE `dct_pos_tbl_empresa_serial`
   ADD PRIMARY KEY (`ser_id_empresa_serial`);
+
+--
+-- Indices de la tabla `dct_pos_tbl_factura_detalle`
+--
+ALTER TABLE `dct_pos_tbl_factura_detalle`
+  ADD PRIMARY KEY (`fdt_id_factura_detalle`);
+
+--
+-- Indices de la tabla `dct_pos_tbl_factura_transaccion`
+--
+ALTER TABLE `dct_pos_tbl_factura_transaccion`
+  ADD PRIMARY KEY (`ftr_id_factura_transaccion`);
 
 --
 -- Indices de la tabla `dct_pos_tbl_forma_pago`
@@ -2550,7 +2632,13 @@ ALTER TABLE `detalle_guia_electronica`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_cientes`
 --
 ALTER TABLE `dct_pos_tbl_cientes`
-  MODIFY `cli_id_cliente` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cli_id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `dct_pos_tbl_clave_acceso`
+--
+ALTER TABLE `dct_pos_tbl_clave_acceso`
+  MODIFY `cla_id_clave_acceso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_empresa_establecimiento`
@@ -2571,10 +2659,22 @@ ALTER TABLE `dct_pos_tbl_empresa_serial`
   MODIFY `ser_id_empresa_serial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_detalle`
+--
+ALTER TABLE `dct_pos_tbl_factura_detalle`
+  MODIFY `fdt_id_factura_detalle` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
+--
+ALTER TABLE `dct_pos_tbl_factura_transaccion`
+  MODIFY `ftr_id_factura_transaccion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`
 --
 ALTER TABLE `dct_pos_tbl_producto_servicio`
-  MODIFY `prs_id_prod_serv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `prs_id_prod_serv` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_aplicacion`
@@ -2592,7 +2692,7 @@ ALTER TABLE `dct_sistema_tbl_catalogo`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_contrasenia`
 --
 ALTER TABLE `dct_sistema_tbl_contrasenia`
-  MODIFY `cts_id_contrasenia` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `cts_id_contrasenia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_empresa`
@@ -2616,7 +2716,7 @@ ALTER TABLE `dct_sistema_tbl_rol`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_token`
 --
 ALTER TABLE `dct_sistema_tbl_token`
-  MODIFY `tok_id_token` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `tok_id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

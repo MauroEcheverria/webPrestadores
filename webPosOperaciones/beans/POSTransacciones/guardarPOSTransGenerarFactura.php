@@ -3,9 +3,7 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
-
 	include_once('../../../plugins/facturacionElectronica/generarXML.php');
-
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
@@ -43,7 +41,7 @@
 					if ($clave_acceso_sri[0] == "cargaOK") {
 			      $data_result["message"] = "saveOK";
 			      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-			      $data_result["ruta_factura"] = $host."webPosOperaciones/comprobantesTransacciones/".$clave_acceso_sri[1].".xml";
+			      $data_result["ruta_xml"] = $host."webPosOperaciones/comprobantesGenerados/".$clave_acceso_sri[1].".xml";
 			      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$row_fe["em_archivo_fact_elec"];
 			      $data_result["contrasenia_archivo"] = $row_fe["em_pass_fct_elec"];
 						$data_result["numLineaCodigo"] = __LINE__;

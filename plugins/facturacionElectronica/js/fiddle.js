@@ -1,10 +1,10 @@
-function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p12,ruta_factura) {
+function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p12,ruta_xml) {
   var response = [];
   $.ajax({
-      url: "../../../plugins/facturacionElectronica/leerFactura.php",
+      url: "../../../plugins/facturacionElectronica/leerXML.php",
       type: 'POST',
       data: {
-        'ruta_factura': ruta_factura
+        'ruta_xml': ruta_xml
       },
       context: document.body
   }).done(function (respuesta) {
@@ -40,7 +40,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               context: document.body
             }).done(function (respuestaValidarComprobante) {
               respuestaValidarComprobante = JSON.parse(respuestaValidarComprobante);
-              if (respuestaValidarComprobante.sri_estado == "RECIBIDA" ) {
+              if (respuestaValidarComprobante.sri_estado == "RECIBIDA") {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida de manera correcta comprobante electrónico.</div>" );
                 service = 'Autorizacion Comprobante';
                 xmlDoc = $.parseXML(window.contenido_comprobante),$xml = $(xmlDoc),$claveAcceso = $xml.find("claveAcceso");

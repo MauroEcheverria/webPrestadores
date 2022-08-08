@@ -346,7 +346,6 @@ class generarPDF {
 		$pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
              
     $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
-    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
     /*$data_result["message"] = "pdf_ok";
     echo json_encode($data_result);*/
 
@@ -673,7 +672,6 @@ class generarPDF {
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
         $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
-	    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
 	    /*$data_result["message"] = "pdf_ok";
 	    echo json_encode($data_result);*/
     }
@@ -851,7 +849,6 @@ class generarPDF {
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
 				$pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
-		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
 		    /*$data_result["message"] = "pdf_ok";
 		    echo json_encode($data_result);*/
     }
@@ -1017,7 +1014,6 @@ class generarPDF {
 
 
         $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
-		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
 		    /*$data_result["message"] = "pdf_ok";
 		    echo json_encode($data_result);*/
     }
@@ -1243,7 +1239,6 @@ class generarPDF {
         $pdf->MultiCell(100, 5, "" . $infoAdicional . "", 0);
 
         $pdf->Output('../../webPosOperaciones/comprobantesAutorizados/'.$claveAcceso.'.pdf','F');
-		    rename("../../webPosOperaciones/comprobantesTransacciones/".$claveAcceso."_aprobada.xml","../../webPosOperaciones/comprobantesAutorizados/".$claveAcceso.".xml");
 		    /*$data_result["message"] = "pdf_ok";
 		    echo json_encode($data_result);*/
     }

@@ -1,7 +1,6 @@
 <?php
 session_start();
-$ruta = $_POST['ruta_factura'];
-$myxmlfilecontent = file_get_contents($ruta);
+$myxmlfilecontent = file_get_contents($_POST['ruta_xml']);
 
 $text = trim(preg_replace('/\s+/', ' ', $myxmlfilecontent));
 $text = preg_replace("/(?<=\>)(\r?\n)|(\r?\n)(?=\<\/)/", '', $text);

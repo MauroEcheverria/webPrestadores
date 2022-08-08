@@ -1,5 +1,5 @@
 <?php
-$nombre = "../../webPosOperaciones/comprobantesTransacciones/".$_POST['clave_acceso']."_firmada.xml";
+$nombre = "../../webPosOperaciones/comprobantesFirmados/".$_POST['clave_acceso'].".xml";
 $archivo = fopen($nombre, "w+");
 if (fwrite($archivo,$_POST['mensaje'].PHP_EOL)) {
   $data_result["cargaXML"] = "cargaOK";
