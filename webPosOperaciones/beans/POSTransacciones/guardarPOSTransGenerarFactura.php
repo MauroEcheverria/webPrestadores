@@ -149,15 +149,14 @@
 												                            $sri_clave_acceso_tipo_emision.
 												                            $sri_clave_acceso_verificador;
 
-						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, cli_id_cliente, cla_fecha_emision, cla_tipo_comprobante, 
-							cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, cla_tipo_emision, 
-							cla_dig_verificador, cla_estado_comprobante, cla_estado, cla_usuario_creacion, cla_fecha_creacion, cla_ip_creacion) 
-						VALUES (:emp_id_empresa, :cli_id_cliente, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, 
-							:cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 
-							'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion);";
+						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, cli_id_cliente, ftr_id_factura_transaccion, cla_fecha_emision, 
+							cla_tipo_comprobante, cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, 
+							cla_tipo_emision, cla_dig_verificador, cla_estado_comprobante, cla_estado, cla_usuario_creacion, cla_fecha_creacion, cla_ip_creacion) 
+						VALUES (:emp_id_empresa, :cli_id_cliente, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion);";
 				    $query_clave_acceso=$pdo->prepare($sql_clave_acceso);
 				    $query_clave_acceso->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':cli_id_cliente',$data_comprobante["cli_id_cliente"],PDO::PARAM_INT);
+				    $query_clave_acceso->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':cla_fecha_emision',$sri_clave_acceso_fecha_emison,PDO::PARAM_STR);
 				    $query_clave_acceso->bindValue(':cla_tipo_comprobante',$sri_clave_acceso_tipo_comprobante,PDO::PARAM_STR);
 				    $query_clave_acceso->bindValue(':cla_ruc',$sri_clave_acceso_ruc,PDO::PARAM_STR);
@@ -172,21 +171,33 @@
 				    $query_clave_acceso->bindValue(':cla_ip_creacion',getRealIP(),PDO::PARAM_STR);
 				    $query_clave_acceso->execute();
 
-						if ($query_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso) {
+				    $sql_serial_facturacion="UPDATE dct_pos_tbl_empresa_serial 
+																    SET ser_factura = :ser_factura,
+																		    ser_usuario_modificacion=:ser_usuario_modificacion,
+																	   		ser_fecha_modificacion=now(),
+																	   		ser_ip_modificacion=:ser_ip_modificacion
+																    WHERE emp_id_empresa = :emp_id_empresa;";
+						$query_serial_facturacion=$pdo->prepare($sql_serial_facturacion);
+						$query_serial_facturacion->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
+						$query_serial_facturacion->bindValue(':ser_factura',$data_comprobante["serial_comprobante"]+1,PDO::PARAM_STR);
+						$query_serial_facturacion->bindValue(':ser_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+						$query_serial_facturacion->bindValue(':ser_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+						$query_serial_facturacion->execute();
+
+						if ($query_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso && $query_serial_facturacion) {
 
 							$pdo->commit();
 
-							echo json_encode($data_comprobante);
-
-							/*$enviarXML=new enviarXML();
-				      $dataXML = $enviarXML->envioXML(1,$tipoComprobante,$pdo);
+							$enviarXML=new enviarXML();
+				      //$dataXML = $enviarXML->envioXML($data_comprobante,$pdo);
+				      $dataXML = $enviarXML->envioXML(1,$data_comprobante["tipo_comporbante"],$pdo);
 				      $clave_acceso_sri = explode("&&&&",$dataXML);
 							if ($clave_acceso_sri[0] == "cargaOK") {
 					      $data_result["message"] = "saveOK";
 					      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
 					      $data_result["ruta_xml"] = $host."webPosOperaciones/comprobantesGenerados/".$clave_acceso_sri[1].".xml";
-					      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$data_result["em_archivo_fact_elec"];
-					      $data_result["contrasenia_archivo"] = $data_result["em_pass_fct_elec"];
+					      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$data_comprobante["em_archivo_fact_elec"];
+					      $data_result["contrasenia_archivo"] = $data_comprobante["em_pass_fct_elec"];
 								$data_result["numLineaCodigo"] = __LINE__;
 								echo json_encode($data_result);
 							}
@@ -194,7 +205,7 @@
 					      $data_result["message"] = "saveXmlError";
 								$data_result["numLineaCodigo"] = __LINE__;
 								echo json_encode($data_result);
-							}*/
+							}
 
 						}
 						else {
