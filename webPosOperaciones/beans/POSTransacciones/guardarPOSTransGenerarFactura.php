@@ -120,34 +120,34 @@
 						$query_detalle_facturacion->bindValue(':fdt_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 						$query_detalle_facturacion->execute();
 
-						$sri_clave_acceso_fecha_emison = date('dmY', strtotime($fechaActual_4));
-						$sri_clave_acceso_tipo_comprobante = str_pad($data_comprobante["tipo_comporbante"],'2','0',STR_PAD_LEFT);
-						$sri_clave_acceso_ruc = $data_comprobante["emp_ruc"];
-						$sri_clave_acceso_tipo_ambiente = $data_comprobante["wsr_tipo_ambiente"];
-						$sri_clave_acceso_serie_establecimiento = str_pad($data_comprobante["est_id_empresa_establecimiento"],'3','0',STR_PAD_LEFT);
-						$sri_clave_acceso_serie_punto_emision = str_pad($data_comprobante["epe_id_empresa_punto_emision"],'3','0',STR_PAD_LEFT);
-						$sri_clave_acceso_secuencial = str_pad($data_comprobante["serial_comprobante"],'9','0',STR_PAD_LEFT);
-						$sri_clave_acceso_cod_numerico = str_pad($data_comprobante["ftr_id_factura_transaccion"],'8','0',STR_PAD_LEFT);
-						$sri_clave_acceso_tipo_emision = $data_comprobante["em_tipo_emision"];
-						$sri_clave_acceso_verificador = validar_clave_sri($sri_clave_acceso_fecha_emison.
-		                                                            $sri_clave_acceso_tipo_comprobante.
-		                                                            $sri_clave_acceso_ruc.
-		                                                            $sri_clave_acceso_tipo_ambiente.
-		                                                            $sri_clave_acceso_serie_establecimiento.
-		                                                            $sri_clave_acceso_serie_punto_emision.
-		                                                            $sri_clave_acceso_secuencial.
-		                                                            $sri_clave_acceso_cod_numerico.
-		                                                            $sri_clave_acceso_tipo_emision);
-		        $data_comprobante["sri_clave_acceso"] = $sri_clave_acceso_fecha_emison.
-												                            $sri_clave_acceso_tipo_comprobante.
-												                            $sri_clave_acceso_ruc.
-												                            $sri_clave_acceso_tipo_ambiente.
-												                            $sri_clave_acceso_serie_establecimiento.
-												                            $sri_clave_acceso_serie_punto_emision.
-												                            $sri_clave_acceso_secuencial.
-												                            $sri_clave_acceso_cod_numerico.
-												                            $sri_clave_acceso_tipo_emision.
-												                            $sri_clave_acceso_verificador;
+						$data_comprobante["sri_clave_acceso_fecha_emison"] = date('dmY', strtotime($fechaActual_4));
+						$data_comprobante["sri_clave_acceso_tipo_comprobante"] = str_pad($data_comprobante["tipo_comporbante"],'2','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_ruc"] = $data_comprobante["emp_ruc"];
+						$data_comprobante["sri_clave_acceso_tipo_ambiente"] = $data_comprobante["wsr_tipo_ambiente"];
+						$data_comprobante["sri_clave_acceso_serie_establecimiento"] = str_pad($data_comprobante["est_id_empresa_establecimiento"],'3','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_serie_punto_emision"] = str_pad($data_comprobante["epe_id_empresa_punto_emision"],'3','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_secuencial"] = str_pad($data_comprobante["serial_comprobante"],'9','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_cod_numerico"] = str_pad($data_comprobante["ftr_id_factura_transaccion"],'8','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_tipo_emision"] = $data_comprobante["em_tipo_emision"];
+						$data_comprobante["sri_clave_acceso_verificador"] = validar_clave_sri($data_comprobante["sri_clave_acceso_fecha_emison"].
+		                                                            $data_comprobante["sri_clave_acceso_tipo_comprobante"].
+		                                                            $data_comprobante["sri_clave_acceso_ruc"].
+		                                                            $data_comprobante["sri_clave_acceso_tipo_ambiente"].
+		                                                            $data_comprobante["sri_clave_acceso_serie_establecimiento"].
+		                                                            $data_comprobante["sri_clave_acceso_serie_punto_emision"].
+		                                                            $data_comprobante["sri_clave_acceso_secuencial"].
+		                                                            $data_comprobante["sri_clave_acceso_cod_numerico"].
+		                                                            $data_comprobante["sri_clave_acceso_tipo_emision"]);
+		        $data_comprobante["sri_clave_acceso"] = $data_comprobante["sri_clave_acceso_fecha_emison"].
+												                            $data_comprobante["sri_clave_acceso_tipo_comprobante"].
+												                            $data_comprobante["sri_clave_acceso_ruc"].
+												                            $data_comprobante["sri_clave_acceso_tipo_ambiente"].
+												                            $data_comprobante["sri_clave_acceso_serie_establecimiento"].
+												                            $data_comprobante["sri_clave_acceso_serie_punto_emision"].
+												                            $data_comprobante["sri_clave_acceso_secuencial"].
+												                            $data_comprobante["sri_clave_acceso_cod_numerico"].
+												                            $data_comprobante["sri_clave_acceso_tipo_emision"].
+												                            $data_comprobante["sri_clave_acceso_verificador"];
 
 						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, cli_id_cliente, ftr_id_factura_transaccion, cla_fecha_emision, 
 							cla_tipo_comprobante, cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, 
@@ -189,8 +189,7 @@
 							$pdo->commit();
 
 							$enviarXML=new enviarXML();
-				      //$dataXML = $enviarXML->envioXML($data_comprobante,$pdo);
-				      $dataXML = $enviarXML->envioXML(1,$data_comprobante["tipo_comporbante"],$pdo);
+				      $dataXML = $enviarXML->envioXML($data_comprobante,$pdo);
 				      $clave_acceso_sri = explode("&&&&",$dataXML);
 							if ($clave_acceso_sri[0] == "cargaOK") {
 					      $data_result["message"] = "saveOK";
