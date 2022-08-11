@@ -88,6 +88,7 @@
 			    $arrayMail["nombres"] = $usr_nombre_1." ".$usr_nombre_2." ".$usr_apellido_1." ".$usr_apellido_2;
 			    $arrayMail["linkReset"] = $validacionUsuario->setPassword($tokenAsignado);
 			    $arrayMail["archivoHTML"] = "../../mail/htmlBienvenida.php";
+			    $arrayMail["host"] = $host;
 			    $arrayMail["tipoCorreo"] = "htmlBienvenida";
 			    $phpMail = phpMailer($arrayMail);
 

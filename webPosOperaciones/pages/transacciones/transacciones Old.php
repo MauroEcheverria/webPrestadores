@@ -44,35 +44,7 @@
 
                     <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
                       <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                      <div class="form-group">
-                        <label for="cli_identificacion" class="control-label">Cédula</label>
-                        <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required value="1308041134">
-                        <div class="help-block with-errors"></div>
-                      </div>
-                      <div class="form-group">
-                        <label for="fop_id_forma_pago" class="control-label">Forma de Pago</label>
-                        <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required>
-                          <option value="">Selecione Establecimiento</option>
-                          <option value="20" selected>OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                      <div class="form-group">
-                        <label for="est_id_empresa_establecimiento" class="control-label">Establecimiento</label>
-                        <select name="est_id_empresa_establecimiento" id="est_id_empresa_establecimiento" class="form-control" required>
-                          <option value="">Selecione Establecimiento</option>
-                          <option value="1" selected>Activo</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                      <div class="form-group">
-                        <label for="epe_id_empresa_punto_emision" class="control-label">Punto Emisión</label>
-                        <select name="epe_id_empresa_punto_emision" id="epe_id_empresa_punto_emision" class="form-control" required>
-                          <option value="">Selecione Punto Emisión</option>
-                          <option value="1" selected>Activo</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                      </div>
+                      <input type="hidden" name="tipoComprobante" value="1">
                       <div class="modal-footer centralFooter">
                         <button type="submit" class="btn btn-success btn-dreconstec">Guardar Factura</button>
                       </div>

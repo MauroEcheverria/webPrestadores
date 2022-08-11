@@ -343,6 +343,7 @@
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
 				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+				  $body = str_replace('%%host%%', $arrayMail["host"], $body);
 	  		break;
 	  	case 'htmlResetPassConfirmacion':
 	  			$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
@@ -356,6 +357,7 @@
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+				  $body = str_replace('%%host%%', $arrayMail["host"], $body);
 				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				break;
 	  	default:

@@ -60,6 +60,7 @@
 		    $arrayMail["nombres"] = $row["usr_nom_completos"];
 		    $arrayMail["linkReset"] = $validacionUsuario->setPassword($tokenAsignado);
 		    $arrayMail["archivoHTML"] = "../../mail/htmlResetPass.php";
+		    $arrayMail["host"] = $host;
 		    $arrayMail["tipoCorreo"] = "htmlResetPass";
 		    $phpMail = phpMailer($arrayMail);
 
