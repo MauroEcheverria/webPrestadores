@@ -16,17 +16,17 @@
 	$mailPort = 587;
 	/*$mailSMTP = 'ssl';
 	$mailPort = 465;*/
-	$hostSince = "mail.dreconstec.com";
-	$passSince = "?}24zK&m;_UU";
-	$mailSince = "app.web@dreconstec.com";
-	$deCorreo = "app.web@dreconstec.com";
+	$hostSince = "smtp.office365.com";
+    $passSince = "Vinicio1984";
+    $mailSince = "app.ceibos@iess.gob.ec";
+	$deCorreo = "app.ceibos@iess.gob.ec";
 	$nombreSetFrom = "APP Dreconstec";
 	/****************** TOKEN ************/
 	$token_csrf = bin2hex(openssl_random_pseudo_bytes(32));
 	/****************** ERROR REPORTING *************************/
 	// 1 - Se ven todo tipo de error y advertencias
 	// 0 - No se ven error ni anvertencias
-	$app_error_reporting = 1;
+	$app_error_reporting = 0;
 	$http = ($app_error_reporting == 0) ? "https://" : "http://";
 	/****************** TIMEOUT SESSION *************************/
 	// 15 min = 900 seg
