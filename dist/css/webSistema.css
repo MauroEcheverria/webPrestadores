@@ -10,6 +10,9 @@
   opacity:.80;
   filter: alpha(opacity=80);
 }
+.solo_main {
+  display: none;
+}
 #loading img{
   margin-top: 15%;
 }
