@@ -1,5 +1,5 @@
 <?php 
-  function arqueoCaja($pdo,$dataSesion){ 
+  function administracion($pdo,$dataSesion){ 
   include("../../../template/templateHead.php");
   include("../../../template/templateFooter.php");
   include("../../../dialogs/modalViews.php"); 
@@ -16,7 +16,7 @@
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main">
-        arqueoCaja
+        administracion
       </div>
     </section>
   </div>

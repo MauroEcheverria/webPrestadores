@@ -25,7 +25,7 @@
 			$dataValidaAcceso = [
 				'cod_system_user' => $userSystem,
 				'fecha_actual' => $fechaActual_4,
-				'id_option' => 8
+				'id_option' => 7
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$_SESSION["token_csrf"] = $token_csrf;
@@ -55,8 +55,8 @@
 				$query->bindValue(':usr_fecha_acceso',$fechaActual_1,PDO::PARAM_STR);
 				$query->execute(); $pdo->commit();
 				$sesion->set('dataSesion', $dataSesion);
-				include('aperturaCaja.php');
-				aperturaCaja($pdo,$dataSesion);
+				include('administracion.php');
+				administracion($pdo,$dataSesion);
 			}
 			else {
 				noAutorizado($pdo,$dataSesion); 
