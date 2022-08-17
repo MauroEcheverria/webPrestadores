@@ -1,16 +1,164 @@
-$(document).ready(function() {
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var target = $(e.target).attr("href")
-    if (target == "#idTogglable_1") {
-      
-    }
-    if (target == "#idTogglable_2") {
-      
-    }
-    if (target == "#idTogglable_3") {
-      
+function ocultarPaneles() {
+  $("#btnTransFacturacion").removeClass('btn-success').addClass('btn-warning');
+  $("#btnTransNotasCredito").removeClass('btn-success').addClass('btn-warning');
+  $("#btnTransNotasDebito").removeClass('btn-success').addClass('btn-warning');
+  $("#btnTransGuiRemision").removeClass('btn-success').addClass('btn-warning');
+  $("#btnTransComprobanteRetencion").removeClass('btn-success').addClass('btn-warning');
+  $("#btnTransEstadoTransaccion").removeClass('btn-success').addClass('btn-warning');
+  $('#transFacturacion').fadeOut(0);
+  $('#transNotasCredito').fadeOut(0);
+  $('#transNotasDebito').fadeOut(0);
+  $('#transGuiRemision').fadeOut(0);
+  $('#transComprobanteRetencion').fadeOut(0);
+  $('#transEstadoTransaccion').fadeOut(0);
+}
+function renderDtEstadoTransaccion() {
+  var dtEstadoTransaccion = $('#dtEstadoTransaccion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,2,3,4,6,7,8,9]
+      },
+      {
+        "targets": [0,1],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">cla_id_clave_acceso</div>' },
+      { title: '<div class="tituloColumnasDT">cla_sri_clave_acceso</div>' },
+      { title: '<div class="tituloColumnasDT">RUC</div>' },
+      { title: '<div class="tituloColumnasDT">Empres</div>' },
+      { title: '<div class="tituloColumnasDT">Identificación</div>' },
+      { title: '<div class="tituloColumnasDT">Nombre</div>' },
+      { title: '<div class="tituloColumnasDT">Fecha Creación</div>' },
+      { title: '<div class="tituloColumnasDT">Comprobante</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="icondtEstadoTransaccionModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtEstadoTransaccionResetear cursorPointerDT" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/POSTransacciones/obtenerClaveAcceso.php',
+      type: "post",
+      data: function ( d ) {
+        d.trans_desde_hasta = $('#trans_desde_hasta').val();
+        d.asdasdasd = $('#cli_identificacion').val()
+      },
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      /*if ( data[5] == 1 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }*/
     }
   });
+}
+$(document).ready(function() {
+  $("#btnTransFacturacion").click(function() {
+    ocultarPaneles();
+    $("#btnTransFacturacion").removeClass('btn-warning').addClass('btn-success');
+    $('#transFacturacion').fadeIn(0);
+  });
+  $("#btnTransNotasCredito").click(function() {
+    ocultarPaneles();
+    $("#btnTransNotasCredito").removeClass('btn-warning').addClass('btn-success');
+    $('#transNotasCredito').fadeIn(0);
+  });
+  $("#btnTransNotasDebito").click(function() {
+    ocultarPaneles();
+    $("#btnTransNotasDebito").removeClass('btn-warning').addClass('btn-success');
+    $('#transNotasDebito').fadeIn(0);
+  });
+  $("#btnTransGuiRemision").click(function() {
+    ocultarPaneles();
+    $("#btnTransGuiRemision").removeClass('btn-warning').addClass('btn-success');
+    $('#transGuiRemision').fadeIn(0);
+  });
+  $("#btnTransComprobanteRetencion").click(function() {
+    ocultarPaneles();
+    $("#btnTransComprobanteRetencion").removeClass('btn-warning').addClass('btn-success');
+    $('#transComprobanteRetencion').fadeIn(0);
+  });
+  $("#btnTransEstadoTransaccion").click(function() {
+    ocultarPaneles();
+    $("#btnTransEstadoTransaccion").removeClass('btn-warning').addClass('btn-success');
+    $('#transEstadoTransaccion').fadeIn(0);
+    renderDtEstadoTransaccion()
+  });
+  $('#trans_desde_hasta').daterangepicker({ 
+    "showDropdowns": true,
+    "dateLimit": {
+      "days": 60
+    },
+    "locale": {
+      "format": "YYYY/MM/DD",
+      "separator": " - ",
+      "applyLabel": "Consultar",
+      "cancelLabel": "Cancelar",
+      "fromLabel": "De",
+      "toLabel": "Hacia",
+      "customRangeLabel": "Personalizado",
+      "weekLabel": "S",
+      "daysOfWeek": [
+          "Do",
+          "Lu",
+          "Ma",
+          "Mi",
+          "Ju",
+          "Vi",
+          "Sá"
+      ],
+      "monthNames": [
+          "Enero",
+          "Febrero",
+          "Marzo",
+          "Abril",
+          "Mayo",
+          "Junio",
+          "Julio",
+          "Agosto",
+          "Septiembre",
+          "Octubre",
+          "Noviembre",
+          "Diciembre"
+      ],
+      "firstDay": 1
+    },
+    "startDate": moment().format('YYYY-MM-DD'),
+    "endDate": (moment().subtract(30,'days')).format('YYYY-MM-DD'),
+    "alwaysShowCalendars": true,
+    "timePicker": false,
+    "timePickerIncrement": 30,
+    "timePicker24Hour": true,
+    "opens": "center",
+    "applyClass": "btn-primary",
+    "cancelClass": "btn-danger"
+  });
+  $('#trans_desde_hasta').val((moment().subtract(30,'days')).format('YYYY-MM-DD')+" - "+moment().format('YYYY-MM-DD'));
   $('#formPOSTransGenerarFactura').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
