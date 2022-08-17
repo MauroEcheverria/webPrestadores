@@ -45,4 +45,6 @@
 	$instance_id="instance12736";
 	/****************** URL POS *************************/
 	$host="http://localhost/GIT/webPrestadores/";
+        /****************** path logo empresas *************************/
+        $PATH_LOGO_EMPRESAS = dirname(__DIR__).'/webPosOperaciones/logosEmpresas/';
 ?>

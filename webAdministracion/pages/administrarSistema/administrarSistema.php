@@ -127,7 +127,7 @@
   </section>
 </div>
 <div class="modal fade" id="myModalSistemaEmpresa" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog modalLogin">
+  <div class="modal-dialog modal-xl modalLogin">
     <div class="modal-content">
       <div class="modal-header">
         <div class="row">
@@ -144,7 +144,7 @@
         <input type="hidden" name="tipo_form_sist_empre" id="tipo_form_sist_empre">
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
               <div class="form-group">
                 <label for="emp_ruc" class="control-label">RUC</label>
                 <input type="text" class="form-control" id="emp_ruc" name="emp_ruc" maxlength="13" minlength="13" onkeypress="return soloNumeros(event);" required>
@@ -161,38 +161,80 @@
                  <div class="help-block with-errors"></div>
               </div>
               <div class="form-group">
-                <label for="emp_direccion_matriz" class="control-label">Dirección Matriz</label>
-                <input type="text" class="form-control" id="emp_direccion_matriz" name="emp_direccion_matriz" required maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
-                 <div class="help-block with-errors"></div>
-              </div>
-              <div class="form-group">
                 <label for="emp_contr_esp" class="control-label">Contribuyente Especial</label>
                 <input type="text" class="form-control" id="emp_contr_esp" name="emp_contr_esp" maxlength="5" minlength="3"  onkeypress="return soloNumeros(event);">
                  <div class="help-block with-errors"></div>
               </div>
+              
               <div class="form-group">
-                <label for="emp_obli_contabilidad" class="control-label">Obligado a llevar contabilidad</label>
-                <select name="emp_obli_contabilidad" id="emp_obli_contabilidad" class="form-control" required>
-                  <option value="">Selecione una opción</option>
-                  <option value="SI">SI</option>
-                  <option value="NO">NO</option>
-                </select>
-                <div class="help-block with-errors"></div>
+                    <label for="emp_direccion_matriz" class="control-label">Dirección Matriz</label>
+                    <input type="text" class="form-control" id="emp_direccion_matriz" name="emp_direccion_matriz" required maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
+                     <div class="help-block with-errors"></div>
+                  </div>
+              
+              
+              
+              
+            </div>
+              <div class="col-md-3">
+                  
+                 <div class="form-group">
+                    <label for="emp_ser_fact" class="control-label">Serial Factura</label>
+                    <input type="text" class="form-control" id="emp_ser_fact" name="emp_ser_fact" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                     <div class="help-block with-errors"></div>
+                  </div>
+                    <div class="form-group">
+                    <label for="emp_ser_ncred" class="control-label">Serial Nota Crédito</label>
+                    <input type="text" class="form-control" id="emp_ser_ncred" name="emp_ser_ncred" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                     <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="emp_ser_ndeb" class="control-label">Serial Guía Remisión</label>
+                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                     <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="emp_ser_ndeb" class="control-label">Serial Nota Débito</label>
+                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                     <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="emp_ser_ndeb" class="control-label">Serial Comprobante Retención</label>
+                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                     <div class="help-block with-errors"></div>
+                  </div>
               </div>
-              <div class="form-group">
-                <label class="control-label">Consideraciones para carga de archivo: </label>
-                <div>
-                  <ul>
-                    <li> Solo formato <code>.p12</code></li>
-                    <li> Tamaño máximo por archivo de 2MB</li>
-                  </ul>
-                </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="em_logo" name="em_logo" required="">
-                  <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
-                </div>
+              
+              
+              <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="emp_obli_contabilidad" class="control-label">Obligado a llevar contabilidad</label>
+                    <select name="emp_obli_contabilidad" id="emp_obli_contabilidad" class="form-control" required>
+                      <option value="">Selecione una opción</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Logo Empresa: </label>
+                    <p>Consideraciones para carga de archivo: </p>
+                    <div>
+                      <ul>
+                        <li> Solo formato <code>.jpg</code> o <code>.png</code></li>
+                        <li> Tamaño máximo del archivo: 1MB</li>
+                      </ul>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="em_logo_empresa" name="em_logo_empresa" required="">
+                      <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
+                    </div>
+                  </div>
+                  
               </div>
-              <div class="form-group">
+              
+            <div class="col-md-3">
+                <div class="form-group">
                 <label for="em_tipo_ambiente" class="control-label">Tipo Ambiente</label>
                 <select name="em_tipo_ambiente" id="em_tipo_ambiente" class="form-control" required>
                   <option value="">Selecione una opción</option>
@@ -201,24 +243,6 @@
                 </select>
                 <div class="help-block with-errors"></div>
               </div>
-              <div class="form-group">
-                <label for="em_tipo_emision" class="control-label">Tipo Emisión</label>
-                <select name="em_tipo_emision" id="em_tipo_emision" class="form-control" required>
-                  <option value="">Selecione una opción</option>
-                  <option value="1" selected>NORMAL</option>
-                </select>
-                <div class="help-block with-errors"></div>
-              </div>
-              <div class="form-group">
-                <label for="emp_vigencia_desde" class="control-label">Vigencia Desde</label>
-                <div class="input-group flex-nowrap">
-                  <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
-                  <input type="text" class="form-control pull-right" id="emp_vigencia_desde" name="emp_vigencia_desde" required>
-                </div>
-                <div class="help-block with-errors"></div>
-              </div>
-            </div>
-            <div class="col-md-6">
               <div class="form-group">
                 <label for="ctg_id_catalogo " class="control-label">Tipo Plan</label>
                 <select name="ctg_id_catalogo" id="ctg_id_catalogo" class="form-control" required></select>
@@ -231,6 +255,14 @@
                   <option value="1">Activo</option>
                   <option value="0">Inactivo</option>
                 </select>
+                <div class="help-block with-errors"></div>
+              </div>
+                <div class="form-group">
+                <label for="emp_vigencia_desde" class="control-label">Vigencia Desde</label>
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+                  <input type="text" class="form-control pull-right" id="emp_vigencia_desde" name="emp_vigencia_desde" required>
+                </div>
                 <div class="help-block with-errors"></div>
               </div>
               <div class="form-group">
