@@ -18,8 +18,9 @@ class enviarXML {
       foreach ($row_comprobante_detalle as $row_comprobante_detalle) {
 
         $sql_producto_detalle="SELECT prs_codigo_item, prs_descripcion_item, prs_valor_unitario, 
-                              prs_descuento, prs_iva_cod_impuesto, prs_iva_cod_tarifa, prs_iva_porcentaje,
-                              prs_ice_cod_impuesto, prs_ice_cod_tarifa, prs_ice_porcentaje, prs_estado,
+                              prs_descuento, prs_iva_cod_impuesto, prs_iva_cod_tarifa,
+                              prs_ice_cod_impuesto, prs_ice_cod_tarifa, prs_irbpnr_cod_impuesto,
+                              prs_irbpnr_cod_tarifa, prs_estado,
                               prs_det_nombre_1, prs_det_valor_1, prs_det_nombre_2, prs_det_valor_2, 
                               prs_det_nombre_3, prs_det_valor_3
                               FROM dct_pos_tbl_producto_servicio 
