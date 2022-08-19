@@ -28,3 +28,8 @@
 .tabContentTrans{
 	margin-top: 15px;
 }
+@media (min-width: 550px) {
+	.container_transaccion {
+	  max-width: 100% !important;
+	}
+}

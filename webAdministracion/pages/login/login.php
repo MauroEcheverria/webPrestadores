@@ -61,7 +61,7 @@
           </div>
         </form>
         <p class="mb-1">
-          <a href="../login/olvidoSuContrasena.php">¿Olvidó su contraseña?</a>
+          <a href="#" id="idOlvidoContrasena">¿Olvidó su contraseña?</a>
         </p>
       </div>
     </div>
@@ -131,7 +131,44 @@
       </div>
     </div>
   </div>
-
+  <div class="modal fade" id="myModalOlvidoContrasena" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row width_100">
+            <div class="col-md-1">
+              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+            </div>
+            <div class="col-md-11 adminContra_3">
+              <h4 class="modal-title" id="myModalLabel">Reestablecimiento de Contraseña</h4>
+            </div>
+          </div>
+        </div>
+        <form id="formReestaPass" class="formModalPages" data-toggle="validator" role="form">
+          <div class="modal-body">
+            <input type="hidden" name="csrf" value="<?php echo $data_template['token_csrf']; ?>">
+            <div class="form-group">
+              <label for="cedOlvPass" class="control-label">Ingrese su cédula</label>
+              <input type="text" class="form-control inputOlvidoPass" id="cedOlvPass" name="cedOlvPass" required maxlength="13" onkeypress='validateOnlyNumber(event)'>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+          <div class="modal-footer centralFooter">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <button type="submit" class="btn btn-success btn-dreconstec">Reestablecer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <?php
   modalViews();
   template_footer($data_template, $js_dreconstec); }

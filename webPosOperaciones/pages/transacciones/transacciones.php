@@ -23,135 +23,112 @@
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
+  <div id="appTransaccionesFlag" class="appTransaccionesFlag"></div>
   <div class="content-wrapper">
     <section class="content">
-      <div class="container container_main">
-        <div class="card">
-          <div class="card-header">
-            <span class="panel-title"><b>Administración de Transacciones</b></span>
-          </div>
-          <div class="card-body">
+      <div class="container container_main container_transaccion">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <span class="panel-title"><b>Datos Comprobante</b></span>
+              </div>
+              <div class="card-body">
+                <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
+                  <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
 
-            <div class="row centrarContent">
-              <div class="col-xs-6 col-md-6 btn-transaccion-panel">
-                <div class="row">
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-success btn-transaccion" id="btnTransFacturacion">Facturación</button>
-                  </div>
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-warning btn-transaccion" id="btnTransNotasCredito">Notas de Credito</button>
-                  </div>
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-warning btn-transaccion" id="btnTransNotasDebito">Notas de Debito</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-6 col-md-6 btn-transaccion-panel">
-                <div class="row">
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-warning btn-transaccion" id="btnTransGuiRemision">Guia de Remisión</button>
-                  </div>
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-warning btn-transaccion" id="btnTransComprobanteRetencion">Comprobante de Retención</button>
-                  </div>
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn btn-warning btn-transaccion" id="btnTransEstadoTransaccion">Estado de Transacciones</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="tabContentTrans" id="transFacturacion">
-              <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
-                <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                <div class="form-group">
-                  <label for="cli_identificacion" class="control-label">Cédula</label>
-                  <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required value="1308041134">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="fop_id_forma_pago" class="control-label">Forma de Pago</label>
-                  <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required>
-                    <option value="">Selecione Establecimiento</option>
-                    <option value="20" selected>OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="est_id_empresa_establecimiento" class="control-label">Establecimiento</label>
-                  <select name="est_id_empresa_establecimiento" id="est_id_empresa_establecimiento" class="form-control" required>
-                    <option value="">Selecione Establecimiento</option>
-                    <option value="1" selected>Activo</option>
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="epe_id_empresa_punto_emision" class="control-label">Punto Emisión</label>
-                  <select name="epe_id_empresa_punto_emision" id="epe_id_empresa_punto_emision" class="form-control" required>
-                    <option value="">Selecione Punto Emisión</option>
-                    <option value="1" selected>Activo</option>
-                  </select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="modal-footer centralFooter">
-                  <button type="submit" class="btn btn-success btn-dreconstec">Guardar Factura</button>
-                </div>
-              </form>
-            </div>
-            <div class="tabContentTrans solo_main" id="transNotasCredito">
-              <form id="formPOSTransGenerarNotaCredito" class="formModalPages" data-toggle="validator" role="form">
-                <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                <input type="hidden" name="tipoComprobante" value="4">
-                  <button type="submit" class="btn btn-success btn-dreconstec">Guardar Nota Credito</button>
-              </form>
-            </div>
-            <div class="tabContentTrans solo_main" id="transNotasDebito">
-              <form id="formPOSTransGenerarNotaDebito" class="formModalPages" data-toggle="validator" role="form">
-                <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                <input type="hidden" name="tipoComprobante" value="5">
-                  <button type="submit" class="btn btn-success btn-dreconstec">Guardar Nota Debito</button>
-              </form>
-            </div>
-            <div class="tabContentTrans solo_main" id="transGuiRemision">
-              <form id="formPOSTransGenerarGuiaRemision" class="formModalPages" data-toggle="validator" role="form">
-                <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                <input type="hidden" name="tipoComprobante" value="6">
-                  <button type="submit" class="btn btn-success btn-dreconstec">Guardar Guia Remision</button>
-              </form>
-            </div>
-            <div class="tabContentTrans solo_main" id="transComprobanteRetencion">
-              <form id="formPOSTransGenerarRetencion" class="formModalPages" data-toggle="validator" role="form">
-                <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                <input type="hidden" name="tipoComprobante" value="7">
-                  <button type="submit" class="btn btn-success btn-dreconstec">Guardar Retencion</button>
-              </form>
-            </div>
-            <div class="tabContentTrans solo_main" id="transEstadoTransaccion">
-              <div class="container">
-                <hr>
-                <h3 class="centrarContent">Estado de Transacciones</h3>
-                <form id="formIngEgrDesdeHastaSuministros" data-toggle="validator" role="form">
-                  <div class="form-group">
-                    <label>Rango de fecha y hora:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-clock-o"></i>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="cli_identificacion" class="control-label">Cédula</label>
+                        <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required value="1308041134">
+                        <div class="help-block with-errors"></div>
                       </div>
-                      <input type="text" class="form-control pull-right" id="trans_desde_hasta" name="trans_desde_hasta" required="">
-                      <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="fop_id_forma_pago" class="control-label">Forma de Pago</label>
+                        <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required>
+                          <option value="">Selecione Establecimiento</option>
+                          <option value="20" selected>OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group centrarContent">
-                    <button type="submit" class="misBotones btn btn-primary">Consultar</button>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="est_id_empresa_establecimiento" class="control-label">Establecimiento</label>
+                        <select name="est_id_empresa_establecimiento" id="est_id_empresa_establecimiento" class="form-control" required>
+                          <option value="">Selecione Establecimiento</option>
+                          <option value="1" selected>Activo</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="epe_id_empresa_punto_emision" class="control-label">Punto Emisión</label>
+                        <select name="epe_id_empresa_punto_emision" id="epe_id_empresa_punto_emision" class="form-control" required>
+                          <option value="">Selecione Punto Emisión</option>
+                          <option value="1" selected>Activo</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
                   </div>
+                      
+                  <div class="modal-footer centralFooter">
+                    <button type="submit" class="btn btn-success btn-dreconstec">Guardar Factura</button>
+                  </div>
+                  
                 </form>
-                <div>
-                  <table id="dtEstadoTransaccion" class="cell-border" cellspacing="0" width="100%"></table> 
-                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <span class="panel-title"><b>Detalle Comprobante</b></span>
+              </div>
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Larry</td>
+                      <td>the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
+            
       </div>
     </section>
   </div>

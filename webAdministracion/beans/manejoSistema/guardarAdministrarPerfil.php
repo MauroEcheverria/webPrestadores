@@ -135,7 +135,7 @@
 			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
 			$data_result["numLineaCodigo"] = __LINE__;
 			echo json_encode($data_result);
-		}		
+		}
 
 	} catch (Exception $ex) {
 		$data_result["message"] = "salidaExcepcionCatch";
