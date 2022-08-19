@@ -52,7 +52,12 @@
     ?>
     <div class="container container_main centrarContent">
     <section class="sectionDataTable">
-      <div class="panel panel-primary widthDataTable" style="width: 50%;">
+      <div class="panel panel-primary widthDataTable">
+        <div class="row centrarContent">
+          <div class="col-md-12">
+            <img src="../../../dist/img/dct_reestablecimiento.png" class="img-responsive" alt="Responsive image">
+          </div>
+        </div>
         <div class="panel-heading tablePanelHeading">
           <h3 class="labelEvoluciones">Verificación de Cuenta de Correo</h3>
         </div>
