@@ -1044,11 +1044,30 @@ $(document).ready(function() {
     e.preventDefault();
     window.temp_ape_id_empresa_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[0];
     window.temp_ape_id_aplicacion_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[1];
+    window.temp_ape_estado_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[4]
     $('#emp_empresa_1').val(temp_ape_id_empresa_1).prop("disabled",true).prop("required",false);
-    $('#apl_aplicacion_1').val(temp_ape_id_aplicacion_1).prop("disabled",true).prop("required",false);
-    $('#ape_estado').val(dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[4]);
-    $('#tipo_form_sist_emp_apl').val("Old");
-    $('#myModalSistemaEmpresaAplicativo').modal('show');
+    $.ajax({
+      url: '../../beans/manejoSistema/cargaSistemaEmpresaAplicativo.php',
+      type: 'POST',
+      dataType: 'html',
+      data:{'dataSelect':$("#emp_empresa_1").val(),'dataEdit':'edit'},
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#apl_aplicacion_1").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#apl_aplicacion_1').val(temp_ape_id_aplicacion_1).prop("disabled",true).prop("required",false);
+            $('#ape_estado').val(temp_ape_estado_1);
+            $('#tipo_form_sist_emp_apl').val("Old");
+            $('#myModalSistemaEmpresaAplicativo').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
   });
   $('#formSistemaEmpresaAplicativo').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
@@ -1098,7 +1117,7 @@ $(document).ready(function() {
         url: '../../beans/manejoSistema/cargaSistemaEmpresaAplicativo.php',
         type: 'POST',
         dataType: 'html',
-        data:{'dataSelect':$("#emp_empresa_1").val()},
+        data:{'dataSelect':$("#emp_empresa_1").val(),'dataEdit':'new'},
         success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
@@ -1143,11 +1162,30 @@ $(document).ready(function() {
     e.preventDefault();
     window.temp_rla_id_rol_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[0];
     window.temp_rla_id_aplicacion_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[1];
+    window.temp_rla_estado_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[4]
     $('#rol_rol_2').val(temp_rla_id_rol_2).prop("disabled",true).prop("required",false);
-    $('#apl_aplicacion_2').val(temp_rla_id_aplicacion_2).prop("disabled",true).prop("required",false);
-    $('#rla_estado').val(dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[4]);
-    $('#tipo_form_sist_rol_apl').val("Old");
-    $('#myModalSistemaRolAplicativo').modal('show');
+    $.ajax({
+      url: '../../beans/manejoSistema/cargaSistemaRolAplicativo.php',
+      type: 'POST',
+      dataType: 'html',
+      data:{'dataSelect':$("#rol_rol_2").val(),'dataEdit':'edit'},
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#apl_aplicacion_2").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#apl_aplicacion_2').val(temp_rla_id_aplicacion_2).prop("disabled",true).prop("required",false);
+            $('#rla_estado').val(temp_rla_estado_2);
+            $('#tipo_form_sist_rol_apl').val("Old");
+            $('#myModalSistemaRolAplicativo').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
   });
   $('#formSistemaRolAplicativo').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
@@ -1197,7 +1235,7 @@ $(document).ready(function() {
         url: '../../beans/manejoSistema/cargaSistemaRolAplicativo.php',
         type: 'POST',
         dataType: 'html',
-        data:{'dataSelect':$("#rol_rol_2").val()},
+        data:{'dataSelect':$("#rol_rol_2").val(),'dataEdit':'new'},
         success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
@@ -1242,11 +1280,31 @@ $(document).ready(function() {
     e.preventDefault();
     window.temp_rlo_id_rol_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[0];
     window.temp_rlo_id_opcion_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[1];
+    window.temp_rlo_estado_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[5]
     $('#rol_rol_3').val(temp_rlo_id_rol_3).prop("disabled",true).prop("required",false);
-    $('#opc_opcion_3').val(temp_rlo_id_opcion_3).prop("disabled",true).prop("required",false);
-    $('#rlo_estado').val(dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[5]);
-    $('#tipo_form_sist_rol_opc').val("Old");
-    $('#myModalSistemaRolOpcion').modal('show');
+    $.ajax({
+      url: '../../beans/manejoSistema/cargaSistemaRolOpcion.php',
+      type: 'POST',
+      dataType: 'html',
+      data:{'dataSelect':temp_rlo_id_rol_3,'dataEdit':'edit'},
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#opc_opcion_3").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#opc_opcion_3').val(temp_rlo_id_opcion_3).prop("disabled",true).prop("required",false);
+            $('#rlo_estado').val(temp_rlo_estado_3);
+            $('#tipo_form_sist_rol_opc').val("Old");
+            $('#myModalSistemaRolOpcion').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
+            
   });
   $('#formSistemaRolOpcion').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
@@ -1296,7 +1354,7 @@ $(document).ready(function() {
         url: '../../beans/manejoSistema/cargaSistemaRolOpcion.php',
         type: 'POST',
         dataType: 'html',
-        data:{'dataSelect':$("#rol_rol_3").val()},
+        data:{'dataSelect':$("#rol_rol_3").val(),'dataEdit':'new'},
         success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
