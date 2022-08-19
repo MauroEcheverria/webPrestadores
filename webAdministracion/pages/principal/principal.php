@@ -35,10 +35,6 @@
     <section class="content">
       <div class="container-fluid">
 
-
-
-
-
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
@@ -78,10 +74,6 @@
           </div>
         </div>
 
-
-
-
-
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -103,7 +95,7 @@
                     </p>
 
                     <div class="chart">
-                      <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                      <canvas id="visitors-chart"  height="180" style="height: 180px;"></canvas>
                     </div>
                   </div>
     
@@ -179,10 +171,6 @@
           </div>
         </div>
 
-
-
-
-
         <div class="row">
           <div class="col-lg-6">
             <div class="card">
@@ -207,7 +195,74 @@
                 </div>
 
                 <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="200"></canvas>
+                  
+                  <table class="table table-striped table-valign-middle">
+                    <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Sales</th>
+                      <th>More</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        Some Product
+                      </td>
+                      <td>$13 USD</td>
+                      <td>
+                        <small class="text-success mr-1">
+                          <i class="fas fa-arrow-up"></i>
+                          12%
+                        </small>
+                        12,000 Sold
+                      </td>
+                      <td>
+                        <a href="#" class="text-muted">
+                          <i class="fas fa-search"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Another Product
+                      </td>
+                      <td>$29 USD</td>
+                      <td>
+                        <small class="text-warning mr-1">
+                          <i class="fas fa-arrow-down"></i>
+                          0.5%
+                        </small>
+                        123,234 Sold
+                      </td>
+                      <td>
+                        <a href="#" class="text-muted">
+                          <i class="fas fa-search"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Amazing Product
+                      </td>
+                      <td>$1,230 USD</td>
+                      <td>
+                        <small class="text-danger mr-1">
+                          <i class="fas fa-arrow-down"></i>
+                          3%
+                        </small>
+                        198 Sold
+                      </td>
+                      <td>
+                        <a href="#" class="text-muted">
+                          <i class="fas fa-search"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
                 </div>
 
                 <div class="d-flex flex-row justify-content-end">
@@ -263,20 +318,6 @@
 
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
       </div>
     </section>
