@@ -36,7 +36,7 @@
 	/****************** ERROR REPORTING *************************/
 	// 1 - Se ven todo tipo de error y advertencias
 	// 0 - No se ven error ni anvertencias
-	$app_error_reporting = 0;
+	$app_error_reporting = 1;
 	$http = ($app_error_reporting == 0) ? "https://" : "http://";
 	/****************** TIMEOUT SESSION *************************/
 	// 15 min = 900 seg

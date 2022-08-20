@@ -28,14 +28,31 @@
     <section class="content">
       <div class="container container_main container_transaccion">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card">
               <div class="card-header">
-                <span class="panel-title"><b>Datos Comprobante</b></span>
+                <span class="panel-title"><b>Datos de Comprobante</b></span>
               </div>
               <div class="card-body">
-                <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
-                  <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div><span style="color: #6c757d; font-size: 18px;">Usuario: </span><span>Mauro Echeverria</span></div>
+                      <div><span style="color: #6c757d; font-size: 18px;">Establecimiento: </span><span>Esteros</span></div>
+                      <div><span style="color: #6c757d; font-size: 18px;">Punto Emision: </span><span>Caja 1</span></div>
+                    </div>
+                    <div class="col-md-4">
+                      <a class="btn btn-app">
+                        <i class="fas fa-edit"></i> Edit
+                      </a>
+                    </div>
+                  </div>
+                  <br>
+
+
+                  
+
+
 
                   <div class="row">
                     <div class="col-md-6">
@@ -58,9 +75,9 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <label for="est_id_empresa_establecimiento" class="control-label">Establecimiento</label>
+                        <label for="est_id_empresa_establecimiento" class="control-label">Productos/Servicios</label>
                         <select name="est_id_empresa_establecimiento" id="est_id_empresa_establecimiento" class="form-control" required>
                           <option value="">Selecione Establecimiento</option>
                           <option value="1" selected>Activo</option>
@@ -68,62 +85,114 @@
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="epe_id_empresa_punto_emision" class="control-label">Punto Emisión</label>
-                        <select name="epe_id_empresa_punto_emision" id="epe_id_empresa_punto_emision" class="form-control" required>
-                          <option value="">Selecione Punto Emisión</option>
-                          <option value="1" selected>Activo</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                    </div>
-                  </div>
-                      
-                  <div class="modal-footer centralFooter">
-                    <button type="submit" class="btn btn-success btn-dreconstec">Guardar Factura</button>
+  
                   </div>
                   
-                </form>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <span class="panel-title"><b>Detalle Comprobante</b></span>
+                <span class="panel-title"><b>Detalle de Comprobante</b></span>
               </div>
               <div class="card-body">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span style="color: #6c757d; font-size: 21px;">Cliente: </span><span>Mauro Echeverria</span>
+                      </div>
+                      <div class="col-md-6">
+                        <span style="color: #6c757d; font-size: 21px;">Telefono: </span><span>0960939030</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span style="color: #6c757d; font-size: 21px;">Direccion: </span><span>Los Esteros</span>
+                      </div>
+                      <div class="col-md-6">
+                        <span style="color: #6c757d; font-size: 21px;">Correo: </span><span>algld@dfdf.vom</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+
+                    <div class="info-box bg-light">
+                      <div class="info-box-content">
+                        <span class="info-box-text text-center text-muted" style="font-size: 23px;">Total</span>
+                        <span class="info-box-number text-center text-muted mb-0" style="font-size: 30px; margin-top: -20px;">$ 1.999,99</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <br>
                 <table class="table table-striped">
                   <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                    <tr class="centrarContent">
+                      <th scope="col">Códico Item</th>
+                      <th scope="col">Decripcion</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Precio Unitario</th>
+                      <th scope="col">Sub Total</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
+                      <td class="centrarContent">C2015</td>
+                      <td>Rinnes 3 1/2</td>
+                      <td class="centrarContent">2</td>
+                      <td class="derechaContent">1.23</td>
+                      <td class="derechaContent">3.69</td>
+                      <td class="centrarContent">
+                        <div class="btn-group btn-group-sm">
+                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
+                      <td class="centrarContent">C2015</td>
+                      <td>Rinnes 3 1/2</td>
+                      <td class="centrarContent">2</td>
+                      <td class="derechaContent">1.23</td>
+                      <td class="derechaContent">3.69</td>
+                      <td class="centrarContent">
+                        <div class="btn-group btn-group-sm">
+                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
+
+                <div style="text-align: right;">
+                  <div style="margin: 10px 135px 20px 500px;">
+                    <div>
+                      <span style="color: #6c757d; font-size: 21px;">Base Imponible 0: </span><span>$ 15362.00</span>
+                    </div>
+                    <div>
+                      <span style="color: #6c757d; font-size: 21px;">Base Imponible 12%: </span><span>$ 15362.00</span>
+                    </div>
+                    <div>
+                      <span style="color: #6c757d; font-size: 21px;">IVA: </span><span>$ 15362.00</span>
+                    </div>
+                    <div>
+                      <span style="color: #6c757d; font-size: 21px;">ICE: </span><span>$ 15362.00</span>
+                    </div>
+                    <div>
+                      <span style="color: #6c757d; font-size: 21px;">TOTAL: </span><span>$ 15362.00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer centralFooter">
+                  <button type="submit" class="btn btn-block bg-gradient-success btn-lg" style="width: 200PX;">Enviar Pago</button>
+                </div>
+
               </div>
             </div>
           </div>

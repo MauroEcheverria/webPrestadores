@@ -40,6 +40,11 @@
   text-align: -webkit-center;
   text-align: -moz-center;
 }
+.derechaContent {
+  text-align: right;
+  text-align: -webkit-right;
+  text-align: -moz-right;
+}
 .container_main {
   padding: 20px 0 1px 0;
 }
