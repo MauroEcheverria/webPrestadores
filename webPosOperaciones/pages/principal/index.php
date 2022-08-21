@@ -39,6 +39,7 @@
 		    'fecha_actual' => $fechaActual_4,
 		    'role' => $returnValidar["role"],
 		    'id_option' => $dataValidaAcceso["id_option"],
+		    'usr_id_empresa' => $returnValidar["usr_id_empresa"],
 		    'token_csrf' => $token_csrf
 			];
 

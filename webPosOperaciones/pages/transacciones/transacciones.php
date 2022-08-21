@@ -8,6 +8,7 @@
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/bootstrap-daterangepicker/daterangepicker.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/select2/dist/css/select2.min.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../dist/css/webPOSTransacciones.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
@@ -16,6 +17,7 @@
   $js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/select2/dist/js/select2.full.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/fiddle.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/buffer.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/forge.min.js'.$dataSesion["version_css_js"].'"></script>';
@@ -24,6 +26,7 @@
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
   <div id="appTransaccionesFlag" class="appTransaccionesFlag"></div>
+  <input type="hidden" name="csrf" id="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main container_transaccion">
@@ -37,36 +40,38 @@
 
                   <div class="row">
                     <div class="col-md-8">
-                      <div><span style="color: #6c757d; font-size: 18px;">Usuario: </span><span>Mauro Echeverria</span></div>
-                      <div><span style="color: #6c757d; font-size: 18px;">Establecimiento: </span><span>Esteros</span></div>
-                      <div><span style="color: #6c757d; font-size: 18px;">Punto Emision: </span><span>Caja 1</span></div>
+                      <div><span style="color: #6c757d; font-size: 15px;">Usuario: </span><span style="color: #6c757d; font-size: 14px;">Mauro Echeverría</span></div>
+                      <div><span style="color: #6c757d; font-size: 15px;">Establecimiento: </span><span style="color: #6c757d; font-size: 14px;">Esteros</span></div>
+                      <div><span style="color: #6c757d; font-size: 15px;">Punto Emisión: </span><span style="color: #6c757d; font-size: 14px;">Caja 1</span></div>
                     </div>
                     <div class="col-md-4">
-                      <a class="btn btn-app">
-                        <i class="fas fa-edit"></i> Edit
-                      </a>
+                      <button type="button" class="btn btn-info" id="btnPosNuevaFactura" title="Nueva factura"><i class="fas fa-plus"></i></button>
+                      <button type="button" class="btn btn-danger" id="btnPosDesctarFactura" title="Descartar Factura"><i class="fas fa-trash"></i></button>
                     </div>
                   </div>
                   <br>
-
-
-                  
-
-
-
                   <div class="row">
                     <div class="col-md-6">
+
                       <div class="form-group">
-                        <label for="cli_identificacion" class="control-label">Cédula</label>
-                        <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required value="1308041134">
+                        <label for="cli_identificacion" class="control-label">Identificación</label>
+                        <div class="input-group input-group-sm">
+                          <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
+                          <span class="input-group-append">
+                            <button type="button" class="btn btn-info btn-flat" disabled id="btn_cli_identificacion"><i class="fas fa-search"></i></button>
+                          </span>
+                        </div>
                         <div class="help-block with-errors"></div>
                       </div>
+
+                        
+
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="fop_id_forma_pago" class="control-label">Forma de Pago</label>
-                        <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required>
-                          <option value="">Selecione Establecimiento</option>
+                        <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required disabled>
+                          <option value="">Seleccione Establecimiento</option>
                           <option value="20" selected>OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
                         </select>
                         <div class="help-block with-errors"></div>
@@ -77,9 +82,9 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="est_id_empresa_establecimiento" class="control-label">Productos/Servicios</label>
-                        <select name="est_id_empresa_establecimiento" id="est_id_empresa_establecimiento" class="form-control" required>
-                          <option value="">Selecione Establecimiento</option>
+                        <label for="prs_id_prod_serv" class="control-label">Productos/Servicios</label>
+                        <select name="prs_id_prod_serv" id="prs_id_prod_serv" class="form-control select2" required disabled>
+                          <option value="">Seleccione Establecimiento</option>
                           <option value="1" selected>Activo</option>
                         </select>
                         <div class="help-block with-errors"></div>
@@ -101,15 +106,15 @@
                   <div class="col-md-9">
                     <div class="row">
                       <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Cliente: </span><span>Mauro Echeverria</span>
+                        <span style="color: #6c757d; font-size: 21px;">Cliente: </span><span>Mauro Echeverría</span>
                       </div>
                       <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Telefono: </span><span>0960939030</span>
+                        <span style="color: #6c757d; font-size: 21px;">Teléfono: </span><span>0960939030</span>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Direccion: </span><span>Los Esteros</span>
+                        <span style="color: #6c757d; font-size: 21px;">Dirección: </span><span>Los Esteros</span>
                       </div>
                       <div class="col-md-6">
                         <span style="color: #6c757d; font-size: 21px;">Correo: </span><span>algld@dfdf.vom</span>
@@ -131,8 +136,8 @@
                 <table class="table table-striped">
                   <thead>
                     <tr class="centrarContent">
-                      <th scope="col">Códico Item</th>
-                      <th scope="col">Decripcion</th>
+                      <th scope="col">Código</th>
+                      <th scope="col">Descripción</th>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Precio Unitario</th>
                       <th scope="col">Sub Total</th>

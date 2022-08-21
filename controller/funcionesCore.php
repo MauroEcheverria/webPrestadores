@@ -279,6 +279,7 @@
 			$dataSesion = [
       	'estadoValidarAcceso' => $estadoValidarAcceso,
 		    'complete_names' => $row_usr["usr_nom_completos"],
+		    'usr_id_empresa' => $row_usr["usr_id_empresa"],
 		    'id_role' => $row_usr["usr_id_rol"],
 		    'role' => $row_usr["rol_rol"],
 		    'codigoValidacion' => $codigoValidacion

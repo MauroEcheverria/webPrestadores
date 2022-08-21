@@ -14,7 +14,34 @@ function ocultarPaneles() {
 }
 $(document).ready(function() {
   if($('div#appTransaccionesFlag').hasClass('appTransaccionesFlag')) {
-    $("body").addClass('sidebar-collapse')
+    $("body").addClass('sidebar-collapse');
+    $.ajax({
+      url: '../../beans/POSTransacciones/verificarFacturaCabecera.php',
+      type: 'POST',
+      data:{ 'csrf' : $("#csrf").val() },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "si_transaccion":
+            $('#cli_identificacion').prop("disabled",false);
+            $('#btn_cli_identificacion').prop("disabled",false);
+            $('#fop_id_forma_pago').prop("disabled",false);
+            $('#prs_id_prod_serv').prop("disabled",false);
+            break;
+          case "no_transaccion":
+            $('#cli_identificacion').prop("disabled",true);
+            $('#btn_cli_identificacion').prop("disabled",true);
+            $('#fop_id_forma_pago').prop("disabled",true);
+            $('#prs_id_prod_serv').prop("disabled",true);
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
   }
   $('#trans_desde_hasta').daterangepicker({ 
     "showDropdowns": true,
@@ -348,5 +375,31 @@ $(document).ready(function() {
         $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
       }*/
     }
+  });
+  $('#btnPosNuevaFactura').click( function () {
+    $.ajax({
+      url: '../../beans/POSTransacciones/generarFacturaCabecera.php',
+      type: 'POST',
+      data:{ 'csrf' : $("#csrf").val() },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $('#cli_identificacion').prop("disabled",false);
+            $('#btn_cli_identificacion').prop("disabled",false);
+            $('#fop_id_forma_pago').prop("disabled",false);
+            $('#prs_id_prod_serv').prop("disabled",false);
+          case "token_csrf_error":
+          case "fact_transaccion_registrada":
+            modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
   });
 });
