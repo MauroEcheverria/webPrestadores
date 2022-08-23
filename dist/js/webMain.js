@@ -14,7 +14,8 @@ function fnSistemaEmpresa() {
         aTargets: [1,3,4,5,6,7,8]
       },
       {
-        "targets": [0,9],
+        //"targets": [0,9],
+        "targets": [0,4,5,6,7,8,9,10,11,12],
         "visible": false,
         "searchable": false
       }
@@ -23,6 +24,18 @@ function fnSistemaEmpresa() {
       { title: '<div class="tituloColumnasDT">emp_id_empresa</div>' },
       { title: '<div class="tituloColumnasDT">RUC</div>' },
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
+      
+        { title: '<div class="tituloColumnasDT">Nombre comercial</div>' },
+            { title: '<div class="tituloColumnasDT">Cont. especial</div>' },
+            { title: '<div class="tituloColumnasDT">dir_matriz</div>' },
+            { title: '<div class="tituloColumnasDT">ser_fact</div>' },
+            { title: '<div class="tituloColumnasDT">ser_nc</div>' },
+            { title: '<div class="tituloColumnasDT">ser_nd</div>' },
+            { title: '<div class="tituloColumnasDT">ser_guia_remision</div>' },
+            { title: '<div class="tituloColumnasDT">ser_ret</div>' },
+            { title: '<div class="tituloColumnasDT">lleva_cont</div>' },
+            { title: '<div class="tituloColumnasDT">tipo_amb</div>' },
+            
       { title: '<div class="tituloColumnasDT">Vigencia Desde</div>' },
       { title: '<div class="tituloColumnasDT">Vigencia Hasta</div>' },
       { title: '<div class="tituloColumnasDT">Tipo Plan</div>' },
@@ -50,14 +63,16 @@ function fnSistemaEmpresa() {
       },
       timeout: 60000
     },
+    
     createdRow: function ( row, data, index ) {
-      if ( data[7] == 1 ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      if ( data[17] == 1 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
       }
-      if ( data[7] == 0 ) {
-        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      if ( data[17] == 0 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
       }
     }
+    
   });
 }
 function fnSistemaRol() {
@@ -821,15 +836,30 @@ $(document).ready(function() {
   $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaModificar', function (e) {
     e.preventDefault();
     window.temp_emp_id_empresa_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
-    window.temp_ctg_id_catalogo_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[9]
+    window.temp_ctg_id_catalogo_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[19];
     $('#emp_empresa').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[2]);
     $('#emp_ruc').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[1]);
-    $('#emp_estado').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[7]);
-    $('#emp_vigencia_desde').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
-    $('#emp_vigencia_hasta').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
-    $('#emp_vigencia_desde').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
-    $('#emp_vigencia_hasta').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
+    $('#emp_estado').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[17]);
+    $('#emp_vigencia_desde').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[13]);
+    $('#emp_vigencia_hasta').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[14]);
+    $('#emp_vigencia_desde').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[13]);
+    $('#emp_vigencia_hasta').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[14]);
+    
+    $('#ctg_id_catalogo').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[15]);
+    
+    $('#emp_nom_comercial').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
+    $('#emp_contr_esp').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
+    $('#emp_direccion_matriz').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[5]);
+    $('#emp_ser_fact').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[6]);
+    $('#emp_ser_ncred').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[7]);
+    $('#emp_guia_remision').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[8]);
+    $('#emp_ser_ndeb').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[9]);
+    $('#emp_ser_ret').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[10]);
+    $('#emp_obli_contabilidad').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[11]);
+    $('#em_tipo_ambiente').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[12]);
+    
     $('#tipo_form_sist_empre').val("Old");
+    $(".empCamposNoEditables").attr("disabled","true");
     $.ajax({
       url: '../../beans/manejoSistema/obtenerCatalogoEmpresas.php',
       type: 'POST',
@@ -866,13 +896,21 @@ $(document).ready(function() {
         data:$params,
         success: function(result){
           var result = eval('('+result+')');
-          $('#myModalSistemaEmpresa').modal('hide');
+          if (result.message !== 'error_negocio')
+          {
+              $('#myModalSistemaEmpresa').modal('hide');
+          }
+            
           switch (result.message) {
             case "saveOK":
               $('#tipo_form_sist_empre').val("Old");
             case "token_csrf_error":
             case "error_admin_perfil":
               dtSistemaEmpresa.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            case "error_negocio":
+              //dtSistemaEmpresa.ajax.reload();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
@@ -898,6 +936,7 @@ $(document).ready(function() {
             $('#ctg_id_catalogo').val("");
             $('#myModalSistemaEmpresa').modal('show');
             document.getElementById("formSistemaEmpresa").reset();
+            $(".empCamposNoEditables").attr("disabled","false");
             break;
           default:
             $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);

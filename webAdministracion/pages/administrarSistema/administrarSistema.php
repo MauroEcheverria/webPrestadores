@@ -160,47 +160,47 @@
                 <input type="text" class="form-control" id="emp_nom_comercial" name="emp_nom_comercial" maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
                  <div class="help-block with-errors"></div>
               </div>
-              <div class="form-group">
-                <label for="emp_contr_esp" class="control-label">Contribuyente Especial</label>
-                <input type="text" class="form-control" id="emp_contr_esp" name="emp_contr_esp" maxlength="5" minlength="3"  onkeypress="return soloNumeros(event);">
-                 <div class="help-block with-errors"></div>
-              </div>
+                <div class="form-group">
+                    <label for="emp_contr_esp" class="control-label">Contribuyente Especial</label>
+                    <select name="emp_contr_esp" id="emp_contr_esp" class="form-control" required>
+                      <option value="">Selecione una opción</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
               
               <div class="form-group">
                     <label for="emp_direccion_matriz" class="control-label">Dirección Matriz</label>
                     <input type="text" class="form-control" id="emp_direccion_matriz" name="emp_direccion_matriz" required maxlength="300" minlength="3" oninput="this.value = this.value.toUpperCase()">
                      <div class="help-block with-errors"></div>
                   </div>
-              
-              
-              
-              
             </div>
               <div class="col-md-3">
                   
                  <div class="form-group">
                     <label for="emp_ser_fact" class="control-label">Serial Factura</label>
-                    <input type="text" class="form-control" id="emp_ser_fact" name="emp_ser_fact" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                    <input type="text" class="form-control empCamposNoEditables" id="emp_ser_fact" name="emp_ser_fact" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
                      <div class="help-block with-errors"></div>
                   </div>
                     <div class="form-group">
                     <label for="emp_ser_ncred" class="control-label">Serial Nota Crédito</label>
-                    <input type="text" class="form-control" id="emp_ser_ncred" name="emp_ser_ncred" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                    <input type="text" class="form-control empCamposNoEditables" id="emp_ser_ncred" name="emp_ser_ncred" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
                      <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
-                    <label for="emp_ser_ndeb" class="control-label">Serial Guía Remisión</label>
-                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                    <label for="emp_guia_remision" class="control-label">Serial Guía Remisión</label>
+                    <input type="text" class="form-control empCamposNoEditables" id="emp_guia_remision" name="emp_guia_remision" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
                      <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label for="emp_ser_ndeb" class="control-label">Serial Nota Débito</label>
-                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                    <input type="text" class="form-control empCamposNoEditables" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
                      <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
-                    <label for="emp_ser_ndeb" class="control-label">Serial Comprobante Retención</label>
-                    <input type="text" class="form-control" id="emp_ser_ndeb" name="emp_ser_ndeb" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
+                    <label for="emp_ser_ret" class="control-label">Serial Comprobante Retención</label>
+                    <input type="text" class="form-control empCamposNoEditables" id="emp_ser_ret" name="emp_ser_ret" maxlength="11" minlength="1"  onkeypress="return soloNumeros(event);" required>
                      <div class="help-block with-errors"></div>
                   </div>
               </div>
@@ -226,8 +226,8 @@
                       </ul>
                     </div>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="em_logo_empresa" name="em_logo_empresa" required="">
-                      <label class="custom-file-label form-control-file" for="customFileLang">Seleccionar Archivo</label>
+                      <input type="file" class="custom-file-input" id="em_logo_empresa" name="em_logo_empresa" required="true">
+                      <label class="custom-file-label form-control-file" for="em_logo_empresa">Seleccionar Archivo</label>
                     </div>
                   </div>
                   
