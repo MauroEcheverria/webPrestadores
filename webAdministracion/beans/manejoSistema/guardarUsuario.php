@@ -3,6 +3,7 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
+	//require_once('../../../plugins/apiWhatsapp/ultramsg.class.php');
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
@@ -91,6 +92,11 @@
 			    $arrayMail["host"] = $host;
 			    $arrayMail["tipoCorreo"] = "htmlBienvenida";
 			    $phpMail = phpMailer($arrayMail);
+
+			    /*$client = new UltraMsg\WhatsAppApi($ultramsg_token,$instance_id);
+				$body="📲 Su registro a sido guardado correctamente ✔"; 
+				$api=$client->sendChatMessage($celular_numero,$body);
+				$data_result["sendChatMessage"] = $api["message"];*/
 
 			    if ($phpMail) {
 			      $data_result["dataModal_3"] = 'El registro fue guardado correctamente, revisa tu correo ya que te enviamos un correo de bienvenida.';

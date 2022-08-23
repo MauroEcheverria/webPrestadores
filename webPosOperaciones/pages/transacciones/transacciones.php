@@ -37,12 +37,11 @@
                 <span class="panel-title"><b>Datos de Comprobante</b></span>
               </div>
               <div class="card-body">
-
                   <div class="row">
                     <div class="col-md-8">
-                      <div><span style="color: #6c757d; font-size: 15px;">Usuario: </span><span style="color: #6c757d; font-size: 14px;">Mauro Echeverría</span></div>
-                      <div><span style="color: #6c757d; font-size: 15px;">Establecimiento: </span><span style="color: #6c757d; font-size: 14px;">Esteros</span></div>
-                      <div><span style="color: #6c757d; font-size: 15px;">Punto Emisión: </span><span style="color: #6c757d; font-size: 14px;">Caja 1</span></div>
+                      <div><span class="labelIdentificacion">Usuario: </span><span class="dataIdentificacion">Mauro Echeverría</span></div>
+                      <div><span class="labelIdentificacion">Establecimiento: </span><span class="dataIdentificacion">Esteros</span></div>
+                      <div><span class="labelIdentificacion">Punto Emisión: </span><span class="dataIdentificacion">Caja 1</span></div>
                     </div>
                     <div class="col-md-4">
                       <button type="button" class="btn btn-info" id="btnPosNuevaFactura" title="Nueva factura"><i class="fas fa-plus"></i></button>
@@ -52,9 +51,8 @@
                   <br>
                   <div class="row">
                     <div class="col-md-6">
-
                       <div class="form-group">
-                        <label for="cli_identificacion" class="control-label">Identificación</label>
+                        <label for="cli_identificacion" class="control-label">Identificación</label> <a href="#" style="font-size: 10px;" id="idConsumidorFinal">(Consumidor Final)</a>
                         <div class="input-group input-group-sm">
                           <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
                           <span class="input-group-append">
@@ -63,22 +61,15 @@
                         </div>
                         <div class="help-block with-errors"></div>
                       </div>
-
-                        
-
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="fop_id_forma_pago" class="control-label">Forma de Pago</label>
-                        <select name="fop_id_forma_pago" id="fop_id_forma_pago" class="form-control" required disabled>
-                          <option value="">Seleccione Establecimiento</option>
-                          <option value="20" selected>OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO</option>
-                        </select>
+                        <label for="ftr_id_forma_pago" class="control-label">Forma de Pago</label>
+                        <select name="ftr_id_forma_pago" id="ftr_id_forma_pago" class="form-control" required disabled></select>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                   </div>
-
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -90,9 +81,7 @@
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
-  
-                  </div>
-                  
+                  </div> 
               </div>
             </div>
           </div>
@@ -104,32 +93,41 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-9">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Cliente: </span><span>Mauro Echeverría</span>
+                    <div class="solo_main" id="dataCliente">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Identificación: </span>
+                          <span class="dataIdentificacion" id="dataCliIdentificacion"></span>
+                        </div>
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Teléfono: </span><span class="dataIdentificacion" id="dataCliTelefono"></span>
+                        </div>
                       </div>
-                      <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Teléfono: </span><span>0960939030</span>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Nombres: </span><span class="dataIdentificacion" id="dataCliNombres"></span>
+                        </div>
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Correo: </span><span class="dataIdentificacion" id="dataCliCorreo"></span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Dirección: </span><span>Los Esteros</span>
-                      </div>
-                      <div class="col-md-6">
-                        <span style="color: #6c757d; font-size: 21px;">Correo: </span><span>algld@dfdf.vom</span>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Dirección: </span><span class="dataIdentificacion" id="dataCliDireccion"></span>
+                        </div>
+                        <div class="col-md-6">
+                          <span class="labelIdentificacion">Placa: </span><span class="dataIdentificacion" id="dataCliPlaca"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-3">
-
                     <div class="info-box bg-light">
                       <div class="info-box-content">
                         <span class="info-box-text text-center text-muted" style="font-size: 23px;">Total</span>
                         <span class="info-box-number text-center text-muted mb-0" style="font-size: 30px; margin-top: -20px;">$ 1.999,99</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <br>
@@ -173,7 +171,6 @@
                     </tr>
                   </tbody>
                 </table>
-
                 <div style="text-align: right;">
                   <div style="margin: 10px 135px 20px 500px;">
                     <div>
@@ -193,16 +190,13 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="modal-footer centralFooter">
                   <button type="submit" class="btn btn-block bg-gradient-success btn-lg" style="width: 200PX;">Enviar Pago</button>
                 </div>
-
               </div>
             </div>
           </div>
-        </div>
-            
+        </div>    
       </div>
     </section>
   </div>
@@ -229,7 +223,6 @@
       </div>
     </div>
   </div>
-
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

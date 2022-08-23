@@ -33,3 +33,12 @@
 	  max-width: 100% !important;
 	}
 }
+.labelIdentificacion {
+	color: #6c757d; 
+	font-size: 13px;
+	font-weight: bold;
+}
+.dataIdentificacion {
+	color: #6c757d; 
+	font-size: 13px;
+}

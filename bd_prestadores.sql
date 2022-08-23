@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-08-2022 a las 04:47:08
+-- Tiempo de generación: 24-08-2022 a las 01:17:58
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1674,7 +1674,8 @@ CREATE TABLE `dct_pos_tbl_cientes` (
   `cli_tipo_identificacion` varchar(2) NOT NULL,
   `cli_identificacion` varchar(13) NOT NULL,
   `cli_nombres` varchar(300) NOT NULL,
-  `cli_direccion` varchar(300) NOT NULL,
+  `cli_correo` varchar(80) NOT NULL,
+  `cli_direccion` varchar(300) DEFAULT NULL,
   `cli_telefono` varchar(10) DEFAULT NULL,
   `cli_placa` varchar(20) DEFAULT NULL,
   `cli_estado` tinyint(1) NOT NULL,
@@ -1690,8 +1691,9 @@ CREATE TABLE `dct_pos_tbl_cientes` (
 -- Volcado de datos para la tabla `dct_pos_tbl_cientes`
 --
 
-INSERT INTO `dct_pos_tbl_cientes` (`cli_id_cliente`, `emp_id_empresa`, `cli_tipo_identificacion`, `cli_identificacion`, `cli_nombres`, `cli_direccion`, `cli_telefono`, `cli_placa`, `cli_estado`, `cli_usuario_creacion`, `cli_usuario_modificacion`, `cli_fecha_creacion`, `cli_fecha_modificacion`, `cli_ip_creacion`, `cli_ip_modificacion`) VALUES
-(1, 1, '05', '1308041134', 'MERY JAZMIN REINA CEVALLOS', 'LOS ESTEROS', '0960939030', '', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dct_pos_tbl_cientes` (`cli_id_cliente`, `emp_id_empresa`, `cli_tipo_identificacion`, `cli_identificacion`, `cli_nombres`, `cli_correo`, `cli_direccion`, `cli_telefono`, `cli_placa`, `cli_estado`, `cli_usuario_creacion`, `cli_usuario_modificacion`, `cli_fecha_creacion`, `cli_fecha_modificacion`, `cli_ip_creacion`, `cli_ip_modificacion`) VALUES
+(1, 1, '05', '1308041134', 'MERY JAZMIN REINA CEVALLOS', 'mreinacevallos@iess.gob.ec', 'LOS ESTEROS', '0960939030', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, '04', '9999999999', 'CONSUMIDOR FINAL', 'app.web@dreconstec.com', 'LOS ESTEROS', '0960939030', '--------', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1870,7 +1872,7 @@ CREATE TABLE `dct_pos_tbl_factura_transaccion` (
   `ftr_id_factura_transaccion` int(11) NOT NULL,
   `emp_id_empresa` int(11) NOT NULL,
   `cli_id_cliente` int(11) DEFAULT NULL,
-  `usr_cod_usuario` varchar(13) NOT NULL,
+  `ftr_id_forma_pago` varchar(2) DEFAULT NULL,
   `ftr_estado_transaccion` varchar(3) NOT NULL,
   `ftr_estado` tinyint(1) NOT NULL,
   `ftr_usuario_creacion` varchar(13) DEFAULT NULL,
@@ -1885,41 +1887,8 @@ CREATE TABLE `dct_pos_tbl_factura_transaccion` (
 -- Volcado de datos para la tabla `dct_pos_tbl_factura_transaccion`
 --
 
-INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `emp_id_empresa`, `cli_id_cliente`, `usr_cod_usuario`, `ftr_estado_transaccion`, `ftr_estado`, `ftr_usuario_creacion`, `ftr_usuario_modificacion`, `ftr_fecha_creacion`, `ftr_fecha_modificacion`, `ftr_ip_creacion`, `ftr_ip_modificacion`) VALUES
-(5, 1, NULL, '0919664854', 'TMP', 1, '0919664854', NULL, '2022-08-21 02:42:31', NULL, '::1', NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dct_pos_tbl_forma_pago`
---
-
-CREATE TABLE `dct_pos_tbl_forma_pago` (
-  `fop_id_forma_pago` varchar(2) NOT NULL,
-  `fop_descripcion` varchar(50) NOT NULL,
-  `fop_order` tinyint(4) NOT NULL,
-  `fop_estado` tinyint(1) NOT NULL,
-  `fop_usuario_creacion` varchar(13) DEFAULT NULL,
-  `fop_usuario_modificacion` varchar(13) DEFAULT NULL,
-  `fop_fecha_creacion` timestamp NULL DEFAULT NULL,
-  `fop_fecha_modificacion` timestamp NULL DEFAULT NULL,
-  `fop_ip_creacion` varchar(100) DEFAULT NULL,
-  `fop_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `dct_pos_tbl_forma_pago`
---
-
-INSERT INTO `dct_pos_tbl_forma_pago` (`fop_id_forma_pago`, `fop_descripcion`, `fop_order`, `fop_estado`, `fop_usuario_creacion`, `fop_usuario_modificacion`, `fop_fecha_creacion`, `fop_fecha_modificacion`, `fop_ip_creacion`, `fop_ip_modificacion`) VALUES
-('01', 'SIN UTILIZACION DEL SISTEMA FINANCIERO', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-('15', 'COMPENSACIÓN DE DEUDAS', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-('16', 'TARJETA DE DÉBITO', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-('17', 'DINERO ELECTRÓNICO', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-('18', 'TARJETA PREPAGO', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-('19', 'TARJETA DE CRÉDITO', 3, 1, NULL, NULL, NULL, NULL, NULL, NULL),
-('20', 'OTROS CON UTILIZACIÓN DEL SISTEMA FINANCIERO', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-('21', 'ENDOSO DE TÍTULOS', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `emp_id_empresa`, `cli_id_cliente`, `ftr_id_forma_pago`, `ftr_estado_transaccion`, `ftr_estado`, `ftr_usuario_creacion`, `ftr_usuario_modificacion`, `ftr_fecha_creacion`, `ftr_fecha_modificacion`, `ftr_ip_creacion`, `ftr_ip_modificacion`) VALUES
+(7, 1, 1, '20', 'TMP', 1, '0919664854', '0919664854', '2022-08-23 21:38:46', '2022-08-23 23:17:09', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -2153,7 +2122,20 @@ INSERT INTO `dct_sistema_tbl_catalogo` (`ctg_id_catalogo`, `ctg_tipo`, `ctg_key`
 (9, 'POS', 'LM100', 'FACTURACION LIMITADA 100', 1),
 (10, 'POS', 'LM150', 'FACTURACION LIMITADA 150', 1),
 (11, 'POS', 'LM200', 'FACTURACION LIMITADA 200', 1),
-(12, 'POS', 'STAND', 'ESTANDAR', 1);
+(12, 'POS', 'STAND', 'ESTANDAR', 1),
+(13, 'IDEN', '04', 'RUC', 1),
+(14, 'IDEN', '05', 'CEDULA', 1),
+(15, 'IDEN', '06', 'PASAPORTE', 1),
+(16, 'IDEN', '07', 'CONSUMIDOR FINAL', 1),
+(17, 'IDEN', '08', 'IDENTIFICACION DEL EXTERIOR', 1),
+(18, 'PAGO', '01', 'SIN UTILIZACION DEL SISTEMA FINANCIERO', 0),
+(19, 'PAGO', '15', 'COMPENSACIÓN DE DEUDAS', 0),
+(20, 'PAGO', '16', 'TARJETA DE DÉBITO', 1),
+(21, 'PAGO', '17', 'DINERO ELECTRÓNICO', 0),
+(22, 'PAGO', '18', 'TARJETA PREPAGO', 0),
+(23, 'PAGO', '19', 'TARJETA DE CRÉDITO', 1),
+(24, 'PAGO', '20', 'OTROS CON UTILIZACIÓN DEL SISTEMA FINANC', 1),
+(25, 'PAGO', '21', 'ENDOSO DE TÍTULOS', 0);
 
 -- --------------------------------------------------------
 
@@ -2416,7 +2398,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-21 02:43:01', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-19', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-08-23 23:17:26', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-23', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR');
 
 -- --------------------------------------------------------
@@ -2637,12 +2619,6 @@ ALTER TABLE `dct_pos_tbl_factura_transaccion`
   ADD PRIMARY KEY (`ftr_id_factura_transaccion`);
 
 --
--- Indices de la tabla `dct_pos_tbl_forma_pago`
---
-ALTER TABLE `dct_pos_tbl_forma_pago`
-  ADD PRIMARY KEY (`fop_id_forma_pago`);
-
---
 -- Indices de la tabla `dct_pos_tbl_impuesto`
 --
 ALTER TABLE `dct_pos_tbl_impuesto`
@@ -2752,7 +2728,7 @@ ALTER TABLE `detalle_guia_electronica`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_cientes`
 --
 ALTER TABLE `dct_pos_tbl_cientes`
-  MODIFY `cli_id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cli_id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_clave_acceso`
@@ -2788,7 +2764,7 @@ ALTER TABLE `dct_pos_tbl_factura_detalle`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
 --
 ALTER TABLE `dct_pos_tbl_factura_transaccion`
-  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`
@@ -2812,7 +2788,7 @@ ALTER TABLE `dct_sistema_tbl_aplicacion`
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_catalogo`
 --
 ALTER TABLE `dct_sistema_tbl_catalogo`
-  MODIFY `ctg_id_catalogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ctg_id_catalogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_sistema_tbl_contrasenia`

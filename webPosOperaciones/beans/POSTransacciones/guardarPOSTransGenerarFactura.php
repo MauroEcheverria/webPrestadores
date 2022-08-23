@@ -153,13 +153,12 @@
 												                            $data_comprobante["sri_clave_acceso_tipo_emision"].
 												                            $data_comprobante["sri_clave_acceso_verificador"];
 
-						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, cli_id_cliente, ftr_id_factura_transaccion, cla_fecha_emision, 
+						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, ftr_id_factura_transaccion, cla_fecha_emision, 
 							cla_tipo_comprobante, cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, 
 							cla_tipo_emision, cla_dig_verificador, cla_estado_comprobante, cla_estado, cla_usuario_creacion, cla_fecha_creacion, cla_ip_creacion, cla_sri_clave_acceso) 
-						VALUES (:emp_id_empresa, :cli_id_cliente, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion, :cla_sri_clave_acceso);";
+						VALUES (:emp_id_empresa, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion, :cla_sri_clave_acceso);";
 				    $query_clave_acceso=$pdo->prepare($sql_clave_acceso);
 				    $query_clave_acceso->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
-				    $query_clave_acceso->bindValue(':cli_id_cliente',$data_comprobante["cli_id_cliente"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':cla_fecha_emision',$data_comprobante["sri_clave_acceso_fecha_emison"],PDO::PARAM_STR);
 				    $query_clave_acceso->bindValue(':cla_tipo_comprobante',$data_comprobante["sri_clave_acceso_tipo_comprobante"],PDO::PARAM_STR);

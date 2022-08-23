@@ -2,12 +2,11 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
-  require_once("../../../controller/sesion.class.php");
-	require_once('../../../plugins/apiWhatsapp/ultramsg.class.php');
+	require_once("../../../controller/sesion.class.php");
 	app_error_reporting($app_error_reporting);
 	try {
-    $sesion = new sesion();
-    $dataSesion = $sesion->get('dataSesion');
+		$sesion = new sesion();
+		$dataSesion = $sesion->get('dataSesion');
 		$ConnectionDB = new ConnectionDB();
 		$pdo = $ConnectionDB->connect();
 		$pdo->beginTransaction();
@@ -46,18 +45,12 @@
 		    $query_2->execute();
 
 		    if($query_2) {
-
-		    	/*$client = new UltraMsg\WhatsAppApi($ultramsg_token,$instance_id);
-					$body="📲 Su registro a sido guardado correctamente ✔"; 
-					$api=$client->sendChatMessage($celular_numero,$body);
-					$data_result["sendChatMessage"] = $api["message"];*/
-
 					$pdo->commit();
 					$data_result["message"] = "saveOK";
 					$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
-		      $data_result["dataModal_2"] = 'Información';
-		      $data_result["dataModal_3"] = 'Perfíl registado de manera correcta.';
-		      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+					$data_result["dataModal_2"] = 'Información';
+					$data_result["dataModal_3"] = 'Perfíl registado de manera correcta.';
+					$data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>';
 					$data_result["numLineaCodigo"] = __LINE__;
 					echo json_encode($data_result);
 				}

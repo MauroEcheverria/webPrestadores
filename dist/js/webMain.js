@@ -1381,7 +1381,6 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           switch (result.message) {
             case "regNulo":
-              break;
             case "regRepetido":
               $('#myModalSistemaRolOpcion').modal('hide');
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

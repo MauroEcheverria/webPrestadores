@@ -1,38 +1,39 @@
-function ocultarPaneles() {
-  $("#btnTransFacturacion").removeClass('btn-success').addClass('btn-warning');
-  $("#btnTransNotasCredito").removeClass('btn-success').addClass('btn-warning');
-  $("#btnTransNotasDebito").removeClass('btn-success').addClass('btn-warning');
-  $("#btnTransGuiRemision").removeClass('btn-success').addClass('btn-warning');
-  $("#btnTransComprobanteRetencion").removeClass('btn-success').addClass('btn-warning');
-  $("#btnTransEstadoTransaccion").removeClass('btn-success').addClass('btn-warning');
-  $('#transFacturacion').fadeOut(0);
-  $('#transNotasCredito').fadeOut(0);
-  $('#transNotasDebito').fadeOut(0);
-  $('#transGuiRemision').fadeOut(0);
-  $('#transComprobanteRetencion').fadeOut(0);
-  $('#transEstadoTransaccion').fadeOut(0);
-}
 $(document).ready(function() {
   if($('div#appTransaccionesFlag').hasClass('appTransaccionesFlag')) {
     $("body").addClass('sidebar-collapse');
     $.ajax({
       url: '../../beans/POSTransacciones/verificarFacturaCabecera.php',
       type: 'POST',
-      data:{ 'csrf' : $("#csrf").val() },
       dataType: 'html',
       success: function(result){
         var result = eval('('+result+')');
+        $("#ftr_id_forma_pago").empty().prepend(result.formas_pago);
+        $('#dataCliente').fadeOut();
         switch (result.message) {
           case "si_transaccion":
+
+            if (result.data_row.cli_identificacion != null) {
+              $('#dataCliente').fadeIn();
+              //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+              $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+              $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+              $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+              $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+              $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+              $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+              $('#cli_identificacion').val(result.data_row.cli_identificacion);
+              $('#ftr_id_forma_pago').val(result.data_row.ftr_id_forma_pago);
+            }
+
             $('#cli_identificacion').prop("disabled",false);
+            $('#ftr_id_forma_pago').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
-            $('#fop_id_forma_pago').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
             break;
           case "no_transaccion":
             $('#cli_identificacion').prop("disabled",true);
             $('#btn_cli_identificacion').prop("disabled",true);
-            $('#fop_id_forma_pago').prop("disabled",true);
+            $('#ftr_id_forma_pago').prop("disabled",true);
             $('#prs_id_prod_serv').prop("disabled",true);
             break;
           default:
@@ -388,7 +389,7 @@ $(document).ready(function() {
           case "saveOK":
             $('#cli_identificacion').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
-            $('#fop_id_forma_pago').prop("disabled",false);
+            $('#ftr_id_forma_pago').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
           case "token_csrf_error":
           case "fact_transaccion_registrada":
@@ -401,5 +402,94 @@ $(document).ready(function() {
         }
       }
     });
+  });
+  $('#btn_cli_identificacion').click( function () {
+    $.ajax({
+      url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
+      type: 'POST',
+      data:{ 'cli_identificacion' : $("#cli_identificacion").val() },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        $('#dataCliente').fadeOut();
+        switch (result.message) {
+          case "saveOK":
+              if (result.msmData == "siData") {
+                $('#dataCliente').fadeIn();
+                //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+                $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+                $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+                $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+                $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+                $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+                $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+              }
+              else {
+                $('#myModalClienteNoRegistrado').modal('show');
+              }
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+        }
+      }
+    });
+  });
+  $('#idConsumidorFinal').click( function (e) {
+    e.preventDefault();
+    $("#cli_identificacion").val("9999999999");
+    $.ajax({
+      url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
+      type: 'POST',
+      data:{ 'cli_identificacion' : "9999999999" },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        $('#dataCliente').fadeOut();
+        switch (result.message) {
+          case "saveOK":
+              if (result.msmData == "siData") {
+                $('#dataCliente').fadeIn();
+                //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+                $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+                $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+                $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+                $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+                $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+                $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+              }
+              else {
+                $('#myModalClienteNoRegistrado').modal('show');
+              }
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+        }
+      }
+    });
+  });
+  $('#ftr_id_forma_pago').change( function () {
+    if ($("#ftr_id_forma_pago").val() != "") {
+      $.ajax({
+        url: '../../beans/POSTransacciones/registrarFormaPago.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'ftr_id_forma_pago' : $("#ftr_id_forma_pago").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "saveOK":
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
   });
 });

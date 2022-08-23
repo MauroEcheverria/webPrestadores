@@ -45,7 +45,7 @@
 	// 45 min = 2700 seg
 	$param_timeout = 2700;
 	/****************** VERSIONES CSS Y JS *************************/
-	$version_css_js = "?dct_1.1";
+	$version_css_js = "?dct_1.0";
 	/****************** REESTABLECIMIENTO PASS *************************/
 	$reestablecimeinto_pass = 90;
 	/****************** URL ACTUAL *************************/
