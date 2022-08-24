@@ -13,7 +13,7 @@
 		$sql="SELECT tr.ftr_id_factura_transaccion,tr.emp_id_empresa,tr.cli_id_cliente, tr.ftr_id_forma_pago,
 					(SELECT cli_tipo_identificacion FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_tipo_identificacion,
 					(SELECT cli_identificacion FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_identificacion,
-					(SELECT cli_nombres FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_nombres,
+					(SELECT CONCAT(IFNULL(cli_nombre_1,''),' ',IFNULL(cli_nombre_2,''),' ',IFNULL(cli_apellido_1,''),' ',IFNULL(cli_apellido_2,'')) FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_nombres,
 					(SELECT cli_correo FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_correo,
 					(SELECT cli_direccion FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_direccion,
 					(SELECT cli_telefono FROM dct_pos_tbl_cientes WHERE cli_id_cliente = tr.cli_id_cliente) cli_telefono,

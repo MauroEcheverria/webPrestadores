@@ -223,6 +223,84 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="myModalClienteNoRegistrado" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modalLogin">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <div class="col-md-1">
+              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+            </div>
+            <div class="col-md-11">
+              <h4 class="modal-title">Nuevo Usuario</h4>
+            </div>
+          </div>
+        </div>
+        <form id="formClienteNoRegistrado" class="formModalPages" data-toggle="validator" role="form">
+          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+          <div class="modal-body">
+            <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
+              El correo electrónico ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
+            </div>
+            <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
+              La cédula o pasaporte ingresado ya se encuentra registrado en nuestro sistema. Si tiene inconvenientes favor escribir a info@dreconstec.com
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cli_identificacion" class="control-label">Cédula</label>
+                  <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_nombre_1" class="control-label">Primer Nombre</label>
+                  <input type="text" class="form-control" id="cli_nombre_1" name="cli_nombre_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
+                   <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_apellido_1" class="control-label">Primer Apellido</label>
+                  <input type="text" class="form-control" id="cli_apellido_1" name="cli_apellido_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
+                  <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_direccion" class="control-label">Dirección</label>
+                  <select name="cli_direccion" id="cli_direccion" class="form-control" required style="width: 100%;"></select>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cli_correo" class="control-label">Correo</label>
+                  <input type="email" class="form-control" id="cli_correo" name="cli_correo" maxlength="60" 
+                  data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
+                  <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_nombre_2" class="control-label">Segundo Nombre</label>
+                  <input type="text" class="form-control" id="cli_nombre_2" name="cli_nombre_2" maxlength="15" minlength="2" required oninput="this.value = this.value.toUpperCase()">
+                   <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_apellido_2" class="control-label">Segundo Apellido</label>
+                  <input type="text" class="form-control" id="cli_apellido_2" name="cli_apellido_2" maxlength="15" oninput="this.value = this.value.toUpperCase()">
+                  <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cli_telefono" class="control-label">Convencional/Celular</label>
+                  <select name="cli_telefono" id="cli_telefono" class="form-control" required style="width: 100%;"></select>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer centralFooter">
+            <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

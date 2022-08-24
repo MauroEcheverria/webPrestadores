@@ -12,7 +12,9 @@
     $pdo->beginTransaction();
 
     if ($_POST["cli_identificacion"] == "9999999999") {
-    	$sql="SELECT cli_id_cliente, cli_tipo_identificacion, cli_identificacion, cli_nombres, cli_correo, cli_direccion, cli_telefono, cli_placa
+    	$sql="SELECT cli_id_cliente, cli_tipo_identificacion, cli_identificacion, 
+						    	 CONCAT(IFNULL(cli_nombre_1,''),' ',IFNULL(cli_nombre_2,''),' ',IFNULL(cli_apellido_1,''),' ',IFNULL(cli_apellido_2,'')) cli_nombres, 
+						    	cli_correo, cli_direccion, cli_telefono, cli_placa
           FROM dct_pos_tbl_cientes
           WHERE cli_identificacion = :cli_identificacion;";
       $query=$pdo->prepare($sql);
@@ -21,7 +23,9 @@
 	    $row = $query->fetch(\PDO::FETCH_ASSOC);
     }
     else {
-    	$sql="SELECT cli_id_cliente, cli_tipo_identificacion, cli_identificacion, cli_nombres, cli_correo, cli_direccion, cli_telefono, cli_placa
+    	$sql="SELECT cli_id_cliente, cli_tipo_identificacion, cli_identificacion, 
+			    	CONCAT(IFNULL(cli_nombre_1,''),' ',IFNULL(cli_nombre_2,''),' ',IFNULL(cli_apellido_1,''),' ',IFNULL(cli_apellido_2,'')) cli_nombres, 
+			    	cli_correo, cli_direccion, cli_telefono, cli_placa
           FROM dct_pos_tbl_cientes
           WHERE cli_identificacion = :cli_identificacion
           AND emp_id_empresa = (SELECT usr_id_empresa FROM dct_sistema_tbl_usuario WHERE usr_cod_usuario = :usr_cod_usuario );";

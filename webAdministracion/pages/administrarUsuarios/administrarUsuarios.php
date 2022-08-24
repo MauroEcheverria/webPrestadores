@@ -16,7 +16,6 @@
 
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
-
   <div class="content-wrapper">
     <section class="content">
       <div class="container container_main">
@@ -34,7 +33,6 @@
       </div>
     </section>
   </div>
-    
   <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modalLogin">
       <div class="modal-content">

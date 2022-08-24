@@ -1,0 +1,9 @@
+{
+	"font_size": 8,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"auto_complete": true,
+	"dictionary": "Packages/Language – Spanish/Spanish.dic",
+}
