@@ -42,3 +42,10 @@
 	color: #6c757d; 
 	font-size: 13px;
 }
+.btn_descartar_item {
+	font-size: 12px;
+  width: auto;
+}
+.dct_table {
+	font-size: 12px;
+}

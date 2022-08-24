@@ -55,7 +55,8 @@
   display: block;
 }
 .btn-dreconstec {
-  width: 150px;
+  width: 140px;
+  font-size: 13px;
 }
 .toggle_dentro_panel {
   margin: 25px 25px 25px 25px;
@@ -63,6 +64,7 @@
 .select2-selection--single {
   height: 38px !important;
   border: 1px solid #ced4da !important;
+  font-size: 12px;
 }
 /*.select2-selection__rendered {
   font-size: 21px !important;
@@ -134,10 +136,10 @@
   text-align: left;
 }
 .main-sidebar, .sidebar, .nav-sidebar {
-  font-size: 13px;
+  font-size: 12px;
 }
 .cell-border, .dataTable, .no-footer {
-  font-size: 13px;
+  font-size: 12px;
 }
 .inputOlvidoPass {
   text-align: center;
@@ -156,4 +158,16 @@
   .error-page {
     width: 90%;
   }
+}
+b {
+  font-size: 13px;
+}
+.dct_pestanas {
+  font-size: 13px;
+}
+.control-label {
+  font-size: 13px !important;
+}
+.form-control {
+  font-size: 12px !important;
 }

@@ -25,7 +25,7 @@
             <span class="panel-title"><b>Administra Perfíl</b></span>
           </div>
           <div class="card-body">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs dct_pestanas" role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Datos Personales</a>
               </li>

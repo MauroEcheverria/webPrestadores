@@ -40,8 +40,22 @@
     foreach ($row_2 as $row_2) {
       $rpta_2.="<option value='".$row_2["ctg_key"]."'>".$row_2["ctg_descripcion"]."</option>";
     }
+
+    $sql_3="SELECT ctg_key,ctg_descripcion
+				    FROM dct_sistema_tbl_catalogo
+				    WHERE ctg_estado = 1
+				    AND ctg_tipo = 'IDEN';";
+    $query_3=$pdo->prepare($sql_3);
+    $query_3->execute();
+    $row_3 = $query_3->fetchAll();
+
+    $rpta_3="<option value=''>Seleccione una opción</option>";
+    foreach ($row_3 as $row_3) {
+      $rpta_3.="<option value='".$row_3["ctg_key"]."'>".$row_3["ctg_descripcion"]."</option>";
+    }
 		
 		$data_result["formas_pago"] = $rpta_2;
+		$data_result["tipo_identificacion"] = $rpta_3;
 		if ( $query->rowCount() == 1 ) {
 			$_SESSION["id_factura_transaccion "] = $row["ftr_id_factura_transaccion"];
 			$data_result["data_row"] = $row;

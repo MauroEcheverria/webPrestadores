@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+  $(".select2").select2({
+    maximumSelectionLength: 20
+  });
+
   if($('div#appTransaccionesFlag').hasClass('appTransaccionesFlag')) {
     $("body").addClass('sidebar-collapse');
     $.ajax({
@@ -8,6 +13,7 @@ $(document).ready(function() {
       success: function(result){
         var result = eval('('+result+')');
         $("#ftr_id_forma_pago").empty().prepend(result.formas_pago);
+        $("#cli_tipo_identificacion").empty().prepend(result.tipo_identificacion);
         $('#dataCliente').fadeOut();
         switch (result.message) {
           case "si_transaccion":
@@ -412,27 +418,25 @@ $(document).ready(function() {
       success: function(result){
         var result = eval('('+result+')');
         $('#dataCliente').fadeOut();
-        switch (result.message) {
-          case "saveOK":
-              if (result.msmData == "siData") {
-                $('#dataCliente').fadeIn();
-                //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
-                $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
-                $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
-                $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
-                $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
-                $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
-                $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
-              }
-              else {
-                $('#myModalClienteNoRegistrado').modal('show');
-              }
-              break;
-            default:
-                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-                $('#myModalErrorGeneral').modal('show');
-              break;
+
+        if (result.msmData == "siData" && result.message == "saveOK") {
+          $('#dataCliente').fadeIn();
+          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+          $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+          $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+          $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+          $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+          $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+          $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
         }
+        else if (result.msmData == "noData") {
+          $('#myConfirmarClienteNoRegistrado').modal('show');
+        }
+        else {
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+          $('#myModalErrorGeneral').modal('show');
+        }
+
       }
     });
   });
@@ -447,27 +451,36 @@ $(document).ready(function() {
       success: function(result){
         var result = eval('('+result+')');
         $('#dataCliente').fadeOut();
-        switch (result.message) {
-          case "saveOK":
-              if (result.msmData == "siData") {
-                $('#dataCliente').fadeIn();
-                //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
-                $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
-                $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
-                $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
-                $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
-                $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
-                $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
-              }
-              else {
-                $('#myModalClienteNoRegistrado').modal('show');
-              }
-              break;
-            default:
-                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-                $('#myModalErrorGeneral').modal('show');
-              break;
+        if (result.msmData == "siData" && result.message == "saveOK") {
+          $('#dataCliente').fadeIn();
+          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+          $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+          $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+          $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+          $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+          $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+          $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
         }
+        else if (result.msmData == "noData") {
+          $('#myConfirmarClienteNoRegistrado').modal('show');
+        }
+        else {
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+          $('#myModalErrorGeneral').modal('show');
+        }
+      }
+    });
+  });
+  var testOcultarModal = 0;
+  $('#btnConfirmarClienteNoRegistrado').click( function () {
+    $('#myConfirmarClienteNoRegistrado').modal('hide');
+    testOcultarModal = 1;
+    $("#myConfirmarClienteNoRegistrado").on("hidden.bs.modal",function(){
+      if (testOcultarModal == 1) {
+        document.getElementById("formClienteNoRegistrado").reset();
+        $('#cli_identificacion_form').val( $('#cli_identificacion').val());
+        $('#myModalClienteNoRegistrado').modal('show');
+        testOcultarModal = 0;
       }
     });
   });
@@ -482,6 +495,126 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#formClienteNoRegistrado').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+
+      var validacionIdentificacion = 0;
+      switch ($('#cli_tipo_identificacion').val()) {
+        case "04":
+          
+          break;
+        case "05":
+          
+          break;
+        case "06":
+          
+          break;
+        case "08":
+          
+          break;
+        default:
+          
+          break;
+      }
+
+      if (validacionIdentificacion == 0) {
+        $.ajax({
+          url: '../../beans/POSTransacciones/guardarClienteNoRegistrado.php',
+          type: 'POST',
+          dataType: 'html',
+          data:$("#formClienteNoRegistrado").serialize(),
+          success: function(result){
+          var result = eval('('+result+')');
+            $('#myModalClienteNoRegistrado').modal('hide');
+            $('#dataCliente').fadeIn();
+            switch (result.message) {
+              case "saveOK":
+                $('#dataCliente').fadeIn();
+                //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+                $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+                $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+                $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+                $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+                $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+                $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+                modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+                 break;
+              case "token_csrf_error":
+                  modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+                break;
+              case "errorCriterios":
+                  /* OJO NO QUITAR ESTE ALERT - YA ESTA CORREGIDO ORTOGRAFIA */
+                  alert("De cumplir con todos los criterios de los campos solicitados.");
+                break;
+              default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+                break;
+            }
+          }
+        });
+      }
+      else {
+        alert("La cantidad de dígitos ingresados según el tipo de identificación es inválida. Favor revisar.");
+      }
+
+    }
+  });
+  $('#cli_identificacion_form').change( function () {
+    if ($("#cli_identificacion_form").val() != "") {
+      $.ajax({
+        url: '../../beans/POSTransacciones/validarCedula.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'cli_identificacion_form' : $("#cli_identificacion_form").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#cli_identificacion_form").val("").focus();
+              $("#loginUsuarioRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#cli_correo').change( function () {
+    if ($("#cli_correo").val() != "") {
+      $.ajax({
+        url: '../../beans/POSTransacciones/validarCorreo.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'cli_correo' : $("#cli_correo").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#cli_correo").val("").focus();
+              $("#loginCorreoRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
               break;
             default:
               $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);

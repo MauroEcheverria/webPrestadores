@@ -3,7 +3,6 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
-	//include_once('../../../plugins/facturacionElectronica/generarXML.php');
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
