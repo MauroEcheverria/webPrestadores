@@ -43,7 +43,7 @@
                       <div><span class="labelIdentificacion">Establecimiento: </span><span class="dataIdentificacion">Esteros</span></div>
                       <div><span class="labelIdentificacion">Punto Emisión: </span><span class="dataIdentificacion">Caja 1</span></div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 centrarContent">
                       <button type="button" class="btn btn-info" id="btnPosNuevaFactura" title="Nueva factura"><i class="fas fa-plus"></i></button>    
                     </div>
                   </div>
