@@ -14,6 +14,7 @@ $(document).ready(function() {
         var result = eval('('+result+')');
         $("#ftr_id_forma_pago").empty().prepend(result.formas_pago);
         $("#cli_tipo_identificacion").empty().prepend(result.tipo_identificacion);
+        $("#prs_id_prod_serv").empty().prepend(result.productos_servicios);
         $('#dataCliente').fadeOut();
         switch (result.message) {
           case "si_transaccion":
@@ -471,16 +472,16 @@ $(document).ready(function() {
       }
     });
   });
-  var testOcultarModal = 0;
+  var testOcultarModalCliente = 0;
   $('#btnConfirmarClienteNoRegistrado').click( function () {
     $('#myConfirmarClienteNoRegistrado').modal('hide');
-    testOcultarModal = 1;
+    testOcultarModalCliente = 1;
     $("#myConfirmarClienteNoRegistrado").on("hidden.bs.modal",function(){
-      if (testOcultarModal == 1) {
+      if (testOcultarModalCliente == 1) {
         document.getElementById("formClienteNoRegistrado").reset();
         $('#cli_identificacion_form').val( $('#cli_identificacion').val());
         $('#myModalClienteNoRegistrado').modal('show');
-        testOcultarModal = 0;
+        testOcultarModalCliente = 0;
       }
     });
   });
@@ -615,6 +616,60 @@ $(document).ready(function() {
               $("#loginCorreoRegistrado").show();
               ocultarPoppupAlert();
               return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#prs_id_prod_serv').change( function () {
+    if ($("#prs_id_prod_serv").val() != "") {
+      $.ajax({
+        url: '../../beans/POSTransacciones/validarItemComprobante.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'prs_id_prod_serv' : $("#prs_id_prod_serv").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          $("#prs_id_prod_serv").val("").trigger("change");
+          switch (result.message) {
+             case "saveOK":
+              document.getElementById("formItemComprobante").reset();
+              $('#myModalItemComprobante').modal('show');
+              break;
+            case "userError":
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#formItemComprobante').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      $.ajax({
+        url: '../../beans/POSTransacciones/guardarItemComprobante.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$("#formItemComprobante").serialize(),
+        success: function(result){
+        var result = eval('('+result+')');
+          switch (result.message) {
+            case "saveOK":
+              $('#myModalItemComprobante').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            case "token_csrf_error":
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
               $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);

@@ -40,7 +40,7 @@
 			    $query_max=$pdo->prepare($sql_max);          
 			    $query_max->execute();
 			    $row_max = $query_max->fetch(\PDO::FETCH_ASSOC);
-			    $_SESSION["id_factura_transaccion "] = $row_max["id_factura_transaccion"];
+			    $_SESSION["id_factura_transaccion"] = $row_max["id_factura_transaccion"];
 
 					$pdo->commit();
 					$data_result["message"] = "saveOK";

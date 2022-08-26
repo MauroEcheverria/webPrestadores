@@ -246,94 +246,136 @@
     </div>
   </div>
 </div>
-  <div class="modal fade" id="myModalClienteNoRegistrado" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modalLogin">
-      <div class="modal-content">
-        <div class="modal-header">
+<div class="modal fade" id="myModalClienteNoRegistrado" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Registro de nuevo cliente</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formClienteNoRegistrado" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <div class="modal-body">
+          <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
+            El correo electrónico ingresado ya se encuentra registrado en nuestro sistema.
+          </div>
+          <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
+            La identificación ingresada ya se encuentra registrado en nuestro sistema.
+          </div>
           <div class="row">
-            <div class="col-md-1">
-              <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="cli_tipo_identificacion" class="control-label">Tipo identificación</label>
+                <select name="cli_tipo_identificacion" id="cli_tipo_identificacion" class="form-control" required style="width: 100%;"></select>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_identificacion_form" class="control-label">Identificación</label>
+                <input type="text" class="form-control" id="cli_identificacion_form" name="cli_identificacion_form" onkeypress="return soloNumeros(event);" required minlength="8" maxlength="13">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_nombre_1" class="control-label">Primer Nombre</label>
+                <input type="text" class="form-control" id="cli_nombre_1" name="cli_nombre_1" maxlength="10" required minlength="3" oninput="this.value = this.value.toUpperCase()">
+                 <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_apellido_1" class="control-label">Primer Apellido</label>
+                <input type="text" class="form-control" id="cli_apellido_1" name="cli_apellido_1" maxlength="10" required minlength="3" oninput="this.value = this.value.toUpperCase()">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_correo" class="control-label">Correo</label>
+                <input type="email" class="form-control" id="cli_correo" name="cli_correo" maxlength="50" data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
+                <div class="help-block with-errors"></div>
+              </div>
+              
             </div>
-            <div class="col-md-11">
-              <h4 class="modal-title">Registro de nuevo cliente</h4>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="cli_direccion" class="control-label">Dirección</label>
+                <input type="text" class="form-control" id="cli_direccion" name="cli_direccion" maxlength="150" minlength="2" oninput="this.value = this.value.toUpperCase()">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_nombre_2" class="control-label">Segundo Nombre</label>
+                <input type="text" class="form-control" id="cli_nombre_2" name="cli_nombre_2" maxlength="10" minlength="2" oninput="this.value = this.value.toUpperCase()">
+                 <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_apellido_2" class="control-label">Segundo Apellido</label>
+                <input type="text" class="form-control" id="cli_apellido_2" name="cli_apellido_2" maxlength="10" oninput="this.value = this.value.toUpperCase()">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_telefono" class="control-label">Convencional/Celular</label>
+                <input type="text" class="form-control" id="cli_telefono" name="cli_telefono" maxlength="10" minlength="8" onkeypress="return soloNumeros(event);">
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="cli_placa" class="control-label">Número de Placa</label>
+                <input type="text" class="form-control" id="cli_placa" name="cli_placa" maxlength="8" minlength="6" oninput="this.value = this.value.toUpperCase()">
+                <div class="help-block with-errors"></div>
+              </div>
             </div>
           </div>
         </div>
-        <form id="formClienteNoRegistrado" class="formModalPages" data-toggle="validator" role="form">
-          <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-          <div class="modal-body">
-            <div class="alert alert-danger poppupAlert" role="alert" id="loginCorreoRegistrado">
-              El correo electrónico ingresado ya se encuentra registrado en nuestro sistema.
-            </div>
-            <div class="alert alert-danger poppupAlert" role="alert" id="loginUsuarioRegistrado">
-              La identificación ingresada ya se encuentra registrado en nuestro sistema.
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="cli_tipo_identificacion" class="control-label">Tipo identificación</label>
-                  <select name="cli_tipo_identificacion" id="cli_tipo_identificacion" class="form-control" required style="width: 100%;"></select>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_identificacion_form" class="control-label">Identificación</label>
-                  <input type="text" class="form-control" id="cli_identificacion_form" name="cli_identificacion_form" onkeypress="return soloNumeros(event);" required minlength="8" maxlength="13">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_nombre_1" class="control-label">Primer Nombre</label>
-                  <input type="text" class="form-control" id="cli_nombre_1" name="cli_nombre_1" maxlength="10" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_apellido_1" class="control-label">Primer Apellido</label>
-                  <input type="text" class="form-control" id="cli_apellido_1" name="cli_apellido_1" maxlength="10" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_correo" class="control-label">Correo</label>
-                  <input type="email" class="form-control" id="cli_correo" name="cli_correo" maxlength="50" data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
-                  <div class="help-block with-errors"></div>
-                </div>
-                
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="cli_direccion" class="control-label">Dirección</label>
-                  <input type="text" class="form-control" id="cli_direccion" name="cli_direccion" maxlength="150" minlength="2" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_nombre_2" class="control-label">Segundo Nombre</label>
-                  <input type="text" class="form-control" id="cli_nombre_2" name="cli_nombre_2" maxlength="10" minlength="2" oninput="this.value = this.value.toUpperCase()">
-                   <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_apellido_2" class="control-label">Segundo Apellido</label>
-                  <input type="text" class="form-control" id="cli_apellido_2" name="cli_apellido_2" maxlength="10" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_telefono" class="control-label">Convencional/Celular</label>
-                  <input type="text" class="form-control" id="cli_telefono" name="cli_telefono" maxlength="10" minlength="8" onkeypress="return soloNumeros(event);">
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cli_placa" class="control-label">Número de Placa</label>
-                  <input type="text" class="form-control" id="cli_placa" name="cli_placa" maxlength="8" minlength="6" oninput="this.value = this.value.toUpperCase()">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer centralFooter">
-            <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
-          </div>
-        </form>
-      </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+<div class="modal fade" id="myModalItemComprobante" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
+  <div class="modal-dialog modalLogin">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11">
+            <h4 class="modal-title">Ingreso de Ítem</h4>
+          </div>
+        </div>
+      </div>
+      <form id="formItemComprobante" class="formModalPages" data-toggle="validator" role="form">
+        <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <span><strong>Cod. Principal: </strong>SDSDD</span><br>
+              <span><strong>Cod. Auxiliar: </strong>SDSDD</span><br>
+              <span><strong>Descripcion: </strong>SDSDD</span><br>
+            </div>
+            <div class="col-md-6">
+              <span><strong>Precio Unitario: </strong>15</span><br>
+              <span><strong>IVA: </strong>12%</span><br>
+              <span><strong>ICE: </strong>0%</span><br>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fdt_cantidad" class="control-label">Cantidad</label>
+            <input type="number" class="form-control" id="fdt_cantidad" name="fdt_cantidad" onkeypress="return soloNumeros(event);" required>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <?php 
   modalViews();
   template_footer($pdo,$dataSesion,$js_dreconstec); } 

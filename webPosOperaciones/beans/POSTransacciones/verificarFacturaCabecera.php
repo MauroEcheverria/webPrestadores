@@ -53,11 +53,26 @@
     foreach ($row_3 as $row_3) {
       $rpta_3.="<option value='".$row_3["ctg_key"]."'>".$row_3["ctg_descripcion"]."</option>";
     }
+
+    $sql_4="SELECT prs_id_prod_serv,prs_descripcion_item
+				    FROM dct_pos_tbl_producto_servicio
+				    WHERE prs_estado = 1
+				    AND emp_id_empresa = :emp_id_empresa;";
+    $query_4=$pdo->prepare($sql_4);
+    $query_4->bindValue(':emp_id_empresa',cleanData("noLimite",0,"noMayuscula",$dataSesion["usr_id_empresa"]),PDO::PARAM_INT);
+    $query_4->execute();
+    $row_4 = $query_4->fetchAll();
+
+    $rpta_4="<option value=''>Seleccione una opción</option>";
+    foreach ($row_4 as $row_4) {
+      $rpta_4.="<option value='".$row_4["prs_id_prod_serv"]."'>".$row_4["prs_descripcion_item"]."</option>";
+    }
 		
 		$data_result["formas_pago"] = $rpta_2;
 		$data_result["tipo_identificacion"] = $rpta_3;
+		$data_result["productos_servicios"] = $rpta_4;
 		if ( $query->rowCount() == 1 ) {
-			$_SESSION["id_factura_transaccion "] = $row["ftr_id_factura_transaccion"];
+			$_SESSION["id_factura_transaccion"] = $row["ftr_id_factura_transaccion"];
 			$data_result["data_row"] = $row;
 			$data_result["message"] = "si_transaccion";
 			$data_result["numLineaCodigo"] = __LINE__;

@@ -18,7 +18,7 @@
 						ftr_ip_modificacion = :ftr_ip_modificacion
 						WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion";
     $query_2=$pdo->prepare($sql_2);          
-    $query_2->bindValue(':ftr_id_factura_transaccion',$_SESSION["id_factura_transaccion "],PDO::PARAM_INT);
+    $query_2->bindValue(':ftr_id_factura_transaccion',$_SESSION["id_factura_transaccion"],PDO::PARAM_INT);
     $query_2->bindValue(':ftr_id_forma_pago',cleanData("siLimite",2,"noMayuscula",$_POST["ftr_id_forma_pago"]),PDO::PARAM_INT); 
     $query_2->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
     $query_2->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
