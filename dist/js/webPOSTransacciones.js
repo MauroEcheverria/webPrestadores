@@ -1,3 +1,48 @@
+function renderizarProductoServicio() {
+  $.ajax({
+    url: '../../beans/POSTransacciones/getDataProductoServicio.php',
+    type: 'POST',
+    dataType: 'html',
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          $("#idTablaProductoServicio").empty(); $("#idTablaProductoServicio").prepend(result.data_tabla);
+          $('.refDetalleItemProceso').click(function() {
+            var idClicked = this.id;
+            alert("Se visualizará el detalle del Ítem: "+idClicked);
+          });
+          $('.refDescartarItemProceso').click(function() {
+            var idClicked = this.id;
+            inactivarProductoServicio($('#'+idClicked+' span').text());
+          });
+          break;
+        default:
+          alert("Error al realizar la transacción solicitada.");
+          break;
+      }
+    }
+  });
+}
+function inactivarProductoServicio(fdt_id_factura_detalle) {
+  $.ajax({
+    url: '../../beans/POSTransacciones/inactivarProductoServicio.php',
+    type: 'POST',
+    dataType: 'html',
+    data: { 'fdt_id_factura_detalle' : fdt_id_factura_detalle },
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          renderizarProductoServicio();
+          break;
+        default:
+          alert("Error al realizar la transacción solicitada.");
+          break;
+      }
+    }
+  });
+}
 $(document).ready(function() {
 
   $(".select2").select2({
@@ -18,7 +63,7 @@ $(document).ready(function() {
         $('#dataCliente').fadeOut();
         switch (result.message) {
           case "si_transaccion":
-
+            renderizarProductoServicio();
             if (result.data_row.cli_identificacion != null) {
               $('#dataCliente').fadeIn();
               //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
@@ -31,7 +76,6 @@ $(document).ready(function() {
               $('#cli_identificacion').val(result.data_row.cli_identificacion);
               $('#ftr_id_forma_pago').val(result.data_row.ftr_id_forma_pago);
             }
-
             $('#cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
@@ -666,6 +710,7 @@ $(document).ready(function() {
           switch (result.message) {
             case "saveOK":
               $('#myModalItemComprobante').modal('hide');
+              renderizarProductoServicio();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             case "token_csrf_error":

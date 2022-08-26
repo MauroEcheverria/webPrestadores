@@ -130,46 +130,7 @@
                   </div>
                 </div>
                 <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDesctarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
-                <table class="table table-striped dct_table">
-                  <thead>
-                    <tr class="centrarContent">
-                      <th scope="col">Código</th>
-                      <th scope="col">Descripción</th>
-                      <th scope="col">Cantidad</th>
-                      <th scope="col">Precio Unitario</th>
-                      <th scope="col">Sub Total</th>
-                      <th scope="col">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="centrarContent">C2015</td>
-                      <td>Rinnes 3 1/2</td>
-                      <td class="centrarContent">2</td>
-                      <td class="derechaContent">1.23</td>
-                      <td class="derechaContent">3.69</td>
-                      <td class="centrarContent">
-                        <div class="btn-group btn-group-sm">
-                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="centrarContent">C2015</td>
-                      <td>Rinnes 3 1/2</td>
-                      <td class="centrarContent">2</td>
-                      <td class="derechaContent">1.23</td>
-                      <td class="derechaContent">3.69</td>
-                      <td class="centrarContent">
-                        <div class="btn-group btn-group-sm">
-                          <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div id="idTablaProductoServicio"></div>
                 <div style="text-align: right;">
                   <div style="margin: 10px 135px 20px 500px;">
                     <div>
