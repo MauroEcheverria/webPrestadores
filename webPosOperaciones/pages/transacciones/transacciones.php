@@ -129,7 +129,7 @@
                     </div>
                   </div>
                 </div>
-                <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDesctarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
+                <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDescartarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
                 <div id="idTablaProductoServicio"></div>
                 <div style="text-align: right;">
                   <div style="margin: 10px 135px 20px 500px;">
@@ -203,6 +203,30 @@
       <div class="modal-footer centralFooter">
         <button type="button" class="btn btn-warning" data-dismiss="modal"><stron>No</stron></button>
         <button type="button" class="btn btn-warning" id="btnConfirmarClienteNoRegistrado"><stron>Si</stron></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myConfirmarDescartarItems" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">X</span>
+        </button>
+        <div class="row">
+          <div class="col-md-1">
+            <img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">
+          </div>
+          <div class="col-md-11" style="width: 430px;">
+            <h4 class="modal-title" id="myModalLabel">Información</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body"><strong>Esta seguro que desea descartar todos los ítems ingresados?</strong></div>
+      <div class="modal-footer centralFooter">
+        <button type="button" class="btn btn-warning" data-dismiss="modal"><stron>No</stron></button>
+        <button type="button" class="btn btn-warning" id="btnConfirmarDescartarItems"><stron>Si</stron></button>
       </div>
     </div>
   </div>
@@ -323,9 +347,11 @@
               <span><strong>ICE: </strong>0%</span><br>
             </div>
           </div>
-          <div class="form-group">
+          <br>
+          <div class="form-group centrarContent">
             <label for="fdt_cantidad" class="control-label">Cantidad</label>
-            <input type="number" class="form-control" id="fdt_cantidad" name="fdt_cantidad" onkeypress="return soloNumeros(event);" required>
+            <input type="number" class="form-control" id="fdt_cantidad" name="fdt_cantidad" onkeypress="return soloNumeros(event);" 
+            required style="font-size: 30px !important;">
             <div class="help-block with-errors"></div>
           </div>
         </div>

@@ -49,3 +49,8 @@
 .dct_table {
 	font-size: 12px;
 }
+#fdt_cantidad {
+	width: 110px;
+  height: 60px;
+  text-align: center;
+}

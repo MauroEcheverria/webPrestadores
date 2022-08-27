@@ -19,7 +19,7 @@
                   AND fd.fdt_estado = 1
                   AND fd.fdt_estado_transaccion = 'TMP'
                   AND ps.emp_id_empresa = :emp_id_empresa
-                  ORDER BY fd.fdt_fecha_creacion";
+                  ORDER BY fd.fdt_fecha_creacion DESC";
     $query_seg_fas=$pdo->prepare($sql_seg_fas);
     $query_seg_fas->bindValue(':ftr_id_factura_transaccion',$_SESSION["id_factura_transaccion"],PDO::PARAM_INT);
     $query_seg_fas->bindValue(':emp_id_empresa',$dataSesion["usr_id_empresa"],PDO::PARAM_INT);

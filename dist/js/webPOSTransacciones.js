@@ -1,6 +1,6 @@
 function renderizarProductoServicio() {
   $.ajax({
-    url: '../../beans/POSTransacciones/getDataProductoServicio.php',
+    url: '../../beans/POSTransacciones/obtenerDataProductoServicio.php',
     type: 'POST',
     dataType: 'html',
     success: function(result){
@@ -724,5 +724,29 @@ $(document).ready(function() {
         }
       });
     }
+  });
+  $('#btnPosDescartarItems').click( function (e) {
+    e.preventDefault();
+    $('#myConfirmarDescartarItems').modal('show');
+  });
+  $('#btnConfirmarDescartarItems').click( function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: '../../beans/POSTransacciones/inactivarProductoServicioTodos.php',
+      type: 'POST',
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            renderizarProductoServicio();
+            $('#myConfirmarDescartarItems').modal('hide');
+            break;
+          default:
+            alert("Error al realizar la transacción solicitada.");
+            break;
+        }
+      }
+    });
   });
 });
