@@ -26,8 +26,36 @@
     $query_seg_fas->execute();
     $row_seg_fas = $query_seg_fas->fetchAll();
 
+    $posTransComprobante = 0;
+    $posTransDescuento = 0;
+    $posTransSubTotal = 0;
+    $posTransIvaCero = 0;
+    $posTransIvaDiffCero = 0;
+    $posTransIce = 0;
+    $posTransIrbpnr = 0;
+
+    $posTotalComprobante = 0;
+    $posTotalDescuento = 0;
+    $posTotalSubTotal = 0;
+    $posTotalIvaCero = 0;
+    $posTotalIvaDiffCero = 0;
+    $posTotalIce = 0;
+    $posTotalIrbpnr = 0;
+
     $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
+
+      if ($row_seg_fas["prs_descuento"] >= 0) {
+        $posTransDescuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
+        $posTotalDescuento += $posTransDescuento;
+        $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
+        $posTotalSubTotal += $posTransSubTotal;
+      }
+      else {
+        $posTotalDescuento += $row_seg_fas["prs_descuento"];
+        $posTotalSubTotal += $row_seg_fas["prs_valor_unitario"];
+      }
+
       $data_tabla .= '<tr>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["prs_codigo_item"].'</td>';
       $data_tabla .= '<td>'.$row_seg_fas["prs_descripcion_item"].'</td>';
@@ -40,6 +68,7 @@
     $data_tabla .= '</table>';
     
     if($query_seg_fas) {
+      $data_result["posTransComprobante"] = $posTransComprobante;
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";
       echo json_encode($data_result);

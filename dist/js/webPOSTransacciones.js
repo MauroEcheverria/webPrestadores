@@ -7,7 +7,8 @@ function renderizarProductoServicio() {
       var result = eval('('+result+')');
       switch (result.message) {
         case "saveOK":
-          $("#idTablaProductoServicio").empty(); $("#idTablaProductoServicio").prepend(result.data_tabla);
+          $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
+          $("#posTransComprobante").empty().prepend(result.posTransComprobante);
           $('.refDetalleItemProceso').click(function() {
             var idClicked = this.id;
             alert("Se visualizará el detalle del Ítem: "+idClicked);

@@ -123,8 +123,10 @@
                   <div class="col-md-3">
                     <div class="info-box bg-light">
                       <div class="info-box-content">
-                        <span class="info-box-text text-center text-muted" style="font-size: 23px;">Total</span>
-                        <span class="info-box-number text-center text-muted mb-0" style="font-size: 30px; margin-top: -20px;">$ 1.999,99</span>
+                        <span class="info-box-text text-center text-muted posTotalLabel">Total</span>
+                        <span class="info-box-number text-center text-muted mb-0 posTotalCant">
+                        $ <span id="posTransComprobante">0,00</span>
+                        </span>
                       </div>
                     </div>
                   </div>
