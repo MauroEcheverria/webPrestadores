@@ -10,9 +10,16 @@
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
 
-    $sql_seg_fas="SELECT fd.fdt_id_factura_detalle, fd.prs_id_prod_serv, fd.fdt_cantidad, ps.prs_codigo_item, 
-                  ps.prs_descripcion_item, ps.prs_valor_unitario, ps.prs_descuento, ps.prs_iva_cod_impuesto, ps.prs_iva_cod_tarifa, 
-                  ps.prs_ice_cod_impuesto, ps.prs_ice_cod_tarifa, ps.prs_irbpnr_cod_impuesto, ps.prs_irbpnr_cod_tarifa
+    $sql_seg_fas="SELECT fd.fdt_id_factura_detalle, 
+                  fd.prs_id_prod_serv, 
+                  fd.fdt_cantidad, 
+                  ps.prs_codigo_item, 
+                  ps.prs_descripcion_item, 
+                  ps.prs_valor_unitario, 
+                  ps.prs_descuento, 
+                  IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_iva_cod_impuesto AND trf_codigo = ps.prs_iva_cod_tarifa),0) trf_porcentaje_iva,
+                  IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_ice_cod_impuesto AND trf_codigo = ps.prs_ice_cod_tarifa),0) trf_porcentaje_ice,
+                  IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_irbpnr_cod_impuesto AND trf_codigo = ps.prs_irbpnr_cod_tarifa),0) trf_porcentaje_irbpnr
                   FROM dct_pos_tbl_factura_detalle fd, dct_pos_tbl_producto_servicio ps
                   WHERE fd.prs_id_prod_serv = ps.prs_id_prod_serv
                   AND fd.ftr_id_factura_transaccion = :ftr_id_factura_transaccion
@@ -26,35 +33,39 @@
     $query_seg_fas->execute();
     $row_seg_fas = $query_seg_fas->fetchAll();
 
-    $posTransComprobante = 0;
     $posTransDescuento = 0;
     $posTransSubTotal = 0;
     $posTransIvaCero = 0;
     $posTransIvaDiffCero = 0;
     $posTransIce = 0;
     $posTransIrbpnr = 0;
+    $posTransComprobante = 0;
 
-    $posTotalComprobante = 0;
     $posTotalDescuento = 0;
     $posTotalSubTotal = 0;
     $posTotalIvaCero = 0;
     $posTotalIvaDiffCero = 0;
     $posTotalIce = 0;
     $posTotalIrbpnr = 0;
+    $posTotalComprobante = 0;
 
     $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
 
-      if ($row_seg_fas["prs_descuento"] >= 0) {
-        $posTransDescuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
-        $posTotalDescuento += $posTransDescuento;
-        $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
-        $posTotalSubTotal += $posTransSubTotal;
+      /* Descuentos */
+      $posTransDescuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
+      $posTotalDescuento += $posTransDescuento;
+      $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
+      $posTotalSubTotal += $posTransSubTotal;
+
+      /* IVA */
+      if (condition) {
+        // code...
       }
-      else {
-        $posTotalDescuento += $row_seg_fas["prs_descuento"];
-        $posTotalSubTotal += $row_seg_fas["prs_valor_unitario"];
-      }
+      $posTransIvaCero = $posTransSubTotal * 12 / 100;
+      $posTotalDescuento += $posTransIvaCero;
+      $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
+      $posTotalSubTotal += $posTransSubTotal;
 
       $data_tabla .= '<tr>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["prs_codigo_item"].'</td>';
@@ -68,7 +79,7 @@
     $data_tabla .= '</table>';
     
     if($query_seg_fas) {
-      $data_result["posTransComprobante"] = $posTransComprobante;
+      $data_result["posTotalSubTotal"] = $posTotalSubTotal;
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";
       echo json_encode($data_result);
