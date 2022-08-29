@@ -134,22 +134,38 @@
                 <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDescartarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
                 <div id="idTablaProductoServicio"></div>
                 <div style="text-align: right;">
-                  <div style="margin: 10px 135px 20px 500px;">
-                    <div>
-                      <span style="color: #6c757d; font-size: 21px;">Base Imponible 0: </span><span>$ 15362.00</span>
-                    </div>
-                    <div>
-                      <span style="color: #6c757d; font-size: 21px;">Base Imponible 12%: </span><span>$ 15362.00</span>
-                    </div>
-                    <div>
-                      <span style="color: #6c757d; font-size: 21px;">IVA: </span><span>$ 15362.00</span>
-                    </div>
-                    <div>
-                      <span style="color: #6c757d; font-size: 21px;">ICE: </span><span>$ 15362.00</span>
-                    </div>
-                    <div>
-                      <span style="color: #6c757d; font-size: 21px;">TOTAL: </span><span>$ 15362.00</span>
-                    </div>
+                  <div>
+                    <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="posTotalDescuento">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal 0%: </span><span class="detalle_numerico_2" id="posSubTotalIva_0">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal 12%: </span><span class="detalle_numerico_2" id="posSubTotalIva_2">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal 14%: </span><span class="detalle_numerico_2" id="posSubTotalIva_3">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal No sujeto IVA: </span><span class="detalle_numerico_2" id="posSubTotalIva_6">1530.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal Excento IVA: </span><span class="detalle_numerico_2" id="posSubTotalIva_7">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Subtotal <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posSubTotalIva_8">0.00</span>
+                  </div>  
+                  <div>
+                    <span class="detalle_numerico_1">IVA <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posTotalImpIva">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="posTotalImpIce">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">IRBPNR: </span><span class="detalle_numerico_2" id="posTotalImpIrbpnr">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Valor Total: </span><span class="detalle_numerico_2" id="posValorTotal">0.00</span>
                   </div>
                 </div>
                 <div class="modal-footer centralFooter">

@@ -58,5 +58,10 @@
 	font-size: 23px;
 }
 .posTotalCant {
-	font-size: 30px; margin-top: -20px;
+	font-size: 30px; 
+	margin-top: -20px;
+}
+.detalle_numerico_1 {
+	color: #6c757d; 
+	font-size: 21px; 
 }

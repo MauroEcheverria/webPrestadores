@@ -8,7 +8,7 @@ function renderizarProductoServicio() {
       switch (result.message) {
         case "saveOK":
           $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
-          $("#posTotalSubTotal").empty().prepend(result.posTotalSubTotal);
+          $("#posTransComprobante").empty().prepend(result.total_temp);
           $('.refDetalleItemProceso').click(function() {
             var idClicked = this.id;
             alert("Se visualizará el detalle del Ítem: "+idClicked);

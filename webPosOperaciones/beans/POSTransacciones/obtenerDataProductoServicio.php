@@ -16,7 +16,8 @@
                   ps.prs_codigo_item, 
                   ps.prs_descripcion_item, 
                   ps.prs_valor_unitario, 
-                  ps.prs_descuento, 
+                  ps.prs_descuento,
+                  ps.prs_iva_cod_tarifa,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_iva_cod_impuesto AND trf_codigo = ps.prs_iva_cod_tarifa),0) trf_porcentaje_iva,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_ice_cod_impuesto AND trf_codigo = ps.prs_ice_cod_tarifa),0) trf_porcentaje_ice,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_irbpnr_cod_impuesto AND trf_codigo = ps.prs_irbpnr_cod_tarifa),0) trf_porcentaje_irbpnr
@@ -33,53 +34,68 @@
     $query_seg_fas->execute();
     $row_seg_fas = $query_seg_fas->fetchAll();
 
-    $posTransDescuento = 0;
-    $posTransSubTotal = 0;
-    $posTransIvaCero = 0;
-    $posTransIvaDiffCero = 0;
-    $posTransIce = 0;
-    $posTransIrbpnr = 0;
-    $posTransComprobante = 0;
+    $pos_trans_descuento = 0;
+    $pos_trans_sub_total = 0;
+    $pos_total_descuento = 0;
+    $pos_total_sub_total = 0;
 
-    $posTotalDescuento = 0;
-    $posTotalSubTotal = 0;
-    $posTotalIvaCero = 0;
-    $posTotalIvaDiffCero = 0;
-    $posTotalIce = 0;
-    $posTotalIrbpnr = 0;
-    $posTotalComprobante = 0;
+    $pos_sub_total_iva_cero = 0;
+    $pos_sub_total_iva_12 = 0;
+    $pos_sub_total_iva_14 = 0;
+    $pos_sub_total_iva_no_sujeto = 0;
+    $pos_sub_total_iva_exento = 0;
+    $pos_sub_total_iva_diferenciado = 0;
 
-    $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
+    $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Descuento</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
 
       /* Descuentos */
-      $posTransDescuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
-      $posTotalDescuento += $posTransDescuento;
-      $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
-      $posTotalSubTotal += $posTransSubTotal;
+      $pos_trans_descuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
+      $pos_total_descuento += $pos_trans_descuento;
+      $pos_trans_sub_total = ($row_seg_fas["prs_valor_unitario"] - $pos_trans_descuento) * $row_seg_fas["fdt_cantidad"];
+      $pos_total_sub_total += $pos_trans_sub_total;
 
-      /* IVA */
-      if (condition) {
-        // code...
+      /* Diferenciacion IVA */
+      switch ($row_seg_fas["prs_iva_cod_tarifa"]) {
+        case '0':
+          $pos_sub_total_iva_cero += $pos_trans_sub_total;
+          break;
+        case '2':
+          $pos_sub_total_iva_12 += $pos_trans_sub_total;
+          break;
+        case '3':
+          $pos_sub_total_iva_14 += $pos_trans_sub_total;
+          break;
+        case '6':
+          $pos_sub_total_iva_no_sujeto += $pos_trans_sub_total;
+          break;
+        case '7':
+          $pos_sub_total_iva_exento += $pos_trans_sub_total;
+          break;
+        case '8':
+          $pos_sub_total_iva_diferenciado += $pos_trans_sub_total;
+          break;
       }
-      $posTransIvaCero = $posTransSubTotal * 12 / 100;
-      $posTotalDescuento += $posTransIvaCero;
-      $posTransSubTotal = $row_seg_fas["prs_valor_unitario"] - $posTransDescuento;
-      $posTotalSubTotal += $posTransSubTotal;
 
       $data_tabla .= '<tr>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["prs_codigo_item"].'</td>';
       $data_tabla .= '<td>'.$row_seg_fas["prs_descripcion_item"].'</td>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["fdt_cantidad"].'</td>';
       $data_tabla .= '<td align="right">'.$row_seg_fas["prs_valor_unitario"].'</td>';
-      $data_tabla .= '<td align="right">'.($row_seg_fas["fdt_cantidad"] * $row_seg_fas["prs_valor_unitario"]) .'</td>';
+      $data_tabla .= '<td align="right">'.$row_seg_fas["prs_descuento"].'%</td>';
+      $data_tabla .= '<td align="right">'.$pos_trans_sub_total.'</td>';
       $data_tabla .= '<td align="center"><div class="btn-group btn-group-sm"><a href="#" class="btn btn-info refDetalleItemProceso" title="Detalle Ítem" id="item_detalle_'.$row_seg_fas["fdt_id_factura_detalle"].'"><i class="fas fa-eye"></i><span class="solo_main">'.$row_seg_fas["fdt_id_factura_detalle"].'</span></a><a href="#" class="btn btn-danger refDescartarItemProceso" title="Descatar Ítem" id="item_descartar_'.$row_seg_fas["fdt_id_factura_detalle"].'"><i class="fas fa-trash"></i><span class="solo_main">'.$row_seg_fas["fdt_id_factura_detalle"].'</span></a></div></td>';    
       $data_tabla .= '</tr>';
     }
     $data_tabla .= '</table>';
     
     if($query_seg_fas) {
-      $data_result["posTotalSubTotal"] = $posTotalSubTotal;
+
+
+      $data_result["iva_temp"] = $pos_total_sub_total * 12 / 100;
+      $data_result["total_temp"] = $pos_total_sub_total + $data_result["iva_temp"];
+
+
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";
       echo json_encode($data_result);
