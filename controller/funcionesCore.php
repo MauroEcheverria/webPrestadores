@@ -1,5 +1,32 @@
 <?php
 
+	function validar_clave_sri($clave) {
+    if ($clave == "") {
+      $verificado = false;
+      return $verificado;
+    }
+    $x = 2;
+    $sumatoria = 0;
+    for ($i = strlen($clave) - 1; $i >= 0; $i--) {
+      if ($x > 7) {
+          $x = 2;
+      }
+      $sumatoria = $sumatoria + ($clave[$i] * $x);
+      $x++;
+    }
+    $digito = $sumatoria % 11;
+    $digito = 11 - $digito;
+    switch ($digito) {
+      case 10:
+        $digito = "1";
+        break;
+      case 11:
+        $digito = "0";
+        break;
+    }
+    return $digito;
+  }
+
 	function restarDias($numDias, $fecha) {
 		$dias = "-".intval($numDias)." day";
 		$nuevafecha = strtotime($dias,strtotime($fecha));
@@ -12,6 +39,7 @@
 			$data = trim($data);
 		  $data = stripslashes($data);
 		  $data = htmlentities($data);
+      $data = htmlspecialchars($data, ENT_QUOTES, 'utf-8');
 			if ($limite == "siLimite") {
 				$data = substr($data,0,$max);
 			}
@@ -88,9 +116,9 @@
       }
       return false;
     }
-    public function login($userSystem,$password,$pdo) {
+    public function login($userSystem,$password,$pdo,$reestablecimeinto_pass) {
       try {
-				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_fecha_cambio_contrasenia,usr_contador_error_contrasenia,usr_expiro_contrasenia
+				$sql="SELECT usr_contrasenia,usr_estado_contrasenia,usr_contador_error_contrasenia,TIMESTAMPDIFF(DAY,usr_fecha_cambio_contrasenia,CURRENT_DATE) dias_pass
 							FROM dct_sistema_tbl_usuario
 							WHERE usr_cod_usuario = :usr_cod_usuario;";
 		    $query=$pdo->prepare($sql);
@@ -100,15 +128,24 @@
 		    	$row = $query->fetch(\PDO::FETCH_ASSOC);
 		    	if ($row["usr_estado_contrasenia"] == 1) {
 		    		if ($this->verifyPassword($password,$row["usr_contrasenia"])) {
-              return "pasoTodo";
+              if ($row["dias_pass"] < $reestablecimeinto_pass) {
+                return "pasoTodo";
+              }
+              else {
+                return "passNecesitaCambio";
+              }
 		        }
 		        return "claveNoIgual&&&".$row["usr_contador_error_contrasenia"];
 		    	}
 		    	return "statusPassFalse"; // clave inhabilitada por intentos excedidos
 				}
 			  return "cedulaNoRegistrada";
-			} catch (\PDOException $e) {
-			  echo $e->getMessage();
+			} catch (Exception $ex) {
+				$data_result["message"] = "salidaExcepcionCatch";
+				$data_result["codError"] = $ex->getCode();
+				$data_result["msjError"] = $ex->getMessage();
+				$data_result["numLineaCodigo"] = __LINE__;
+				echo json_encode($data_result);
 			}
     }
 	}
@@ -183,9 +220,17 @@
       $query_emp->execute();
       $row_emp = $query_emp->fetch(\PDO::FETCH_ASSOC);
 
-      $valEstadoUsuario = false;$valEstadoContrasena = false;$valExpiroContrasena = false;$valEnOtraPC = false;
-	    $valEstadoOpcion = false;$valEstadoAplicativo = false;$valEstadoRol = false;$valEstadoEmpresa = false;
-	    $valEstadoVigencia = false;$estadoValidarAcceso = false;$codigoValidacion = "";
+      $valEstadoUsuario = false;
+      $valEstadoContrasena = false;
+      $valExpiroContrasena = false;
+      $valEnOtraPC = false;
+	    $valEstadoOpcion = false;
+	    $valEstadoAplicativo = false;
+	    $valEstadoRol = false;
+	    $valEstadoEmpresa = false;
+	    $valEstadoVigencia = false;
+	    $estadoValidarAcceso = false;
+	    $codigoValidacion = "";
 	    
       if($row_usr["usr_estado"] == 1) { $valEstadoUsuario = true; $contValidaAcceso += 1; }
 		  if($row_usr["usr_estado_contrasenia"] == 1) { $valEstadoContrasena = true; $contValidaAcceso += 1; }
@@ -199,19 +244,19 @@
 		  if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
 
 			if (!$valEstadoUsuario) {
-				$codigoValidacion = "usuarioIncativo";
+				$codigoValidacion = "usuarioInactivo";
 			}
 			else if (!$valEstadoContrasena) {
-				$codigoValidacion = "contrasenaIncativa";
+				$codigoValidacion = "contrasenaInactiva";
 			}
 			else if (!$valExpiroContrasena) {
 				$codigoValidacion = "expiroContrasena";
 			}
 			else if (!$valEstadoAplicativo) {
-				$codigoValidacion = "aplicativoIncativo";
+				$codigoValidacion = "aplicativoInactivo";
 			}
 			else if (!$valEstadoRol) {
-				$codigoValidacion = "rolIncativo";
+				$codigoValidacion = "rolInactivo";
 			}
 			else if (!$valEstadoEmpresa) {
 				$codigoValidacion = "empresaInactiva";
@@ -220,7 +265,7 @@
 				$codigoValidacion = "licenciaCaducada";
 			}
 			else if (!$valEstadoOpcion) {
-				$codigoValidacion = "moduloIncativo";
+				$codigoValidacion = "moduloInactivo";
 			}
 			else if (!$valAccesoOpcion) {
 				$codigoValidacion = "noPosseeAccesoOpcion";
@@ -234,6 +279,7 @@
 			$dataSesion = [
       	'estadoValidarAcceso' => $estadoValidarAcceso,
 		    'complete_names' => $row_usr["usr_nom_completos"],
+		    'usr_id_empresa' => $row_usr["usr_id_empresa"],
 		    'id_role' => $row_usr["usr_id_rol"],
 		    'role' => $row_usr["rol_rol"],
 		    'codigoValidacion' => $codigoValidacion
@@ -241,8 +287,12 @@
 
 			return $dataSesion;
 
-		} catch (\PDOException $e) {
-		  echo $e->getMessage();
+		} catch (Exception $ex) {
+			$data_result["message"] = "salidaExcepcionCatch";
+			$data_result["codError"] = $ex->getCode();
+			$data_result["msjError"] = $ex->getMessage();
+			$data_result["numLineaCodigo"] = __LINE__;
+			echo json_encode($data_result);
 		}
 	}
 
@@ -263,8 +313,7 @@
 		/*'%Y años %m meses %d days %H horas %i minutos %s segundos'*/
 		return $interval->format('%Y AÑOS %M MESES %D DÍAS');
 	}
-	function phpMailer($arrayMail)
-	{
+	function phpMailer($arrayMail) {
 		include("../../../dctDatabase/Parameter.php");
 		require_once('../../../plugins/PHPSendMail/PHPMailerAutoload.php');
 	  $mail = new PHPMailer;
@@ -278,7 +327,7 @@
 	  $mail->Password = $passSince;
 	  $mail->SMTPSecure = $mailSMTP;
 	  $mail->Port = $mailPort;
-	  $mail->setFrom($deCorreo);
+	  $mail->setFrom($deCorreo,$nombreSetFrom);
 	  $mail->SMTPOptions = array(
 	    'ssl' => array(
       'verify_peer' => false,
@@ -289,27 +338,28 @@
 
 	  switch ($arrayMail["tipoCorreo"]) {
 	  	case 'htmlResetPass':
-					$mail->addAddress($arrayMail["paraCorreo"]);
+					$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
 				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+				  $body = str_replace('%%host%%', $arrayMail["host"], $body);
 	  		break;
 	  	case 'htmlResetPassConfirmacion':
-	  			$mail->addAddress($arrayMail["paraCorreo"]);
+	  			$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
 				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
 	  		break;
-	  	case 'htmlActivarCuenta':
-	  			$mail->addAddress($arrayMail["paraCorreo"]);
+	  	case 'htmlBienvenida':
+	  			$mail->addAddress($arrayMail["paraCorreo"],$arrayMail["nombres"]);
 				  $mail->Subject = $arrayMail["subject"];
 				  $body = file_get_contents($arrayMail["archivoHTML"]);
-				  $body = str_replace('%%fechaReporte%%', $fechaActual_1, $body);
-				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				  $body = str_replace('%%nombres%%', $arrayMail["nombres"], $body);
+				  $body = str_replace('%%host%%', $arrayMail["host"], $body);
+				  $body = str_replace('%%linkReset%%', $arrayMail["linkReset"], $body);
 				break;
 	  	default:
 	  		break;
@@ -325,4 +375,18 @@
 		    //echo json_encode(array('message'=>"sendError"));
 		}
 	}
+        
+        function tokenSesionValido(){
+            if (!isset($_POST["csrf"]) || !hash_equals($_SESSION["token_csrf"],$_POST["csrf"])) {
+                        $data_result["message"] = "token_csrf_error";
+			$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+			$data_result["dataModal_2"] = 'Información';
+			$data_result["dataModal_3"] = "Token de seguridad inválido, refresque el aplicativo WEB.";
+			$data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+			$data_result["numLineaCodigo"] = __LINE__;
+			echo json_encode($data_result);
+                        return false;
+                }
+                return true;
+        }
 ?>

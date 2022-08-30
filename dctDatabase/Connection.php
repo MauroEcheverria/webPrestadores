@@ -2,19 +2,16 @@
   class ConnectionDB {
     private static $conn;
     public function connect() {
-      $host = 'localhost';
-      
-      $database = 'prestadores_iess';
+
+      $database = 'bd_prestadores';
       $user = 'root';
-      //$password = 'Dreconstec2022';
-      $password = 'mauro';
+      $password = '';
       
-      /*
-      $database = 'dreconst_prestadores_iess';
-      $user = 'dreconst_admin';
-      $password = 'D%#(#74hT3cf4#';
-      */
+      /*$database = 'dreconst_prestadores';
+      $user = 'dreconst_usuario';
+      $password = 'aJlYi)]BVgjt';*/
       
+      $host = 'localhost';
       $charset = 'utf8mb4';
       $dsn = "mysql:host=$host;dbname=$database;port=3306;charset=$charset;options='--client_encoding=UTF8'";
       $options = [
@@ -27,7 +24,10 @@
         $pdo = new \PDO($dsn, $user, $password, $options);
         return $pdo;
       } catch (\PDOException $e) {
-        throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        $data_result["message"] = "salidaExcepcionCatch";
+        $data_result["codError"] = $ex->getCode();
+        $data_result["msjError"] = $ex->getMessage();
+        echo json_encode($data_result);
       }
     }
   }

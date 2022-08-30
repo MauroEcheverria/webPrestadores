@@ -1,162 +1,496 @@
-var validation = {
-isEmailAddress:function(str) {
-   var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-   return pattern.test(str);
-},
-isNotEmpty:function (str) {
-   var pattern =/\S+/;
-   return pattern.test(str);
-},
-isNumber:function(str) {
-   var pattern = /^\d+$/;
-   return pattern.test(str);
-},
-isSame:function(str1,str2){
-  return str1 === str2;
-}}; 
-function quitaEspacios (myText){
-  var myString = myText;
-  myString = $.trim( myString );
-  return myString;
-}
-function toUpperCase(texto) {
-  texto.value = texto.value.toUpperCase();
-}
-function validarCedula(cedula_a_Validar) {
-  var cad = cedula_a_Validar.trim();
-  var total = 0;
-  var longitud = cad.length;
-  var longcheck = longitud - 1;
-  if (cad !== "" && longitud === 10){
-    for(i = 0; i < longcheck; i++){
-      if (i%2 === 0) {
-        var aux = cad.charAt(i) * 2;
-        if (aux > 9) aux -= 9;
-        total += aux;
-      } else {
-        total += parseInt(cad.charAt(i));
+function fnSistemaEmpresa() {
+  window.dtSistemaEmpresa = $('#dtSistemaEmpresa').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,3,4,5,6,7,8]
+      },
+      {
+        //"targets": [0,9],
+        "targets": [0,4,5,6,7,8,9,10,11,12],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">emp_id_empresa</div>' },
+      { title: '<div class="tituloColumnasDT">RUC</div>' },
+      { title: '<div class="tituloColumnasDT">Empresa</div>' },
+      
+        { title: '<div class="tituloColumnasDT">Nombre comercial</div>' },
+            { title: '<div class="tituloColumnasDT">Cont. especial</div>' },
+            { title: '<div class="tituloColumnasDT">dir_matriz</div>' },
+            { title: '<div class="tituloColumnasDT">ser_fact</div>' },
+            { title: '<div class="tituloColumnasDT">ser_nc</div>' },
+            { title: '<div class="tituloColumnasDT">ser_nd</div>' },
+            { title: '<div class="tituloColumnasDT">ser_guia_remision</div>' },
+            { title: '<div class="tituloColumnasDT">ser_ret</div>' },
+            { title: '<div class="tituloColumnasDT">lleva_cont</div>' },
+            { title: '<div class="tituloColumnasDT">tipo_amb</div>' },
+            
+      { title: '<div class="tituloColumnasDT">Vigencia Desde</div>' },
+      { title: '<div class="tituloColumnasDT">Vigencia Hasta</div>' },
+      { title: '<div class="tituloColumnasDT">Tipo Plan</div>' },
+      { title: '<div class="tituloColumnasDT">Archivo Firma Electrónica</div>' },
+      { title: '<div class="tituloColumnasDT">Estado </div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaEmpresaModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaEmpresa.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    
+    createdRow: function ( row, data, index ) {
+      if ( data[17] == 1 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[17] == 0 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
       }
     }
-    total = total % 10 ? 10 - total % 10 : 0;
-    if (cad.charAt(longitud-1) == total) {
-      return true;
-    }else{
-      return false;
+    
+  });
+}
+function fnSistemaRol() {
+  window.dtSistemaRol = $('#dtSistemaRol').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,2,3]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">apl_id_Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaRolModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaRol.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[2] == 1 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[2] == 0 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
     }
-  }
+  });
 }
-function soloNumeros(e) {
-  var key = window.event ? e.which : e.charCode;
-  if (key == 8) {
-    return true;
-  }
-  if (key !== undefined && key === 0) {
-    return true;
-  }
-  var patron = /[0-9]/;
-  var tecla_final = String.fromCharCode(key);
-  return patron.test(tecla_final);
-}
-
-var time;
-function inicio() { 
-  time = setTimeout(function() { 
-    $(document).ready(function(e) {
-      $.ajax({
-        url:'../../../controller/cerrarSesion/inactividad.php',
-        type:'POST',
-        data:{'linkTemp' : window.location.href },
-        success: function(result){
-        var result = eval('('+result+')');
-          switch (result.message) {
-            case "saveOK":
-              $('#myModalInactivity').modal('show'); 
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1400");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
+function fnSistemaAplicacion() {
+  window.dtSistemaAplicacion = $('#dtSistemaAplicacion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [3,4,5,6,7,8]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">apl_id_aplicacion</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
+      { title: '<div class="tituloColumnasDT">Ruta</div>' },
+      { title: '<div class="tituloColumnasDT">Nombre Superior</div>' },
+      { title: '<div class="tituloColumnasDT">Nombre Inferior</div>' },
+      { title: '<div class="tituloColumnasDT">HTML </div>' },
+      { title: '<div class="tituloColumnasDT">Imagen </div>' },
+      { title: '<div class="tituloColumnasDT">Estado </div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaAplicacionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
         }
-      });
-    });
-  },7200000);
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaAplicacion.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[7] == 1 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 0 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
 }
-//3600000 -> 60 min - 7200000
-function reset() {
-  clearTimeout(time);
-  time = setTimeout(function() { 
-    $(document).ready(function(e) {
-      $.ajax({
-        url:'../../../controller/cerrarSesion/inactividad.php',
-        type:'POST',
-        data:{'linkTemp' : window.location.href },
-        success: function(result){
-        var result = eval('('+result+')');
-          switch (result.message) {
-            case "saveOK":
-                $('#myModalInactivity').modal('show'); 
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1401");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
+function fnSistemaOpcion() {
+  window.dtSistemaOpcion = $('#dtSistemaOpcion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,3,4,5,6]
+      },
+      {
+        "targets": [0,7],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">opc_id_opcion</div>' },
+      { title: '<div class="tituloColumnasDT">Opción</div>' },
+      { title: '<div class="tituloColumnasDT">Ruta</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicación</div>' },
+      { title: '<div class="tituloColumnasDT">Orden</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaOpcionModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
         }
-      });
-    });
-  },7200000);
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 3, "asc" ],[ 4, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaOpcion.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(4).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
 }
-function modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4) {
-  $("#putIconModalgeneric").empty().prepend(dataModal_1);
-  $("#putTitleModalgeneric").empty().prepend(dataModal_2);
-  $("#putMessaggeModalgeneric").empty().prepend(dataModal_3);
-  $("#putButtonModalgeneric").empty().prepend(dataModal_4);
-  $('#modalGenericoInfo').modal('show');
+function fnSistemaRol() {
+  window.dtSistemaRol = $('#dtSistemaRol').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [1,2,3]
+      },
+      {
+        "targets": [0],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">apl_id_Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaRolModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 1, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaRol.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[2] == 1 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[2] == 0 ) {
+        $('td', row).eq(1).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaEmpresaAplicativo() {
+  window.dtSistemaEmpresaAplicativo = $('#dtSistemaEmpresaAplicativo').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [4,5]
+      },
+      {
+        "targets": [0,1],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">ape_id_empresa</div>' },
+      { title: '<div class="tituloColumnasDT">ape_id_aplicacion</div>' },
+      { title: '<div class="tituloColumnasDT">Empresa</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicativo</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaEmpresaAplicativoModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 2, "asc" ],[ 3, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaEmpresaAplicativo.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[4] == 1 ) {
+        $('td', row).eq(2).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[4] == 0 ) {
+        $('td', row).eq(2).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaRolAplicativo() {
+  window.dtSistemaRolAplicativo = $('#dtSistemaRolAplicativo').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [4,5]
+      },
+      {
+        "targets": [0,1],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">rla_id_rol</div>' },
+      { title: '<div class="tituloColumnasDT">rla_id_aplicacion</div>' },
+      { title: '<div class="tituloColumnasDT">Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicativo</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaRolAplicativoModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 2, "asc" ],[ 3, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaRolAplicativo.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[4] == 1 ) {
+        $('td', row).eq(2).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[4] == 0 ) {
+        $('td', row).eq(2).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+}
+function fnSistemaRolOpcion() {
+  window.dtSistemaRolOpcion = $('#dtSistemaRolOpcion').DataTable( {
+    bRetrive: true,
+    processing: true,
+    serverSide: false,
+    bDestroy: true,
+    responsive: false,
+    paging: true,
+    searching: true,
+    scrollX: true,
+    aoColumnDefs: [
+      { 
+        sClass: "centrarContent", 
+        aTargets: [5,6]
+      },
+      {
+        "targets": [0,1],
+        "visible": false,
+        "searchable": false
+      }
+    ],
+    columns: [
+      { title: '<div class="tituloColumnasDT">rlo_id_rol</div>' },
+      { title: '<div class="tituloColumnasDT">rlo_id_opcion</div>' },
+      { title: '<div class="tituloColumnasDT">Rol</div>' },
+      { title: '<div class="tituloColumnasDT">Aplicativo</div>' },
+      { title: '<div class="tituloColumnasDT">Opción</div>' },
+      { title: '<div class="tituloColumnasDT">Estado</div>' },
+      { 
+        title: '<div class="tituloColumnasDT">Acciones</div>',
+        width: "80",
+        mRender: function (data, type, row) {
+          var acciones = '';
+          acciones  = '<a class="iconDtSistemaRolOpcionModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          return acciones
+        }
+      },
+    ],
+    oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
+    lengthMenu: [5,10,15,20,30],
+    order: [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ]],
+    ajax:{
+      url:'../../beans/manejoSistema/obtenerSistemaRolOpcion.php',
+      type: "post",
+      data: null,
+      dataSrc: function (json) {
+        return json.data;
+      },
+      timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(3).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(3).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
 }
 $(document).ready(function() {
 
-	$(".aAlert").click(function(){
-    $(this).parent().hide();
-    return false;
-  });
-
-  window.setTimeout(function(){
-    $('.poppupAlert').fadeOut('slow');
-  },3000);
-
-  /*$('[data-mask]').inputmask();*/
-
-  $(".select2,#sys_selec_option").select2({
-    maximumSelectionLength: 20
-  });
-
-  /*$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-    checkboxClass: 'icheckbox_minimal-blue',
-    radioClass   : 'iradio_minimal-blue'
-  });*/
-
-  /*$('.timepicker').timepicker({
-    showInputs: false,
-    showMeridian: false
-  });*/
-
-  $('#newNacimiento,#editNacimiento').datepicker({
-    singleDatePicker: true,
-    showDropdowns: true,
-    autoclose: true,
-    format: 'yyyy-mm-dd',
-    language: 'es',
-    /*startDate: '+0d',*/
-    endDate: '+0d',
-  });
-
-  $('#loading').hide();  
-  $(document)
-  .ajaxStart(function(){$('#loading').show();})
-  .ajaxStop(function(){$('#loading').hide();});
-
-  window.id_dt_cedula = null;
   var dtUsuarios = $('#dtUsuarios').DataTable( {
     bRetrive: true,
     processing: true,
@@ -169,10 +503,10 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [0,3,4,5,6,9]
+        aTargets: [0,3,4,5,6,10]
       },
       {
-        "targets": [7,8],
+        "targets": [8,9,11,12,13,14],
         "visible": false,
         "searchable": false
       }
@@ -185,6 +519,7 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Empresa</div>' },
       { title: '<div class="tituloColumnasDT">Estado Usuario</div>' },
       { title: '<div class="tituloColumnasDT">Estado Contraseña</div>' },
+      { title: '<div class="tituloColumnasDT">Verificación Correo</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_empresa</div>' },
       { title: '<div class="tituloColumnasDT">usr_id_rol</div>' },
       { 
@@ -192,9 +527,9 @@ $(document).ready(function() {
         width: "80",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="iconDtUsuariosModificar" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones  = '<a class="iconDtUsuariosModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtUsuariosResetear" title="Resetear contraseña"><i class="far fa-trash-alt iconDTicon"></i></i></a>';
+          acciones += '<a class="icondtUsuariosResetear cursorPointerDT" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
           return acciones
         }
       },
@@ -210,88 +545,126 @@ $(document).ready(function() {
         return json.data;
       },
       timeout: 60000
+    },
+    createdRow: function ( row, data, index ) {
+      if ( data[5] == 1 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[5] == 0 ) {
+        $('td', row).eq(5).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+      if ( data[6] == 1 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[6] == 0 ) {
+        $('td', row).eq(6).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 1 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Activo</div><img id='okEvalu' src='../../../dist/img/x-visto.png' style='width: 17px;'/></div>");
+      }
+      if ( data[7] == 0 ) {
+        $('td', row).eq(7).html("<div align='center'><div style='display:none;'>Inactivo</div><img id='errorEvalu'src='../../../dist/img/x-error.png' style='width: 17px;'/></div>");
+      }
+    }
+  });
+  $.ajax({
+    url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
+    type: 'POST',
+    dataType: 'html',
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          $("#usr_id_rol,#edit_usr_id_rol").empty().prepend(result.roles);
+          $("#usr_id_empresa,#edit_usr_id_empresa").empty().prepend(result.empresas);
+          break;
+        default:
+          $("span#idCodErrorGeneral").empty().prepend("2515");
+          $('#myModalErrorGeneral').modal('show');
+          break;
+      }
     }
   });
   $('#btnUserNuevo').click( function () {
     $('#myModalNuevoUser').modal('show');
     document.getElementById("formUserNew").reset();
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
-      type: 'POST',
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        switch (result.message) {
-          case "saveOK":
-            $("select#newRol").empty().prepend(result.roles);
-            $("select#newEmpresa").empty().prepend(result.empresas);
-            break;
-          default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
-            $('#myModalErrorGeneral').modal('show');
-            break;
-        }
-      }
-    });
   });
-  $('#newCedula').change( function () {
-    if ($("#newCedula").val() != "") {
+  $('#usr_cod_usuario').change( function () {
+    if ($("#usr_cod_usuario").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCedula.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCedula.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#newCedula").val() },
+        data:{ 'cedula' : $("#usr_cod_usuario").val() },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#newCedula").val("").focus();
-            $("#loginUsuarioRegistrado").show();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#usr_cod_usuario").val("").focus();
+              $("#loginUsuarioRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
     }
   });
-  $('#newCorreo').change( function () {
-    if ($("#newCorreo").val() != "") {
+  $('#usr_correo').change( function () {
+    if ($("#usr_correo").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCorreo.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#newCorreo").val() },
+        data:{ 'usr_correo' : $("#usr_correo").val(), 'usr_cod_usuario' : $("#usr_cod_usuario").val(), 'tipo_val' : 'NUE' },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#newCorreo").val("").focus();
-            $("#loginCorreoRegistrado").show();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#usr_correo").val("").focus();
+              $("#loginCorreoRegistrado").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
     }
   });
-  $('#editCorreo').change( function () {
-    if ($("#editCorreo").val() != "") {
+  $('#edit_usr_correo').change( function () {
+    if ($("#edit_usr_correo").val() != "") {
       $.ajax({
-        url: '../../../webMain/beans/manejoSistema/validarCorreo.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarCorreo.php',
         type: 'POST',
         dataType: 'html',
-        data:{ 'cedula' : $("#editCorreo").val() },
+        data:{ 'usr_correo' : $("#edit_usr_correo").val(), 'usr_cod_usuario' : temp_usr_cod_usuario_1, 'tipo_val' : 'PAS' },
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message == "userError") {
-            window.setTimeout(function(){
-              $('.poppupAlert').fadeOut('slow');
-            },3000);
-            $("#editCorreo").val("").focus();
-            $("#loginCorreoRegistradoEdit").show();
-            return false;
+          switch (result.message) {
+            case "saveOK":
+              break;
+            case "userError":
+              $("#edit_usr_correo").val("").focus();
+              $("#loginCorreoRegistradoEdit").show();
+              ocultarPoppupAlert();
+              return false;
+              break;
+            default:
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+              $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
@@ -307,9 +680,10 @@ $(document).ready(function() {
         data:$("#formUserNew").serialize(),
         success: function(result){
         var result = eval('('+result+')');
+          $('#myModalNuevoUser').modal('hide');
           switch (result.message) {
             case "saveOK":
-                $('#myModalNuevoUser').modal('hide');
+            case "token_csrf_error":
                 dtUsuarios.ajax.reload();
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
@@ -318,8 +692,7 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $('#myModalNuevoUser').modal('hide');
-              $("span#idCodErrorGeneral").empty().prepend("1402");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -329,52 +702,16 @@ $(document).ready(function() {
   });
   $('#dtUsuarios').on('click','.iconDtUsuariosModificar', function (e) {
     e.preventDefault();
-    window.id_dt_cedula = dtUsuarios.row($(this).parents('tr').first()).data()[0];
-    var dt_nombres = dtUsuarios.row($(this).parents('tr').first()).data()[1];
-    var dt_correo = dtUsuarios.row($(this).parents('tr').first()).data()[2];
-    var dt_role = dtUsuarios.row($(this).parents('tr').first()).data()[3];
-    var dt_estado = dtUsuarios.row($(this).parents('tr').first()).data()[5];
-    var dt_cod_unidad = dtUsuarios.row($(this).parents('tr').first()).data()[7];
-    var dt_nacimiento = dtUsuarios.row($(this).parents('tr').first()).data()[8];
-    var dt_sexo = dtUsuarios.row($(this).parents('tr').first()).data()[9];
-    var dt_telefono = dtUsuarios.row($(this).parents('tr').first()).data()[10];
-    $("h3.editCedula").empty(); $("h3.editCedula").prepend(id_dt_cedula);
-    $('#editCorreo').val(dt_correo);
-    $('#editNacimiento').val(dt_nacimiento);
-    $('#edit_usr_sexo').val(dt_sexo);
-    $('#edit_usr_telefono').val(dt_telefono);
-    if (dt_estado == 1) {document.getElementById("editEstado").value = "TRUE"}
-    if (dt_estado == 0) {document.getElementById("editEstado").value = "FALSE"}
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
-      type: 'POST',
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        switch (result.message) {
-          case "saveOK":
-            $("select#editRol").empty().prepend(result.roles);
-            break;
-          default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
-            $('#myModalErrorGeneral').modal('show');
-            break;
-        }
-      }
-    });
-    $.ajax({
-      url: '../../beans/manejoSistema/obtenerNombres.php',
-      type: 'POST',
-      dataType: 'html',
-      data:{ 'id_dt_cedula' : id_dt_cedula },
-      success: function(result){
-        var result = eval('('+result+')');
-        $('#edit_usr_nombre_1').val(result.data_row[0].usr_nombre_1);
-        $('#edit_usr_nombre_2').val(result.data_row[0].usr_nombre_2);
-        $('#edit_usr_apellido_1').val(result.data_row[0].usr_apellido_1);
-        $('#edit_usr_apellido_2').val(result.data_row[0].usr_apellido_2);
-      }
-    });
+    window.temp_usr_cod_usuario_1 = dtUsuarios.row($(this).parents('tr').first()).data()[0];
+    $("h3.editCedula").empty().prepend(dtUsuarios.row($(this).parents('tr').first()).data()[0]);
+    $('#edit_usr_correo').val(dtUsuarios.row($(this).parents('tr').first()).data()[2]);
+    $('#edit_usr_estado').val(dtUsuarios.row($(this).parents('tr').first()).data()[5]);
+    $('#edit_usr_id_empresa').val(dtUsuarios.row($(this).parents('tr').first()).data()[8]);
+    $("#edit_usr_id_rol").val(dtUsuarios.row($(this).parents('tr').first()).data()[9]);
+    $('#edit_usr_nombre_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[11]);
+    $('#edit_usr_nombre_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[12]);
+    $('#edit_usr_apellido_1').val(dtUsuarios.row($(this).parents('tr').first()).data()[13]);
+    $('#edit_usr_apellido_2').val(dtUsuarios.row($(this).parents('tr').first()).data()[14]);
     $('#myModalEditUser').modal('show');
   });
   $('#formUserMod').validator().on('submit', function (e) {
@@ -384,12 +721,13 @@ $(document).ready(function() {
         url: '../../beans/manejoSistema/actualizarUsuario.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formUserMod").serialize()+"&editCedula="+id_dt_cedula,
+        data:$("#formUserMod").serialize()+"&usr_cod_usuario="+temp_usr_cod_usuario_1,
         success: function(result){
         var result = eval('('+result+')');
+          $('#myModalEditUser').modal('hide');
           switch (result.message) {
             case "saveOK":
-                $('#myModalEditUser').modal('hide');
+            case "token_csrf_error":
                 dtUsuarios.ajax.reload();
                 modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
@@ -398,8 +736,7 @@ $(document).ready(function() {
                 alert("De cumplir con todos los criterios de los campos solicitados.");
               break;
             default:
-              $('#myModalEditUser').modal('hide');
-              $("span#idCodErrorGeneral").empty().prepend("1403");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -409,10 +746,10 @@ $(document).ready(function() {
   });
   $('#dtUsuarios').on('click','.icondtUsuariosResetear', function (e) {
     e.preventDefault();
-    var id_dt_cedula = dtUsuarios.row($(this).parents('tr').first()).data()[0];
+    window.temp_usr_cod_usuario_2 = dtUsuarios.row($(this).parents('tr').first()).data()[0];
     var dt_nombres = dtUsuarios.row($(this).parents('tr').first()).data()[1];
     $('#myModalPassUser').modal('show');
-    $("h3.passCedula").empty(); $("h3.passCedula").prepend(id_dt_cedula);
+    $("h3.passCedula").empty(); $("h3.passCedula").prepend(temp_usr_cod_usuario_2);
     $("h3.passNombres").empty();  $("h3.passNombres").prepend(dt_nombres);
   });
   $('#formUserPass').validator().on('submit', function (e) {
@@ -422,19 +759,18 @@ $(document).ready(function() {
           url: '../../beans/manejoSistema/actualizarContrasena.php',
           type: 'POST',
           dataType: 'html',
-          data:$("#formUserPass").serialize()+
-          "&editCedula="+$("h3.passCedula").text()+
-          "&valPaciente="+$.md5($("h3.passCedula").text(),'M@rut0'),
+          data:$("#formUserPass").serialize()+"&editCedula="+temp_usr_cod_usuario_2,
           success: function(result){
-          var result = eval('('+result+')');
+            var result = eval('('+result+')');
             $('#myModalPassUser').modal('hide');
             switch (result.message) {
               case "saveOK":
+              case "token_csrf_error":
                   dtUsuarios.ajax.reload();
                   modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
                 break;
               default:
-                  $("span#idCodErrorGeneral").empty().prepend("1404");
+                  $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
                   $('#myModalErrorGeneral').modal('show');
                 break;
             }
@@ -442,212 +778,393 @@ $(document).ready(function() {
       });
     }
   });
-  $('#formExpirePassPerfil').validator().on('submit', function (e) {
-    if (!e.isDefaultPrevented()) {
-      e.preventDefault();
-      $.ajax({
-        url: '../../beans/manejoSistema/expirarPassAdminPerfil.php',
-        type: 'POST',
-        dataType: 'html',
-        data:$("#formExpirePassPerfil").serialize()+"&cod_system_user="+
-        $('#idPassCedula').val()+"&valPaciente="+
-        $.md5($('#passPassNew').val(),'M@rut0')+"&valPacienteAnt="+
-        $.md5($('#passPassAnt').val(),'M@rut0'),
-        success: function(result){
-          var result = eval('('+result+')');
-          document.getElementById('formExpirePassPerfil').reset();
-          $('#myModal_expire_pass').modal('hide');
-          switch (result.message) {
-            case "updateOk":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "updateError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "passRegistradaAnteriormentes":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            case "passOriginalError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend("1405");
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
+  if($('div#appAdministrarSistema').hasClass('appAdministrarSistema')) {
+    fnSistemaEmpresa();
+  }
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href")
+    if (target == "#idTogglable_1") {
+      fnSistemaEmpresa();
+    }
+    if (target == "#idTogglable_2") {
+      fnSistemaAplicacion();
+    }
+    if (target == "#idTogglable_3") {
+      fnSistemaOpcion();
+    }
+    if (target == "#idTogglable_4") {
+      fnSistemaRol();
+    }
+    if (target == "#idTogglable_5") {
+      fnSistemaEmpresaAplicativo();
+    }
+    if (target == "#idTogglable_6") {
+      fnSistemaRolAplicativo();
+    }
+    if (target == "#idTogglable_7") {
+      fnSistemaRolOpcion();
     }
   });
-  if($('span#selectAdminRoles').hasClass('selectAdminRolesClass')) {
+  $.ajax({
+    url: '../../beans/manejoSistema/obtenerEmpAplRolOpc.php',
+    type: 'POST',
+    dataType: 'html',
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          $("select#emp_empresa_1").empty().prepend(result.dataEmpresa);
+          $("select#rol_rol_2").empty().prepend(result.dataRol);
+          $("select#rol_rol_3").empty().prepend(result.dataRol);
+          break;
+        default:
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+          $('#myModalErrorGeneral').modal('show');
+          break;
+      }
+    }
+  });
+  $('#emp_vigencia_desde,#emp_vigencia_hasta').datepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    autoclose: true,
+    format: 'yyyy-mm-dd',
+    language: 'es',
+    /*startDate: '+0d',
+    endDate: '+0d',*/
+  });
+  $('#dtSistemaEmpresa').on('click','.iconDtSistemaEmpresaModificar', function (e) {
+    e.preventDefault();
+    window.temp_emp_id_empresa_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[0];
+    window.temp_ctg_id_catalogo_1 = dtSistemaEmpresa.row($(this).parents('tr').first()).data()[19];
+    $('#emp_empresa').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[2]);
+    $('#emp_ruc').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[1]);
+    $('#emp_estado').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[17]);
+    $('#emp_vigencia_desde').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[13]);
+    $('#emp_vigencia_hasta').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[14]);
+    $('#emp_vigencia_desde').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[13]);
+    $('#emp_vigencia_hasta').datepicker('setDate', dtSistemaEmpresa.row($(this).parents('tr').first()).data()[14]);
+    
+    $('#ctg_id_catalogo').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[15]);
+    
+    $('#emp_nom_comercial').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[3]);
+    $('#emp_contr_esp').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[4]);
+    $('#emp_direccion_matriz').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[5]);
+    $('#emp_ser_fact').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[6]);
+    $('#emp_ser_ncred').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[7]);
+    $('#emp_guia_remision').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[8]);
+    $('#emp_ser_ndeb').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[9]);
+    $('#emp_ser_ret').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[10]);
+    $('#emp_obli_contabilidad').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[11]);
+    $('#em_tipo_ambiente').val(dtSistemaEmpresa.row($(this).parents('tr').first()).data()[12]);
+    
+    $('#tipo_form_sist_empre').val("Old");
+    $(".empCamposNoEditables").attr("disabled","true");
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerRolEmpresa.php',
+      url: '../../beans/manejoSistema/obtenerCatalogoEmpresas.php',
       type: 'POST',
       dataType: 'html',
       success: function(result){
         var result = eval('('+result+')');
         switch (result.message) {
           case "saveOK":
-            $("select#sys_selec_roles").empty().prepend(result.roles);
+            $("#ctg_id_catalogo").empty().prepend(result.catag);
+            $('#ctg_id_catalogo').val(temp_ctg_id_catalogo_1);
+            $('#myModalSistemaEmpresa').modal('show');
             break;
           default:
-            $("span#idCodErrorGeneral").empty().prepend("2515");
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
             $('#myModalErrorGeneral').modal('show');
             break;
         }
       }
     });
-    $("#sys_selec_roles").change(function() {
-      window.sys_id_app = null;
-      window.table_sys_id_app = $('#sys_dt_roles_app').DataTable( {
-        bRetrive: true,
-        processing: true,
-        serverSide: false,
-        bDestroy: true,
-        responsive: false,
-        paging: true,
-        searching: true,
-        scrollX: true,
-        aoColumnDefs: [{ sClass: "centrarContent", aTargets: [0]}],
-        oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
-        lengthMenu: [5,10,15,20,30],
-        order: [[ 0, "asc" ]],
-        ajax:{
-          url:'../../beans/manejoSistema/getSysRolesApp.php',
-          type: "post",
-          data: function ( d ) {
-            d.sys_selec_roles = $("#sys_selec_roles").val();
-          },
-          dataSrc: function (json) {
-            return json.data;
+  });
+  $('#formSistemaEmpresa').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form_sist_empre').val() == "Old") {
+        $params = $('#formSistemaEmpresa').serialize()+"&emp_id_empresa="+temp_emp_id_empresa_1;
+      }
+      else {
+        $params = $('#formSistemaEmpresa').serialize();
+      }
+      $.ajax({
+        url: '../../beans/manejoSistema/guardarSistemaEmpresa.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          if (result.message !== 'error_negocio')
+          {
+              $('#myModalSistemaEmpresa').modal('hide');
+          }
+            
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_empre').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaEmpresa.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            case "error_negocio":
+              //dtSistemaEmpresa.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
           }
         }
       });
-      $('#sys_dt_roles_app tbody').on( 'click', 'tr', function () {
-        if ( $(this).hasClass('selected') ) {
-            sys_id_app = null;
-            $(this).removeClass('selected');
-            $('#sys_btn_desvincular_app').prop("disabled", true);
-        }
-        else {
-            sys_id_app = $('td', this).eq(0).text();
-            table_sys_id_app.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            if (sys_id_app != "Ningún dato disponible en esta tabla") {
-              $('#sys_btn_desvincular_app').prop("disabled", false);
-            }
-        }
-      });
-      window.sys_id_opt = null;
-      window.table_sys_id_opt = $('#sys_dt_roles_option').DataTable( {
-        bRetrive: true,
-        processing: true,
-        serverSide: false,
-        bDestroy: true,
-        responsive: false,
-        paging: true,
-        searching: true,
-        scrollX: true,
-        aoColumnDefs: [{ sClass: "centrarContent", aTargets: [0]}],
-        oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
-        lengthMenu: [10,15,20,30],
-        order: [[ 1, "asc" ]],
-        ajax:{
-          url:'../../beans/manejoSistema/getSysRolesOpt.php',
-          type: "post",
-          data: function ( d ) {
-            d.sys_selec_roles = $("#sys_selec_roles").val();
-          },
-          dataSrc: function (json) {
-            return json.data;
-          }
-        }
-      });
-      $('#sys_dt_roles_option tbody').on( 'click', 'tr', function () {
-        if ( $(this).hasClass('selected') ) {
-            sys_id_opt = null;
-            $(this).removeClass('selected');
-            $('#sys_btn_desvincular_opt').prop("disabled", true);
-        }
-        else {
-            sys_id_opt = $('td', this).eq(0).text();
-            table_sys_id_opt.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            if (sys_id_opt != "Ningún dato disponible en esta tabla") {
-              $('#sys_btn_desvincular_opt').prop("disabled", false);
-            }
-        }
-      });
-      $("div#panelAdminRoles").removeClass("criteriosOcultar").addClass("criteriosMostrar");
-    });
-  }
-  $('#sys_btn_asignar_app').click( function () {
+    }
+  });
+  $('#btnNuevaSistemaEmpresa').click( function () {
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerAppUser.php',
+      url: '../../beans/manejoSistema/obtenerCatalogoEmpresas.php',
       type: 'POST',
       dataType: 'html',
-      data:{ 'sys_selec_roles' : $("#sys_selec_roles").val() },
       success: function(result){
-        getApp = JSON.parse(result);
-        var newApp = "";
-        for (var i = 0; i <= getApp.length - 1; i++) {
-          newApp += "<option value='"+getApp[i][0]+"'>"+getApp[i][1]+"</option>";
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $('#tipo_form_sist_empre').val("New");
+            $("#ctg_id_catalogo").empty().prepend(result.catag);
+            $('#ctg_id_catalogo').val("");
+            $('#myModalSistemaEmpresa').modal('show');
+            document.getElementById("formSistemaEmpresa").reset();
+            $(".empCamposNoEditables").attr("disabled","false");
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
         }
-        $("select#sys_selec_app").empty(); $("select#sys_selec_app").prepend(newApp);
-        $("h3.passSysRoles").empty(); $("h3.passSysRoles").prepend($("#sys_selec_roles :selected").text());
-        $('#myModalSysRoleApp').modal('show');
       }
     });
   });
-  $('#sys_btn_desvincular_app').click( function () {
-    if (sys_id_app != null) {
+  $('#dtSistemaRol').on('click','.iconDtSistemaRolModificar', function (e) {
+    e.preventDefault();
+    window.temp_rol_id_rol_1 = dtSistemaRol.row($(this).parents('tr').first()).data()[0];
+    $('#rol_rol').val(dtSistemaRol.row($(this).parents('tr').first()).data()[1]).prop("disabled",true).prop("required",false);
+    $('#rol_estado').val(dtSistemaRol.row($(this).parents('tr').first()).data()[2]);
+    $('#tipo_form_sist_rol').val("Old");
+    $('#myModalSistemaRol').modal('show');
+  });
+  $('#formSistemaRol').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form_sist_rol').val() == "Old") {
+        $params = $('#formSistemaRol').serialize()+"&rol_id_rol="+temp_rol_id_rol_1;
+      }
+      else {
+        $params = $('#formSistemaRol').serialize();
+      }
       $.ajax({
-        url: '../../beans/manejoSistema/deleteRoleApp.php',
+        url: '../../beans/manejoSistema/guardarSistemaRol.php',
         type: 'POST',
         dataType: 'html',
-        data:{'sys_selec_roles':$("#sys_selec_roles").val(),'sys_id_app':sys_id_app },
-        success: function(result){  
+        data:$params,
+        success: function(result){
           var result = eval('('+result+')');
+          $('#myModalSistemaRol').modal('hide');
           switch (result.message) {
             case "saveOK":
-              table_sys_id_app.ajax.reload();
-              table_sys_id_opt.ajax.reload();
-              $('#sys_btn_desvincular_app').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
-              var sms_dataModal_2 = 'Información';
-              var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
-              modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
+              $('#tipo_form_sist_rol').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaRol.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1406");
-              $('#myModalErrorGeneral').modal('show');
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
               break;
           }
         }
       });
     }
-    else{
-      $('#myModalNoSelected').modal('show');
-    }
   });
-  $('#formSysApp').validator().on('submit', function (e) {
+  $('#btnNuevaSistemaRol').click( function () {
+    document.getElementById("formSistemaRol").reset();
+    $('#tipo_form_sist_rol').val("New");
+    $('#rol_estado').val("1").prop("disabled",true);
+    $('#rol_rol').prop("disabled",false).prop("required",true);
+    $('#myModalSistemaRol').modal('show');
+  });
+  $('#dtSistemaAplicacion').on('click','.iconDtSistemaAplicacionModificar', function (e) {
+    e.preventDefault();
+    window.temp_apl_id_aplicacion_1 = dtSistemaAplicacion.row($(this).parents('tr').first()).data()[0];
+    $('#apl_aplicacion').val(dtSistemaAplicacion.row($(this).parents('tr').first()).data()[1]).prop("disabled",true).prop("required",false);
+    $('#apl_estado').val(dtSistemaAplicacion.row($(this).parents('tr').first()).data()[7]);
+    $('#tipo_form_sist_apl').val("Old");
+    $('#myModalSistemaAplicacion').modal('show');
+  });
+  $('#formSistemaAplicacion').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
+      if ($('#tipo_form_sist_apl').val() == "Old") {
+        $params = $('#formSistemaAplicacion').serialize()+"&apl_id_aplicacion="+temp_apl_id_aplicacion_1;
+      }
+      else {
+        $params = $('#formSistemaAplicacion').serialize();
+      }
       $.ajax({
-        url: '../../beans/manejoSistema/saveRoleApp.php',
+        url: '../../beans/manejoSistema/guardarSistemaAplicacion.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formSysApp").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaAplicacion').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_apl').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaAplicacion.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#dtSistemaOpcion').on('click','.iconDtSistemaOpcionModificar', function (e) {
+    e.preventDefault();
+    window.temp_opc_id_opcion_1 = dtSistemaOpcion.row($(this).parents('tr').first()).data()[0];
+    $('#opc_opcion').val(dtSistemaOpcion.row($(this).parents('tr').first()).data()[1]).prop("disabled",true).prop("required",false);
+    $('#opc_estado').val(dtSistemaOpcion.row($(this).parents('tr').first()).data()[5]);
+    $('#tipo_form_sist_opc').val("Old");
+    $('#myModalSistemaOpcion').modal('show');
+  });
+  $('#formSistemaOpcion').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form_sist_opc').val() == "Old") {
+        $params = $('#formSistemaOpcion').serialize()+"&opc_id_opcion="+temp_opc_id_opcion_1;
+      }
+      else {
+        $params = $('#formSistemaOpcion').serialize();
+      }
+      $.ajax({
+        url: '../../beans/manejoSistema/guardarSistemaOpcion.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaOpcion').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_opc').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaOpcion.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#dtSistemaEmpresaAplicativo').on('click','.iconDtSistemaEmpresaAplicativoModificar', function (e) {
+    e.preventDefault();
+    window.temp_ape_id_empresa_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[0];
+    window.temp_ape_id_aplicacion_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[1];
+    window.temp_ape_estado_1 = dtSistemaEmpresaAplicativo.row($(this).parents('tr').first()).data()[4]
+    $('#emp_empresa_1').val(temp_ape_id_empresa_1).prop("disabled",true).prop("required",false);
+    $.ajax({
+      url: '../../beans/manejoSistema/cargaSistemaEmpresaAplicativo.php',
+      type: 'POST',
+      dataType: 'html',
+      data:{'dataSelect':$("#emp_empresa_1").val(),'dataEdit':'edit'},
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#apl_aplicacion_1").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#apl_aplicacion_1').val(temp_ape_id_aplicacion_1).prop("disabled",true).prop("required",false);
+            $('#ape_estado').val(temp_ape_estado_1);
+            $('#tipo_form_sist_emp_apl').val("Old");
+            $('#myModalSistemaEmpresaAplicativo').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
+  });
+  $('#formSistemaEmpresaAplicativo').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form_sist_emp_apl').val() == "Old") {
+        $params = $('#formSistemaEmpresaAplicativo').serialize()+"&ape_id_empresa="+temp_ape_id_empresa_1+"&ape_id_aplicacion="+temp_ape_id_aplicacion_1;
+      }
+      else {
+        $params = $('#formSistemaEmpresaAplicativo').serialize();
+      }
+      $.ajax({
+        url: '../../beans/manejoSistema/guardarSistemaEmpresaAplicativo.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaEmpresaAplicativo').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_emp_apl').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaEmpresaAplicativo.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#btnNuevaSistemaEmpresaAplicativo').click( function () {
+    document.getElementById("formSistemaEmpresaAplicativo").reset();
+    $('#tipo_form_sist_emp_apl').val("New");
+    $('#ape_estado').val("1").prop("disabled",true);
+    $('#emp_empresa_1').prop("disabled",false).prop("required",true);
+    $('#apl_aplicacion_1').prop("disabled",true).prop("required",true);
+    $('#myModalSistemaEmpresaAplicativo').modal('show');
+  });
+  $('#emp_empresa_1').change( function () {
+    if ($("#emp_empresa_1").val() != "") {
+      $.ajax({
+        url: '../../beans/manejoSistema/cargaSistemaEmpresaAplicativo.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{'dataSelect':$("#emp_empresa_1").val(),'dataEdit':'new'},
         success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              table_sys_id_app.ajax.reload();
-              $('#myModalSysRoleApp').modal('hide');
+              $("#apl_aplicacion_1").empty().prepend(result.dataSelect).prop("disabled",false);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1407");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -655,41 +1172,117 @@ $(document).ready(function() {
       });
     }
   });
-  $('#sys_btn_asignar_opt').click( function () {
+  $('#apl_aplicacion_1').change( function () {
+    if ($("#emp_empresa_1").val() != "" && $("#apl_aplicacion_1").val() != "") {
+      $.ajax({
+        url: '../../../webAdministracion/beans/manejoSistema/validarSistemaEmpresaAplicativo.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'emp_empresa_1' : $("#emp_empresa_1").val(),'apl_aplicacion_1' : $("#apl_aplicacion_1").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaEmpresaAplicativo').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#dtSistemaRolAplicativo').on('click','.iconDtSistemaRolAplicativoModificar', function (e) {
+    e.preventDefault();
+    window.temp_rla_id_rol_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[0];
+    window.temp_rla_id_aplicacion_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[1];
+    window.temp_rla_estado_2 = dtSistemaRolAplicativo.row($(this).parents('tr').first()).data()[4]
+    $('#rol_rol_2').val(temp_rla_id_rol_2).prop("disabled",true).prop("required",false);
     $.ajax({
-      url: '../../beans/manejoSistema/obtenerOptionUser.php',
+      url: '../../beans/manejoSistema/cargaSistemaRolAplicativo.php',
       type: 'POST',
       dataType: 'html',
-      data:{ 'sys_selec_roles' : $("#sys_selec_roles").val() },
+      data:{'dataSelect':$("#rol_rol_2").val(),'dataEdit':'edit'},
       success: function(result){
-        getApp = JSON.parse(result);
-        var newApp = "";
-        for (var i = 0; i <= getApp.length - 1; i++) {
-          newApp += "<option value='"+getApp[i][0]+"'>"+getApp[i][1]+" - "+getApp[i][2]+"</option>";
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#apl_aplicacion_2").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#apl_aplicacion_2').val(temp_rla_id_aplicacion_2).prop("disabled",true).prop("required",false);
+            $('#rla_estado').val(temp_rla_estado_2);
+            $('#tipo_form_sist_rol_apl').val("Old");
+            $('#myModalSistemaRolAplicativo').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
         }
-        $("select#sys_selec_option").empty(); $("select#sys_selec_option").prepend(newApp);
-        $("h3.passSysRoles").empty(); $("h3.passSysRoles").prepend($("#sys_selec_roles :selected").text());
-        $('#myModalSysRoleOpt').modal('show');
       }
     });
   });
-  $('#formSysOption').validator().on('submit', function (e) {
+  $('#formSistemaRolAplicativo').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
+      if ($('#tipo_form_sist_rol_apl').val() == "Old") {
+        $params = $('#formSistemaRolAplicativo').serialize()+"&rla_id_rol="+temp_rla_id_rol_2+"&rla_id_aplicacion="+temp_rla_id_aplicacion_2;
+      }
+      else {
+        $params = $('#formSistemaRolAplicativo').serialize();
+      }
       $.ajax({
-        url: '../../beans/manejoSistema/saveRoleOption.php',
+        url: '../../beans/manejoSistema/guardarSistemaRolAplicativo.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formSysOption").serialize()+"&sys_selec_roles="+$("#sys_selec_roles").val(),
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaRolAplicativo').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_rol_apl').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaRolAplicativo.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#btnNuevaSistemaRolAplicativo').click( function () {
+    document.getElementById("formSistemaRolAplicativo").reset();
+    $('#tipo_form_sist_rol_apl').val("New");
+    $('#rla_estado').val("1").prop("disabled",true);
+    $('#rol_rol_2').prop("disabled",false).prop("required",true);
+    $('#apl_aplicacion_2').prop("disabled",true).prop("required",true);
+    $('#myModalSistemaRolAplicativo').modal('show');
+  });
+  $('#rol_rol_2').change( function () {
+    if ($("#rol_rol_2").val() != "") {
+      $.ajax({
+        url: '../../beans/manejoSistema/cargaSistemaRolAplicativo.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{'dataSelect':$("#rol_rol_2").val(),'dataEdit':'new'},
         success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              table_sys_id_opt.ajax.reload();
-              $('#myModalSysRoleOpt').modal('hide');
+              $("#apl_aplicacion_2").empty().prepend(result.dataSelect).prop("disabled",false);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1408");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
@@ -697,35 +1290,150 @@ $(document).ready(function() {
       });
     }
   });
-  $('#sys_btn_desvincular_opt').click( function () {
-    if (sys_id_opt != null) {
+  $('#apl_aplicacion_2').change( function () {
+    if ($("#rol_rol_2").val() != "" && $("#apl_aplicacion_2").val() != "") {
       $.ajax({
-        url: '../../beans/manejoSistema/deleteRoleOption.php',
+        url: '../../../webAdministracion/beans/manejoSistema/validarSistemaRolAplicativo.php',
         type: 'POST',
         dataType: 'html',
-        data:{'sys_selec_roles':$("#sys_selec_roles").val(),'sys_id_opt':sys_id_opt },
-        success: function(result){  
+        data:{ 'rol_rol_2' : $("#rol_rol_2").val(),'apl_aplicacion_2' : $("#apl_aplicacion_2").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaRolAplicativo').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#dtSistemaRolOpcion').on('click','.iconDtSistemaRolOpcionModificar', function (e) {
+    e.preventDefault();
+    window.temp_rlo_id_rol_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[0];
+    window.temp_rlo_id_opcion_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[1];
+    window.temp_rlo_estado_3 = dtSistemaRolOpcion.row($(this).parents('tr').first()).data()[5]
+    $('#rol_rol_3').val(temp_rlo_id_rol_3).prop("disabled",true).prop("required",false);
+    $.ajax({
+      url: '../../beans/manejoSistema/cargaSistemaRolOpcion.php',
+      type: 'POST',
+      dataType: 'html',
+      data:{'dataSelect':temp_rlo_id_rol_3,'dataEdit':'edit'},
+      success: function(result){
+        var result = eval('('+result+')');
+        switch (result.message) {
+          case "saveOK":
+            $("#opc_opcion_3").empty().prepend(result.dataSelect).prop("disabled",false);
+            $('#opc_opcion_3').val(temp_rlo_id_opcion_3).prop("disabled",true).prop("required",false);
+            $('#rlo_estado').val(temp_rlo_estado_3);
+            $('#tipo_form_sist_rol_opc').val("Old");
+            $('#myModalSistemaRolOpcion').modal('show');
+            break;
+          default:
+            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+            $('#myModalErrorGeneral').modal('show');
+            break;
+        }
+      }
+    });
+            
+  });
+  $('#formSistemaRolOpcion').validator().on('submit', function (e) {
+    if (!e.isDefaultPrevented()) {
+      e.preventDefault();
+      if ($('#tipo_form_sist_rol_opc').val() == "Old") {
+        $params = $('#formSistemaRolOpcion').serialize()+"&rlo_id_rol="+temp_rlo_id_rol_3+"&rlo_id_opcion="+temp_rlo_id_opcion_3;
+      }
+      else {
+        $params = $('#formSistemaRolOpcion').serialize();
+      }
+      $.ajax({
+        url: '../../beans/manejoSistema/guardarSistemaRolOpcion.php',
+        type: 'POST',
+        dataType: 'html',
+        data:$params,
+        success: function(result){
+          var result = eval('('+result+')');
+          $('#myModalSistemaRolOpcion').modal('hide');
+          switch (result.message) {
+            case "saveOK":
+              $('#tipo_form_sist_rol_opc').val("Old");
+            case "token_csrf_error":
+            case "error_admin_perfil":
+              dtSistemaRolOpcion.ajax.reload();
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
+    }
+  });
+  $('#btnNuevaSistemaRolOpcion').click( function () {
+    document.getElementById("formSistemaRolOpcion").reset();
+    $('#tipo_form_sist_rol_opc').val("New");
+    $('#rlo_estado').val("1").prop("disabled",true);
+    $('#rol_rol_3').prop("disabled",false).prop("required",true);
+    $('#opc_opcion_3').prop("disabled",true).prop("required",true);
+    $('#myModalSistemaRolOpcion').modal('show');
+  });
+  $('#rol_rol_3').change( function () {
+    if ($("#rol_rol_3").val() != "") {
+      $.ajax({
+        url: '../../beans/manejoSistema/cargaSistemaRolOpcion.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{'dataSelect':$("#rol_rol_3").val(),'dataEdit':'new'},
+        success: function(result){
           var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              table_sys_id_opt.ajax.reload();
-              $('#sys_btn_desvincular_opt').prop("disabled", true);
-              var sms_dataModal_1 = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
-              var sms_dataModal_2 = 'Información';
-              var sms_dataModal_3 = 'Desvinculación realizada con éxito.';
-              var sms_dataModal_4 = '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
-              modalGenerico(sms_dataModal_1,sms_dataModal_2,sms_dataModal_3,sms_dataModal_4);
+              $("#opc_opcion_3").empty().prepend(result.dataSelect).prop("disabled",false);
               break;
             default:
-              $("span#idCodErrorGeneral").empty().prepend("1409");
+              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
               break;
           }
         }
       });
     }
-    else{
-      $('#myModalNoSelected').modal('show');
+  });
+  $('#opc_opcion_3').change( function () {
+    if ($("#rol_rol_3").val() != "" && $("#opc_opcion_3").val() != "") {
+      $.ajax({
+        url: '../../../webAdministracion/beans/manejoSistema/validarSistemaRolOpcion.php',
+        type: 'POST',
+        dataType: 'html',
+        data:{ 'rol_rol_3' : $("#rol_rol_3").val(),'opc_opcion_3' : $("#opc_opcion_3").val() },
+        success: function(result){
+          var result = eval('('+result+')');
+          switch (result.message) {
+            case "regNulo":
+              break;
+            case "regRepetido":
+              $('#myModalSistemaRolOpcion').modal('hide');
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            default:
+                $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+                $('#myModalErrorGeneral').modal('show');
+              break;
+          }
+        }
+      });
     }
   });
+  
+
 });

@@ -3,9 +3,9 @@
   $sesion = new sesion();
   $userSystem = $sesion->get("userSystem"); 
   if( $userSystem === false ) { 
-    header("Location: webMain/pages/login");
+    header("Location: webAdministracion/pages/login");
   }
   else {
-    header("Location: webMain/pages/bienvenido");
+    header("Location: webAdministracion/pages/principal");
   }
 ?>

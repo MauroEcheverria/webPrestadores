@@ -1,0 +1,67 @@
+.iconDataTrans {
+	width: 15px;
+	margin-right: 10px;
+}
+.txtDataTrans {
+	font-size: 13px;
+}
+.btn-transaccion {
+	height: 50px;
+  width: 100px;
+  color: #fffbfb;
+  font-size: 12px;
+  font-weight: 500;
+}
+.btn-transaccion:hover {
+	color: #ffffff;
+}
+@media screen and (max-width: 768px) {
+  .btn-transaccion {
+		margin: 3px 0 3px 0;
+	}
+}
+@media screen and (max-width: 576px) {
+  .btn-transaccion-panel {
+		width: 50%;
+	}
+}
+.tabContentTrans{
+	margin-top: 15px;
+}
+@media (min-width: 550px) {
+	.container_transaccion {
+	  max-width: 100% !important;
+	}
+}
+.labelIdentificacion {
+	color: #6c757d; 
+	font-size: 13px;
+	font-weight: bold;
+}
+.dataIdentificacion {
+	color: #6c757d; 
+	font-size: 13px;
+}
+.btn_descartar_item {
+	font-size: 12px;
+  width: auto;
+}
+.dct_table {
+	font-size: 12px;
+}
+#fdt_cantidad {
+	width: 110px;
+  height: 60px;
+  text-align: center;
+}
+.posTotalLabel {
+	font-size: 23px;
+}
+.posTotalCant {
+	font-size: 30px; 
+	margin-top: -20px;
+}
+.detalle_numerico_1 {
+	color: #6c757d; 
+	font-size: 21px; 
+}

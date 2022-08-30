@@ -4,11 +4,17 @@
   position: absolute; 
   width: 100%;
   height: 100%;
-  background-color: #080808;
+  background-color: #2c2c2cb0;
   z-index:999999;
   -moz-opacity: 0.8;
   opacity:.80;
   filter: alpha(opacity=80);
+}
+.solo_main {
+  display: none;
+}
+#loading img{
+  margin-top: 15%;
 }
 .seccionBtnAccion {
   margin: 5px 0 20px 0;
@@ -16,6 +22,11 @@
 .poppupAlert{
   display:none;
   font-size: 13px;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .iconDTicon {
   font-size: 20px;
@@ -29,8 +40,13 @@
   text-align: -webkit-center;
   text-align: -moz-center;
 }
+.derechaContent {
+  text-align: right;
+  text-align: -webkit-right;
+  text-align: -moz-right;
+}
 .container_main {
-  padding-top: 25px;
+  padding: 20px 0 1px 0;
 }
 .centralFooter {
   text-align: center;
@@ -39,7 +55,8 @@
   display: block;
 }
 .btn-dreconstec {
-  width: 150px;
+  width: 140px;
+  font-size: 13px;
 }
 .toggle_dentro_panel {
   margin: 25px 25px 25px 25px;
@@ -47,15 +64,110 @@
 .select2-selection--single {
   height: 38px !important;
   border: 1px solid #ced4da !important;
+  font-size: 12px;
 }
-.select2-selection__rendered {
+/*.select2-selection__rendered {
   font-size: 21px !important;
   font-weight: 600 !important;
-}
+}*/
 .select2-selection__arrow {
   top: 6px !important;
 }
 .help-block,.with-errors{
   font-size: 13px;
   color: #ff6161;
+}
+.num_pass_cambio {
+  font-size: 20px;
+  text-decoration: underline;
+}
+#num_pass_cambio {
+  margin-top: -10px;
+}
+.img_pass_cambio {
+  width: 25px;
+  height: 25px;
+  margin: 2px 10px 0 0;
+}
+@media screen and (max-width: 991px) {
+  #num_pass_cambio {
+    margin-top: 0;
+  }
+}
+.textNoAutorizado {
+  margin-top: 25px;
+  font-size: 18px;
+}
+.imageNoAutorizado {
+  width: 200px;
+}
+.divNoAutorizado {
+  margin-top: 30px;
+}
+.width_100 {
+  width: 100%;
+}
+.tituloColumnasDT{
+  color: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #3c8dbc;
+  padding: 7px;
+}
+.formSelect2,.select2-container {
+  width: 100% !important;
+}
+.cursorPointerDT {
+  cursor: pointer;
+  cursor: hand;
+}
+.invalid_pass {
+  background:url(../../dist/img/dt_error.png) no-repeat 0 50%;
+  padding-left:22px;
+  line-height:24px;
+  color:#ec3f41;
+  text-align: left;
+}
+.valid_pass {
+  background:url(../../dist/img/dt_visto_2.png) no-repeat 0 50%;
+  padding-left:22px;
+  line-height:24px;
+  color:#3a7d34;
+  text-align: left;
+}
+.main-sidebar, .sidebar, .nav-sidebar {
+  font-size: 12px;
+}
+.cell-border, .dataTable, .no-footer {
+  font-size: 12px;
+}
+.inputOlvidoPass {
+  text-align: center;
+  font-size: 23px;
+  font-weight: bold;
+}
+.error-page {
+  margin: 70px auto 0;
+  width: 600px;
+}
+.error-page .headline {
+  font-size: 78px;
+  font-weight: 300;
+}
+@media screen and (max-width: 768px) {
+  .error-page {
+    width: 90%;
+  }
+}
+b {
+  font-size: 13px;
+}
+.dct_pestanas {
+  font-size: 13px;
+}
+.control-label {
+  font-size: 13px !important;
+}
+.form-control {
+  font-size: 12px !important;
 }
