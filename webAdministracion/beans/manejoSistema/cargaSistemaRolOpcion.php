@@ -8,13 +8,25 @@
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
 
-    $sql_1="SELECT opc_id_opcion,CONCAT((SELECT apl.apl_aplicacion 
-        FROM dct_sistema_tbl_aplicacion apl 
-        WHERE apl.apl_id_aplicacion = opc_id_aplicacion),' - ',opc_opcion) opc_opcion 
+    if ($_POST["dataEdit"] == "new") {
+      $sql_1="SELECT opc_id_opcion,CONCAT((SELECT apl.apl_aplicacion 
+          FROM dct_sistema_tbl_aplicacion apl 
+          WHERE apl.apl_id_aplicacion = opc_id_aplicacion),' - ',opc_opcion) opc_opcion 
           FROM dct_sistema_tbl_opcion
-          WHERE opc_id_opcion  NOT IN (SELECT rlo_id_opcion 
+          WHERE opc_id_opcion NOT IN (SELECT rlo_id_opcion 
           FROM dct_sistema_tbl_rol_opcion
           WHERE rlo_id_rol  = :rlo_id_rol)";
+    }
+    else {
+      $sql_1="SELECT opc_id_opcion,CONCAT((SELECT apl.apl_aplicacion 
+          FROM dct_sistema_tbl_aplicacion apl 
+          WHERE apl.apl_id_aplicacion = opc_id_aplicacion),' - ',opc_opcion) opc_opcion 
+          FROM dct_sistema_tbl_opcion
+          WHERE opc_id_opcion IN (SELECT rlo_id_opcion 
+          FROM dct_sistema_tbl_rol_opcion
+          WHERE rlo_id_rol  = :rlo_id_rol)";
+    }
+
     $query_1=$pdo->prepare($sql_1);
     $query_1->bindValue(':rlo_id_rol',cleanData("noLimite",0,"noMayuscula",$_POST["dataSelect"]),PDO::PARAM_INT); 
     $query_1->execute();

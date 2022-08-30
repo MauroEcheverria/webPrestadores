@@ -3,7 +3,6 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
-	//include_once('../../../plugins/facturacionElectronica/generarXML.php');
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
@@ -24,7 +23,11 @@
 	    $data_comprobante["cli_identificacion"] = cleanData("siLimite",13,"noMayuscula",$_POST["cli_identificacion"]);
 	    $data_comprobante["fop_id_forma_pago"] = cleanData("siLimite",2,"noMayuscula",$_POST["fop_id_forma_pago"]);
 
-			$sql_empresa="SELECT emp_id_empresa,emp_ruc,emp_empresa,emp_nom_comercial,emp_direccion_matriz,emp_contrib_especial,emp_obli_contabilidad,em_logo,wsr_tipo_ambiente,em_tipo_emision,em_archivo_fact_elec,em_pass_fct_elec
+			$sql_empresa="SELECT emp_id_empresa,emp_ruc,emp_empresa,
+													emp_nom_comercial,emp_direccion_matriz,
+													emp_contrib_especial,emp_obli_contabilidad,
+													em_logo,wsr_tipo_ambiente,em_tipo_emision,
+													em_archivo_fact_elec,em_pass_fct_elec
 										FROM dct_sistema_tbl_empresa 
 										WHERE emp_id_empresa = (SELECT usr_id_empresa
 					          FROM dct_sistema_tbl_usuario
@@ -48,14 +51,15 @@
 
 	    if ($data_comprobante["em_archivo_fact_elec"] != "") {
 
-	    	$sql_serial="SELECT ser_factura
+	    	$sql_serial="SELECT ser_factura_serie,ser_factura_cod_num
 										FROM dct_pos_tbl_empresa_serial 
 										WHERE emp_id_empresa = :emp_id_empresa;";
 		    $query_serial=$pdo->prepare($sql_serial);
 		    $query_serial->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
 		    $query_serial->execute();
 		    $row_serial = $query_serial->fetch(\PDO::FETCH_ASSOC);
-	    	$data_comprobante["serial_comprobante"] = $row_serial["ser_factura"];
+	    	$data_comprobante["serial_comprobante"] = $row_serial["ser_factura_serie"];
+	    	$data_comprobante["cod_num_comprobante"] = $row_serial["ser_factura_cod_num"];
 
 	    	$sql_cliente="SELECT cli_id_cliente,cli_tipo_identificacion,cli_identificacion,cli_nombres,cli_direccion,cli_telefono,cli_placa
 											FROM dct_pos_tbl_cientes 
@@ -68,21 +72,20 @@
 
 	    	if ($query_cliente->rowCount() == 1) {
 
-	    	$row_cliente = $query_cliente->fetch(\PDO::FETCH_ASSOC);
-	    	$data_comprobante["cli_id_cliente"] = $row_cliente["cli_id_cliente"];
-	    	$data_comprobante["cli_tipo_identificacion"] = $row_cliente["cli_tipo_identificacion"];
-	    	$data_comprobante["cli_identificacion"] = $row_cliente["cli_identificacion"];
-	    	$data_comprobante["cli_nombres"] = $row_cliente["cli_nombres"];
-	    	$data_comprobante["cli_direccion"] = $row_cliente["cli_direccion"];
-	    	$data_comprobante["cli_telefono"] = $row_cliente["cli_telefono"];
-	    	$data_comprobante["cli_placa"] = $row_cliente["cli_placa"];
+		    	$row_cliente = $query_cliente->fetch(\PDO::FETCH_ASSOC);
+		    	$data_comprobante["cli_id_cliente"] = $row_cliente["cli_id_cliente"];
+		    	$data_comprobante["cli_tipo_identificacion"] = $row_cliente["cli_tipo_identificacion"];
+		    	$data_comprobante["cli_identificacion"] = $row_cliente["cli_identificacion"];
+		    	$data_comprobante["cli_nombres"] = $row_cliente["cli_nombres"];
+		    	$data_comprobante["cli_direccion"] = $row_cliente["cli_direccion"];
+		    	$data_comprobante["cli_telefono"] = $row_cliente["cli_telefono"];
+		    	$data_comprobante["cli_placa"] = $row_cliente["cli_placa"];
 
 	    		$sql_trans_facturacion="SELECT ftr_id_factura_transaccion
 																	FROM dct_pos_tbl_factura_transaccion 
 																	WHERE usr_cod_usuario = :usr_cod_usuario
 																	AND emp_id_empresa = :emp_id_empresa
 																	AND ftr_estado_transaccion = 'TMP'
-																	AND ftr_estado = 1
 																	LIMIT 1;";
 			    $query_trans_facturacion=$pdo->prepare($sql_trans_facturacion);
 			    $query_trans_facturacion->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
@@ -127,7 +130,7 @@
 						$data_comprobante["sri_clave_acceso_serie_establecimiento"] = str_pad($data_comprobante["est_id_empresa_establecimiento"],'3','0',STR_PAD_LEFT);
 						$data_comprobante["sri_clave_acceso_serie_punto_emision"] = str_pad($data_comprobante["epe_id_empresa_punto_emision"],'3','0',STR_PAD_LEFT);
 						$data_comprobante["sri_clave_acceso_secuencial"] = str_pad($data_comprobante["serial_comprobante"],'9','0',STR_PAD_LEFT);
-						$data_comprobante["sri_clave_acceso_cod_numerico"] = str_pad($data_comprobante["ftr_id_factura_transaccion"],'8','0',STR_PAD_LEFT);
+						$data_comprobante["sri_clave_acceso_cod_numerico"] = str_pad($data_comprobante["cod_num_comprobante"],'8','0',STR_PAD_LEFT);
 						$data_comprobante["sri_clave_acceso_tipo_emision"] = $data_comprobante["em_tipo_emision"];
 						$data_comprobante["sri_clave_acceso_verificador"] = validar_clave_sri($data_comprobante["sri_clave_acceso_fecha_emison"].
 		                                                            $data_comprobante["sri_clave_acceso_tipo_comprobante"].
@@ -149,13 +152,12 @@
 												                            $data_comprobante["sri_clave_acceso_tipo_emision"].
 												                            $data_comprobante["sri_clave_acceso_verificador"];
 
-						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, cli_id_cliente, ftr_id_factura_transaccion, cla_fecha_emision, 
+						$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, ftr_id_factura_transaccion, cla_fecha_emision, 
 							cla_tipo_comprobante, cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, 
 							cla_tipo_emision, cla_dig_verificador, cla_estado_comprobante, cla_estado, cla_usuario_creacion, cla_fecha_creacion, cla_ip_creacion, cla_sri_clave_acceso) 
-						VALUES (:emp_id_empresa, :cli_id_cliente, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion, :cla_sri_clave_acceso);";
+						VALUES (:emp_id_empresa, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion, :cla_sri_clave_acceso);";
 				    $query_clave_acceso=$pdo->prepare($sql_clave_acceso);
 				    $query_clave_acceso->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
-				    $query_clave_acceso->bindValue(':cli_id_cliente',$data_comprobante["cli_id_cliente"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
 				    $query_clave_acceso->bindValue(':cla_fecha_emision',$data_comprobante["sri_clave_acceso_fecha_emison"],PDO::PARAM_STR);
 				    $query_clave_acceso->bindValue(':cla_tipo_comprobante',$data_comprobante["sri_clave_acceso_tipo_comprobante"],PDO::PARAM_STR);
@@ -173,14 +175,16 @@
 				    $query_clave_acceso->execute();
 
 				    $sql_serial_facturacion="UPDATE dct_pos_tbl_empresa_serial 
-																    SET ser_factura = :ser_factura,
+																    SET ser_factura_serie = :ser_factura_serie,
+																    		ser_factura_cod_num = :ser_factura_cod_num,
 																		    ser_usuario_modificacion=:ser_usuario_modificacion,
 																	   		ser_fecha_modificacion=now(),
 																	   		ser_ip_modificacion=:ser_ip_modificacion
 																    WHERE emp_id_empresa = :emp_id_empresa;";
 						$query_serial_facturacion=$pdo->prepare($sql_serial_facturacion);
 						$query_serial_facturacion->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
-						$query_serial_facturacion->bindValue(':ser_factura',$data_comprobante["serial_comprobante"]+1,PDO::PARAM_STR);
+						$query_serial_facturacion->bindValue(':ser_factura_serie',$data_comprobante["serial_comprobante"]+1,PDO::PARAM_STR);
+						$query_serial_facturacion->bindValue(':ser_factura_cod_num',$data_comprobante["cod_num_comprobante"]+1,PDO::PARAM_STR);
 						$query_serial_facturacion->bindValue(':ser_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
 						$query_serial_facturacion->bindValue(':ser_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 						$query_serial_facturacion->execute();

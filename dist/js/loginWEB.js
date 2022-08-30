@@ -122,6 +122,7 @@ $(document).ready(function() {
         data:$("#formReestaPass").serialize(),
         success: function(result){
           var result = eval('('+result+')');
+          $('#myModalOlvidoContrasena').modal('hide');
           document.getElementById('formReestaPass').reset();
           switch (result.message) {
             case "saveOK":
@@ -158,6 +159,9 @@ $(document).ready(function() {
                 modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4);
               }
               break;
+            case "token_csrf_error":
+              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
             default:
               $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
               $('#myModalErrorGeneral').modal('show');
@@ -167,9 +171,9 @@ $(document).ready(function() {
       });
     }
   });
-  $('#idModalRegistro').click( function (e) {
+  $('#idOlvidoContrasena').click( function (e) {
     e.preventDefault();
-    $('#myModalRegistro').modal('show');
+    $('#myModalOlvidoContrasena').modal('show');
   });
   var flagEstatusPass = 0;
   $('#passPassNew').keyup(function() {

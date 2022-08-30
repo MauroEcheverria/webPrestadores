@@ -8,11 +8,21 @@
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
 
-    $sql_1="SELECT apl_id_aplicacion ,apl_aplicacion 
-          FROM dct_sistema_tbl_aplicacion
-          WHERE apl_id_aplicacion  NOT IN (SELECT ape_id_aplicacion 
-          FROM dct_sistema_tbl_aplicacion_empresa
-          WHERE ape_id_empresa = :ape_id_empresa)";
+    if ($_POST["dataEdit"] == "new") {
+      $sql_1="SELECT apl_id_aplicacion ,apl_aplicacion 
+            FROM dct_sistema_tbl_aplicacion
+            WHERE apl_id_aplicacion NOT IN (SELECT ape_id_aplicacion 
+            FROM dct_sistema_tbl_aplicacion_empresa
+            WHERE ape_id_empresa = :ape_id_empresa)";
+    }
+    else {
+      $sql_1="SELECT apl_id_aplicacion ,apl_aplicacion 
+            FROM dct_sistema_tbl_aplicacion
+            WHERE apl_id_aplicacion IN (SELECT ape_id_aplicacion 
+            FROM dct_sistema_tbl_aplicacion_empresa
+            WHERE ape_id_empresa = :ape_id_empresa)";
+    }
+
     $query_1=$pdo->prepare($sql_1);
     $query_1->bindValue(':ape_id_empresa',cleanData("noLimite",0,"noMayuscula",$_POST["dataSelect"]),PDO::PARAM_INT); 
     $query_1->execute();

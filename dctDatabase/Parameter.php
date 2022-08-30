@@ -12,15 +12,25 @@
 	$fechaActual_8 = $hora->format("H:i");
 	$fechaActual_9 = $hora->format("Y-m-d H:i:s.u");
 	/****************** Mail ************/
+
 	$mailSMTP = 'tls';
 	$mailPort = 587;
+	
 	/*$mailSMTP = 'ssl';
 	$mailPort = 465;*/
-	$hostSince = "mail.dreconstec.com";
+
+	/*$hostSince = "mail.dreconstec.com";
     $passSince = "?}24zK&m;_UU";
     $mailSince = "app.web@dreconstec.com";
 	$deCorreo = "app.web@dreconstec.com";
+	$nombreSetFrom = "APP Dreconstec";*/
+
+	$hostSince = "smtp.office365.com";
+    $passSince = "Vinicio1984";
+    $mailSince = "app.ceibos@iess.gob.ec";
+	$deCorreo = "app.ceibos@iess.gob.ec";
 	$nombreSetFrom = "APP Dreconstec";
+
 	/****************** TOKEN ************/
 	$token_csrf = bin2hex(openssl_random_pseudo_bytes(32));
 	/****************** ERROR REPORTING *************************/
@@ -35,7 +45,7 @@
 	// 45 min = 2700 seg
 	$param_timeout = 2700;
 	/****************** VERSIONES CSS Y JS *************************/
-	$version_css_js = "?dct_1.1";
+	$version_css_js = "?dct_1.0";
 	/****************** REESTABLECIMIENTO PASS *************************/
 	$reestablecimeinto_pass = 90;
 	/****************** URL ACTUAL *************************/
