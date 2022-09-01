@@ -72,8 +72,6 @@
 		$data_result["tipo_identificacion"] = $rpta_3;
 		$data_result["productos_servicios"] = $rpta_4;
 		if ( $query->rowCount() == 1 ) {
-
-
 			$sql_seg_fas="SELECT fd.fdt_id_factura_detalle, fd.prs_id_prod_serv, fd.fdt_cantidad, ps.prs_codigo_item, 
 	                  ps.prs_descripcion_item, ps.prs_valor_unitario, ps.prs_descuento, ps.prs_iva_cod_impuesto, ps.prs_iva_cod_tarifa, 
 	                  ps.prs_ice_cod_impuesto, ps.prs_ice_cod_tarifa, ps.prs_irbpnr_cod_impuesto, ps.prs_irbpnr_cod_tarifa
@@ -85,7 +83,7 @@
 	                  AND ps.emp_id_empresa = :emp_id_empresa
 	                  ORDER BY fd.fdt_fecha_creacion";
 	    $query_seg_fas=$pdo->prepare($sql_seg_fas);
-	    $query_seg_fas->bindValue(':ftr_id_factura_transaccion',$_SESSION["id_factura_transaccion"],PDO::PARAM_INT);
+	    $query_seg_fas->bindValue(':ftr_id_factura_transaccion',$row["ftr_id_factura_transaccion"],PDO::PARAM_INT);
 	    $query_seg_fas->bindValue(':emp_id_empresa',$dataSesion["usr_id_empresa"],PDO::PARAM_INT);
 	    $query_seg_fas->execute();
 	    $row_seg_fas = $query_seg_fas->fetchAll();
@@ -104,12 +102,10 @@
 	    $data_tabla .= '</table>';
 
 	    $data_result["data_tabla"] = $data_tabla;
-
-
-			$_SESSION["id_factura_transaccion"] = $row["ftr_id_factura_transaccion"];
 			$data_result["data_row"] = $row;
 			$data_result["message"] = "si_transaccion";
 			$data_result["numLineaCodigo"] = __LINE__;
+			$_SESSION["id_factura_transaccion"] = $row["ftr_id_factura_transaccion"];
 		}
 		else {
 			$data_result["message"] = "no_transaccion";

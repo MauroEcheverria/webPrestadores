@@ -671,33 +671,6 @@ $(document).ready(function() {
       });
     }
   });
-  $('#prs_id_prod_serv').change( function () {
-    if ($("#prs_id_prod_serv").val() != "") {
-      $.ajax({
-        url: '../../beans/POSTransacciones/validarItemComprobante.php',
-        type: 'POST',
-        dataType: 'html',
-        data:{ 'prs_id_prod_serv' : $("#prs_id_prod_serv").val() },
-        success: function(result){
-          var result = eval('('+result+')');
-          $("#prs_id_prod_serv").val("").trigger("change");
-          switch (result.message) {
-             case "saveOK":
-              document.getElementById("formItemComprobante").reset();
-              $('#myModalItemComprobante').modal('show');
-              break;
-            case "userError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    }
-  });
   $('#formItemComprobante').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
@@ -710,7 +683,6 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              $('#myModalItemComprobante').modal('hide');
               renderizarProductoServicio();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
