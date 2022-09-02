@@ -17,6 +17,32 @@ function renderizarProductoServicio() {
             var idClicked = this.id;
             inactivarProductoServicio($('#'+idClicked+' span').text());
           });
+          $('.fdt_cantidad_tbl').change(function() {
+            var idClicked = this.id;
+            idProdServ = idClicked.split("_");
+            actualizarProductoServicio(idProdServ[1],$("#"+idClicked).val());
+          });
+          break;
+        default:
+          alert("Error al realizar la transacción solicitada.");
+          break;
+      }
+    }
+  });
+}
+function actualizarProductoServicio(fdt_id_factura_detalle,fdt_cantidad_tbl) {
+  $.ajax({
+    url: '../../beans/POSTransacciones/actualizarProductoServicio.php',
+    type: 'POST',
+    dataType: 'html',
+    data: { 
+      'fdt_id_factura_detalle' : fdt_id_factura_detalle, 
+      'fdt_cantidad_tbl' : fdt_cantidad_tbl},
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          renderizarProductoServicio();
           break;
         default:
           alert("Error al realizar la transacción solicitada.");
@@ -43,6 +69,25 @@ function inactivarProductoServicio(fdt_id_factura_detalle) {
       }
     }
   });
+}
+
+function focusAnimado (idElemento) {
+  setParentTransition('#'+idElemento, 'all', '0s', 'ease', function() {
+      $('#'+idElemento).addClass('citaSeleccionada');
+  });
+  setTimeout(function() {
+      setParentTransition('#'+idElemento, 'all', '1s', 'ease', function() {
+          $('#'+idElemento).removeClass('citaSeleccionada');
+      });
+  }); 
+  $('#'+idElemento).focus().focusout();
+}
+function setParentTransition(id, prop, delay, style, callback) {
+    $(id).css({'-webkit-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'-moz-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'-o-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'transition' : prop + ' ' + delay + ' ' + style});
+    callback();
 }
 $(document).ready(function() {
 
@@ -680,11 +725,15 @@ $(document).ready(function() {
         dataType: 'html',
         data:$("#formItemComprobante").serialize(),
         success: function(result){
-        var result = eval('('+result+')');
+          var result = eval('('+result+')');
+          $("#prs_id_prod_serv").val("").trigger("change");
+          document.getElementById("formItemComprobante").reset();
           switch (result.message) {
             case "saveOK":
               renderizarProductoServicio();
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            case "itemRegistrado":
+              focusAnimado("itemCant_"+result.id_item);
               break;
             case "token_csrf_error":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

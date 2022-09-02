@@ -80,7 +80,7 @@
       $data_tabla .= '<tr>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["prs_codigo_item"].'</td>';
       $data_tabla .= '<td>'.$row_seg_fas["prs_descripcion_item"].'</td>';
-      $data_tabla .= '<td align="center">'.$row_seg_fas["fdt_cantidad"].'</td>';
+      $data_tabla .= '<td align="center"><input type="number" class="form-control fdt_cantidad_tbl" name="fdt_cantidad_tbl" id="itemCant_'.$row_seg_fas["fdt_id_factura_detalle"].'" value="'.$row_seg_fas["fdt_cantidad"].'"></td>';
       $data_tabla .= '<td align="right">'.$row_seg_fas["prs_valor_unitario"].'</td>';
       $data_tabla .= '<td align="right">'.$row_seg_fas["prs_descuento"].'%</td>';
       $data_tabla .= '<td align="right">'.$pos_trans_sub_total.'</td>';

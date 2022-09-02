@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+                        <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Guardar <br><i class="fas fa-save"></i></button>
                       </div>
                     </div>
                   </div> 
@@ -189,7 +189,7 @@
                   </div>
                 </div>
                 <div class="modal-footer centralFooter">
-                  <button type="submit" class="btn btn-block bg-gradient-success btn-lg" style="width: 200PX;">Enviar Pago</button>
+                  <button type="submit" class="btn btn-success" style="width: 200PX;">Enviar Pago</button>
                 </div>
               </div>
             </div>
