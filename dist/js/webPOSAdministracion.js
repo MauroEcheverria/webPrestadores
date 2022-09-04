@@ -11,10 +11,9 @@ function fnSistemaEstablecimiento() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [1,2,3,4,5,6,7,8]
+        aTargets: [0]
       },
       {
-        //"targets": [0,9],
         "targets": [0,1],
         "visible": false,
         "searchable": false
@@ -128,11 +127,9 @@ $('#btnNuevoEstablecimiento').click( function () {
         data:$params+"&chkMatriz="+chkMatriz,
         success: function(result){
           var result = eval('('+result+')');
-          if (result.message !== 'error_negocio')
-          {
-              $('#myModalEstablecimiento').modal('hide');
+          if (result.message !== 'error_negocio') {
+            $('#myModalEstablecimiento').modal('hide');
           }
-            
           switch (result.message) {
             case "saveOK":
               $('#tipo_form_est').val("Old");

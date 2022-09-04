@@ -22,50 +22,47 @@ function administracion($pdo, $dataSesion) {
     ?>
     <div id="appAdministrarEstablecimiento" class="appAdministrarEstablecimiento"></div>
     <div class="content-wrapper">
-        <section class="content">
-            <div class="container container_main">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="panel-title"><b>Administración</b></span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Establecimientos</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Puntos de Emisión</a>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
-                                <div class="divPanelTogglable">
-                                    <div class="toggle_dentro_panel">
-                                        <div class="seccionBtnAccion">
-                                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoEstablecimiento">Crear</button>
-                                        </div>
-                                        <table id="dtSistemaEstablecimiento" class="cell-border" cellspacing="0" width="100%"></table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
-                                <div class="divPanelTogglable">
-                                    <div class="toggle_dentro_panel">
-                                        <div class="seccionBtnAccion">
-                                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
-                                        </div>
-                                        <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
+      <section class="content">
+        <div class="container container_main">
+          <div class="card">
+            <div class="card-header">
+                <span class="panel-title"><b>Administración</b></span>
             </div>
-        </section>
+            <div class="card-body">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Establecimientos</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Puntos de Emisión</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
+                  <div class="divPanelTogglable">
+                    <div class="toggle_dentro_panel">
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoEstablecimiento">Crear</button>
+                      </div>
+                      <table id="dtSistemaEstablecimiento" class="cell-border" cellspacing="0" width="100%"></table>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
+                  <div class="divPanelTogglable">
+                    <div class="toggle_dentro_panel">
+                      <div class="seccionBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
+                      </div>
+                      <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div class="modal fade" id="myModalEstablecimiento" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg modalLogin">
@@ -105,10 +102,7 @@ function administracion($pdo, $dataSesion) {
                                     </select>
                                     <div class="help-block with-errors"></div>
                                   </div>
-
-
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="slcEmpresa " class="control-label">Empresa</label>
@@ -140,10 +134,8 @@ function administracion($pdo, $dataSesion) {
             </div>
         </div>
     </div>
-
-
-    <?php
+<?php
     modalViews();
     template_footer($pdo, $dataSesion, $js_dreconstec);
-}
+  }
 ?>
