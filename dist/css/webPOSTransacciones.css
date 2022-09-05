@@ -76,3 +76,8 @@
   font-weight: bold;
   text-align: center;
 }
+.citaSeleccionada {
+ 	border: 3px solid #00838a!important; 
+ 	background-color: #00f3ff!important;
+ 	font-size: 21px
+}

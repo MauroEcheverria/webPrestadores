@@ -145,7 +145,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text text-center text-muted posTotalLabel">Total</span>
                         <span class="info-box-number text-center text-muted mb-0 posTotalCant">
-                        $ <span id="posTransComprobante">0,00</span>
+                        $ <span id="pos_total_comprobante">0,00</span>
                         </span>
                       </div>
                     </div>
@@ -155,28 +155,25 @@
                 <div id="idTablaProductoServicio"></div>
                 <div style="text-align: right;">
                   <div>
+                    <span class="detalle_numerico_1">Base imponible <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posBaseImpIva_diff">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="posBaseImpIva_0">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="posBaseImpIva_6">0.00</span>
+                  </div>
+                  <div>
+                    <span class="detalle_numerico_1">Base imponible excento IVA: </span><span class="detalle_numerico_2" id="posBaseImpIva_7">0.00</span>
+                  </div>
+                  <div>
                     <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="posTotalDescuento">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Subtotal 0%: </span><span class="detalle_numerico_2" id="posSubTotalIva_0">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal 12%: </span><span class="detalle_numerico_2" id="posSubTotalIva_2">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal 14%: </span><span class="detalle_numerico_2" id="posSubTotalIva_3">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal No sujeto IVA: </span><span class="detalle_numerico_2" id="posSubTotalIva_6">1530.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal Excento IVA: </span><span class="detalle_numerico_2" id="posSubTotalIva_7">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posSubTotalIva_8">0.00</span>
+                    <span class="detalle_numerico_1">Subtotal: </span><span class="detalle_numerico_2" id="posSubTotal">0.00</span>
                   </div>  
                   <div>
-                    <span class="detalle_numerico_1">IVA <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posTotalImpIva">0.00</span>
+                    <span class="detalle_numerico_1">IVA: </span><span class="detalle_numerico_2" id="posTotalImpIva">0.00</span>
                   </div>
                   <div>
                     <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="posTotalImpIce">0.00</span>

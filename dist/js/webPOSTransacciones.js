@@ -8,7 +8,25 @@ function renderizarProductoServicio() {
       switch (result.message) {
         case "saveOK":
           $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
-          $("#posTransComprobante").empty().prepend(result.total_temp);
+
+
+
+          $("#pos_total_comprobante").empty().prepend(result.pos_total_comprobante);
+
+
+          $data_result["pos_total_descuento"] = $pos_total_descuento;
+          $data_result["pos_base_imp_diff"] = $pos_base_imp_iva_12 + $pos_base_imp_iva_14 + $pos_base_imp_iva_diferenciado;
+          $data_result["pos_base_imp_iva_cero"] = $pos_base_imp_iva_cero;
+          $data_result["pos_base_imp_iva_no_sujeto"] = $pos_base_imp_iva_no_sujeto;
+          $data_result["pos_base_imp_iva_exento"] = $pos_base_imp_iva_exento;
+          $data_result["pos_total_sub_total"] = $pos_total_sub_total;
+          $data_result["pos_total_comprobante"] = $pos_total_sub_total + $data_result["iva_temp"];
+
+
+
+
+
+          
           $('.refDetalleItemProceso').click(function() {
             var idClicked = this.id;
             alert("Se visualizará el detalle del Ítem: "+idClicked);
