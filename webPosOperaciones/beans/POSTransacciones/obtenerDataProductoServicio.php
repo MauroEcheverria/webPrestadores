@@ -49,6 +49,7 @@
     $pos_calc_iva_12 = 0;
     $pos_calc_iva_14 = 0;
     $pos_calc_iva_diferenciado = 0;
+    $pos_porcentaje_iva = 0;
 
     $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Descuento</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
@@ -67,10 +68,12 @@
         case '2':
           $pos_base_imp_iva_12 += $pos_trans_sub_total;
           $pos_calc_iva_12 += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_iva"] / 100;
+          $pos_porcentaje_iva = $row_seg_fas["trf_porcentaje_iva"];
           break;
         case '3':
           $pos_base_imp_iva_14 += $pos_trans_sub_total;
           $pos_calc_iva_14 += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_iva"] / 100;
+          $pos_porcentaje_iva = $row_seg_fas["trf_porcentaje_iva"];
           break;
         case '6':
           $pos_base_imp_iva_no_sujeto += $pos_trans_sub_total;
@@ -81,6 +84,7 @@
         case '8':
           $pos_base_imp_iva_diferenciado += $pos_trans_sub_total;
           $pos_calc_iva_diferenciado += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_iva"] / 100;
+          $pos_porcentaje_iva = $row_seg_fas["trf_porcentaje_iva"];
           break;
       }
 
@@ -98,18 +102,24 @@
     
     if($query_seg_fas) {
 
-      $data_result["pos_base_imp_12"] = $pos_base_imp_iva_12;
-      $data_result["pos_base_imp_14"] = $pos_base_imp_iva_14;
-      $data_result["pos_base_imp_diff"] = $pos_base_imp_iva_diferenciado;
+      $data_result["pos_base_imp_diff"] = $pos_base_imp_iva_12 + $pos_base_imp_iva_14 + $pos_base_imp_iva_diferenciado;
       $data_result["pos_base_imp_iva_cero"] = $pos_base_imp_iva_cero;
       $data_result["pos_base_imp_iva_no_sujeto"] = $pos_base_imp_iva_no_sujeto;
       $data_result["pos_base_imp_iva_exento"] = $pos_base_imp_iva_exento;
-      $data_result["pos_total_iva_diff"] = $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
+
+      if ($pos_porcentaje_iva != 0) {
+        $data_result["pos_porcentaje_iva"] = $pos_porcentaje_iva;
+      }
+      else {
+        $data_result["pos_porcentaje_iva"] = 12;
+      }
+      $data_result["pos_total_iva"] = $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
+
       $data_result["pos_total_ice"] = 0;
       $data_result["pos_total_irbpnr"] = 0;
       $data_result["pos_total_descuento"] = $pos_total_descuento;
       $data_result["pos_total_sub_total"] = $pos_total_sub_total;
-      $data_result["pos_total_comprobante"] = $pos_total_sub_total;
+      $data_result["pos_total_comprobante"] = $pos_total_sub_total + $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
 
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";

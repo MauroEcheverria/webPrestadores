@@ -145,7 +145,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text text-center text-muted posTotalLabel">Total</span>
                         <span class="info-box-number text-center text-muted mb-0 posTotalCant">
-                        $ <span id="pos_total_comprobante">0,00</span>
+                        $ <span id="pos_total_comprobante_1">0,00</span>
                         </span>
                       </div>
                     </div>
@@ -155,34 +155,34 @@
                 <div id="idTablaProductoServicio"></div>
                 <div style="text-align: right;">
                   <div>
-                    <span class="detalle_numerico_1">Base imponible <span id="posTipoIva"></span>%: </span><span class="detalle_numerico_2" id="posBaseImpIva_diff">0.00</span>
+                    <span class="detalle_numerico_1">Base imponible <span id="pos_porcentaje_iva"></span>%: </span><span class="detalle_numerico_2" id="pos_base_imp_diff">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="posBaseImpIva_0">0.00</span>
+                    <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_cero">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="posBaseImpIva_6">0.00</span>
+                    <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_no_sujeto">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Base imponible excento IVA: </span><span class="detalle_numerico_2" id="posBaseImpIva_7">0.00</span>
+                    <span class="detalle_numerico_1">Base imponible excento IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_exento">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="posTotalDescuento">0.00</span>
+                    <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="pos_total_descuento">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Subtotal: </span><span class="detalle_numerico_2" id="posSubTotal">0.00</span>
+                    <span class="detalle_numerico_1">Subtotal: </span><span class="detalle_numerico_2" id="pos_total_sub_total">0.00</span>
                   </div>  
                   <div>
-                    <span class="detalle_numerico_1">IVA: </span><span class="detalle_numerico_2" id="posTotalImpIva">0.00</span>
+                    <span class="detalle_numerico_1">IVA: </span><span class="detalle_numerico_2" id="pos_total_iva">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="posTotalImpIce">0.00</span>
+                    <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="pos_total_ice">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">IRBPNR: </span><span class="detalle_numerico_2" id="posTotalImpIrbpnr">0.00</span>
+                    <span class="detalle_numerico_1">IRBPNR: </span><span class="detalle_numerico_2" id="pos_total_irbpnr">0.00</span>
                   </div>
                   <div>
-                    <span class="detalle_numerico_1">Valor Total: </span><span class="detalle_numerico_2" id="posValorTotal">0.00</span>
+                    <span class="detalle_numerico_1">Valor Total: </span><span class="detalle_numerico_2" id="pos_total_comprobante_2">0.00</span>
                   </div>
                 </div>
                 <div class="modal-footer centralFooter">

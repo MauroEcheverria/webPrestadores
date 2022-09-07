@@ -9,23 +9,17 @@ function renderizarProductoServicio() {
         case "saveOK":
           $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
 
-
-
-          $("#pos_total_comprobante").empty().prepend(result.pos_total_comprobante);
-
-
-          $data_result["pos_total_descuento"] = $pos_total_descuento;
-          $data_result["pos_base_imp_diff"] = $pos_base_imp_iva_12 + $pos_base_imp_iva_14 + $pos_base_imp_iva_diferenciado;
-          $data_result["pos_base_imp_iva_cero"] = $pos_base_imp_iva_cero;
-          $data_result["pos_base_imp_iva_no_sujeto"] = $pos_base_imp_iva_no_sujeto;
-          $data_result["pos_base_imp_iva_exento"] = $pos_base_imp_iva_exento;
-          $data_result["pos_total_sub_total"] = $pos_total_sub_total;
-          $data_result["pos_total_comprobante"] = $pos_total_sub_total + $data_result["iva_temp"];
-
-
-
-
-
+          $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
+          $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
+          $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
+          $("#pos_base_imp_iva_cero").empty().prepend(result.pos_base_imp_iva_cero);
+          $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
+          $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
+          $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
+          $("#pos_total_sub_total").empty().prepend(result.pos_total_sub_total);
+          $("#pos_total_iva").empty().prepend(result.pos_total_iva);
+          $("#pos_total_ice").empty().prepend(result.pos_total_ice);
+          $("#pos_total_irbpnr").empty().prepend(result.pos_total_irbpnr);
           
           $('.refDetalleItemProceso').click(function() {
             var idClicked = this.id;
