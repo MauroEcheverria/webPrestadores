@@ -52,10 +52,11 @@ function administracion($pdo, $dataSesion) {
                             <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
                                 <div class="divPanelTogglable">
                                     <div class="toggle_dentro_panel">
+                                        
                                         <div class="seccionBtnAccion">
                                             <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
                                         </div>
-                                        <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
+                                        <table id="dtPuntosEmision" class="cell-border" cellspacing="0" width="100%"></table>
                                     </div>
                                 </div>
                             </div>
@@ -96,9 +97,9 @@ function administracion($pdo, $dataSesion) {
                                     <input type="text" class="form-control" id="estNombre" name="estNombre" maxlength="300" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group camposVisibles">
                                     <label for="slcEstado" class="control-label">Estado</label>
-                                    <select name="slcEstado" id="slcEstado" class="form-control" required>
+                                    <select name="slcEstado" id="slcEstado" class="form-control camposVisibles" required>
                                       <option value="">Selecione una opción</option>
                                       <option value="1">Activo</option>
                                       <option value="0">Inactivo</option>
@@ -140,7 +141,9 @@ function administracion($pdo, $dataSesion) {
             </div>
         </div>
     </div>
-
+    
+    
+    <?php include("puntosEmision.php"); ?>
 
     <?php
     modalViews();
