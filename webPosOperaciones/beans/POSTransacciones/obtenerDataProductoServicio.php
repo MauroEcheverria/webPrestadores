@@ -51,6 +51,9 @@
     $pos_calc_iva_diferenciado = 0;
     $pos_porcentaje_iva = 0;
 
+    $pos_calc_ice = 0;
+    $pos_calc_irbpnr = 0;
+
     $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Descuento</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
 
@@ -88,6 +91,12 @@
           break;
       }
 
+      /* Diferenciacion ICE */
+      $pos_calc_ice += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_ice"] / 100;
+
+      /* Diferenciacion irbpnr */
+      $pos_calc_irbpnr += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_irbpnr"] / 100;
+
       $data_tabla .= '<tr>';
       $data_tabla .= '<td align="center">'.$row_seg_fas["prs_codigo_item"].'</td>';
       $data_tabla .= '<td>'.$row_seg_fas["prs_descripcion_item"].'</td>';
@@ -115,8 +124,8 @@
       }
       $data_result["pos_total_iva"] = $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
 
-      $data_result["pos_total_ice"] = 0;
-      $data_result["pos_total_irbpnr"] = 0;
+      $data_result["pos_total_ice"] = $pos_calc_ice;
+      $data_result["pos_total_irbpnr"] = $pos_calc_irbpnr;
       $data_result["pos_total_descuento"] = $pos_total_descuento;
       $data_result["pos_total_sub_total"] = $pos_total_sub_total;
       $data_result["pos_total_comprobante"] = $pos_total_sub_total + $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
