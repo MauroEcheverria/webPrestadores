@@ -11,32 +11,31 @@ try {
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
-    
-    $idEmpresaUserLogin = null;
-    $isSuAdmin = (isset($dataSesion["id_role"]) && $dataSesion["id_role"] == 1);
-    
-    if (!$isSuAdmin)
-    {
-      //id empresa de persona logueada
-      $idEmpresaUserLogin = !isset($dataSesion["usr_id_empresa"]) ? -1 : $dataSesion["usr_id_empresa"];  
-    }
-    
-    
 
-    $sql_1 = "select e.emp_id_empresa, e.emp_empresa, e.emp_estado
-            from dct_sistema_tbl_empresa e
-            where e.emp_id_empresa = ifnull(:emp_id_empresa, e.emp_id_empresa)
-            and e.emp_estado = 1;";
-    $query_1 = $pdo->prepare($sql_1);
-    $query_1->bindValue(':emp_id_empresa', $idEmpresaUserLogin, PDO::PARAM_INT);
-    $query_1->execute();
-    $rows = $query_1->fetchAll();
+    //id empresa de persona logueada
+    $idEmpresa = $_POST["slcEmpresaPe"];
+
+    $sql = "select est.est_id_empresa_establecimiento, emp.emp_id_empresa
+                ,emp.emp_empresa
+                ,est.est_nombre
+                ,est.est_cod_establecimiento
+                ,est.est_direccion_emisor
+                ,est.est_es_matriz
+                ,est.est_estado
+        from dct_pos_tbl_empresa_establecimiento est
+        inner join dct_sistema_tbl_empresa emp
+                on emp.emp_id_empresa = est.emp_id_empresa
+        where emp.emp_id_empresa = :emp_id_empresa";
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':emp_id_empresa', $idEmpresa, PDO::PARAM_INT);
+    $query->execute();
+    $rows = $query->fetchAll();
 
     if (!isset($rows) || sizeof($rows) == 0) {
         $data_result["message"] = "error_negocio";
         $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
         $data_result["dataModal_2"] = 'Información';
-        $data_result["dataModal_3"] = "No existe una empresa activa para el usuario actual";
+        $data_result["dataModal_3"] = "No existe un establecimiento activo para la empresa enviada";
         $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
         $data_result["numLineaCodigo"] = __LINE__;
         echo json_encode($data_result);
@@ -45,7 +44,7 @@ try {
 
     $rpta_1 = "<option value=''>Seleccione una opción</option>";
     foreach ($rows as $row) {
-        $rpta_1.="<option value='" . $row["emp_id_empresa"] . "'>" . $row["emp_empresa"] . "</option>";
+        $rpta_1.="<option value='" . $row["est_id_empresa_establecimiento"] . "'>" . $row["est_cod_establecimiento"] . " - " . $row["est_nombre"] ."</option>";
     }
 
     $data_result["message"] = "saveOK";

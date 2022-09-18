@@ -17,52 +17,67 @@ function administracion($pdo, $dataSesion) {
     $js_dreconstec[] = '<script src="../../../plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js' . $dataSesion["version_css_js"] . '"></script>';
     $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js' . $dataSesion["version_css_js"] . '"></script>';
     $js_dreconstec[] = '<script src="../../../dist/js/webPOSAdministracion.js' . $dataSesion["version_css_js"] . '"></script>';
+    $js_dreconstec[] = '<script src="../../../dist/js/webPOSProductos.js' . $dataSesion["version_css_js"] . '"></script>';
 
     template_head($pdo, $dataSesion, $css_dreconstec);
     ?>
     <div id="appAdministrarEstablecimiento" class="appAdministrarEstablecimiento"></div>
     <div class="content-wrapper">
-      <section class="content">
-        <div class="container container_main">
-          <div class="card">
-            <div class="card-header">
-                <span class="panel-title"><b>Administración</b></span>
-            </div>
-            <div class="card-body">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Establecimientos</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Puntos de Emisión</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
-                  <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoEstablecimiento">Crear</button>
-                      </div>
-                      <table id="dtSistemaEstablecimiento" class="cell-border" cellspacing="0" width="100%"></table>
+        <section class="content">
+            <div class="container container_main">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="panel-title"><b>Administración</b></span>
                     </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
-                  <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                      <div class="seccionBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
-                      </div>
-                      <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Establecimientos</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Puntos de Emisión</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="idTogglable_3-tab" data-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Productos</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
+                                <div class="divPanelTogglable">
+                                    <div class="toggle_dentro_panel">
+                                        <div class="seccionBtnAccion">
+                                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoEstablecimiento">Crear</button>
+                                        </div>
+                                        <table id="dtSistemaEstablecimiento" class="cell-border" cellspacing="0" width="100%"></table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
+                                <div class="divPanelTogglable">
+                                    <div class="toggle_dentro_panel">
+                                        
+                                        <div class="seccionBtnAccion">
+                                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
+                                        </div>
+                                        <table id="dtPuntosEmision" class="cell-border" cellspacing="0" width="100%"></table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
+                                <div class="divPanelTogglable">
+                                    <div class="toggle_dentro_panel">                                  
+                                        <?php include("productos.php"); ?>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
     <div class="modal fade" id="myModalEstablecimiento" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg modalLogin">
@@ -93,16 +108,19 @@ function administracion($pdo, $dataSesion) {
                                     <input type="text" class="form-control" id="estNombre" name="estNombre" maxlength="300" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group camposVisibles">
                                     <label for="slcEstado" class="control-label">Estado</label>
-                                    <select name="slcEstado" id="slcEstado" class="form-control" required>
+                                    <select name="slcEstado" id="slcEstado" class="form-control camposVisibles" required>
                                       <option value="">Selecione una opción</option>
                                       <option value="1">Activo</option>
                                       <option value="0">Inactivo</option>
                                     </select>
                                     <div class="help-block with-errors"></div>
                                   </div>
+
+
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="slcEmpresa " class="control-label">Empresa</label>
@@ -134,8 +152,12 @@ function administracion($pdo, $dataSesion) {
             </div>
         </div>
     </div>
-<?php
+    
+    
+    <?php include("puntosEmision.php"); ?>
+
+    <?php
     modalViews();
     template_footer($pdo, $dataSesion, $js_dreconstec);
-  }
+}
 ?>

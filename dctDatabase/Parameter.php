@@ -57,4 +57,8 @@
 	$host="http://localhost/GIT/webPrestadores/";
         /****************** path logo empresas *************************/
         $PATH_LOGO_EMPRESAS = dirname(__DIR__).'/webPosOperaciones/logosEmpresas/';
+        /****************** CODIGOS IMPUESTOS *************************/
+        $CODIGO_IVA=2;
+        $CODIGO_ICE=3;
+        $CODIGO_IRBPNR=5;
 ?>

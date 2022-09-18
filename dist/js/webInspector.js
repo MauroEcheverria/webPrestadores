@@ -57,6 +57,44 @@ function soloNumeros(e) {
   var tecla_final = String.fromCharCode(key);
   return patron.test(tecla_final);
 }
+
+function soloNumerosYdecimales(evt) {
+  var theEvent = evt || window.event;
+  if (theEvent.type === 'paste') {
+    key = event.clipboardData.getData('text/plain');
+  } else {
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+  }
+  console.log(key);
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+
+function NumCheck(e, field) {
+  key = e.keyCode ? e.keyCode : e.which
+  // backspace
+  if (key == 8) return true
+  // 0-9
+  if (key > 47 && key < 58) {
+    if (field.value == "") return true
+    regexp = /.[0-9]{12}$/
+    return !(regexp.test(field.value))
+  }
+  // .
+  if (key == 46) {
+    if (field.value == "") return false
+    regexp = /^[0-9]+$/
+    return regexp.test(field.value)
+  }
+  // other key
+  return false
+ 
+}
+
 function modalGenerico(dataModal_1,dataModal_2,dataModal_3,dataModal_4) {
   $("#putIconModalgeneric").empty().prepend(dataModal_1);
   $("#putTitleModalgeneric").empty().prepend(dataModal_2);
@@ -69,6 +107,7 @@ function ocultarPoppupAlert(){
     $('.poppupAlert').fadeOut('slow');
   },3000);
 }
+
 $(document).ready(function() {
 
 	/*$(document).bind("contextmenu",function(e){
