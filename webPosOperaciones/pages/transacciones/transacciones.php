@@ -186,7 +186,14 @@
                   </div>
                 </div>
                 <div class="modal-footer centralFooter">
-                  <button type="submit" class="btn btn-success" style="width: 200PX;">Enviar Pago</button>
+
+                  <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
+                    <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                    <div class="modal-footer centralFooter">
+                      <button type="submit" class="btn btn-success btn-dreconstec">Enviar Pago</button>
+                    </div>
+                  </form>
+
                 </div>
               </div>
             </div>

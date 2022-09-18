@@ -18,22 +18,17 @@
 		$data_comprobante["tipo_comporbante"] = 1;
 		/****************************************/
 
-		$data_comprobante["est_id_empresa_establecimiento"] = cleanData("noLimite",0,"noMayuscula",$_POST["est_id_empresa_establecimiento"]);
-    $data_comprobante["epe_id_empresa_punto_emision"] = cleanData("noLimite",0,"noMayuscula",$_POST["epe_id_empresa_punto_emision"]);
+		$data_comprobante["est_id_empresa_establecimiento"] = cleanData("noLimite",0,"noMayuscula",1);
+    $data_comprobante["epe_id_empresa_punto_emision"] = cleanData("noLimite",0,"noMayuscula",1);
     $data_comprobante["cli_identificacion"] = cleanData("siLimite",13,"noMayuscula",$_POST["cli_identificacion"]);
-    $data_comprobante["fop_id_forma_pago"] = cleanData("siLimite",2,"noMayuscula",$_POST["fop_id_forma_pago"]);
+    $data_comprobante["fop_id_forma_pago"] = cleanData("siLimite",2,"noMayuscula",$_POST["ftr_id_forma_pago"]);
 
-		$sql_empresa="SELECT emp_id_empresa,emp_ruc,emp_empresa,
-												emp_nom_comercial,emp_direccion_matriz,
-												emp_contrib_especial,emp_obli_contabilidad,
-												em_logo,wsr_tipo_ambiente,em_tipo_emision,
-												em_archivo_fact_elec,em_pass_fct_elec
+		$sql_empresa="SELECT emp_id_empresa,emp_ruc,emp_empresa,emp_nom_comercial,emp_direccion_matriz,em_archivo_fact_elec,
+												emp_contrib_especial,emp_obli_contabilidad,em_logo,wsr_tipo_ambiente,em_tipo_emision,em_pass_fct_elec
 									FROM dct_sistema_tbl_empresa 
-									WHERE emp_id_empresa = (SELECT usr_id_empresa
-				          FROM dct_sistema_tbl_usuario
-				          WHERE usr_cod_usuario = :usr_cod_usuario);";
+									WHERE emp_id_empresa = :emp_id_empresa;";
     $query_empresa=$pdo->prepare($sql_empresa);
-    $query_empresa->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
+    $query_empresa->bindValue(':emp_id_empresa',$dataSesion["usr_id_empresa"],PDO::PARAM_INT);
     $query_empresa->execute();
     $row_empresa = $query_empresa->fetch(\PDO::FETCH_ASSOC);
     $data_comprobante["emp_id_empresa"] = $row_empresa["emp_id_empresa"];
@@ -61,7 +56,8 @@
     	$data_comprobante["serial_comprobante"] = $row_serial["ser_factura_serie"];
     	$data_comprobante["cod_num_comprobante"] = $row_serial["ser_factura_cod_num"];
 
-    	$sql_cliente="SELECT cli_id_cliente,cli_tipo_identificacion,cli_identificacion,cli_nombres,cli_direccion,cli_telefono,cli_placa
+    	$sql_cliente="SELECT cli_id_cliente,cli_tipo_identificacion,cli_identificacion,cli_direccion,cli_telefono,cli_placa,
+    								CONCAT(IFNULL(cli_nombre_1,''),' ',IFNULL(cli_nombre_2,''),' ',IFNULL(cli_apellido_1,''),' ',IFNULL(cli_apellido_2,'')) cli_nombres
 										FROM dct_pos_tbl_cientes 
 										WHERE cli_identificacion = :cli_identificacion
 										AND emp_id_empresa = :emp_id_empresa;";
@@ -83,12 +79,12 @@
 
     		$sql_trans_facturacion="SELECT ftr_id_factura_transaccion
 																FROM dct_pos_tbl_factura_transaccion 
-																WHERE usr_cod_usuario = :usr_cod_usuario
+																WHERE ftr_usuario_creacion = :ftr_usuario_creacion
 																AND emp_id_empresa = :emp_id_empresa
 																AND ftr_estado_transaccion = 'TMP'
 																LIMIT 1;";
 		    $query_trans_facturacion=$pdo->prepare($sql_trans_facturacion);
-		    $query_trans_facturacion->bindValue(':usr_cod_usuario',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
+		    $query_trans_facturacion->bindValue(':ftr_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT);
 		    $query_trans_facturacion->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
 		    $query_trans_facturacion->execute();
 
@@ -105,7 +101,7 @@
 															    WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
 			    $query_update_trans_facturacion=$pdo->prepare($sql_update_trans_facturacion);
 			    $query_update_trans_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
-			    $query_update_trans_facturacion->bindValue(':ftr_estado_transaccion','TMP',PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_estado_transaccion','PPR',PDO::PARAM_STR);
 			    $query_update_trans_facturacion->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
 			    $query_update_trans_facturacion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 			    $query_update_trans_facturacion->execute();
@@ -118,7 +114,7 @@
 															    WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
 					$query_detalle_facturacion=$pdo->prepare($sql_detalle_facturacion);
 					$query_detalle_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
-					$query_detalle_facturacion->bindValue(':fdt_estado_transaccion','TMP',PDO::PARAM_STR);
+					$query_detalle_facturacion->bindValue(':fdt_estado_transaccion','PPR',PDO::PARAM_STR);
 					$query_detalle_facturacion->bindValue(':fdt_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
 					$query_detalle_facturacion->bindValue(':fdt_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 					$query_detalle_facturacion->execute();

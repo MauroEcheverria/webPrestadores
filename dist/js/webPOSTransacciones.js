@@ -210,16 +210,17 @@ $(document).ready(function() {
         url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formPOSTransGenerarFactura").serialize(),
+        data:$("#formPOSTransGenerarFactura").serialize()+"&cli_identificacion="+$('#cli_identificacion').val()+"&ftr_id_forma_pago="+$('#ftr_id_forma_pago').val(),
         success: function(result){
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              $('#myModalRegistroTransacciones').modal('show');
+              renderizarProductoServicio();
+              /*$('#myModalRegistroTransacciones').modal('show');
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);*/
               break;
             case "noPoseeFirma":
               $('#myModalRegistroTransacciones').modal('show');
