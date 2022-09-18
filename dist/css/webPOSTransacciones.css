@@ -55,13 +55,29 @@
   text-align: center;
 }
 .posTotalLabel {
-	font-size: 23px;
+	font-size: 20px;
 }
 .posTotalCant {
 	font-size: 30px; 
-	margin-top: -20px;
+	margin-top: -20px !important;
 }
 .detalle_numerico_1 {
 	color: #6c757d; 
 	font-size: 21px; 
+}
+.btnItemComprobante {
+	height: 90px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100px;
+}
+.fdt_cantidad_tbl {
+	width: 80px;
+  font-weight: bold;
+  text-align: center;
+}
+.citaSeleccionada {
+ 	border: 3px solid #00838a!important; 
+ 	background-color: #00f3ff!important;
+ 	font-size: 21px
 }

@@ -8,7 +8,19 @@ function renderizarProductoServicio() {
       switch (result.message) {
         case "saveOK":
           $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
-          $("#posTransComprobante").empty().prepend(result.total_temp);
+
+          $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
+          $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
+          $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
+          $("#pos_base_imp_iva_cero").empty().prepend(result.pos_base_imp_iva_cero);
+          $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
+          $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
+          $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
+          $("#pos_total_sub_total").empty().prepend(result.pos_total_sub_total);
+          $("#pos_total_iva").empty().prepend(result.pos_total_iva);
+          $("#pos_total_ice").empty().prepend(result.pos_total_ice);
+          $("#pos_total_irbpnr").empty().prepend(result.pos_total_irbpnr);
+          
           $('.refDetalleItemProceso').click(function() {
             var idClicked = this.id;
             alert("Se visualizará el detalle del Ítem: "+idClicked);
@@ -17,6 +29,32 @@ function renderizarProductoServicio() {
             var idClicked = this.id;
             inactivarProductoServicio($('#'+idClicked+' span').text());
           });
+          $('.fdt_cantidad_tbl').change(function() {
+            var idClicked = this.id;
+            idProdServ = idClicked.split("_");
+            actualizarProductoServicio(idProdServ[1],$("#"+idClicked).val());
+          });
+          break;
+        default:
+          alert("Error al realizar la transacción solicitada.");
+          break;
+      }
+    }
+  });
+}
+function actualizarProductoServicio(fdt_id_factura_detalle,fdt_cantidad_tbl) {
+  $.ajax({
+    url: '../../beans/POSTransacciones/actualizarProductoServicio.php',
+    type: 'POST',
+    dataType: 'html',
+    data: { 
+      'fdt_id_factura_detalle' : fdt_id_factura_detalle, 
+      'fdt_cantidad_tbl' : fdt_cantidad_tbl},
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          renderizarProductoServicio();
           break;
         default:
           alert("Error al realizar la transacción solicitada.");
@@ -43,6 +81,25 @@ function inactivarProductoServicio(fdt_id_factura_detalle) {
       }
     }
   });
+}
+
+function focusAnimado (idElemento) {
+  setParentTransition('#'+idElemento, 'all', '0s', 'ease', function() {
+      $('#'+idElemento).addClass('citaSeleccionada');
+  });
+  setTimeout(function() {
+      setParentTransition('#'+idElemento, 'all', '1s', 'ease', function() {
+          $('#'+idElemento).removeClass('citaSeleccionada');
+      });
+  }); 
+  $('#'+idElemento).focus().focusout();
+}
+function setParentTransition(id, prop, delay, style, callback) {
+    $(id).css({'-webkit-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'-moz-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'-o-transition' : prop + ' ' + delay + ' ' + style});
+    $(id).css({'transition' : prop + ' ' + delay + ' ' + style});
+    callback();
 }
 $(document).ready(function() {
 
@@ -153,16 +210,17 @@ $(document).ready(function() {
         url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
         type: 'POST',
         dataType: 'html',
-        data:$("#formPOSTransGenerarFactura").serialize(),
+        data:$("#formPOSTransGenerarFactura").serialize()+"&cli_identificacion="+$('#cli_identificacion').val()+"&ftr_id_forma_pago="+$('#ftr_id_forma_pago').val(),
         success: function(result){
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              $('#myModalRegistroTransacciones').modal('show');
+              renderizarProductoServicio();
+              /*$('#myModalRegistroTransacciones').modal('show');
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);*/
               break;
             case "noPoseeFirma":
               $('#myModalRegistroTransacciones').modal('show');
@@ -671,33 +729,6 @@ $(document).ready(function() {
       });
     }
   });
-  $('#prs_id_prod_serv').change( function () {
-    if ($("#prs_id_prod_serv").val() != "") {
-      $.ajax({
-        url: '../../beans/POSTransacciones/validarItemComprobante.php',
-        type: 'POST',
-        dataType: 'html',
-        data:{ 'prs_id_prod_serv' : $("#prs_id_prod_serv").val() },
-        success: function(result){
-          var result = eval('('+result+')');
-          $("#prs_id_prod_serv").val("").trigger("change");
-          switch (result.message) {
-             case "saveOK":
-              document.getElementById("formItemComprobante").reset();
-              $('#myModalItemComprobante').modal('show');
-              break;
-            case "userError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    }
-  });
   $('#formItemComprobante').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
@@ -707,12 +738,15 @@ $(document).ready(function() {
         dataType: 'html',
         data:$("#formItemComprobante").serialize(),
         success: function(result){
-        var result = eval('('+result+')');
+          var result = eval('('+result+')');
+          $("#prs_id_prod_serv").val("").trigger("change");
+          document.getElementById("formItemComprobante").reset();
           switch (result.message) {
             case "saveOK":
-              $('#myModalItemComprobante').modal('hide');
               renderizarProductoServicio();
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              break;
+            case "itemRegistrado":
+              focusAnimado("itemCant_"+result.id_item);
               break;
             case "token_csrf_error":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

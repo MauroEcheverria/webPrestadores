@@ -5,7 +5,7 @@
 
       $database = 'bd_prestadores';
       $user = 'root';
-      $password = '';
+      $password = 'Dreconstec2022';
       
       /*$database = 'dreconst_prestadores';
       $user = 'dreconst_usuario';
@@ -23,7 +23,7 @@
       try {
         $pdo = new \PDO($dsn, $user, $password, $options);
         return $pdo;
-      } catch (\PDOException $e) {
+      } catch (\PDOException $ex) {
         $data_result["message"] = "salidaExcepcionCatch";
         $data_result["codError"] = $ex->getCode();
         $data_result["msjError"] = $ex->getMessage();
