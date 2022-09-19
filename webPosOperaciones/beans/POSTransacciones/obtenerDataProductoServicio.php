@@ -65,9 +65,6 @@
 
       /* Diferenciacion IVA */
       switch ($row_seg_fas["prs_iva_cod_tarifa"]) {
-        case '0':
-          $pos_base_imp_iva_cero += $pos_trans_sub_total;
-          break;
         case '2':
           $pos_base_imp_iva_12 += $pos_trans_sub_total;
           $pos_calc_iva_12 += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_iva"] / 100;
@@ -128,7 +125,7 @@
       $data_result["pos_total_irbpnr"] = $pos_calc_irbpnr;
       $data_result["pos_total_descuento"] = $pos_total_descuento;
       $data_result["pos_total_sub_total"] = $pos_total_sub_total;
-      $data_result["pos_total_comprobante"] = $pos_total_sub_total + $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado;
+      $data_result["pos_total_comprobante"] = $pos_total_sub_total + $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado + $pos_calc_ice + $pos_calc_irbpnr;
 
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";

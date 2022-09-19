@@ -3,6 +3,7 @@
 	require_once("../../../controller/funcionesCore.php");
 	require_once("../../../dctDatabase/Connection.php");
 	require_once("../../../dctDatabase/Parameter.php");
+	include_once('../../../plugins/facturacionElectronica/generarFacturaXML.php');
 	app_error_reporting($app_error_reporting);
 	try {
 		$sesion = new sesion();
@@ -56,7 +57,7 @@
     	$data_comprobante["serial_comprobante"] = $row_serial["ser_factura_serie"];
     	$data_comprobante["cod_num_comprobante"] = $row_serial["ser_factura_cod_num"];
 
-    	$sql_cliente="SELECT cli_id_cliente,cli_tipo_identificacion,cli_identificacion,cli_direccion,cli_telefono,cli_placa,
+    	$sql_cliente="SELECT cli_id_cliente,cli_tipo_identificacion,cli_identificacion,cli_direccion,cli_telefono,cli_placa,cli_correo,
     								CONCAT(IFNULL(cli_nombre_1,''),' ',IFNULL(cli_nombre_2,''),' ',IFNULL(cli_apellido_1,''),' ',IFNULL(cli_apellido_2,'')) cli_nombres
 										FROM dct_pos_tbl_cientes 
 										WHERE cli_identificacion = :cli_identificacion
@@ -76,6 +77,7 @@
 	    	$data_comprobante["cli_direccion"] = $row_cliente["cli_direccion"];
 	    	$data_comprobante["cli_telefono"] = $row_cliente["cli_telefono"];
 	    	$data_comprobante["cli_placa"] = $row_cliente["cli_placa"];
+	    	$data_comprobante["cli_correo"] = $row_cliente["cli_correo"];
 
     		$sql_trans_facturacion="SELECT ftr_id_factura_transaccion
 																FROM dct_pos_tbl_factura_transaccion 
@@ -188,17 +190,14 @@
 					if ($query_update_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso && $query_serial_facturacion) {
 
 						$pdo->commit();
-						$data_result["message"] = "saveOK";
-						$data_result["numLineaCodigo"] = __LINE__;
-						echo json_encode($data_result);
-
-						/*$enviarXML=new enviarXML();
-			      $dataXML = $enviarXML->envioXML($data_comprobante,$pdo);
+		
+						$generarFacturaXML = new generarFacturaXML();
+			      $dataXML = $generarFacturaXML->generarFacturaXML($data_comprobante,$pdo);
 			      $clave_acceso_sri = explode("&&&&",$dataXML);
 						if ($clave_acceso_sri[0] == "cargaOK") {
 				      $data_result["message"] = "saveOK";
-				      $data_result["clave_acceso_sri"] = $clave_acceso_sri[1];
-				      $data_result["ruta_xml"] = $host."webPosOperaciones/comprobantesGenerados/".$clave_acceso_sri[1].".xml";
+				      $data_result["clave_acceso_sri"] = $data_comprobante["sri_clave_acceso"];
+				      $data_result["ruta_xml"] = $host."webPosOperaciones/comprobantesGenerados/".$data_comprobante["sri_clave_acceso"].".xml";
 				      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$data_comprobante["em_archivo_fact_elec"];
 				      $data_result["contrasenia_archivo"] = $data_comprobante["em_pass_fct_elec"];
 							$data_result["numLineaCodigo"] = __LINE__;
@@ -208,7 +207,7 @@
 				      $data_result["message"] = "saveXmlError";
 							$data_result["numLineaCodigo"] = __LINE__;
 							echo json_encode($data_result);
-						}*/
+						}
 
 					}
 					else {
