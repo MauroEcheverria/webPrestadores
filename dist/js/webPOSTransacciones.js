@@ -502,6 +502,7 @@ $(document).ready(function() {
             $('#btn_cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
+            break;
           case "token_csrf_error":
           case "fact_transaccion_registrada":
             modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

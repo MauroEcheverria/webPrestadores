@@ -44,10 +44,6 @@
 
 				$pdo->commit();
 				$data_result["message"] = "saveOK";
-				$data_result["dataModal_1"] = '<img src="../../../dist/img/modal_visto.png" width="30px" heigth="20px">';
-	      $data_result["dataModal_2"] = 'Información';
-	      $data_result["dataModal_3"] = 'Transacción registra de manera correcta.';
-	      $data_result["dataModal_4"] = '<button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>';
 				$data_result["numLineaCodigo"] = __LINE__;
 				echo json_encode($data_result);
 			}

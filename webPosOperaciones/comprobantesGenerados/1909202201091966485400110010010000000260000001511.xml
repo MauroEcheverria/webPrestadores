@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+            <factura id="comprobante" version="1.0.0">
+            <infoTributaria>
+                <ambiente>1</ambiente>
+                <tipoEmision>1</tipoEmision>
+                <razonSocial>DRECONSTEC</razonSocial>
+                <nombreComercial></nombreComercial>
+                <ruc>0919664854001</ruc>
+                <claveAcceso>1909202201091966485400110010010000000260000001511</claveAcceso>
+                <codDoc>01</codDoc>
+                <estab>001</estab>
+                <ptoEmi>001</ptoEmi>
+                <secuencial>000000026</secuencial>
+                <dirMatriz>LA RIOJA</dirMatriz>
+            </infoTributaria>
+            <infoFactura>
+                <fechaEmision>19/09/2022</fechaEmision>
+                <dirEstablecimiento>LA RIOJA</dirEstablecimiento>
+                <contribuyenteEspecial>1</contribuyenteEspecial>
+                <obligadoContabilidad>0</obligadoContabilidad>
+                <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+                <guiaRemision></guiaRemision>
+                <razonSocialComprador>MERY  REINA </razonSocialComprador>
+                <identificacionComprador>1308041134</identificacionComprador>
+                <direccionComprador>LOS ESTEROS</direccionComprador><totalSinImpuestos>1500</totalSinImpuestos><totalDescuento>0</totalDescuento><totalConImpuestos></totalConImpuestos>        
+          <propina>0.00</propina>        
+          <importeTotal>0</importeTotal>
+          <moneda>DOLAR</moneda>
+          <pagos>
+              <pago>
+                  <formaPago>20</formaPago>
+                  <total>0</total>
+                  <plazo>1</plazo>
+                  <unidadTiempo>Dias</unidadTiempo>
+              </pago>            
+          </pagos>
+          <valorRetIva>0.00</valorRetIva>
+          <valorRetRenta>0.00</valorRetRenta>
+          </infoFactura>
+          <detalles><detalle>
+                        <codigoPrincipal>C003</codigoPrincipal>
+                        <codigoAuxiliar>C003</codigoAuxiliar>
+                        <descripcion>PARACETAMOL</descripcion>
+                        <cantidad>10</cantidad>
+                        <precioUnitario>150</precioUnitario>            
+                        <descuento>0</descuento>
+                        <precioTotalSinImpuesto>1500</precioTotalSinImpuesto>
+                        <detallesAdicionales></detallesAdicionales><impuestos><impuesto>
+                              <codigo>2</codigo>
+                              <codigoPorcentaje>0</codigoPorcentaje>
+                              <tarifa>0</tarifa>
+                              <baseImponible>1500</baseImponible>
+                              <valor>0</valor>
+                            </impuesto></impuestos></detalle></detalles>
+            <infoAdicional>
+                <campoAdicional nombre="Direccion">LOS ESTEROS</campoAdicional>
+                <campoAdicional nombre="Telefono">0960939030</campoAdicional>        
+                <campoAdicional nombre="Email">mreinacevallos@iess.gob.ec</campoAdicional>
+            </infoAdicional>
+          </factura>
