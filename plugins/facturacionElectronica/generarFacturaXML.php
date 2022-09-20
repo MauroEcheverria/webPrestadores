@@ -1,6 +1,6 @@
 <?php
 class generarFacturaXML {
-  public function generarFacturaXML($data_comprobante,$pdo) {
+  public function funcGenerarFacturaXML($data_comprobante,$pdo) {
 
     $sql_comprobante_detalle="SELECT prs_id_prod_serv,fdt_cantidad
                               FROM dct_pos_tbl_factura_detalle 
@@ -86,7 +86,6 @@ class generarFacturaXML {
         case '0':
         case '6':
         case '7':
-          $pos_base_imp_iva_no_sujeto += $pos_trans_sub_total;
           $xml_detalles .= '<impuesto>
                               <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
                               <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
@@ -141,7 +140,7 @@ class generarFacturaXML {
     $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <factura id="comprobante" version="1.0.0">
             <infoTributaria>
-                <ambiente>'.$data_comprobante["sri_clave_acceso_tipo_ambiente"]e.'</ambiente>
+                <ambiente>'.$data_comprobante["sri_clave_acceso_tipo_ambiente"].'</ambiente>
                 <tipoEmision>'.$data_comprobante["sri_clave_acceso_tipo_emision"].'</tipoEmision>
                 <razonSocial>'.$data_comprobante["emp_empresa"].'</razonSocial>
                 <nombreComercial>'.$data_comprobante["emp_nom_comercial"].'</nombreComercial>
@@ -154,7 +153,7 @@ class generarFacturaXML {
                 <dirMatriz>'.$data_comprobante["emp_direccion_matriz"].'</dirMatriz>
             </infoTributaria>
             <infoFactura>
-                <fechaEmision>'.date("d/m/Y",strtotime($fechaActual_4)).'</fechaEmision>
+                <fechaEmision>'.date("d/m/Y",strtotime($data_comprobante["fechaActual_4"])).'</fechaEmision>
                 <dirEstablecimiento>'.$data_comprobante["emp_direccion_matriz"].'</dirEstablecimiento>
                 <contribuyenteEspecial>'.$data_comprobante["emp_contrib_especial"].'</contribuyenteEspecial>
                 <obligadoContabilidad>'.$data_comprobante["emp_obli_contabilidad"].'</obligadoContabilidad>

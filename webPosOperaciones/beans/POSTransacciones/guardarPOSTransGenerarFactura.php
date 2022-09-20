@@ -187,12 +187,12 @@
 					$query_serial_facturacion->bindValue(':ser_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 					$query_serial_facturacion->execute();
 
-					if ($query_update_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso && $query_serial_facturacion) {
+					$data_comprobante["fechaActual_4"] = $fechaActual_4;
 
-						$pdo->commit();
+					if ($query_update_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso && $query_serial_facturacion) {
 		
 						$generarFacturaXML = new generarFacturaXML();
-			      $dataXML = $generarFacturaXML->generarFacturaXML($data_comprobante,$pdo);
+			      $dataXML = $generarFacturaXML->funcGenerarFacturaXML($data_comprobante,$pdo);
 			      $clave_acceso_sri = explode("&&&&",$dataXML);
 						if ($clave_acceso_sri[0] == "cargaOK") {
 				      $data_result["message"] = "saveOK";
@@ -201,6 +201,7 @@
 				      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$data_comprobante["em_archivo_fact_elec"];
 				      $data_result["contrasenia_archivo"] = $data_comprobante["em_pass_fct_elec"];
 							$data_result["numLineaCodigo"] = __LINE__;
+							$pdo->commit();
 							echo json_encode($data_result);
 						}
 						else {
