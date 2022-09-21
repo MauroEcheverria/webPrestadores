@@ -8,7 +8,7 @@ use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 $profile = CapabilityProfile::load("simple");
-$connector = new WindowsPrintConnector("smb://DESKTOP-8N19MD6/EPSON TM-T88V Receipt");
+$connector = new WindowsPrintConnector("smb://Maruto:Bielka1984*@DESKTOP-8N19MD6/EPSON TM-T88V Receipt");
 $printer = new Printer($connector,$profile);
 $printer -> initialize();
 
