@@ -103,6 +103,8 @@ function setParentTransition(id, prop, delay, style, callback) {
 }
 $(document).ready(function() {
 
+  toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {timeOut: 5000,progressBar: true});
+
   $(".select2").select2({
     maximumSelectionLength: 20
   });
