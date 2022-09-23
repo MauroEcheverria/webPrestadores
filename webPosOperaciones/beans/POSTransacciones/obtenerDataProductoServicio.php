@@ -34,6 +34,8 @@
     $query_seg_fas->execute();
     $row_seg_fas = $query_seg_fas->fetchAll();
 
+    $pos_cant_item = 0;
+
     $pos_trans_descuento = 0;
     $pos_trans_sub_total = 0;
     $pos_total_descuento = 0;
@@ -56,6 +58,8 @@
 
     $data_tabla = '<table class="table table-striped dct_table"><tr><th style="text-align:center;">Código Ítem</th><th style="text-align:center;">Descripción</th><th style="text-align:center;">Cantidad</th><th style="text-align:center;">Precio Unitadrio</th><th style="text-align:center;">Descuento</th><th style="text-align:center;">Sub Total</th><th style="text-align:center;">Acciones</th></tr>';
     foreach ($row_seg_fas as $row_seg_fas) {
+
+      $pos_cant_item += 1;
 
       /* Descuentos */
       $pos_trans_descuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
@@ -127,6 +131,7 @@
       $data_result["pos_total_sub_total"] = $pos_total_sub_total;
       $data_result["pos_total_comprobante"] = $pos_total_sub_total + $pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado + $pos_calc_ice + $pos_calc_irbpnr;
 
+      $data_result["pos_cant_item"] = $pos_cant_item;
       $data_result["data_tabla"] = $data_tabla;
       $data_result["message"] = "saveOK";
       echo json_encode($data_result);
