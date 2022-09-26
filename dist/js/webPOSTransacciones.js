@@ -7,33 +7,38 @@ function renderizarProductoServicio() {
       var result = eval('('+result+')');
       switch (result.message) {
         case "saveOK":
-          $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
-
-          $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
-          $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
-          $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
-          $("#pos_base_imp_iva_cero").empty().prepend(result.pos_base_imp_iva_cero);
-          $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
-          $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
-          $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
-          $("#pos_total_sub_total").empty().prepend(result.pos_total_sub_total);
-          $("#pos_total_iva").empty().prepend(result.pos_total_iva);
-          $("#pos_total_ice").empty().prepend(result.pos_total_ice);
-          $("#pos_total_irbpnr").empty().prepend(result.pos_total_irbpnr);
-          
-          $('.refDetalleItemProceso').click(function() {
-            var idClicked = this.id;
-            alert("Se visualizará el detalle del Ítem: "+idClicked);
-          });
-          $('.refDescartarItemProceso').click(function() {
-            var idClicked = this.id;
-            inactivarProductoServicio($('#'+idClicked+' span').text());
-          });
-          $('.fdt_cantidad_tbl').change(function() {
-            var idClicked = this.id;
-            idProdServ = idClicked.split("_");
-            actualizarProductoServicio(idProdServ[1],$("#"+idClicked).val());
-          });
+          if (result.pos_cant_item >= 1) {
+            $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
+            $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
+            $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
+            $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
+            $("#pos_base_imp_iva_cero").empty().prepend(result.pos_base_imp_iva_cero);
+            $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
+            $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
+            $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
+            $("#pos_total_sub_total").empty().prepend(result.pos_total_sub_total);
+            $("#pos_total_iva").empty().prepend(result.pos_total_iva);
+            $("#pos_total_ice").empty().prepend(result.pos_total_ice);
+            $("#pos_total_irbpnr").empty().prepend(result.pos_total_irbpnr);
+            $('.refDetalleItemProceso').click(function() {
+              var idClicked = this.id;
+              alert("Se visualizará el detalle del Ítem: "+idClicked);
+            });
+            $('.refDescartarItemProceso').click(function() {
+              var idClicked = this.id;
+              inactivarProductoServicio($('#'+idClicked+' span').text());
+            });
+            $('.fdt_cantidad_tbl').change(function() {
+              var idClicked = this.id;
+              idProdServ = idClicked.split("_");
+              actualizarProductoServicio(idProdServ[1],$("#"+idClicked).val());
+            });
+            $('#transPanel_3').fadeIn();
+          }
+          else {
+            $('#transPanel_3').fadeOut();
+          }
+            
           break;
         default:
           alert("Error al realizar la transacción solicitada.");
@@ -118,12 +123,12 @@ $(document).ready(function() {
         $("#ftr_id_forma_pago").empty().prepend(result.formas_pago);
         $("#cli_tipo_identificacion").empty().prepend(result.tipo_identificacion);
         $("#prs_id_prod_serv").empty().prepend(result.productos_servicios);
-        $('#dataCliente').fadeOut();
+        $('#transPanel_2').fadeOut();
         switch (result.message) {
           case "si_transaccion":
             renderizarProductoServicio();
             if (result.data_row.cli_identificacion != null) {
-              $('#dataCliente').fadeIn();
+              $('#transPanel_2').fadeIn();
               //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
               $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
               $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -134,12 +139,16 @@ $(document).ready(function() {
               $('#cli_identificacion').val(result.data_row.cli_identificacion);
               $('#ftr_id_forma_pago').val(result.data_row.ftr_id_forma_pago);
             }
+            $('#transPanel_1').fadeIn();
+            $('#btnPosNuevaFactura').prop("disabled",true);
             $('#cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
             break;
           case "no_transaccion":
+            $('#transPanel_1').fadeOut();
+            $('#btnPosNuevaFactura').prop("disabled",false);
             $('#cli_identificacion').prop("disabled",true);
             $('#btn_cli_identificacion').prop("disabled",true);
             $('#ftr_id_forma_pago').prop("disabled",true);
@@ -220,6 +229,7 @@ $(document).ready(function() {
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
+              renderizarProductoServicio();
               obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);*/
               break;
             case "noPoseeFirma":
@@ -497,10 +507,13 @@ $(document).ready(function() {
         var result = eval('('+result+')');
         switch (result.message) {
           case "saveOK":
+            toastr.success('Cabecera de comprobante creada exitosamente.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right"});
             $('#cli_identificacion').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
+            $('#transPanel_1').fadeIn();
+            break;
           case "token_csrf_error":
           case "fact_transaccion_registrada":
             modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
@@ -521,10 +534,10 @@ $(document).ready(function() {
       dataType: 'html',
       success: function(result){
         var result = eval('('+result+')');
-        $('#dataCliente').fadeOut();
+        $('#transPanel_2').fadeOut();
 
         if (result.msmData == "siData" && result.message == "saveOK") {
-          $('#dataCliente').fadeIn();
+          $('#transPanel_2').fadeIn();
           //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
           $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
           $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -554,9 +567,9 @@ $(document).ready(function() {
       dataType: 'html',
       success: function(result){
         var result = eval('('+result+')');
-        $('#dataCliente').fadeOut();
+        $('#transPanel_2').fadeOut();
         if (result.msmData == "siData" && result.message == "saveOK") {
-          $('#dataCliente').fadeIn();
+          $('#transPanel_2').fadeIn();
           //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
           $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
           $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -641,10 +654,10 @@ $(document).ready(function() {
           success: function(result){
           var result = eval('('+result+')');
             $('#myModalClienteNoRegistrado').modal('hide');
-            $('#dataCliente').fadeIn();
+            $('#transPanel_2').fadeIn();
             switch (result.message) {
               case "saveOK":
-                $('#dataCliente').fadeIn();
+                $('#transPanel_2').fadeIn();
                 //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
                 $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
                 $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -741,11 +754,14 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           $("#prs_id_prod_serv").val("").trigger("change");
           document.getElementById("formItemComprobante").reset();
+          $('#transPanel_3').fadeOut();
           switch (result.message) {
             case "saveOK":
               renderizarProductoServicio();
+              $('#transPanel_3').fadeIn();
               break;
             case "itemRegistrado":
+              $('#transPanel_3').fadeIn();
               focusAnimado("itemCant_"+result.id_item);
               break;
             case "token_csrf_error":

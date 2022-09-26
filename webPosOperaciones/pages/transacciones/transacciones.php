@@ -9,6 +9,7 @@
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/select2/dist/css/select2.min.css'.$dataSesion["version_css_js"].'">';
+  $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/toastr-master/build/toastr.min.css'.$dataSesion["version_css_js"].'">';
   $css_dreconstec[] = '<link rel="stylesheet" href="../../../dist/css/webPOSTransacciones.css'.$dataSesion["version_css_js"].'">';
 
   $js_dreconstec = array();
@@ -18,6 +19,7 @@
   $js_dreconstec[] = '<script src="../../../plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/select2/dist/js/select2.full.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/toastr-master/build/toastr.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/fiddle.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/buffer.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/facturacionElectronica/js/forge.min.js'.$dataSesion["version_css_js"].'"></script>';
@@ -44,63 +46,67 @@
                     <div><span class="labelIdentificacion">Punto Emisión: </span><span class="dataIdentificacion">Caja 1</span></div>
                   </div>
                   <div class="col-md-4 centrarContent">
-                    <button type="button" class="btn btn-info" id="btnPosNuevaFactura" title="Nueva factura"><i class="fas fa-plus"></i></button>    
+                    <button type="button" class="btn btn-info" id="btnPosNuevaFactura" title="Nuevo Comprobante"><i class="fas fa-plus"></i></button>    
                   </div>
                 </div>
-                <br>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="cli_identificacion" class="control-label">Identificación</label> <a href="#" style="font-size: 10px;" id="idConsumidorFinal">(Consumidor Final)</a>
-                      <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
-                        <span class="input-group-append">
-                          <button type="button" class="btn btn-info btn-flat" disabled id="btn_cli_identificacion"><i class="fas fa-search"></i></button>
-                        </span>
-                      </div>
-                      <div class="help-block with-errors"></div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="ftr_id_forma_pago" class="control-label">Forma de Pago</label>
-                      <select name="ftr_id_forma_pago" id="ftr_id_forma_pago" class="form-control" required disabled></select>
-                      <div class="help-block with-errors"></div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="centrarContent"><strong>Ingreso de Ítems</strong></div>
-                <form id="formItemComprobante" class="formModalPages" data-toggle="validator" role="form">
-                  <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="prs_id_prod_serv" class="control-label">Productos/Servicios</label>
-                        <select name="prs_id_prod_serv" id="prs_id_prod_serv" class="form-control select2" required disabled>
-                          <option value="">Seleccione Establecimiento</option>
-                          <option value="1" selected>Activo</option>
-                        </select>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                    </div>
-                  </div>
+
+                <div id="transPanel_1" class="solo_main">
+                  <br>
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group centrarContent">
-                        <label for="fdt_cantidad" class="control-label">Cantidad</label>
-                        <input type="number" class="form-control" id="fdt_cantidad" name="fdt_cantidad" onkeypress="return soloNumeros(event);" 
-                        required style="font-size: 30px !important;">
+                      <div class="form-group">
+                        <label for="cli_identificacion" class="control-label">Identificación</label> <a href="#" style="font-size: 10px;" id="idConsumidorFinal">(Consumidor Final)</a>
+                        <div class="input-group input-group-sm">
+                          <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
+                          <span class="input-group-append">
+                            <button type="button" class="btn btn-info btn-flat" disabled id="btn_cli_identificacion"><i class="fas fa-search"></i></button>
+                          </span>
+                        </div>
                         <div class="help-block with-errors"></div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Guardar <br><i class="fas fa-save"></i></button>
+                        <label for="ftr_id_forma_pago" class="control-label">Forma de Pago</label>
+                        <select name="ftr_id_forma_pago" id="ftr_id_forma_pago" class="form-control" required disabled></select>
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
-                  </div> 
-                </form>
+                  </div>
+                  <hr>
+                  <div class="centrarContent"><strong>Ingreso de Ítems</strong></div>
+                  <form id="formItemComprobante" class="formModalPages" data-toggle="validator" role="form">
+                    <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="prs_id_prod_serv" class="control-label">Productos/Servicios</label>
+                          <select name="prs_id_prod_serv" id="prs_id_prod_serv" class="form-control select2" required disabled>
+                            <option value="">Seleccione Establecimiento</option>
+                            <option value="1" selected>Activo</option>
+                          </select>
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group centrarContent">
+                          <label for="fdt_cantidad" class="control-label">Cantidad</label>
+                          <input type="number" class="form-control" id="fdt_cantidad" name="fdt_cantidad" onkeypress="return soloNumeros(event);" 
+                          required style="font-size: 30px !important;">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Guardar <br><i class="fas fa-save"></i></button>
+                        </div>
+                      </div>
+                    </div> 
+                  </form>
+                </div>
+
               </div>
             </div>
           </div>
@@ -112,7 +118,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-9">
-                    <div class="solo_main" id="dataCliente">
+                    <div class="solo_main" id="transPanel_2">
                       <div class="row">
                         <div class="col-md-6">
                           <span class="labelIdentificacion">Identificación: </span>
@@ -151,50 +157,50 @@
                     </div>
                   </div>
                 </div>
-                <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDescartarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
-                <div id="idTablaProductoServicio"></div>
-                <div style="text-align: right;">
-                  <div>
-                    <span class="detalle_numerico_1">Base imponible <span id="pos_porcentaje_iva"></span>%: </span><span class="detalle_numerico_2" id="pos_base_imp_diff">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_cero">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_no_sujeto">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Base imponible excento IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_exento">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="pos_total_descuento">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Subtotal: </span><span class="detalle_numerico_2" id="pos_total_sub_total">0.00</span>
-                  </div>  
-                  <div>
-                    <span class="detalle_numerico_1">IVA: </span><span class="detalle_numerico_2" id="pos_total_iva">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="pos_total_ice">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">IRBPNR: </span><span class="detalle_numerico_2" id="pos_total_irbpnr">0.00</span>
-                  </div>
-                  <div>
-                    <span class="detalle_numerico_1">Valor Total: </span><span class="detalle_numerico_2" id="pos_total_comprobante_2">0.00</span>
-                  </div>
-                </div>
-                <div class="modal-footer centralFooter">
 
-                  <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
-                    <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                    <div class="modal-footer centralFooter">
-                      <button type="submit" class="btn btn-success btn-dreconstec">Enviar Pago</button>
+                <div id="transPanel_3" class="solo_main">
+                  <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDescartarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
+                  <div id="idTablaProductoServicio"></div>
+                  <div style="text-align: right;">
+                    <div>
+                      <span class="detalle_numerico_1">Base imponible <span id="pos_porcentaje_iva"></span>%: </span><span class="detalle_numerico_2" id="pos_base_imp_diff">0.00</span>
                     </div>
-                  </form>
-
+                    <div>
+                      <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_cero">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_no_sujeto">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">Base imponible excento IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_exento">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">Descuento: </span><span class="detalle_numerico_2" id="pos_total_descuento">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">Subtotal: </span><span class="detalle_numerico_2" id="pos_total_sub_total">0.00</span>
+                    </div>  
+                    <div>
+                      <span class="detalle_numerico_1">IVA: </span><span class="detalle_numerico_2" id="pos_total_iva">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">ICE: </span><span class="detalle_numerico_2" id="pos_total_ice">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">IRBPNR: </span><span class="detalle_numerico_2" id="pos_total_irbpnr">0.00</span>
+                    </div>
+                    <div>
+                      <span class="detalle_numerico_1">Valor Total: </span><span class="detalle_numerico_2" id="pos_total_comprobante_2">0.00</span>
+                    </div>
+                  </div>
+                  <div class="modal-footer centralFooter">
+                    <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
+                      <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
+                      <button type="submit" class="btn btn-success btn-dreconstec">Enviar Pago</button>
+                    </form>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>

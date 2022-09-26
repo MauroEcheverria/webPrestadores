@@ -1,0 +1,210 @@
+<?php
+class generarFacturaXML {
+  public function funcGenerarFacturaXML($data_comprobante,$pdo) {
+
+    $sql_comprobante_detalle="SELECT prs_id_prod_serv,fdt_cantidad
+                              FROM dct_pos_tbl_factura_detalle 
+                              WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
+    $query_comprobante_detalle=$pdo->prepare($sql_comprobante_detalle);
+    $query_comprobante_detalle->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
+    $query_comprobante_detalle->execute();
+    $row_comprobante_detalle = $query_comprobante_detalle->fetchAll();
+
+    $xml_detalles = '';
+    $xml_total_impuesto = '';
+    
+    $pos_trans_descuento = 0;
+    $pos_trans_sub_total = 0;
+    $pos_total_descuento = 0;
+    $pos_total_sub_total = 0;
+
+    foreach ($row_comprobante_detalle as $row_comprobante_detalle) {
+
+      $sql_producto_detalle="SELECT ps.prs_codigo_item, ps.prs_descripcion_item, ps.prs_valor_unitario, 
+                            ps.prs_descuento, ps.prs_iva_cod_impuesto, ps.prs_iva_cod_tarifa,
+                            ps.prs_ice_cod_impuesto, ps.prs_ice_cod_tarifa, ps.prs_irbpnr_cod_impuesto,
+                            ps.prs_irbpnr_cod_tarifa, ps.prs_estado,
+                            ps.prs_det_nombre_1, ps.prs_det_valor_1, ps.prs_det_nombre_2, ps.prs_det_valor_2, 
+                            ps.prs_det_nombre_3, ps.prs_det_valor_3,
+                            IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_iva_cod_impuesto AND trf_codigo = ps.prs_iva_cod_tarifa),0) trf_porcentaje_iva,
+                            IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_ice_cod_impuesto AND trf_codigo = ps.prs_ice_cod_tarifa),0) trf_porcentaje_ice,
+                            IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_irbpnr_cod_impuesto AND trf_codigo = ps.prs_irbpnr_cod_tarifa),0) trf_porcentaje_irbpnr
+                            FROM dct_pos_tbl_producto_servicio ps
+                            WHERE ps.prs_id_prod_serv = :prs_id_prod_serv;";
+      $query_producto_detalle=$pdo->prepare($sql_producto_detalle);
+      $query_producto_detalle->bindValue(':prs_id_prod_serv',$row_comprobante_detalle["prs_id_prod_serv"],PDO::PARAM_INT);
+      $query_producto_detalle->execute();
+      $row_producto_detalle = $query_producto_detalle->fetch(\PDO::FETCH_ASSOC);
+
+      $pos_trans_descuento = $row_producto_detalle["prs_valor_unitario"] * $row_producto_detalle["prs_descuento"] / 100;
+      $pos_total_descuento += $pos_trans_descuento;
+      $pos_trans_sub_total = ($row_producto_detalle["prs_valor_unitario"] - $pos_trans_descuento) * $row_comprobante_detalle["fdt_cantidad"];
+      $pos_total_sub_total += $pos_trans_sub_total;
+
+      $xml_detalles .= '<detalle>
+                        <codigoPrincipal>'.$row_producto_detalle["prs_codigo_item"].'</codigoPrincipal>
+                        <codigoAuxiliar>'.$row_producto_detalle["prs_codigo_item"].'</codigoAuxiliar>
+                        <descripcion>'.$row_producto_detalle["prs_descripcion_item"].'</descripcion>
+                        <cantidad>'.$row_comprobante_detalle["fdt_cantidad"].'</cantidad>
+                        <precioUnitario>'.$row_producto_detalle["prs_valor_unitario"].'</precioUnitario>            
+                        <descuento>'.$pos_trans_descuento.'</descuento>
+                        <precioTotalSinImpuesto>'.($row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"]).'</precioTotalSinImpuesto>
+                        <detallesAdicionales>';
+                          if( $row_producto_detalle["prs_det_nombre_1"] != "" && $row_producto_detalle["prs_det_valor_1"] != "" ) {
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_1"].'" valor="'.$row_producto_detalle["prs_det_valor_1"].'"/>';
+                          }
+                          if( $row_producto_detalle["prs_det_nombre_2"] != "" && $row_producto_detalle["prs_det_valor_2"] != "" ) {
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_2"].'" valor="'.$row_producto_detalle["prs_det_valor_2"].'"/>';
+                          }
+                          if( $row_producto_detalle["prs_det_nombre_3"] != "" && $row_producto_detalle["prs_det_valor_3"] != "" ) {
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_3"].'" valor="'.$row_producto_detalle["prs_det_valor_3"].'"/>';
+                          }
+      $xml_detalles .= '</detallesAdicionales>';
+
+      $xml_detalles .= '<impuestos>';
+
+      /* Diferenciacion IVA */
+      switch ($row_producto_detalle["prs_iva_cod_tarifa"]) {
+        case '2':
+        case '3':
+        case '8':
+          $xml_detalles .= '<impuesto>
+                              <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                              <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                              <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                              <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                              <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                            </impuesto>';
+          $xml_total_impuesto .= '<totalImpuesto>
+                                    <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                                    <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                                    <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                                    <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                                    <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                                  </totalImpuesto>';
+          break;
+        case '0':
+        case '6':
+        case '7':
+          $xml_detalles .= '<impuesto>
+                              <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                              <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                              <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                              <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                              <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                            </impuesto>';
+          break;
+      }
+
+      /* Diferenciacion ICE */
+      if ($row_producto_detalle["prs_ice_cod_impuesto"] == 3) {
+        $xml_detalles .= '<impuesto>
+                            <codigo>'.$row_producto_detalle["prs_ice_cod_impuesto"].'</codigo>
+                            <codigoPorcentaje>'.$row_producto_detalle["prs_ice_cod_tarifa"].'</codigoPorcentaje>
+                            <tarifa>'.$row_producto_detalle["trf_porcentaje_ice"].'</tarifa>
+                            <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                            <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100).'</valor>
+                          </impuesto>';
+        $xml_total_impuesto .= '<totalImpuesto>
+                                  <codigo>'.$row_producto_detalle["prs_ice_cod_impuesto"].'</codigo>
+                                  <codigoPorcentaje>'.$row_producto_detalle["prs_ice_cod_tarifa"].'</codigoPorcentaje>
+                                  <tarifa>'.$row_producto_detalle["trf_porcentaje_ice"].'</tarifa>
+                                  <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                                  <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100).'</valor>
+                                </totalImpuesto>';
+      }
+
+      /* Diferenciacion irbpnr */
+      if ($row_producto_detalle["prs_irbpnr_cod_impuesto"] == 5) {
+        $xml_detalles .= '<impuesto>
+                            <codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
+                            <codigoPorcentaje>'.$row_producto_detalle["prs_irbpnr_cod_tarifa"].'</codigoPorcentaje>
+                            <tarifa>'.$row_producto_detalle['trf_porcentaje_irbpnr'].'</tarifa>
+                            <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                            <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100).'</valor>
+                          </impuesto>';
+        $xml_total_impuesto .= '<totalImpuesto>
+                                  <codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
+                                  <codigoPorcentaje>'.$row_producto_detalle["prs_irbpnr_cod_tarifa"].'</codigoPorcentaje>
+                                  <tarifa>'.$row_producto_detalle['trf_porcentaje_irbpnr'].'</tarifa>
+                                  <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
+                                  <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100).'</valor>
+                                </totalImpuesto>';
+      }
+
+      $xml_detalles .= '</impuestos>';
+      $xml_detalles .= '</detalle>';
+    }
+
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>
+            <factura id="comprobante" version="1.0.0">
+            <infoTributaria>
+                <ambiente>'.$data_comprobante["sri_clave_acceso_tipo_ambiente"].'</ambiente>
+                <tipoEmision>'.$data_comprobante["sri_clave_acceso_tipo_emision"].'</tipoEmision>
+                <razonSocial>'.$data_comprobante["emp_empresa"].'</razonSocial>
+                <nombreComercial>'.$data_comprobante["emp_nom_comercial"].'</nombreComercial>
+                <ruc>'.$data_comprobante["emp_ruc"].'</ruc>
+                <claveAcceso>'.$data_comprobante["sri_clave_acceso"].'</claveAcceso>
+                <codDoc>'.$data_comprobante["sri_clave_acceso_tipo_comprobante"].'</codDoc>
+                <estab>'.$data_comprobante["sri_clave_acceso_serie_establecimiento"] .'</estab>
+                <ptoEmi>'.$data_comprobante["sri_clave_acceso_serie_punto_emision"].'</ptoEmi>
+                <secuencial>'.$data_comprobante["sri_clave_acceso_secuencial"].'</secuencial>
+                <dirMatriz>'.$data_comprobante["emp_direccion_matriz"].'</dirMatriz>
+            </infoTributaria>
+            <infoFactura>
+                <fechaEmision>'.date("d/m/Y",strtotime($data_comprobante["fechaActual_4"])).'</fechaEmision>
+                <dirEstablecimiento>'.$data_comprobante["emp_direccion_matriz"].'</dirEstablecimiento>
+                <contribuyenteEspecial>'.$data_comprobante["emp_contrib_especial"].'</contribuyenteEspecial>
+                <obligadoContabilidad>'.$data_comprobante["emp_obli_contabilidad"].'</obligadoContabilidad>
+                <tipoIdentificacionComprador>'.$data_comprobante["cli_tipo_identificacion"].'</tipoIdentificacionComprador>
+                <guiaRemision></guiaRemision>
+                <razonSocialComprador>'.$data_comprobante["cli_nombres"].'</razonSocialComprador>
+                <identificacionComprador>'.$data_comprobante["cli_identificacion"].'</identificacionComprador>
+                <direccionComprador>'.$data_comprobante["cli_direccion"].'</direccionComprador>';
+    $xml .= '<totalSinImpuestos>'.$pos_total_sub_total.'</totalSinImpuestos>';
+    $xml .= '<totalDescuento>'.$pos_total_descuento.'</totalDescuento>';        
+    $xml .= '<totalConImpuestos>';
+    $xml .= $xml_total_impuesto;
+    $importeTotal = 0;
+    $xml.='</totalConImpuestos>        
+          <propina>0.00</propina>        
+          <importeTotal>'.$importeTotal.'</importeTotal>
+          <moneda>DOLAR</moneda>
+          <pagos>
+              <pago>
+                  <formaPago>'.$data_comprobante["fop_id_forma_pago"].'</formaPago>
+                  <total>'.$importeTotal.'</total>
+                  <plazo>1</plazo>
+                  <unidadTiempo>Dias</unidadTiempo>
+              </pago>            
+          </pagos>
+          <valorRetIva>0.00</valorRetIva>
+          <valorRetRenta>0.00</valorRetRenta>
+          </infoFactura>
+          <detalles>';
+    $xml.=$xml_detalles;
+    $xml.='</detalles>
+            <infoAdicional>
+                <campoAdicional nombre="Direccion">'.$data_comprobante["cli_direccion"].'</campoAdicional>
+                <campoAdicional nombre="Telefono">'.$data_comprobante["cli_telefono"].'</campoAdicional>        
+                <campoAdicional nombre="Email">'.$data_comprobante["cli_correo"].'</campoAdicional>
+            </infoAdicional>
+          </factura>';
+
+    $nombre = "../../comprobantesGenerados/".$data_comprobante["sri_clave_acceso"].".xml";
+    $archivo = fopen($nombre, "w+");
+    if (fwrite($archivo, $xml)) {
+      $data_result["cargaXML"] = "cargaOK";
+      $data_result["clave_acceso_sri"] = $data_comprobante["sri_clave_acceso"];
+    }
+    else {
+      $data_result["cargaXML"] = "cargaError";
+      $data_result["clave_acceso_sri"] = "";
+    }
+    fclose($archivo);
+
+    return $data_result["cargaXML"]."&&&&".$data_result["clave_acceso_sri"];
+ 
+  }   
+}
