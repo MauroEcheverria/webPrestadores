@@ -12,7 +12,7 @@ function renderizarProductoServicio() {
             $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
             $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
             $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
-            $("#pos_base_imp_iva_cero").empty().prepend(result.pos_base_imp_iva_cero);
+            $("#pos_base_imp_iva_0").empty().prepend(result.pos_base_imp_iva_0);
             $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
             $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
             $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
@@ -110,6 +110,22 @@ $(document).ready(function() {
 
   $(".select2").select2({
     maximumSelectionLength: 20
+  });
+
+  $('#cli_identificacion').keypress(function(e){
+    if( e.which == 13 ){
+      if( $('#cli_identificacion').val() != "" ){
+        if( $('#cli_identificacion').val().length >= 8 ){
+          $('#btn_cli_identificacion').click();
+        }
+        else {
+          toastr.warning('El número ingresado debe contener más de 8 dígitos.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right"});
+        }
+      }
+      else {
+        toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right"});
+      }
+    }
   });
 
   if($('div#appTransaccionesFlag').hasClass('appTransaccionesFlag')) {
@@ -600,6 +616,10 @@ $(document).ready(function() {
         testOcultarModalCliente = 0;
       }
     });
+  });
+  $('#btnNoRegistrarClienteNoRegistrado').click( function () {
+    $('#cli_identificacion').val("");
+    $('#myConfirmarClienteNoRegistrado').modal('hide');
   });
   $('#ftr_id_forma_pago').change( function () {
     if ($("#ftr_id_forma_pago").val() != "") {

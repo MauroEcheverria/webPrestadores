@@ -166,7 +166,7 @@
                       <span class="detalle_numerico_1">Base imponible <span id="pos_porcentaje_iva"></span>%: </span><span class="detalle_numerico_2" id="pos_base_imp_diff">0.00</span>
                     </div>
                     <div>
-                      <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_cero">0.00</span>
+                      <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_0">0.00</span>
                     </div>
                     <div>
                       <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_no_sujeto">0.00</span>
@@ -249,7 +249,7 @@
       </div>
       <div class="modal-body"><strong>Cliente NO registrado, desea registrarlo?</strong></div>
       <div class="modal-footer centralFooter">
-        <button type="button" class="btn btn-warning" data-dismiss="modal"><stron>No</stron></button>
+        <button type="button" class="btn btn-warning" id="btnNoRegistrarClienteNoRegistrado"><stron>No</stron></button>
         <button type="button" class="btn btn-warning" id="btnConfirmarClienteNoRegistrado"><stron>Si</stron></button>
       </div>
     </div>
