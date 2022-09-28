@@ -31,7 +31,8 @@
     $sql_2="SELECT ctg_key,ctg_descripcion
 				    FROM dct_sistema_tbl_catalogo
 				    WHERE ctg_estado = 1
-				    AND ctg_tipo = 'PAGO';";
+				    AND ctg_tipo = 'PAGO'
+				    ORDER BY 1 DESC;";
     $query_2=$pdo->prepare($sql_2);
     $query_2->execute();
     $row_2 = $query_2->fetchAll();

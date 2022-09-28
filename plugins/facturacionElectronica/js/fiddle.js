@@ -35,11 +35,11 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               type: 'POST',
               url: "../../../plugins/facturacionElectronica/validarComprobante.php",
               data: {
-                'claveAcceso': $claveAcceso.text()
+                'claveAcceso': clave_acceso_sri
               },
               context: document.body
             }).done(function (respuestaValidarComprobante) {
-              /*respuestaValidarComprobante = JSON.parse(respuestaValidarComprobante);
+              respuestaValidarComprobante = JSON.parse(respuestaValidarComprobante);
               if (respuestaValidarComprobante.sri_estado == "RECIBIDA") {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se valida de manera correcta comprobante electrónico.</div>" );
                 service = 'Autorizacion Comprobante';
@@ -48,7 +48,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   type: 'POST',
                   url: "../../../plugins/facturacionElectronica/autorizacionComprobante.php",
                   data: {
-                    'claveAcceso': $claveAcceso.text()
+                    'claveAcceso': clave_acceso_sri
                   },
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
@@ -62,7 +62,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                 });
               } else {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.sri_mensaje+". Cod Error SRI ("+respuestaValidarComprobante.sri_identificador+")</div>" );
-              }*/
+              }
             });
           });
         }

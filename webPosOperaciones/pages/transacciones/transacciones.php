@@ -57,7 +57,7 @@
                       <div class="form-group">
                         <label for="cli_identificacion" class="control-label">Identificación</label> <a href="#" style="font-size: 10px;" id="idConsumidorFinal">(Consumidor Final)</a>
                         <div class="input-group input-group-sm">
-                          <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
+                          <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" required disabled style="font-size: 15px !important;">
                           <span class="input-group-append">
                             <button type="button" class="btn btn-info btn-flat" disabled id="btn_cli_identificacion"><i class="fas fa-search"></i></button>
                           </span>
@@ -100,7 +100,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Guardar <br><i class="fas fa-save"></i></button>
+                          <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Añadir <br><i class="fas fa-cart-plus"></i></button>
                         </div>
                       </div>
                     </div> 

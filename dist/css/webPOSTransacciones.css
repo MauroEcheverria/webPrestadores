@@ -82,3 +82,7 @@
  	background-color: #00f3ff!important;
  	font-size: 21px
 }
+#cli_identificacion {
+	text-align: center;
+    font-weight: bold;
+}

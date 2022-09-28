@@ -12,30 +12,29 @@
     $dataSesion = $sesion->get('dataSesion');
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
-    $pdo->beginTransaction();
 
     $sql_empresa="SELECT wsr_tipo_ambiente
-        FROM dct_sistema_tbl_empresa 
-        WHERE emp_id_empresa = 
-        (SELECT usr_id_empresa 
-          FROM dct_sistema_tbl_usuario 
-          WHERE usr_cod_usuario = :usr_cod_usuario);";
+                  FROM dct_sistema_tbl_empresa 
+                  WHERE emp_id_empresa = 
+                  (SELECT usr_id_empresa 
+                    FROM dct_sistema_tbl_usuario 
+                    WHERE usr_cod_usuario = :usr_cod_usuario);";
     $query_empresa=$pdo->prepare($sql_empresa);
     $query_empresa->bindValue(':usr_cod_usuario',$dataSesion["cod_system_user"],PDO::PARAM_INT);
     $query_empresa->execute();
     $row_empresa = $query_empresa->fetch(\PDO::FETCH_ASSOC);
 
     $sql_ws="SELECT wsr_url_1,wsr_url_2
-        FROM dct_pos_tbl_ws_sri 
-        WHERE wsr_tipo_ambiente = :wsr_tipo_ambiente
-        AND wsr_descripcion = 'AUTORIZACION'
-        AND wsr_estado = 1;";
+              FROM dct_pos_tbl_ws_sri 
+              WHERE wsr_tipo_ambiente = :wsr_tipo_ambiente
+              AND wsr_descripcion = 'AUTORIZACION'
+              AND wsr_estado = 1;";
     $query_ws=$pdo->prepare($sql_ws);
     $query_ws->bindValue(':wsr_tipo_ambiente',$row_empresa["wsr_tipo_ambiente"],PDO::PARAM_INT);
     $query_ws->execute();
     $row_ws = $query_ws->fetch(\PDO::FETCH_ASSOC);
 
-    $claveAcceso = $_POST['claveAcceso'];
+    $claveAcceso = $_POST["claveAcceso"];
     $servicio = $row_ws["wsr_url_1"];
     $parametros = array();
     $parametros['claveAccesoComprobante'] = $claveAcceso;
@@ -50,26 +49,30 @@
     else {
       $sri_estado = "";
     }
+
     if (!empty($result['autorizaciones']['autorizacion']['numeroAutorizacion'])) {
       $sri_num_autorizacion = utf8_decode($result['autorizaciones']['autorizacion']['numeroAutorizacion']);
     }
     else {
       $sri_num_autorizacion = "";
     }
+
     if (!empty($result['autorizaciones']['autorizacion']['ambiente'])) {
       $sri_ambiente = utf8_decode($result['autorizaciones']['autorizacion']['ambiente']);
     }
     else {
       $sri_ambiente = "";
     }
+
     if (!empty($result['autorizaciones']['autorizacion']['fechaAutorizacion'])) {
       $sri_fecha_autorizacion = utf8_decode($result['autorizaciones']['autorizacion']['fechaAutorizacion']);
     }
     else {
       $sri_fecha_autorizacion = "";
     }
+
     if (!empty($result['autorizaciones']['autorizacion']['mensajes'])) {
-      $sri_mensaje = utf8_decode($result['autorizaciones']['autorizacion']['mensajes']);
+      $sri_mensaje = $result['autorizaciones']['autorizacion']['mensajes'];
     }
     else {
       $sri_mensaje = "";
@@ -92,9 +95,9 @@
 
         if ($result['autorizaciones']['autorizacion']['estado'] == 'AUTORIZADO') {
 
-          /*ACTUALIZAR FACTURA CON LOS DATOS DEL SRI
-          $result['autorizaciones']['autorizacion']['fechaAutorizacion']
-          $result['claveAccesoConsultada']*/
+          //ACTUALIZAR FACTURA CON LOS DATOS DEL SRI
+          //$result['autorizaciones']['autorizacion']['fechaAutorizacion']
+          //$result['claveAccesoConsultada']
 
           $comprobante = $client->responseData;
           $xml = str_replace(['&lt;', '&gt;'], ['<', '>'], $comprobante);
@@ -139,13 +142,13 @@
           echo json_encode($data_result);
         }
         else if ($result['autorizaciones']['autorizacion']['estado'] == 'NO AUTORIZADO') {
+          $data_result["message"] = "autorizacion_no_autorizada";
           echo json_encode($data_result);
         }
         else {
           $data_result["message"] = "autorizacion_no_identificada";
           echo json_encode($data_result);
         }
-        
 
       }
     }
