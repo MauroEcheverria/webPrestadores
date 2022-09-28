@@ -240,13 +240,22 @@ $(document).ready(function() {
         var result = eval('('+result+')');
           switch (result.message) {
             case "saveOK":
-              renderizarProductoServicio();
-              /*$('#myModalRegistroTransacciones').modal('show');
+              $('#myModalRegistroTransacciones').modal('show');
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
               renderizarProductoServicio();
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);*/
+              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+
+              $('#transPanel_1').fadeOut();
+              $('#transPanel_2').fadeOut();
+              $("#pos_total_comprobante_1").empty().prepend("0.00");
+              $('#btnPosNuevaFactura').prop("disabled",false);
+              $('#cli_identificacion').prop("disabled",true);
+              $('#btn_cli_identificacion').prop("disabled",true);
+              $('#ftr_id_forma_pago').prop("disabled",true);
+              $('#prs_id_prod_serv').prop("disabled",true);
+
               break;
             case "noPoseeFirma":
               $('#myModalRegistroTransacciones').modal('show');
