@@ -846,4 +846,8 @@ $(document).ready(function() {
       }
     });
   });
+  $('#btnEnviarPago').click( function (e) {
+    e.preventDefault();
+    $('#btnSubmitEnviarPago').click();
+  });
 });

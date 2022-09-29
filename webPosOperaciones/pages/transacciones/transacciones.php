@@ -160,6 +160,7 @@
 
                 <div id="transPanel_3" class="solo_main">
                   <button type="button" class="btn btn-danger btn_descartar_item" id="btnPosDescartarItems" title="Descartar Factura"><i class="fas fa-trash"></i> Descartar Ítems</button>
+                  <button type="button" class="btn btn-success btn_descartar_item" id="btnEnviarPago" title="Enviar pago"><i class="fas fa-paper-plane"></i> Enviar Pago</button>
                   <div id="idTablaProductoServicio"></div>
                   <div style="text-align: right;">
                     <div>
@@ -196,7 +197,7 @@
                   <div class="modal-footer centralFooter">
                     <form id="formPOSTransGenerarFactura" class="formModalPages" data-toggle="validator" role="form">
                       <input type="hidden" name="csrf" value="<?php echo $dataSesion["token_csrf"]; ?>">
-                      <button type="submit" class="btn btn-success btn-dreconstec">Enviar Pago</button>
+                      <button type="submit" class="btn btn-success btn-dreconstec" id="btnSubmitEnviarPago" title="Enviar pago"><i class="fas fa-paper-plane"></i> Enviar Pago</button>
                     </form>
                   </div>
                 </div>
@@ -225,8 +226,29 @@
           <div id="dataPOSTransacciones"></div>
         </div>
         <div class="modal-footer centralFooter">
-          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal" 
-          id="idCerrarRegistroTransacciones">Cerrar</button>
+          <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal" id="idCerrarRegistroTransacciones">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalInfoErroresDetalle" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row width_100">
+            <div class="col-md-1">
+              <img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">
+            </div>
+            <div class="col-md-11" style="width: 430px;">
+              <h4 class="modal-title">Información</h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div id="dataInfoErroresDetalle"></div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal" id="idCerrarRegistroTransacciones">Cerrar</button>
         </div>
       </div>
     </div>

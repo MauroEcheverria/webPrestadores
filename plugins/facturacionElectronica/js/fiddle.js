@@ -57,7 +57,15 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                     $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba de manera correcta comprobante electrónico</div>" );
                   }
                   else {
-                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.sri_mensaje+". Cod Error SRI ()</div>" );
+                    $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.sri_mensaje+". Cod Error SRI ("+respuestaAutorizacionComprobante.sri_identificador+")<i class='fas fa-eye' id='idVerErrorSRI'></i></div>" );
+
+                    $("#dataInfoErroresDetalle").prepend(respuestaAutorizacionComprobante.sri_informacionAdicional);
+                    $('#idVerErrorSRI').click( function (e) {
+                      e.preventDefault();
+                      $('#myModalRegistroTransacciones').modal('hide');
+                      $('#myModalInfoErroresDetalle').modal('show');
+                    });
+
                   }
                 });
               } else {

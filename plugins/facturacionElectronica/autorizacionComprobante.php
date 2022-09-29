@@ -71,18 +71,30 @@
       $sri_fecha_autorizacion = "";
     }
 
-    if (!empty($result['autorizaciones']['autorizacion']['mensajes'])) {
-      $sri_mensaje = $result['autorizaciones']['autorizacion']['mensajes'];
+    if (is_array($result['autorizaciones']['autorizacion']['mensajes'])) {
+      $sri_mensaje = $result['autorizaciones']['autorizacion']['mensajes']['mensaje']['mensaje'];
+      $sri_identificador = $result['autorizaciones']['autorizacion']['mensajes']['mensaje']['identificador'];
+      $sri_informacionAdicional = $result['autorizaciones']['autorizacion']['mensajes']['mensaje']['informacionAdicional'];
     }
     else {
-      $sri_mensaje = "";
+      if (!empty($result['autorizaciones']['autorizacion']['mensajes'])) {
+        $sri_mensaje = $result['autorizaciones']['autorizacion']['mensajes'];
+      }
+      else {
+        $sri_mensaje = "";
+      }
+      $sri_identificador =  "";
+      $sri_informacionAdicional =  "";
     }
 
+    $data_result["sri_result"] = $result;
+    $data_result["sri_informacionAdicional"] = $sri_informacionAdicional;
     $data_result["sri_estado"] = $sri_estado;
     $data_result["sri_num_autorizacion"] = $sri_num_autorizacion;
     $data_result["sri_ambiente"] = $sri_ambiente;
     $data_result["sri_fecha_autorizacion"] = $sri_fecha_autorizacion;
     $data_result["sri_mensaje"] = $sri_mensaje;
+    $data_result["sri_identificador"] = $sri_identificador;
 
     if ($client->fault) {
       $data_result["message"] = "error_client_default";
