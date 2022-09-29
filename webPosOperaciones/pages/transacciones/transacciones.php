@@ -57,7 +57,7 @@
                       <div class="form-group">
                         <label for="cli_identificacion" class="control-label">Identificación</label> <a href="#" style="font-size: 10px;" id="idConsumidorFinal">(Consumidor Final)</a>
                         <div class="input-group input-group-sm">
-                          <input type="number" class="form-control" id="cli_identificacion" name="cli_identificacion" onkeypress="return soloNumeros(event);" required disabled>
+                          <input type="text" class="form-control" id="cli_identificacion" name="cli_identificacion" required disabled style="font-size: 15px !important;">
                           <span class="input-group-append">
                             <button type="button" class="btn btn-info btn-flat" disabled id="btn_cli_identificacion"><i class="fas fa-search"></i></button>
                           </span>
@@ -100,7 +100,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Guardar <br><i class="fas fa-save"></i></button>
+                          <button type="submit" class="btn btn-success btn-dreconstec btnItemComprobante">Añadir <br><i class="fas fa-cart-plus"></i></button>
                         </div>
                       </div>
                     </div> 
@@ -166,7 +166,7 @@
                       <span class="detalle_numerico_1">Base imponible <span id="pos_porcentaje_iva"></span>%: </span><span class="detalle_numerico_2" id="pos_base_imp_diff">0.00</span>
                     </div>
                     <div>
-                      <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_cero">0.00</span>
+                      <span class="detalle_numerico_1">Base imponible 0%: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_0">0.00</span>
                     </div>
                     <div>
                       <span class="detalle_numerico_1">Base imponible no sujeto IVA: </span><span class="detalle_numerico_2" id="pos_base_imp_iva_no_sujeto">0.00</span>
@@ -249,7 +249,7 @@
       </div>
       <div class="modal-body"><strong>Cliente NO registrado, desea registrarlo?</strong></div>
       <div class="modal-footer centralFooter">
-        <button type="button" class="btn btn-warning" data-dismiss="modal"><stron>No</stron></button>
+        <button type="button" class="btn btn-warning" id="btnNoRegistrarClienteNoRegistrado"><stron>No</stron></button>
         <button type="button" class="btn btn-warning" id="btnConfirmarClienteNoRegistrado"><stron>Si</stron></button>
       </div>
     </div>

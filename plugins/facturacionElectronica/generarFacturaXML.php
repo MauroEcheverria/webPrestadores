@@ -18,6 +18,17 @@ class generarFacturaXML {
     $pos_total_descuento = 0;
     $pos_total_sub_total = 0;
 
+    $pos_base_imp_iva = 0;
+    $pos_base_imp_iva_acum = 0;
+
+    $pos_base_imp_ice = 0;
+    $pos_base_imp_ice_acum = 0;
+
+    $pos_base_imp_irbpnr = 0;
+    $pos_base_imp_irbpnr_acum = 0;
+
+    $pos_total_comprobante = 0;
+
     foreach ($row_comprobante_detalle as $row_comprobante_detalle) {
 
       $sql_producto_detalle="SELECT ps.prs_codigo_item, ps.prs_descripcion_item, ps.prs_valor_unitario, 
@@ -38,7 +49,7 @@ class generarFacturaXML {
 
       $pos_trans_descuento = $row_producto_detalle["prs_valor_unitario"] * $row_producto_detalle["prs_descuento"] / 100;
       $pos_total_descuento += $pos_trans_descuento;
-      $pos_trans_sub_total = ($row_producto_detalle["prs_valor_unitario"] - $pos_trans_descuento) * $row_comprobante_detalle["fdt_cantidad"];
+      $pos_trans_sub_total = ( $row_producto_detalle["prs_valor_unitario"] - $pos_trans_descuento ) * $row_comprobante_detalle["fdt_cantidad"];
       $pos_total_sub_total += $pos_trans_sub_total;
 
       $xml_detalles .= '<detalle>
@@ -46,18 +57,18 @@ class generarFacturaXML {
                         <codigoAuxiliar>'.$row_producto_detalle["prs_codigo_item"].'</codigoAuxiliar>
                         <descripcion>'.$row_producto_detalle["prs_descripcion_item"].'</descripcion>
                         <cantidad>'.$row_comprobante_detalle["fdt_cantidad"].'</cantidad>
-                        <precioUnitario>'.$row_producto_detalle["prs_valor_unitario"].'</precioUnitario>            
-                        <descuento>'.$pos_trans_descuento.'</descuento>
-                        <precioTotalSinImpuesto>'.($row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"]).'</precioTotalSinImpuesto>
+                        <precioUnitario>'.round($row_producto_detalle["prs_valor_unitario"],2).'</precioUnitario>            
+                        <descuento>'.round($pos_trans_descuento,2).'</descuento>
+                        <precioTotalSinImpuesto>'.round(($row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"]),2).'</precioTotalSinImpuesto>
                         <detallesAdicionales>';
                           if( $row_producto_detalle["prs_det_nombre_1"] != "" && $row_producto_detalle["prs_det_valor_1"] != "" ) {
-                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_1"].'" valor="'.$row_producto_detalle["prs_det_valor_1"].'"/>';
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_1"].'" valor="'.$row_producto_detalle["prs_det_valor_1"].'"></detAdicional>';
                           }
                           if( $row_producto_detalle["prs_det_nombre_2"] != "" && $row_producto_detalle["prs_det_valor_2"] != "" ) {
-                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_2"].'" valor="'.$row_producto_detalle["prs_det_valor_2"].'"/>';
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_2"].'" valor="'.$row_producto_detalle["prs_det_valor_2"].'"></detAdicional>';
                           }
                           if( $row_producto_detalle["prs_det_nombre_3"] != "" && $row_producto_detalle["prs_det_valor_3"] != "" ) {
-                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_3"].'" valor="'.$row_producto_detalle["prs_det_valor_3"].'"/>';
+                            $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_3"].'" valor="'.$row_producto_detalle["prs_det_valor_3"].'"></detAdicional>';
                           }
       $xml_detalles .= '</detallesAdicionales>';
 
@@ -68,20 +79,22 @@ class generarFacturaXML {
         case '2':
         case '3':
         case '8':
+          $pos_base_imp_iva = $pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100;
           $xml_detalles .= '<impuesto>
                               <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
                               <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
                               <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
-                              <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                              <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                              <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                              <valor>'.round($pos_base_imp_iva,2).'</valor>
                             </impuesto>';
           $xml_total_impuesto .= '<totalImpuesto>
                                     <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
                                     <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                                    <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
                                     <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
-                                    <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                                    <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                                    <valor>'.round($pos_base_imp_iva,2).'</valor>
                                   </totalImpuesto>';
+          $pos_base_imp_iva_acum += $pos_base_imp_iva;
           break;
         case '0':
         case '6':
@@ -90,52 +103,64 @@ class generarFacturaXML {
                               <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
                               <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
                               <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
-                              <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                              <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_iva"] / 100).'</valor>
+                              <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                              <valor>0.00</valor>
                             </impuesto>';
+          $xml_total_impuesto .= '<totalImpuesto>
+                                    <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                                    <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                                    <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                                    <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                                    <valor>0.00</valor>
+                                  </totalImpuesto>';
           break;
       }
 
       /* Diferenciacion ICE */
       if ($row_producto_detalle["prs_ice_cod_impuesto"] == 3) {
+        $pos_base_imp_ice = $pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100;
         $xml_detalles .= '<impuesto>
                             <codigo>'.$row_producto_detalle["prs_ice_cod_impuesto"].'</codigo>
                             <codigoPorcentaje>'.$row_producto_detalle["prs_ice_cod_tarifa"].'</codigoPorcentaje>
                             <tarifa>'.$row_producto_detalle["trf_porcentaje_ice"].'</tarifa>
-                            <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                            <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100).'</valor>
+                            <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                            <valor>'.round($pos_base_imp_ice,2).'</valor>
                           </impuesto>';
         $xml_total_impuesto .= '<totalImpuesto>
                                   <codigo>'.$row_producto_detalle["prs_ice_cod_impuesto"].'</codigo>
                                   <codigoPorcentaje>'.$row_producto_detalle["prs_ice_cod_tarifa"].'</codigoPorcentaje>
+                                  <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
                                   <tarifa>'.$row_producto_detalle["trf_porcentaje_ice"].'</tarifa>
-                                  <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                                  <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100).'</valor>
+                                  <valor>'.round($pos_base_imp_ice,2).'</valor>
                                 </totalImpuesto>';
+        $pos_base_imp_ice_acum += $pos_base_imp_ice;
       }
 
       /* Diferenciacion irbpnr */
       if ($row_producto_detalle["prs_irbpnr_cod_impuesto"] == 5) {
+        $pos_base_imp_irbpnr = $pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100;
         $xml_detalles .= '<impuesto>
                             <codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
                             <codigoPorcentaje>'.$row_producto_detalle["prs_irbpnr_cod_tarifa"].'</codigoPorcentaje>
                             <tarifa>'.$row_producto_detalle['trf_porcentaje_irbpnr'].'</tarifa>
-                            <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                            <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100).'</valor>
+                            <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                            <valor>'.round($pos_base_imp_irbpnr,2).'</valor>
                           </impuesto>';
         $xml_total_impuesto .= '<totalImpuesto>
                                   <codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
                                   <codigoPorcentaje>'.$row_producto_detalle["prs_irbpnr_cod_tarifa"].'</codigoPorcentaje>
+                                  <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
                                   <tarifa>'.$row_producto_detalle['trf_porcentaje_irbpnr'].'</tarifa>
-                                  <baseImponible>'.$pos_trans_sub_total.'</baseImponible>
-                                  <valor>'.($pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100).'</valor>
+                                  <valor>'.round($pos_base_imp_irbpnr,2).'</valor>
                                 </totalImpuesto>';
+        $pos_base_imp_irbpnr_acum = $pos_base_imp_irbpnr;
       }
 
       $xml_detalles .= '</impuestos>';
       $xml_detalles .= '</detalle>';
     }
 
+    $pos_total_comprobante = round($pos_total_sub_total,2) + round($pos_base_imp_iva_acum,2) + round($pos_base_imp_ice_acum,2) + round($pos_base_imp_irbpnr_acum,2);
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <factura id="comprobante" version="1.0.0">
@@ -155,10 +180,8 @@ class generarFacturaXML {
             <infoFactura>
                 <fechaEmision>'.date("d/m/Y",strtotime($data_comprobante["fechaActual_4"])).'</fechaEmision>
                 <dirEstablecimiento>'.$data_comprobante["emp_direccion_matriz"].'</dirEstablecimiento>
-                <contribuyenteEspecial>'.$data_comprobante["emp_contrib_especial"].'</contribuyenteEspecial>
-                <obligadoContabilidad>'.$data_comprobante["emp_obli_contabilidad"].'</obligadoContabilidad>
+                <obligadoContabilidad>'.($data_comprobante["emp_obli_contabilidad"] == 1 ? "SI" : "NO").'</obligadoContabilidad>
                 <tipoIdentificacionComprador>'.$data_comprobante["cli_tipo_identificacion"].'</tipoIdentificacionComprador>
-                <guiaRemision></guiaRemision>
                 <razonSocialComprador>'.$data_comprobante["cli_nombres"].'</razonSocialComprador>
                 <identificacionComprador>'.$data_comprobante["cli_identificacion"].'</identificacionComprador>
                 <direccionComprador>'.$data_comprobante["cli_direccion"].'</direccionComprador>';
@@ -166,7 +189,7 @@ class generarFacturaXML {
     $xml .= '<totalDescuento>'.$pos_total_descuento.'</totalDescuento>';        
     $xml .= '<totalConImpuestos>';
     $xml .= $xml_total_impuesto;
-    $importeTotal = 0;
+    $importeTotal = round($pos_total_comprobante,2);
     $xml.='</totalConImpuestos>        
           <propina>0.00</propina>        
           <importeTotal>'.$importeTotal.'</importeTotal>

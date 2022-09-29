@@ -35,7 +35,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               type: 'POST',
               url: "../../../plugins/facturacionElectronica/validarComprobante.php",
               data: {
-                'claveAcceso': $claveAcceso.text()
+                'claveAcceso': clave_acceso_sri
               },
               context: document.body
             }).done(function (respuestaValidarComprobante) {
@@ -48,7 +48,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   type: 'POST',
                   url: "../../../plugins/facturacionElectronica/autorizacionComprobante.php",
                   data: {
-                    'claveAcceso': $claveAcceso.text()
+                    'claveAcceso': clave_acceso_sri
                   },
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
@@ -74,7 +74,7 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
         $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Contraseña de certificado electrónico inválida</div>" );
       }    
     }
-    //oReq.send();
+    oReq.send();
   });
 }
 function validar_fechas_certificado(ruta_certificado,mi_pwd_p12) {
