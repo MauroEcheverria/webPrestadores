@@ -62,9 +62,9 @@
       $pos_cant_item += 1;
 
       /* Descuentos */
-      $pos_trans_descuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["prs_descuento"] / 100;
+      $pos_trans_descuento = $row_seg_fas["prs_valor_unitario"] * $row_seg_fas["fdt_cantidad"] * $row_seg_fas["prs_descuento"] / 100;
       $pos_total_descuento += $pos_trans_descuento;
-      $pos_trans_sub_total = ($row_seg_fas["prs_valor_unitario"] - $pos_trans_descuento) * $row_seg_fas["fdt_cantidad"];
+      $pos_trans_sub_total = ($row_seg_fas["prs_valor_unitario"] * $row_seg_fas["fdt_cantidad"]) - $pos_trans_descuento;
       $pos_total_sub_total += $pos_trans_sub_total;
 
       /* Diferenciacion IVA */
