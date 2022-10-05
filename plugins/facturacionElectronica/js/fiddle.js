@@ -53,20 +53,30 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
                   respuestaAutorizacionComprobante = JSON.parse(respuestaAutorizacionComprobante);
+
                   if (respuestaAutorizacionComprobante.sri_estado == "AUTORIZADO") {
                     $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba de manera correcta comprobante electrónico</div>" );
+                    toastr.success('Su comprobante ha sido generado correctamente.','Éxito...!!!',{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+                    $('#myModalRegistroTransacciones').modal('hide');
                   }
                   else {
                     $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaAutorizacionComprobante.sri_mensaje+". Cod Error SRI ("+respuestaAutorizacionComprobante.sri_identificador+")<i class='fas fa-eye' id='idVerErrorSRI'></i></div>" );
-
                     $("#dataInfoErroresDetalle").prepend(respuestaAutorizacionComprobante.sri_informacionAdicional);
                     $('#idVerErrorSRI').click( function (e) {
                       e.preventDefault();
                       $('#myModalRegistroTransacciones').modal('hide');
                       $('#myModalInfoErroresDetalle').modal('show');
                     });
-
                   }
+                  
+                  renderizarProductoServicio();
+                  $('#transPanel_1,#transPanel_2,#transPanel_3').fadeOut();
+                  $("#pos_total_comprobante_1").empty().prepend("0.00");
+                  $("#cli_identificacion,#ftr_id_forma_pago").val("").prop("disabled",true);
+                  $("#prs_id_prod_serv").val("").trigger("change").prop("disabled",true);
+                  $('#btnPosNuevaFactura').prop("disabled",false);
+                  $('#btn_cli_identificacion').prop("disabled",true);
+
                 });
               } else {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.sri_mensaje+". Cod Error SRI ("+respuestaValidarComprobante.sri_identificador+")</div>" );

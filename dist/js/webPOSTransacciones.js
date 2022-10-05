@@ -38,7 +38,6 @@ function renderizarProductoServicio() {
           else {
             $('#transPanel_3').fadeOut();
           }
-            
           break;
         default:
           alert("Error al realizar la transacción solicitada.");
@@ -87,7 +86,6 @@ function inactivarProductoServicio(fdt_id_factura_detalle) {
     }
   });
 }
-
 function focusAnimado (idElemento) {
   setParentTransition('#'+idElemento, 'all', '0s', 'ease', function() {
       $('#'+idElemento).addClass('citaSeleccionada');
@@ -100,11 +98,45 @@ function focusAnimado (idElemento) {
   $('#'+idElemento).focus().focusout();
 }
 function setParentTransition(id, prop, delay, style, callback) {
-    $(id).css({'-webkit-transition' : prop + ' ' + delay + ' ' + style});
-    $(id).css({'-moz-transition' : prop + ' ' + delay + ' ' + style});
-    $(id).css({'-o-transition' : prop + ' ' + delay + ' ' + style});
-    $(id).css({'transition' : prop + ' ' + delay + ' ' + style});
-    callback();
+  $(id).css({'-webkit-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'-moz-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'-o-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'transition' : prop + ' ' + delay + ' ' + style});
+  callback();
+}
+function obtenerDatosCliente(cli_identificacion) {
+  if ( cli_identificacion != "") {
+    $.ajax({
+      url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
+      type: 'POST',
+      data:{ 'cli_identificacion' : cli_identificacion },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        $('#transPanel_2').fadeOut();
+        if (result.msmData == "siData" && result.message == "saveOK") {
+          $('#transPanel_2').fadeIn();
+          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+          $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+          $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+          $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+          $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+          $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+          $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+        }
+        else if (result.msmData == "noData") {
+          $('#myConfirmarClienteNoRegistrado').modal('show');
+        }
+        else {
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+          $('#myModalErrorGeneral').modal('show');
+        }
+      }
+    });
+  }
+  else {
+    toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+  }
 }
 $(document).ready(function() {
 
@@ -259,16 +291,7 @@ $(document).ready(function() {
                 $("#dataPOSTransacciones").empty().prepend("");
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-                renderizarProductoServicio();
                 obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
-                $('#transPanel_1').fadeOut();
-                $('#transPanel_2').fadeOut();
-                $("#pos_total_comprobante_1").empty().prepend("0.00");
-                $('#btnPosNuevaFactura').prop("disabled",false);
-                $('#cli_identificacion').prop("disabled",true);
-                $('#btn_cli_identificacion').prop("disabled",true);
-                $('#ftr_id_forma_pago').prop("disabled",true);
-                $('#prs_id_prod_serv').prop("disabled",true);
                 break;
               case "noPoseeFirma":
                 $('#myModalRegistroTransacciones').modal('show');
@@ -567,38 +590,10 @@ $(document).ready(function() {
     });
   });
   $('#btn_cli_identificacion').click( function () {
-    if ($("#cli_identificacion").val() != "") {
-      $.ajax({
-        url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
-        type: 'POST',
-        data:{ 'cli_identificacion' : $("#cli_identificacion").val() },
-        dataType: 'html',
-        success: function(result){
-          var result = eval('('+result+')');
-          $('#transPanel_2').fadeOut();
-          if (result.msmData == "siData" && result.message == "saveOK") {
-            $('#transPanel_2').fadeIn();
-            //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
-            $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
-            $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
-            $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
-            $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
-            $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
-            $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
-          }
-          else if (result.msmData == "noData") {
-            $('#myConfirmarClienteNoRegistrado').modal('show');
-          }
-          else {
-            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-            $('#myModalErrorGeneral').modal('show');
-          }
-        }
-      });
-    }
-    else {
-      toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
-    }
+    obtenerDatosCliente($("#cli_identificacion").val());
+  });
+  $('#cli_identificacion').change( function () {
+    obtenerDatosCliente($("#cli_identificacion").val());
   });
   $('#idConsumidorFinal').click( function (e) {
     e.preventDefault();
