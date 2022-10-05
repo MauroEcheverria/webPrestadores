@@ -76,6 +76,7 @@
       $sri_info_adicional = "";
     }
 
+    $data_result["sri_result"] = $result;
     $data_result["sri_estado"] = $sri_estado;
     $data_result["sri_clave_acceso"] = $sri_clave_acceso;
     $data_result["sri_mensaje"] = $sri_mensaje;

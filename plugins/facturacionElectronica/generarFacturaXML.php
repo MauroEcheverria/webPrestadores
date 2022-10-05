@@ -47,9 +47,9 @@ class generarFacturaXML {
       $query_producto_detalle->execute();
       $row_producto_detalle = $query_producto_detalle->fetch(\PDO::FETCH_ASSOC);
 
-      $pos_trans_descuento = $row_producto_detalle["prs_valor_unitario"] * $row_producto_detalle["prs_descuento"] / 100;
+      $pos_trans_descuento = $row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"] * $row_producto_detalle["prs_descuento"] / 100;
       $pos_total_descuento += $pos_trans_descuento;
-      $pos_trans_sub_total = ( $row_producto_detalle["prs_valor_unitario"] - $pos_trans_descuento ) * $row_comprobante_detalle["fdt_cantidad"];
+      $pos_trans_sub_total = ($row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"]) - $pos_trans_descuento;
       $pos_total_sub_total += $pos_trans_sub_total;
 
       $xml_detalles .= '<detalle>
@@ -59,7 +59,7 @@ class generarFacturaXML {
                         <cantidad>'.$row_comprobante_detalle["fdt_cantidad"].'</cantidad>
                         <precioUnitario>'.round($row_producto_detalle["prs_valor_unitario"],2).'</precioUnitario>            
                         <descuento>'.round($pos_trans_descuento,2).'</descuento>
-                        <precioTotalSinImpuesto>'.round(($row_producto_detalle["prs_valor_unitario"] * $row_comprobante_detalle["fdt_cantidad"]),2).'</precioTotalSinImpuesto>
+                        <precioTotalSinImpuesto>'.round($pos_trans_sub_total,2).'</precioTotalSinImpuesto>
                         <detallesAdicionales>';
                           if( $row_producto_detalle["prs_det_nombre_1"] != "" && $row_producto_detalle["prs_det_valor_1"] != "" ) {
                             $xml_detalles .= '<detAdicional nombre="'.$row_producto_detalle["prs_det_nombre_1"].'" valor="'.$row_producto_detalle["prs_det_valor_1"].'"></detAdicional>';

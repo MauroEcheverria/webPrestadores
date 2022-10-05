@@ -44,7 +44,7 @@
 }
 .btn_descartar_item {
 	font-size: 12px;
-  width: auto;
+  width: 120px;
   margin-bottom: 15px;
 }
 .dct_table {
@@ -85,4 +85,8 @@
 #cli_identificacion {
 	text-align: center;
     font-weight: bold;
+}
+#idVerErrorSRI {
+	margin-left: 10px;
+	cursor:pointer;
 }
