@@ -15,7 +15,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="slcEmpresaF " class="control-label">Empresa</label>
-                        <select name="slcEmpresaF" id="slcEmpresaF" class="form-control empCamposNoEditables slcEmpresa"></select>
+                        <select name="slcEmpresaF" id="slcEmpresaF" class="form-control slcEmpresa"></select>
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 <input type="hidden" name="tipo_form_prod" id="tipo_form_prod">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="slcEmpresaP " class="control-label">Empresa</label>
                                 <select name="slcEmpresaP" id="slcEmpresaP" class="form-control empCamposNoEditables slcEmpresa" required></select>
@@ -84,29 +84,29 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             
                             <div class="form-group">
                                 <label for="pPrecioUnitario" class="control-label">Precio Unitario</label>
-                                <input type="text" class="form-control" id="pPrecioUnitario" name="pPrecioUnitario" maxlength="60" onkeypress="return NumCheck(event, this)">
+                                <input type="text" class="form-control" id="pPrecioUnitario" name="pPrecioUnitario" maxlength="60" onkeypress="return NumCheck(event, this)" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="slcIva" class="control-label">IVA  - Impuesto al Valor Agregado</label>
-                                <select name="slcIva" id="slcIva" class="form-control empCamposNoEditables"></select>
+                                <select name="slcIva" id="slcIva" class="form-control"></select>
                                 <div class="help-block with-errors"></div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="slcIce" class="control-label">ICE - Impuesto a Consumos Especiales</label>
-                                <select name="slcIce" id="slcIce" class="form-control empCamposNoEditables"></select>
+                                <select name="slcIce" id="slcIce" class="form-control"></select>
                                 <div class="help-block with-errors"></div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="slcIbr" class="control-label">IRBPNR - Impuesto Redimible Botellas Plásticas no Retornables</label>
-                                <select name="slcIbr" id="slcIbr" class="form-control empCamposNoEditables"></select>
+                                <select name="slcIbr" id="slcIbr" class="form-control"></select>
                                 <div class="help-block with-errors"></div>
                             </div>
 
@@ -128,7 +128,64 @@
                                         </table>-->
 
                         </div>
-                    </div>
+                        
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalle1" class="control-label">Detalle Adicional 1</label>
+                                        <input type="text" class="form-control" id="pDetalle1" name="pDetalle1" maxlength="200" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalleValor1" class="control-label">Valor</label>
+                                        <input type="text" class="form-control" id="pDetalleValor1" name="pDetalleValor1" maxlength="200" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalle2" class="control-label">Detalle Adicional 2</label>
+                                        <input type="text" class="form-control" id="pDetalle2" name="pDetalle2" maxlength="200">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalleValor2" class="control-label">Valor</label>
+                                        <input type="text" class="form-control" id="pDetalleValor2" name="pDetalleValor2" maxlength="200">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalle3" class="control-label">Detalle Adicional 3</label>
+                                        <input type="text" class="form-control" id="pDetalle3" name="pDetalle3" maxlength="200">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pDetalleValor3" class="control-label">Valor</label>
+                                        <input type="text" class="form-control" id="pDetalleValor3" name="pDetalleValor3" maxlength="200">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        </div>
+                    
                 </div>
                 <div class="modal-footer centralFooter">
                     <button type="button" class="btn btn-success btn-dreconstec" data-dismiss="modal">Cerrar</button>

@@ -15,7 +15,7 @@ function fnProductos() {
       },
       {
         //"targets": [0,9],
-        "targets": [0,1,11,12,13,14,15,16],
+        "targets": [0,1,11,12,13,14,15,16,19,20,21,22],
         "visible": false,
         "searchable": false
       }
@@ -38,6 +38,12 @@ function fnProductos() {
       { title: '<div class="tituloColumnasDT">prs_iva_cod_tarifa</div>' },
       { title: '<div class="tituloColumnasDT">prs_ice_cod_tarifa</div>' },
       { title: '<div class="tituloColumnasDT">prs_irbpnr_cod_tarifa</div>' },
+      { title: '<div class="tituloColumnasDT">Detalle adicional 1</div>' },
+      { title: '<div class="tituloColumnasDT">valor</div>' },
+      { title: '<div class="tituloColumnasDT">Detalle adicional 2</div>' },
+      { title: '<div class="tituloColumnasDT">valor_2</div>' },
+      { title: '<div class="tituloColumnasDT">Detalle adicional 3</div>' },
+      { title: '<div class="tituloColumnasDT">valor_3</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
         width: "80",
@@ -223,37 +229,32 @@ $("#slcImpuesto").change( function () {
   
   $('#dtProductos').on('click','.iconDtSistemaEstablecimientoModificar', function (e) {
     e.preventDefault();
-    window.temp_emp_id_establecimiento = dtProductos.row($(this).parents('tr').first()).data()[0];
-    window.temp_emp_id_empresa = dtProductos.row($(this).parents('tr').first()).data()[1];
-    $('#estCodigo').val(dtProductos.row($(this).parents('tr').first()).data()[3]);
-    $('#estDireccion').val(dtProductos.row($(this).parents('tr').first()).data()[4]);
-    $('#estNombre').val(dtProductos.row($(this).parents('tr').first()).data()[5]);
+    window.idProdServ = dtProductos.row($(this).parents('tr').first()).data()[0];
     
-    $("#chkMatriz").prop("checked",(dtProductos.row($(this).parents('tr').first()).data()[6]) == 1 ? true : false);
-    $('#slcEstado').val(dtProductos.row($(this).parents('tr').first()).data()[7]);
+    $('#slcEmpresaP').val(dtProductos.row($(this).parents('tr').first()).data()[1]);
+    $('#pCodigoItem').val(dtProductos.row($(this).parents('tr').first()).data()[3]);
+    $('#pCodigoAuxiliar').val(dtProductos.row($(this).parents('tr').first()).data()[4]);
+    $('#pDescripcion').val(dtProductos.row($(this).parents('tr').first()).data()[5]);
+    $('#pPrecioUnitario').val(dtProductos.row($(this).parents('tr').first()).data()[6]);
+    $('#slcEstadoP').val(dtProductos.row($(this).parents('tr').first()).data()[10]);
+    $('#slcIva').val(dtProductos.row($(this).parents('tr').first()).data()[14]);
+    $('#slcIce').val(dtProductos.row($(this).parents('tr').first()).data()[15]);
+    $('#slcIbr').val(dtProductos.row($(this).parents('tr').first()).data()[16]);
+    
 
+    $('#pDetalle1').val(dtProductos.row($(this).parents('tr').first()).data()[17]);
+    $('#pDetalleValor1').val(dtProductos.row($(this).parents('tr').first()).data()[18]);
+    $('#pDetalle2').val(dtProductos.row($(this).parents('tr').first()).data()[19]);
+    $('#pDetalleValor2').val(dtProductos.row($(this).parents('tr').first()).data()[20]);
+    $('#pDetalle3').val(dtProductos.row($(this).parents('tr').first()).data()[21]);
+    $('#pDetalleValor3').val(dtProductos.row($(this).parents('tr').first()).data()[22]);
+    
+    
     $('#tipo_form_prod').val("Old");
     $(".empCamposNoEditables").attr("disabled",true);
     $(".camposVisibles").show().attr("required",true);
-    $.ajax({
-      url: '../../beans/POSAdministracion/obtenerEmpresas.php',
-      type: 'POST',
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        switch (result.message) {
-          case "saveOK":
-            $("#slcEmpresa").empty().prepend(result.catag);
-            $('#slcEmpresa').val(temp_emp_id_empresa);
-            $('#myModalProductos').modal('show');
-            break;
-          default:
-            $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-            $('#myModalErrorGeneral').modal('show');
-            break;
-        }
-      }
-    });
+    
+    $('#myModalProductos').modal('show');
 
   });
 
@@ -367,7 +368,7 @@ $('#frmProductos').validator().on('submit', function (e) {
           var serialized = myform.serialize();
           disabled.attr('disabled','disabled');
           
-        $params = serialized+"&idProducto="+temp_emp_id_establecimiento;
+        $params = serialized+"&idProducto="+idProdServ;
       }
       else {
         $params = myform.serialize();

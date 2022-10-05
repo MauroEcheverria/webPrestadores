@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="slcEmpresaFVinc " class="control-label">Empresa</label>
-                        <select name="slcEmpresaFVinc" id="slcEmpresaFVinc" class="form-control empCamposNoEditables slcEmpresa"></select>
+                        <select name="slcEmpresaFVinc" id="slcEmpresaFVinc" class="form-control slcEmpresa"></select>
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="slcEmpresaP " class="control-label">Empresa</label>
-                                <select name="slcEmpresaP" id="slcEmpresaP" class="form-control empCamposNoEditables slcEmpresa" required></select>
+                                <label for="slcEmpresaVinc" class="control-label">Empresa</label>
+                                <select name="slcEmpresaVinc" id="slcEmpresaVinc" class="form-control  slcEmpresa" required></select>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -71,21 +71,21 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="slcUsuariosVinc" class="control-label">Usuarios</label>
-                                <select name="slcUsuariosVinc" id="slcUsuariosVinc" class="form-control empCamposNoEditables slcEmpresa" required></select>
+                                <select name="slcUsuariosVinc" id="slcUsuariosVinc" class="form-control" required></select>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                     <label for="slcEstablecimientoVinc " class="control-label">Establecimiento</label>
-                                    <select name="slcEstablecimientoVinc" id="slcEstablecimientoVinc" class="form-control empCamposNoEditables" required></select>
+                                    <select name="slcEstablecimientoVinc" id="slcEstablecimientoVinc" class="form-control " required></select>
                                     <div class="help-block with-errors"></div>
                                 </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                     <label for="slcPtoEmisionVinc " class="control-label">Punto Emision</label>
-                                    <select name="slcPtoEmisionVinc" id="slcPtoEmisionVinc" class="form-control empCamposNoEditables" required></select>
+                                    <select name="slcPtoEmisionVinc" id="slcPtoEmisionVinc" class="form-control " required></select>
                                     <div class="help-block with-errors"></div>
                                 </div>
                         </div>              

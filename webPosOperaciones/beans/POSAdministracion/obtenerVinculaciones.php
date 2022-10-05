@@ -50,11 +50,11 @@ try {
         $return_array[1] = $row["emp_id_empresa"];
         $return_array[2] = $row["est_id_empresa_establecimiento"];
         $return_array[3] = $row["epe_id_empresa_punto_emision"];
-        $return_array[4] = $row["emp_empresa"];
-        $return_array[5] = $row["establecimiento"];
-        $return_array[6] = $row["punto_emision"];
-        $return_array[7] = $row["usr_cod_usuario"];
-        $return_array[8] = $row["usuario"];
+        $return_array[4] = $row["usr_cod_usuario"];
+        $return_array[5] = $row["usuario"];
+        $return_array[6] = $row["emp_empresa"];
+        $return_array[7] = $row["establecimiento"];
+        $return_array[8] = $row["punto_emision"];
         $return_array[9] = $row["uep_estado"];
         
         array_push($return, $return_array);
