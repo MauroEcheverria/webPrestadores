@@ -273,8 +273,6 @@ $('#slcEmpresaPe').change( function () {
           switch (result.message) {
             case "saveOK":
               $('#tipo_form_est').val("Old");
-            case "token_csrf_error":
-            case "error_admin_perfil":
               dtSistemaEstablecimiento.ajax.reload();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
               break;
@@ -323,11 +321,9 @@ $('#slcEmpresaPe').change( function () {
           switch (result.message) {
             case "saveOK":
               $('#tipo_form_pe').val("Old");
-            case "token_csrf_error":
-            case "error_admin_perfil":
               dtPuntosEmision.ajax.reload();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
+              break; 
             case "error_negocio":
               //dtSistemaEstablecimiento.ajax.reload();
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);

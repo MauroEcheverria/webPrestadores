@@ -9,6 +9,7 @@ function administracion($pdo, $dataSesion) {
     $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/media/css/jquery.dataTables.min.css' . $dataSesion["version_css_js"] . '" rel="stylesheet">';
     $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/DataTables/extensions/Responsive/css/responsive.dataTables.min.css' . $dataSesion["version_css_js"] . '" rel="stylesheet">';
     $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' . $dataSesion["version_css_js"] . '">';
+    $css_dreconstec[] = '<link rel="stylesheet" href="../../../plugins/toastr-master/build/toastr.min.css'.$dataSesion["version_css_js"].'">';
 
     $js_dreconstec = array();
     $js_dreconstec[] = '<script src="../../../plugins/DataTables/media/js/jquery.dataTables.min.js' . $dataSesion["version_css_js"] . '"></script>';
@@ -18,6 +19,8 @@ function administracion($pdo, $dataSesion) {
     $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js' . $dataSesion["version_css_js"] . '"></script>';
     $js_dreconstec[] = '<script src="../../../dist/js/webPOSAdministracion.js' . $dataSesion["version_css_js"] . '"></script>';
     $js_dreconstec[] = '<script src="../../../dist/js/webPOSProductos.js' . $dataSesion["version_css_js"] . '"></script>';
+    $js_dreconstec[] = '<script src="../../../dist/js/webPOSVinculacion.js' . $dataSesion["version_css_js"] . '"></script>';
+    $js_dreconstec[] = '<script src="../../../plugins/toastr-master/build/toastr.min.js'.$dataSesion["version_css_js"].'"></script>';
 
     template_head($pdo, $dataSesion, $css_dreconstec);
     ?>
@@ -36,6 +39,9 @@ function administracion($pdo, $dataSesion) {
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Puntos de Emisión</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tabVinculacion-tab" data-toggle="tab" href="#tabVinculacion" role="tab" aria-controls="tabVinculacion" aria-selected="false">Vinculación</a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="idTogglable_3-tab" data-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Productos</a>
@@ -61,6 +67,13 @@ function administracion($pdo, $dataSesion) {
                                             <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevoPtoEmision">Crear</button>
                                         </div>
                                         <table id="dtPuntosEmision" class="cell-border" cellspacing="0" width="100%"></table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tabVinculacion" role="tabpanel" aria-labelledby="tabVinculacion-tab">
+                                <div class="divPanelTogglable">
+                                    <div class="toggle_dentro_panel">                                  
+                                        <?php include("vinculacion.php"); ?>
                                     </div>
                                 </div>
                             </div>

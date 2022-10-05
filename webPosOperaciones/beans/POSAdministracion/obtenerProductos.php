@@ -36,6 +36,7 @@ try {
             ,ifnull(concat(irb.trf_porcentaje ,' - ', irb.trf_descripcion ),'-') desc_irb
             ,p.prs_iva_cod_impuesto,p.prs_ice_cod_impuesto,p.prs_irbpnr_cod_impuesto
             ,p.prs_iva_cod_tarifa,p.prs_ice_cod_tarifa,p.prs_irbpnr_cod_tarifa
+            ,prs_det_nombre_1, prs_det_valor_1 ,prs_det_nombre_2, prs_det_valor_2 ,prs_det_nombre_3, prs_det_valor_3
             from dct_pos_tbl_producto_servicio p
             inner join dct_sistema_tbl_empresa e
                     on e.emp_id_empresa = p.emp_id_empresa
@@ -74,6 +75,12 @@ try {
         $return_array[14] = $row["prs_iva_cod_tarifa"];
         $return_array[15] = $row["prs_ice_cod_tarifa"];
         $return_array[16] = $row["prs_irbpnr_cod_tarifa"];
+        $return_array[17] = $row["prs_det_nombre_1"];
+        $return_array[18] = $row["prs_det_valor_1"];
+        $return_array[19] = $row["prs_det_nombre_2"];
+        $return_array[20] = $row["prs_det_valor_2"];
+        $return_array[21] = $row["prs_det_nombre_3"];
+        $return_array[22] = $row["prs_det_valor_3"];
         
         array_push($return, $return_array);
     }
