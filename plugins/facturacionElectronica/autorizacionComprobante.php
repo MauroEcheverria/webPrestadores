@@ -111,6 +111,21 @@
           //$result['autorizaciones']['autorizacion']['fechaAutorizacion']
           //$result['claveAccesoConsultada']
 
+          $sql_update_trans_facturacion="UPDATE dct_pos_tbl_factura_transaccion 
+                                  SET ftr_estado_transaccion = :ftr_estado_transaccion,
+                                      ftr_usuario_modificacion=:ftr_usuario_modificacion,
+                                      ftr_fecha_autorizacion=:ftr_fecha_autorizacion,
+                                      ftr_fecha_modificacion=now(),
+                                      ftr_ip_modificacion=:ftr_ip_modificacion
+                                  WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
+          $query_update_trans_facturacion=$pdo->prepare($sql_update_trans_facturacion);
+          $query_update_trans_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
+          $query_update_trans_facturacion->bindValue(':ftr_estado_transaccion','AUT',PDO::PARAM_STR);
+          $query_update_trans_facturacion->bindValue(':ftr_fecha_autorizacion',$result['autorizaciones']['autorizacion']['fechaAutorizacion'],PDO::PARAM_STR);
+          $query_update_trans_facturacion->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+          $query_update_trans_facturacion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+          $query_update_trans_facturacion->execute();
+
           $comprobante = $client->responseData;
           $xml = str_replace(['&lt;', '&gt;'], ['<', '>'], $comprobante);
 

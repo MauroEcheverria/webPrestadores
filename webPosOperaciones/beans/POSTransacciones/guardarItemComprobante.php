@@ -25,8 +25,8 @@
 			if ($row["prs_id_prod_serv"] == $_POST["prs_id_prod_serv"]) {$cont++;}
 		}
 		if ($cont==0) {
-      $sql="INSERT INTO dct_pos_tbl_factura_detalle(ftr_id_factura_transaccion, prs_id_prod_serv, fdt_cantidad, fdt_estado_transaccion, fdt_estado, fdt_usuario_creacion, fdt_fecha_creacion, fdt_ip_creacion)
-		    	VALUES (:ftr_id_factura_transaccion, :prs_id_prod_serv, :fdt_cantidad, 'TMP', 1, :fdt_usuario_creacion, now(), :fdt_ip_creacion);";
+      $sql="INSERT INTO dct_pos_tbl_factura_detalle(ftr_id_factura_transaccion, prs_id_prod_serv, fdt_cantidad, fdt_estado, fdt_usuario_creacion, fdt_fecha_creacion, fdt_ip_creacion)
+		    	VALUES (:ftr_id_factura_transaccion, :prs_id_prod_serv, :fdt_cantidad, 1, :fdt_usuario_creacion, now(), :fdt_ip_creacion);";
 	    $query=$pdo->prepare($sql);
 	    $query->bindValue(':ftr_id_factura_transaccion',$_SESSION["id_factura_transaccion"],PDO::PARAM_INT);
 	    $query->bindValue(':prs_id_prod_serv',cleanData("noLimite",0,"noMayuscula",$_POST["prs_id_prod_serv"]),PDO::PARAM_INT);

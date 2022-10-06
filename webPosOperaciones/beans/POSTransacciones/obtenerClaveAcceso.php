@@ -13,8 +13,8 @@
 					ca.cla_sri_clave_acceso,
 					(SELECT em.emp_ruc  FROM dct_sistema_tbl_empresa em WHERE em.emp_id_empresa  = ca.emp_id_empresa) emp_ruc,
 					(SELECT em.emp_empresa  FROM dct_sistema_tbl_empresa em WHERE em.emp_id_empresa  = ca.emp_id_empresa) emp_empresa,
-					(SELECT cl.cli_identificacion  FROM dct_pos_tbl_cientes cl WHERE cl.cli_id_cliente   = ca.cli_id_cliente) cli_identificacion,
-					(SELECT cl.cli_nombres  FROM dct_pos_tbl_cientes cl WHERE cl.cli_id_cliente   = ca.cli_id_cliente) cli_nombres,
+					'0919664854' cli_identificacion,
+					'MARUTO' cli_nombres,
 					CAST(ca.cla_fecha_creacion AS DATE) cla_fecha_creacion,
 					CONCAT(ca.cla_establecimiento,'-',ca.cla_punto_emision,'-',ca.cla_num_comprobante) num_comprobante,
 					CASE 

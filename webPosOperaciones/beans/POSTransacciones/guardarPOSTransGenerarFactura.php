@@ -108,19 +108,6 @@
 			    $query_update_trans_facturacion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
 			    $query_update_trans_facturacion->execute();
 
-			    $sql_detalle_facturacion="UPDATE dct_pos_tbl_factura_detalle 
-															    SET fdt_estado_transaccion = :fdt_estado_transaccion,
-																	    fdt_usuario_modificacion=:fdt_usuario_modificacion,
-																   		fdt_fecha_modificacion=now(),
-																   		fdt_ip_modificacion=:fdt_ip_modificacion
-															    WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
-					$query_detalle_facturacion=$pdo->prepare($sql_detalle_facturacion);
-					$query_detalle_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
-					$query_detalle_facturacion->bindValue(':fdt_estado_transaccion','PPR',PDO::PARAM_STR);
-					$query_detalle_facturacion->bindValue(':fdt_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-					$query_detalle_facturacion->bindValue(':fdt_ip_modificacion',getRealIP(),PDO::PARAM_STR);
-					$query_detalle_facturacion->execute();
-
 					$data_comprobante["sri_clave_acceso_fecha_emison"] = date('dmY', strtotime($fechaActual_4));
 					$data_comprobante["sri_clave_acceso_tipo_comprobante"] = str_pad($data_comprobante["tipo_comporbante"],'2','0',STR_PAD_LEFT);
 					$data_comprobante["sri_clave_acceso_ruc"] = $data_comprobante["emp_ruc"];
@@ -189,7 +176,7 @@
 
 					$data_comprobante["fechaActual_4"] = $fechaActual_4;
 
-					if ($query_update_trans_facturacion && $query_detalle_facturacion && $query_clave_acceso && $query_serial_facturacion) {
+					if ($query_update_trans_facturacion && $query_clave_acceso && $query_serial_facturacion) {
 		
 						$generarFacturaXML = new generarFacturaXML();
 			      $dataXML = $generarFacturaXML->funcGenerarFacturaXML($data_comprobante,$pdo);

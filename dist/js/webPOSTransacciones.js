@@ -508,7 +508,7 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [1,2,3,4,6,7,8,9]
+        aTargets: [0]
       },
       {
         "targets": [0,1],
@@ -546,7 +546,6 @@ $(document).ready(function() {
       type: "post",
       data: function ( d ) {
         d.trans_desde_hasta = $('#trans_desde_hasta').val();
-        d.asdasdasd = $('#cli_identificacion').val()
       },
       dataSrc: function (json) {
         return json.data;
