@@ -1,4 +1,4 @@
-function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p12,ruta_xml) {
+function obtenerComprobanteFirmadoSRI(id_transaccion,clave_acceso_sri,ruta_certificado,mi_pwd_p12,ruta_xml) {
   var response = [];
   $.ajax({
       url: "../../../plugins/facturacionElectronica/leerXML.php",
@@ -35,7 +35,8 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
               type: 'POST',
               url: "../../../plugins/facturacionElectronica/validarComprobante.php",
               data: {
-                'claveAcceso': clave_acceso_sri
+                'claveAcceso': clave_acceso_sri,
+                'id_transaccion': id_transaccion
               },
               context: document.body
             }).done(function (respuestaValidarComprobante) {
@@ -48,12 +49,12 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   type: 'POST',
                   url: "../../../plugins/facturacionElectronica/autorizacionComprobante.php",
                   data: {
-                    'claveAcceso': clave_acceso_sri
+                    'claveAcceso': clave_acceso_sri,
+                    'id_transaccion': id_transaccion
                   },
                   context: document.body
                 }).done(function (respuestaAutorizacionComprobante) {
                   respuestaAutorizacionComprobante = JSON.parse(respuestaAutorizacionComprobante);
-
                   if (respuestaAutorizacionComprobante.sri_estado == "AUTORIZADO") {
                     $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se aprueba de manera correcta comprobante electrónico</div>" );
                     toastr.success('Su comprobante ha sido generado correctamente.','Éxito...!!!',{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
@@ -68,7 +69,6 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                       $('#myModalInfoErroresDetalle').modal('show');
                     });
                   }
-                  
                   renderizarProductoServicio();
                   $('#transPanel_1,#transPanel_2,#transPanel_3').fadeOut();
                   $("#pos_total_comprobante_1").empty().prepend("0.00");
@@ -76,7 +76,6 @@ function obtenerComprobanteFirmadoSRI(clave_acceso_sri,ruta_certificado,mi_pwd_p
                   $("#prs_id_prod_serv").val("").trigger("change").prop("disabled",true);
                   $('#btnPosNuevaFactura').prop("disabled",false);
                   $('#btn_cli_identificacion').prop("disabled",true);
-
                 });
               } else {
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Mensaje SRI: "+respuestaValidarComprobante.sri_mensaje+". Cod Error SRI ("+respuestaValidarComprobante.sri_identificador+")</div>" );

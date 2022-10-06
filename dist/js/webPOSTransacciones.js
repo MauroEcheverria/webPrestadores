@@ -291,7 +291,7 @@ $(document).ready(function() {
                 $("#dataPOSTransacciones").empty().prepend("");
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
                 $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-                obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+                obtenerComprobanteFirmadoSRI(result.id_transaccion,result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
                 break;
               case "noPoseeFirma":
                 $('#myModalRegistroTransacciones').modal('show');

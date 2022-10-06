@@ -24,7 +24,7 @@
                   FROM dct_pos_tbl_factura_transaccion ft,dct_pos_tbl_factura_detalle fd, dct_pos_tbl_producto_servicio ps
                   WHERE ft.ftr_id_factura_transaccion = fd.ftr_id_factura_transaccion
                   AND fd.prs_id_prod_serv = ps.prs_id_prod_serv
-                  AND ft.ftr_estado_transaccion = 'PPR'
+                  AND ft.ftr_estado_transaccion = 'TMP'
                   AND fd.ftr_id_factura_transaccion = :ftr_id_factura_transaccion
                   AND fd.fdt_estado = 1
                   AND ps.emp_id_empresa = :emp_id_empresa

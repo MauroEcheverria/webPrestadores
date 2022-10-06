@@ -92,23 +92,10 @@
 
 		    if ($query_trans_facturacion->rowCount() == 1) {
 
-		    $row_trans_facturacion = $query_trans_facturacion->fetch(\PDO::FETCH_ASSOC);
-		    $data_comprobante["ftr_id_factura_transaccion"] = $row_trans_facturacion["ftr_id_factura_transaccion"];
+			    $row_trans_facturacion = $query_trans_facturacion->fetch(\PDO::FETCH_ASSOC);
+			    $data_comprobante["ftr_id_factura_transaccion"] = $row_trans_facturacion["ftr_id_factura_transaccion"];
 
-		    	$sql_update_trans_facturacion="UPDATE dct_pos_tbl_factura_transaccion 
-															    SET ftr_estado_transaccion = :ftr_estado_transaccion,
-																	    ftr_usuario_modificacion=:ftr_usuario_modificacion,
-																   		ftr_fecha_modificacion=now(),
-																   		ftr_ip_modificacion=:ftr_ip_modificacion
-															    WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
-			    $query_update_trans_facturacion=$pdo->prepare($sql_update_trans_facturacion);
-			    $query_update_trans_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
-			    $query_update_trans_facturacion->bindValue(':ftr_estado_transaccion','PPR',PDO::PARAM_STR);
-			    $query_update_trans_facturacion->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-			    $query_update_trans_facturacion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
-			    $query_update_trans_facturacion->execute();
-
-					$data_comprobante["sri_clave_acceso_fecha_emison"] = date('dmY', strtotime($fechaActual_4));
+		    	$data_comprobante["sri_clave_acceso_fecha_emison"] = date('dmY', strtotime($fechaActual_4));
 					$data_comprobante["sri_clave_acceso_tipo_comprobante"] = str_pad($data_comprobante["tipo_comporbante"],'2','0',STR_PAD_LEFT);
 					$data_comprobante["sri_clave_acceso_ruc"] = $data_comprobante["emp_ruc"];
 					$data_comprobante["sri_clave_acceso_tipo_ambiente"] = $data_comprobante["wsr_tipo_ambiente"];
@@ -137,27 +124,40 @@
 											                            $data_comprobante["sri_clave_acceso_tipo_emision"].
 											                            $data_comprobante["sri_clave_acceso_verificador"];
 
-					$sql_clave_acceso="INSERT INTO dct_pos_tbl_clave_acceso(emp_id_empresa, ftr_id_factura_transaccion, cla_fecha_emision, 
-						cla_tipo_comprobante, cla_ruc, cla_tipo_ambiente, cla_establecimiento, cla_punto_emision, cla_num_comprobante, cla_cod_numerico, 
-						cla_tipo_emision, cla_dig_verificador, cla_estado_comprobante, cla_estado, cla_usuario_creacion, cla_fecha_creacion, cla_ip_creacion, cla_sri_clave_acceso) 
-					VALUES (:emp_id_empresa, :ftr_id_factura_transaccion, :cla_fecha_emision, :cla_tipo_comprobante, :cla_ruc, :cla_tipo_ambiente, :cla_establecimiento, :cla_punto_emision, :cla_num_comprobante, :cla_cod_numerico, :cla_tipo_emision, :cla_dig_verificador, 'PPR', 1, :cla_usuario_creacion, now(), :cla_ip_creacion, :cla_sri_clave_acceso);";
-			    $query_clave_acceso=$pdo->prepare($sql_clave_acceso);
-			    $query_clave_acceso->bindValue(':emp_id_empresa',$data_comprobante["emp_id_empresa"],PDO::PARAM_INT);
-			    $query_clave_acceso->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
-			    $query_clave_acceso->bindValue(':cla_fecha_emision',$data_comprobante["sri_clave_acceso_fecha_emison"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_tipo_comprobante',$data_comprobante["sri_clave_acceso_tipo_comprobante"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_ruc',$data_comprobante["sri_clave_acceso_ruc"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_tipo_ambiente',$data_comprobante["sri_clave_acceso_tipo_ambiente"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_establecimiento',$data_comprobante["sri_clave_acceso_serie_establecimiento"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_punto_emision',$data_comprobante["sri_clave_acceso_serie_punto_emision"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_num_comprobante',$data_comprobante["sri_clave_acceso_secuencial"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_cod_numerico',$data_comprobante["sri_clave_acceso_cod_numerico"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_tipo_emision',$data_comprobante["sri_clave_acceso_tipo_emision"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_dig_verificador',$data_comprobante["sri_clave_acceso_verificador"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_sri_clave_acceso',$data_comprobante["sri_clave_acceso"],PDO::PARAM_STR);
-			    $query_clave_acceso->bindValue(':cla_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
-			    $query_clave_acceso->bindValue(':cla_ip_creacion',getRealIP(),PDO::PARAM_STR);
-			    $query_clave_acceso->execute();
+		    	$sql_update_trans_facturacion="UPDATE dct_pos_tbl_factura_transaccion SET 
+															    ftr_fecha_emision=:ftr_fecha_emision,
+															    ftr_tipo_comprobante=:ftr_tipo_comprobante,
+															    ftr_ruc=:ftr_ruc,
+															    ftr_tipo_ambiente=:ftr_tipo_ambiente,
+															    ftr_establecimiento=:ftr_establecimiento,
+															    ftr_punto_emision=:ftr_punto_emision,
+															    ftr_num_comprobante=:ftr_num_comprobante,
+															    ftr_cod_numerico=:ftr_cod_numerico,
+															    ftr_tipo_emision=:ftr_tipo_emision,
+															    ftr_dig_verificador=:ftr_dig_verificador,
+															    ftr_sri_clave_acceso=:ftr_sri_clave_acceso,
+															    ftr_estado_transaccion = :ftr_estado_transaccion,
+															    ftr_usuario_modificacion=:ftr_usuario_modificacion,
+														   		ftr_fecha_modificacion=now(),
+														   		ftr_ip_modificacion=:ftr_ip_modificacion
+															    WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
+			    $query_update_trans_facturacion=$pdo->prepare($sql_update_trans_facturacion);
+			    $query_update_trans_facturacion->bindValue(':ftr_fecha_emision',$data_comprobante["sri_clave_acceso_fecha_emison"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_tipo_comprobante',$data_comprobante["sri_clave_acceso_tipo_comprobante"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_ruc',$data_comprobante["sri_clave_acceso_ruc"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_tipo_ambiente',$data_comprobante["sri_clave_acceso_tipo_ambiente"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_establecimiento',$data_comprobante["sri_clave_acceso_serie_establecimiento"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_punto_emision',$data_comprobante["sri_clave_acceso_serie_punto_emision"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_num_comprobante',$data_comprobante["sri_clave_acceso_secuencial"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_cod_numerico',$data_comprobante["sri_clave_acceso_cod_numerico"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_tipo_emision',$data_comprobante["sri_clave_acceso_tipo_emision"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_dig_verificador',$data_comprobante["sri_clave_acceso_verificador"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_sri_clave_acceso',$data_comprobante["sri_clave_acceso"],PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_id_factura_transaccion',$data_comprobante["ftr_id_factura_transaccion"],PDO::PARAM_INT);
+			    $query_update_trans_facturacion->bindValue(':ftr_estado_transaccion','PPR',PDO::PARAM_STR);
+			    $query_update_trans_facturacion->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+			    $query_update_trans_facturacion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+			    $query_update_trans_facturacion->execute();
 
 			    $sql_serial_facturacion="UPDATE dct_pos_tbl_empresa_serial 
 															    SET ser_factura_serie = :ser_factura_serie,
@@ -176,7 +176,7 @@
 
 					$data_comprobante["fechaActual_4"] = $fechaActual_4;
 
-					if ($query_update_trans_facturacion && $query_clave_acceso && $query_serial_facturacion) {
+					if ($query_update_trans_facturacion && $query_serial_facturacion) {
 		
 						$generarFacturaXML = new generarFacturaXML();
 			      $dataXML = $generarFacturaXML->funcGenerarFacturaXML($data_comprobante,$pdo);
@@ -187,6 +187,7 @@
 				      $data_result["ruta_xml"] = $host."webPosOperaciones/comprobantesGenerados/".$data_comprobante["sri_clave_acceso"].".xml";
 				      $data_result["ruta_certificado"] = $host."webPosOperaciones/cargaFirmaArchivo/".$data_comprobante["em_archivo_fact_elec"];
 				      $data_result["contrasenia_archivo"] = $data_comprobante["em_pass_fct_elec"];
+				      $data_result["id_transaccion"] = $data_comprobante["ftr_id_factura_transaccion"];
 							$data_result["numLineaCodigo"] = __LINE__;
 							$pdo->commit();
 							echo json_encode($data_result);
