@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2022 a las 23:03:41
+-- Tiempo de generación: 08-10-2022 a las 19:32:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1792,7 +1792,7 @@ CREATE TABLE `dct_pos_tbl_empresa_serial` (
 --
 
 INSERT INTO `dct_pos_tbl_empresa_serial` (`ser_id_empresa_serial`, `emp_id_empresa`, `ser_factura_serie`, `ser_factura_cod_num`, `ser_nota_credito_serie`, `ser_nota_credito_cod_num`, `ser_nota_debito_serie`, `ser_nota_debito_cod_num`, `ser_guia_remision_serie`, `ser_guia_remision_cod_num`, `ser_comp_ret_serie`, `ser_comp_ret_cod_num`, `ser_estado`, `ser_usuario_creacion`, `ser_usuario_modificacion`, `ser_fecha_creacion`, `ser_fecha_modificacion`, `ser_ip_creacion`, `ser_ip_modificacion`) VALUES
-(1, 1, 116, 118, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-06 20:59:34', NULL, '::1'),
+(1, 1, 119, 121, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-07 19:13:00', NULL, '::1'),
 (3, 2, 10, 1, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-08-09 03:44:36', NULL, '::1');
 
 -- --------------------------------------------------------
@@ -1814,6 +1814,17 @@ CREATE TABLE `dct_pos_tbl_factura_detalle` (
   `fdt_ip_creacion` varchar(100) DEFAULT NULL,
   `fdt_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_factura_detalle`
+--
+
+INSERT INTO `dct_pos_tbl_factura_detalle` (`fdt_id_factura_detalle`, `ftr_id_factura_transaccion`, `prs_id_prod_serv`, `fdt_cantidad`, `fdt_estado`, `fdt_usuario_creacion`, `fdt_usuario_modificacion`, `fdt_fecha_creacion`, `fdt_fecha_modificacion`, `fdt_ip_creacion`, `fdt_ip_modificacion`) VALUES
+(1, 1, 1, 10, 1, '0919664854', NULL, '2022-10-07 19:00:26', NULL, '::1', NULL),
+(2, 2, 3, 30, 1, '0919664854', NULL, '2022-10-07 19:09:40', NULL, '::1', NULL),
+(3, 2, 1, 40, 1, '0919664854', NULL, '2022-10-07 19:09:45', NULL, '::1', NULL),
+(4, 3, 3, 30, 1, '0919664854', NULL, '2022-10-07 19:12:49', NULL, '::1', NULL),
+(5, 3, 1, 20, 1, '0919664854', NULL, '2022-10-07 19:12:52', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1848,6 +1859,15 @@ CREATE TABLE `dct_pos_tbl_factura_transaccion` (
   `ftr_ip_creacion` varchar(100) DEFAULT NULL,
   `ftr_ip_modificacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_factura_transaccion`
+--
+
+INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `emp_id_empresa`, `cli_id_cliente`, `ftr_id_forma_pago`, `ftr_fecha_emision`, `ftr_tipo_comprobante`, `ftr_ruc`, `ftr_tipo_ambiente`, `ftr_establecimiento`, `ftr_punto_emision`, `ftr_num_comprobante`, `ftr_cod_numerico`, `ftr_tipo_emision`, `ftr_dig_verificador`, `ftr_sri_clave_acceso`, `ftr_fecha_autorizacion`, `ftr_estado_transaccion`, `ftr_cod_error`, `ftr_estado`, `ftr_usuario_creacion`, `ftr_usuario_modificacion`, `ftr_fecha_creacion`, `ftr_fecha_modificacion`, `ftr_ip_creacion`, `ftr_ip_modificacion`) VALUES
+(1, 1, 1, '20', '07102022', '01', '0919664854001', '1', '001', '001', '000000116', '00000118', '1', '3', '0710202201091966485400110010010000001160000011813', '2022-10-07', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-07 19:00:13', '2022-10-07 19:06:15', '::1', '::1'),
+(2, 1, 1, '19', '07102022', '01', '0919664854001', '1', '001', '001', '000000117', '00000119', '1', '6', '0710202201091966485400110010010000001170000011916', NULL, 'DVT', 45, 1, '0919664854', '0919664854', '2022-10-07 19:09:35', '2022-10-07 19:11:36', '::1', '::1'),
+(3, 1, 1, '19', '07102022', '01', '0919664854001', '1', '001', '001', '000000118', '00000120', '1', '2', '0710202201091966485400110010010000001180000012012', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-07 19:12:43', '2022-10-07 19:13:03', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -2361,7 +2381,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-06 21:00:55', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-05', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 0, 1, NULL, NULL, 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-07', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('45677686788', 'THFGHFG', 'HFGHFGH', 'FGHFGHFG', 'HFGHFGH', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'mreinacevallos@gmail.com', 0, 9, 1, 1, '2022-09-03', 0, 1, NULL, '0919664854', NULL, '2022-09-03 14:21:18', NULL, '::1', NULL);
 
@@ -2716,13 +2736,13 @@ ALTER TABLE `dct_pos_tbl_empresa_serial`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_detalle`
 --
 ALTER TABLE `dct_pos_tbl_factura_detalle`
-  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
 --
 ALTER TABLE `dct_pos_tbl_factura_transaccion`
-  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`
