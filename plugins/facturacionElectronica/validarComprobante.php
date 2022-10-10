@@ -4,7 +4,7 @@
   require_once("../../dctDatabase/Connection.php");
   require_once("../../dctDatabase/Parameter.php");
   require_once('nusoap.php');
-  //app_error_reporting($app_error_reporting);
+  app_error_reporting($app_error_reporting);
   header("Content-Type: text/plain");
   try {
     $sesion = new sesion();
@@ -34,7 +34,10 @@
     $query_ws->execute();
     $row_ws = $query_ws->fetch(\PDO::FETCH_ASSOC);
 
-    $content = file_get_contents("../../webPosOperaciones/comprobantesFirmados/".$_POST["claveAcceso"].".xml");
+    $claveAcceso = $_POST["claveAcceso"];
+    $id_transaccion = $_POST["id_transaccion"];
+
+    $content = file_get_contents("../../webPosOperaciones/comprobantesFirmados/".$claveAcceso.".xml");
     $mensaje = base64_encode($content);
 
     $servicio = $row_ws["wsr_url_1"];
@@ -67,7 +70,7 @@
       $sri_identificador = utf8_decode($result['comprobantes']['comprobante']['mensajes']['mensaje']['identificador']);
     }
     else {
-      $sri_identificador = "";
+      $sri_identificador = 0;
     }
     if (!empty($result['comprobantes']['comprobante']['mensajes']['mensaje']['informacionAdicional'])) {
       $sri_info_adicional = utf8_decode($result['comprobantes']['comprobante']['mensajes']['mensaje']['informacionAdicional']);
@@ -83,31 +86,37 @@
     $data_result["sri_identificador"] = $sri_identificador;
     $data_result["sri_info_adicional"] = $sri_info_adicional;
 
-    if ($client->fault) {
-      $data_result["message"] = "error_client_default";
-      echo json_encode($data_result);
-    } else {
-      if ($client->getError()) {
-        $data_result["message"] = "error_client_get_error";
-        echo json_encode($data_result);
-      } else {
-        if ($result['estado'] == 'RECIBIDA') {
-          $data_result["message"] = "validacion_comprobante_correcta";
-          echo json_encode($data_result);
-        }
-        else if ($result['estado'] == 'DEVUELTA') {
-          $data_result["message"] = "se_elimina_archivos";
-          echo json_encode($data_result);
-        }
-        else {
-          $data_result["message"] = "validacion_no_identificada";
-          echo json_encode($data_result);
-        }
+    if ($result['estado'] != 'RECIBIDA') {
+      $sql_update_transaccion="UPDATE dct_pos_tbl_factura_transaccion 
+                              SET ftr_estado_transaccion = :ftr_estado_transaccion,
+                                  ftr_usuario_modificacion=:ftr_usuario_modificacion,
+                                   ftr_cod_error=:ftr_cod_error,
+                                  ftr_fecha_modificacion=now(),
+                                  ftr_ip_modificacion=:ftr_ip_modificacion
+                              WHERE ftr_id_factura_transaccion = :ftr_id_factura_transaccion;";
+      $query_update_transaccion=$pdo->prepare($sql_update_transaccion);
+      $query_update_transaccion->bindValue(':ftr_id_factura_transaccion',$id_transaccion,PDO::PARAM_INT);
+      $query_update_transaccion->bindValue(':ftr_estado_transaccion','DVT',PDO::PARAM_STR);
+      $query_update_transaccion->bindValue(':ftr_cod_error',$sri_identificador,PDO::PARAM_INT);
+      $query_update_transaccion->bindValue(':ftr_usuario_modificacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
+      $query_update_transaccion->bindValue(':ftr_ip_modificacion',getRealIP(),PDO::PARAM_STR);
+      $query_update_transaccion->execute();
+      if($query_update_transaccion) {
+        $pdo->commit();
+        $data_result["message_bd"] = "saveOK";
+        $data_result["numLineaCodigo"] = __LINE__;
+      }
+      else {
+        $pdo->rollBack();
+        $data_result["message_bd"] = "saveError";
+        $data_result["numLineaCodigo"] = __LINE__;
       }
     }
 
+    echo json_encode($data_result);
+
   } catch (Exception $ex) {
-    $data_result["message"] = "salidaExcepcionCatch";
+    $data_result["message_sistema"] = "salidaExcepcionCatch";
     $data_result["codError"] = $ex->getCode();
     $data_result["msjError"] = $ex->getMessage();
     $data_result["numLineaCodigo"] = __LINE__;

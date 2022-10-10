@@ -80,7 +80,6 @@
 	                  WHERE fd.prs_id_prod_serv = ps.prs_id_prod_serv
 	                  AND fd.ftr_id_factura_transaccion = :ftr_id_factura_transaccion
 	                  AND fd.fdt_estado = 1
-	                  AND fd.fdt_estado_transaccion = 'TMP'
 	                  AND ps.emp_id_empresa = :emp_id_empresa
 	                  ORDER BY fd.fdt_fecha_creacion";
 	    $query_seg_fas=$pdo->prepare($sql_seg_fas);
