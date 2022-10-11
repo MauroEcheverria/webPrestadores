@@ -20,33 +20,22 @@
         ?>
       </head>
       <body>
-        <header>
-          <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                  <h4 class="text-white">About</h4>
-                  <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-                </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                  <h4 class="text-white">Contact</h4>
-                  <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                    <li><a href="#" class="text-white">Like on Facebook</a></li>
-                    <li><a href="#" class="text-white">Email me</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container">
-              <a href="../login.php" class="navbar-brand d-flex align-items-center">
-                <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;<strong>Inicio de Sesión</strong>
+        <div id="loading"><img src="../dist/img/loading.gif"/></div>
+        <header class="p-3 bg-dark text-white">
+          <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+              <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
               </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+              <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="../" class="nav-link px-2 text-secondary">Inicio</a></li>
+                <li><a href="../productos/" class="nav-link px-2 text-white">Productos</a></li>
+                <li><a href="../planes/" class="nav-link px-2 text-white">Planes</a></li>
+                <li><a href="../contactanos/" class="nav-link px-2 text-white">Contáctanos</a></li>
+              </ul>
+              <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2" onclick="location.href='../login.php';">Login</button>
+              </div>
             </div>
           </div>
         </header>

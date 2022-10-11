@@ -170,3 +170,6 @@ b {
 .form-control {
   font-size: 12px !important;
 }
+.infoPlanBasico {
+  height: 110px;
+}
