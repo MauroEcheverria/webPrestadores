@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2022 a las 19:32:29
+-- Tiempo de generación: 13-10-2022 a las 05:40:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1701,7 +1701,8 @@ INSERT INTO `dct_pos_tbl_cientes` (`cli_id_cliente`, `emp_id_empresa`, `cli_tipo
 (4, 1, '05', '0919664854', 'MAURO', NULL, 'ECHEVERRIA', NULL, 'rtytryt@asdasd.com', 'GUAYAQUI FERTIZA', NULL, NULL, 1, '0919664854', NULL, '2022-08-24 21:26:26', NULL, '::1', NULL),
 (5, 1, '04', '12345679012', 'MAURO', 'WERWER', 'ECHEVERRIA', 'WERWER', 'sdfsdf@sadsad.com', 'GUAYAQUI FERTIZA', '2324234234', '34345435', 1, '0919664854', NULL, '2022-08-24 21:27:14', NULL, '::1', NULL),
 (6, 1, '05', '1706486105', 'MAURO', 'DGDFG', 'ECHEVERRIA', 'DFGDF', 'fghf@df.com', 'GUAYAQUI FERTIZA', '2324234234', 'T34T34T4', 1, '0919664854', NULL, '2022-08-24 23:23:14', NULL, '::1', NULL),
-(7, 1, '05', '9992525252', 'FGHFGH', 'FGHFGH', 'FGHFGH', 'FGHFGH', 'dgdff@sdfsdf.com', 'FGHFGH', '0426565656', NULL, 1, '0919664854', NULL, '2022-09-18 02:53:10', NULL, '::1', NULL);
+(7, 1, '05', '9992525252', 'FGHFGH', 'FGHFGH', 'FGHFGH', 'FGHFGH', 'dgdff@sdfsdf.com', 'FGHFGH', '0426565656', NULL, 1, '0919664854', NULL, '2022-09-18 02:53:10', NULL, '::1', NULL),
+(8, 1, '04', '0930924853', 'BCVBCVBVC', 'FGHFGH', 'YFTYRTY', 'FGHGH', 'ghg@fdgdfg.com', 'FGHFGH', '0565656565', 'GHFGHGH', 1, '0919664854', NULL, '2022-10-10 21:01:31', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1792,7 +1793,7 @@ CREATE TABLE `dct_pos_tbl_empresa_serial` (
 --
 
 INSERT INTO `dct_pos_tbl_empresa_serial` (`ser_id_empresa_serial`, `emp_id_empresa`, `ser_factura_serie`, `ser_factura_cod_num`, `ser_nota_credito_serie`, `ser_nota_credito_cod_num`, `ser_nota_debito_serie`, `ser_nota_debito_cod_num`, `ser_guia_remision_serie`, `ser_guia_remision_cod_num`, `ser_comp_ret_serie`, `ser_comp_ret_cod_num`, `ser_estado`, `ser_usuario_creacion`, `ser_usuario_modificacion`, `ser_fecha_creacion`, `ser_fecha_modificacion`, `ser_ip_creacion`, `ser_ip_modificacion`) VALUES
-(1, 1, 119, 121, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-07 19:13:00', NULL, '::1'),
+(1, 1, 131, 133, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-13 03:38:04', NULL, '::1'),
 (3, 2, 10, 1, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-08-09 03:44:36', NULL, '::1');
 
 -- --------------------------------------------------------
@@ -1824,7 +1825,25 @@ INSERT INTO `dct_pos_tbl_factura_detalle` (`fdt_id_factura_detalle`, `ftr_id_fac
 (2, 2, 3, 30, 1, '0919664854', NULL, '2022-10-07 19:09:40', NULL, '::1', NULL),
 (3, 2, 1, 40, 1, '0919664854', NULL, '2022-10-07 19:09:45', NULL, '::1', NULL),
 (4, 3, 3, 30, 1, '0919664854', NULL, '2022-10-07 19:12:49', NULL, '::1', NULL),
-(5, 3, 1, 20, 1, '0919664854', NULL, '2022-10-07 19:12:52', NULL, '::1', NULL);
+(5, 3, 1, 20, 1, '0919664854', NULL, '2022-10-07 19:12:52', NULL, '::1', NULL),
+(6, 4, 1, 10, 1, '0919664854', NULL, '2022-10-08 17:39:51', NULL, '::1', NULL),
+(7, 4, 3, 10, 1, '0919664854', NULL, '2022-10-08 17:39:53', NULL, '::1', NULL),
+(8, 5, 3, 20, 1, '0919664854', NULL, '2022-10-08 20:31:26', NULL, '::1', NULL),
+(9, 6, 2, 1, 1, '0919664854', NULL, '2022-10-10 19:55:43', NULL, '::1', NULL),
+(10, 7, 2, 1, 1, '0919664854', NULL, '2022-10-10 20:53:50', NULL, '::1', NULL),
+(11, 8, 2, 1, 1, '0919664854', NULL, '2022-10-10 20:55:34', NULL, '::1', NULL),
+(12, 9, 3, 2500, 1, '0919664854', NULL, '2022-10-10 21:02:03', NULL, '::1', NULL),
+(13, 10, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:09:11', NULL, '::1', NULL),
+(14, 11, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:11:28', NULL, '::1', NULL),
+(15, 11, 1, 30, 1, '0919664854', NULL, '2022-10-13 03:11:32', NULL, '::1', NULL),
+(16, 12, 1, 50, 1, '0919664854', NULL, '2022-10-13 03:11:54', NULL, '::1', NULL),
+(17, 12, 2, 10, 1, '0919664854', NULL, '2022-10-13 03:11:58', NULL, '::1', NULL),
+(18, 12, 3, 500, 1, '0919664854', NULL, '2022-10-13 03:12:01', NULL, '::1', NULL),
+(19, 12, 4, 30, 1, '0919664854', NULL, '2022-10-13 03:12:07', NULL, '::1', NULL),
+(20, 13, 2, 1, 1, '0919664854', NULL, '2022-10-13 03:30:57', NULL, '::1', NULL),
+(21, 13, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:30:59', NULL, '::1', NULL),
+(22, 14, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:37:29', NULL, '::1', NULL),
+(23, 15, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:38:03', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1867,7 +1886,19 @@ CREATE TABLE `dct_pos_tbl_factura_transaccion` (
 INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `emp_id_empresa`, `cli_id_cliente`, `ftr_id_forma_pago`, `ftr_fecha_emision`, `ftr_tipo_comprobante`, `ftr_ruc`, `ftr_tipo_ambiente`, `ftr_establecimiento`, `ftr_punto_emision`, `ftr_num_comprobante`, `ftr_cod_numerico`, `ftr_tipo_emision`, `ftr_dig_verificador`, `ftr_sri_clave_acceso`, `ftr_fecha_autorizacion`, `ftr_estado_transaccion`, `ftr_cod_error`, `ftr_estado`, `ftr_usuario_creacion`, `ftr_usuario_modificacion`, `ftr_fecha_creacion`, `ftr_fecha_modificacion`, `ftr_ip_creacion`, `ftr_ip_modificacion`) VALUES
 (1, 1, 1, '20', '07102022', '01', '0919664854001', '1', '001', '001', '000000116', '00000118', '1', '3', '0710202201091966485400110010010000001160000011813', '2022-10-07', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-07 19:00:13', '2022-10-07 19:06:15', '::1', '::1'),
 (2, 1, 1, '19', '07102022', '01', '0919664854001', '1', '001', '001', '000000117', '00000119', '1', '6', '0710202201091966485400110010010000001170000011916', NULL, 'DVT', 45, 1, '0919664854', '0919664854', '2022-10-07 19:09:35', '2022-10-07 19:11:36', '::1', '::1'),
-(3, 1, 1, '19', '07102022', '01', '0919664854001', '1', '001', '001', '000000118', '00000120', '1', '2', '0710202201091966485400110010010000001180000012012', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-07 19:12:43', '2022-10-07 19:13:03', '::1', '::1');
+(3, 1, 1, '19', '07102022', '01', '0919664854001', '1', '001', '001', '000000118', '00000120', '1', '2', '0710202201091966485400110010010000001180000012012', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-07 19:12:43', '2022-10-07 19:13:03', '::1', '::1'),
+(4, 1, 1, '20', '08102022', '01', '0919664854001', '1', '001', '001', '000000119', '00000121', '1', '1', '0810202201091966485400110010010000001190000012111', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-08 17:39:43', '2022-10-08 17:40:04', '::1', '::1'),
+(5, 1, 1, '19', '08102022', '01', '0919664854001', '1', '001', '001', '000000120', '00000122', '1', '2', '0810202201091966485400110010010000001200000012212', '2022-10-08', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-08 20:31:21', '2022-10-08 20:31:34', '::1', '::1'),
+(6, 1, 1, '19', '10102022', '01', '0919664854001', '1', '001', '001', '000000121', '00000123', '1', '2', '1010202201091966485400110010010000001210000012312', '2022-10-10', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-10 19:55:31', '2022-10-10 20:51:43', '::1', '::1'),
+(7, 1, 1, '19', '10102022', '01', '0919664854001', '1', '001', '001', '000000122', '00000124', '1', '5', '1010202201091966485400110010010000001220000012415', '2022-10-10', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-10 20:53:41', '2022-10-10 20:54:05', '::1', '::1'),
+(8, 1, 1, '19', '10102022', '01', '0919664854001', '1', '001', '001', '000000123', '00000125', '1', '8', '1010202201091966485400110010010000001230000012518', '2022-10-10', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-10 20:55:26', '2022-10-10 20:57:42', '::1', '::1'),
+(9, 1, 2, '20', '10102022', '01', '0919664854001', '1', '001', '001', '000000124', '00000126', '1', '0', '1010202201091966485400110010010000001240000012610', '2022-10-10', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-10 21:00:35', '2022-10-10 21:02:16', '::1', '::1'),
+(10, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000125', '00000127', '1', '2', '1210202201091966485400110010010000001250000012712', '2022-10-12', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-13 03:06:52', '2022-10-13 03:11:20', '::1', '::1'),
+(11, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000126', '00000128', '1', '5', '1210202201091966485400110010010000001260000012815', '2022-10-12', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-13 03:11:22', '2022-10-13 03:11:41', '::1', '::1'),
+(12, 1, 1, '16', '12102022', '01', '0919664854001', '1', '001', '001', '000000127', '00000129', '1', '8', '1210202201091966485400110010010000001270000012918', '2022-10-12', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-13 03:11:48', '2022-10-13 03:12:20', '::1', '::1'),
+(13, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000128', '00000130', '1', '4', '1210202201091966485400110010010000001280000013014', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:30:49', '2022-10-13 03:31:11', '::1', '::1'),
+(14, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000129', '00000131', '1', '7', '1210202201091966485400110010010000001290000013117', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:37:20', '2022-10-13 03:37:34', '::1', '::1'),
+(15, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000130', '00000132', '1', '1', '1210202201091966485400110010010000001300000013211', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:37:57', '2022-10-13 03:38:08', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -1930,10 +1961,10 @@ CREATE TABLE `dct_pos_tbl_producto_servicio` (
 --
 
 INSERT INTO `dct_pos_tbl_producto_servicio` (`prs_id_prod_serv`, `emp_id_empresa`, `prs_codigo_item`, `prs_codigo_auxiliar`, `prs_descripcion_item`, `prs_valor_unitario`, `prs_descuento`, `prs_iva_cod_impuesto`, `prs_iva_cod_tarifa`, `prs_ice_cod_impuesto`, `prs_ice_cod_tarifa`, `prs_irbpnr_cod_impuesto`, `prs_irbpnr_cod_tarifa`, `prs_det_nombre_1`, `prs_det_valor_1`, `prs_det_nombre_2`, `prs_det_valor_2`, `prs_det_nombre_3`, `prs_det_valor_3`, `prs_estado`, `prs_usuario_creacion`, `prs_usuario_modificacion`, `prs_fecha_creacion`, `prs_fecha_modificacion`, `prs_ip_creacion`, `prs_ip_modificacion`) VALUES
-(1, 1, 'C001', 'CNJ', 'ALQUILER DE HABITACION PERSONAL', 100, 0, 2, 2, 0, 0, 0, 0, 'Tipo', 'Sinple con AC', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 'C002', 'BHY', 'CAMIONETA', 20000, 0, 2, 2, 0, 0, 0, 0, 'Tipo', '4V en B', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 1, 'C003', 'NY45', 'PARACETAMOL', 0.25, 0, 2, 2, 0, 0, 0, 0, 'CONCENTRACION', '0.5mg', 'PRESENTACION', 'FRASCO', NULL, NULL, 1, NULL, '0919664854', NULL, '2022-10-05 01:57:05', NULL, '::1'),
-(4, 1, 'C004', 'NY469', 'BOTELLAS PLASTICAS', 0.1, 0, 2, 2, 0, 0, 0, 0, 'Tipo', 'Estandar', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'C001', 'CNJ', 'ALQUILER DE HABITACION PERSONAL', 100, 0, 2, 0, 0, 0, 0, 0, 'Tipo', 'Sinple con AC', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 'C002', 'BHY', 'CAMIONETA', 20000, 10, 2, 0, 0, 0, 0, 0, 'Tipo', '4V en B', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 'C003', 'NY45', 'PARACETAMOL', 0.25, 0, 2, 0, 0, 0, 0, 0, 'CONCENTRACION', '0.5mg', 'PRESENTACION', 'FRASCO', NULL, NULL, 1, NULL, '0919664854', NULL, '2022-10-05 01:57:05', NULL, '::1'),
+(4, 1, 'C004', 'NY469', 'BOTELLAS PLASTICAS', 0.1, 0, 2, 0, 0, 0, 0, 0, 'Tipo', 'Estandar', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1959,7 +1990,7 @@ INSERT INTO `dct_pos_tbl_tarifa_impuesto` (`imp_codigo`, `trf_codigo`, `trf_porc
 (2, 3, 14, NULL, '14%'),
 (2, 6, 0, NULL, 'No Objeto de impuesto'),
 (2, 7, 0, NULL, 'Exento de IVA'),
-(2, 8, 8, NULL, 'IVA diferenciado'),
+(2, 8, NULL, NULL, 'IVA diferenciado'),
 (3, 3023, 150, NULL, 'ICE Productos del Tabaco y Sucedáneos del Tabaco excepto Cigarrillos'),
 (3, 3031, 75, NULL, 'ICE Bebidas Alcohólicas'),
 (5, 1, NULL, 0.02, 'Impuesto Redimible Botellas Plásticas no Retornables');
@@ -2381,7 +2412,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 0, 1, NULL, NULL, 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-07', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-13 03:38:19', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-12', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('45677686788', 'THFGHFG', 'HFGHFGH', 'FGHFGHFG', 'HFGHFGH', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'mreinacevallos@gmail.com', 0, 9, 1, 1, '2022-09-03', 0, 1, NULL, '0919664854', NULL, '2022-09-03 14:21:18', NULL, '::1', NULL);
 
@@ -2712,7 +2743,7 @@ ALTER TABLE `detalle_guia_electronica`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_cientes`
 --
 ALTER TABLE `dct_pos_tbl_cientes`
-  MODIFY `cli_id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cli_id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_empresa_establecimiento`
@@ -2736,13 +2767,13 @@ ALTER TABLE `dct_pos_tbl_empresa_serial`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_detalle`
 --
 ALTER TABLE `dct_pos_tbl_factura_detalle`
-  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
 --
 ALTER TABLE `dct_pos_tbl_factura_transaccion`
-  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`

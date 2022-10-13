@@ -16,56 +16,61 @@
   template_head($data_template, $css_dreconstec);
 ?>
 
-  <div class="login-box">
-    <div class="card card-outline card-primary">
-      <div class="card-header text-center">
-        <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
-      </div>
-      <div class="card-body">
-        <p class="login-box-msg">Inicio de Sesión</p>
-        <form id="formLoginSesion" class="needs-validation" novalidate method="post" data-toggle="validator" role="form" autocomplete="off">
-          <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
-          <input type="hidden" name="csrf" value="<?php echo $data_template["token_csrf"]; ?>">
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser" required="">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
+  <div class="row">
+    <div class="col-md-8">
+      <div><img src="../../../dist/img/portada_1.jpg" style="width: 100%;" /></div>
+    </div>
+    <div class="col-md-4">
+      <div class="login-box">
+        <div class="card card-outline card-primary">
+          <div class="card-header text-center">
+            <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+          </div>
+          <div class="card-body">
+            <p class="login-box-msg">Inicio de Sesión</p>
+            <form id="formLoginSesion" class="needs-validation" novalidate method="post" data-toggle="validator" role="form" autocomplete="off">
+              <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
+              <input type="hidden" name="csrf" value="<?php echo $data_template["token_csrf"]; ?>">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser" required="">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback">
+                    Por favor ingrese su cédula de identidad
+                  </div>
+                  <div class="valid-feedback"></div>
                 </div>
               </div>
-              <div class="invalid-feedback">
-                Por favor ingrese su cédula de identidad
-              </div>
-              <div class="valid-feedback"></div>
-            </div>
-            
-          </div>
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword" required="">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword" required="">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-lock"></span>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback">
+                    Por favor ingrese su contraseña
+                  </div>
+                  <div class="valid-feedback"></div>
                 </div>
               </div>
-              <div class="invalid-feedback">
-                Por favor ingrese su contraseña
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Acceder</button>
               </div>
-              <div class="valid-feedback"></div>
-            </div>
- 
+            </form>
+            <p class="mb-1">
+              <a href="#" id="idOlvidoContrasena">¿Olvidó su contraseña?</a>
+            </p>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Acceder</button>
-          </div>
-        </form>
-        <p class="mb-1">
-          <a href="#" id="idOlvidoContrasena">¿Olvidó su contraseña?</a>
-        </p>
+        </div>
       </div>
     </div>
-  </div>
+  </div>   
 
   <div class="modal fade" id="myModalExpirePass" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
