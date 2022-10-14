@@ -31,12 +31,14 @@ try {
 
     $sql = "select p.prs_id_prod_serv, p.emp_id_empresa, e.emp_empresa
             ,p.prs_codigo_item, p.prs_codigo_auxiliar, p.prs_descripcion_item, p.prs_valor_unitario,p.prs_estado
-            ,ifnull(concat(iva.trf_porcentaje ,' - ', iva.trf_descripcion ),'-') desc_iva
+            ,ifnull(concat(ifnull(iva.trf_porcentaje,p.prs_iva_dif_porc) ,' - ', iva.trf_descripcion ),'-') desc_iva
             ,ifnull(concat(ice.trf_porcentaje ,' - ', ice.trf_descripcion ),'-') desc_ice
-            ,ifnull(concat(irb.trf_porcentaje ,' - ', irb.trf_descripcion ),'-') desc_irb
+            ,ifnull(concat('+ $',irb.trf_valor ,' - ', irb.trf_descripcion ),'-') desc_irb
             ,p.prs_iva_cod_impuesto,p.prs_ice_cod_impuesto,p.prs_irbpnr_cod_impuesto
             ,p.prs_iva_cod_tarifa,p.prs_ice_cod_tarifa,p.prs_irbpnr_cod_tarifa
             ,prs_det_nombre_1, prs_det_valor_1 ,prs_det_nombre_2, prs_det_valor_2 ,prs_det_nombre_3, prs_det_valor_3
+            ,p.prs_iva_dif_porc
+            ,p.prs_descuento
             from dct_pos_tbl_producto_servicio p
             inner join dct_sistema_tbl_empresa e
                     on e.emp_id_empresa = p.emp_id_empresa
@@ -49,7 +51,8 @@ try {
             left join dct_pos_tbl_tarifa_impuesto irb
                     on irb.imp_codigo = p.prs_irbpnr_cod_impuesto
                 and irb.trf_codigo = p.prs_irbpnr_cod_tarifa
-            where e.emp_id_empresa = ifnull(:emp_id_empresa, e.emp_id_empresa);
+            where e.emp_id_empresa = ifnull(:emp_id_empresa, e.emp_id_empresa)
+            order by p.prs_fecha_creacion desc;
             ";
     $query = $pdo->prepare($sql);
     $query->bindValue(':emp_id_empresa', $idEmpresaUserLogin, PDO::PARAM_INT);
@@ -81,6 +84,8 @@ try {
         $return_array[20] = $row["prs_det_valor_2"];
         $return_array[21] = $row["prs_det_nombre_3"];
         $return_array[22] = $row["prs_det_valor_3"];
+        $return_array[23] = $row["prs_iva_dif_porc"];
+        $return_array[24] = $row["prs_descuento"];
         
         array_push($return, $return_array);
     }

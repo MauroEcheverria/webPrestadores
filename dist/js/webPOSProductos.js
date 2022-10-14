@@ -15,7 +15,7 @@ function fnProductos() {
       },
       {
         //"targets": [0,9],
-        "targets": [0,1,11,12,13,14,15,16,19,20,21,22],
+        "targets": [0,1,11,12,13,14,15,16,19,20,21,22,23,24],
         "visible": false,
         "searchable": false
       }
@@ -44,6 +44,8 @@ function fnProductos() {
       { title: '<div class="tituloColumnasDT">valor_2</div>' },
       { title: '<div class="tituloColumnasDT">Detalle adicional 3</div>' },
       { title: '<div class="tituloColumnasDT">valor_3</div>' },
+      { title: '<div class="tituloColumnasDT">prs_iva_dif_porc</div>' },
+      { title: '<div class="tituloColumnasDT">descuento</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
         width: "80",
@@ -207,16 +209,28 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   });
 
 $('#btnNuevoProducto').click( function () {
-    $('#myModalProductos').modal('show');
+    $(".slcIvaDif").hide().attr("required",false).prop("selectedIndex", 0);
     document.getElementById("frmProductos").reset();
     $(".empCamposNoEditables").attr("disabled",false);
     $(".camposVisibles").hide().attr("required",false);
     $('#tipo_form_prod').val("New");
+    $('#myModalProductos').modal('show');
             
   });
 
 $("#slcEmpresaF").change( function () {
     dtProductos.ajax.reload();
+  });
+
+$("#slcIva").change( function () {
+    if ($("#slcIva").val() == 8)
+    {
+        $(".slcIvaDif").show().attr("required",true);
+    }
+    else
+    {
+        $(".slcIvaDif").hide().attr("required",false).prop("selectedIndex", 0);
+    }
   });
 
 $("#slcImpuesto").change( function () {
@@ -238,6 +252,7 @@ $("#slcImpuesto").change( function () {
     $('#pPrecioUnitario').val(dtProductos.row($(this).parents('tr').first()).data()[6]);
     $('#slcEstadoP').val(dtProductos.row($(this).parents('tr').first()).data()[10]);
     $('#slcIva').val(dtProductos.row($(this).parents('tr').first()).data()[14]);
+        
     $('#slcIce').val(dtProductos.row($(this).parents('tr').first()).data()[15]);
     $('#slcIbr').val(dtProductos.row($(this).parents('tr').first()).data()[16]);
     
@@ -248,6 +263,16 @@ $("#slcImpuesto").change( function () {
     $('#pDetalleValor2').val(dtProductos.row($(this).parents('tr').first()).data()[20]);
     $('#pDetalle3').val(dtProductos.row($(this).parents('tr').first()).data()[21]);
     $('#pDetalleValor3').val(dtProductos.row($(this).parents('tr').first()).data()[22]);
+    if ($("#slcIva").val() == 8)
+        {
+            $(".slcIvaDif").show().attr("required",true);
+            $("#slcIvaDif").val(dtProductos.row($(this).parents('tr').first()).data()[23]);
+        }
+        else
+        {
+            $(".slcIvaDif").hide().attr("required",false).prop("selectedIndex", 0);
+        }
+    $('#pDescuento').val(dtProductos.row($(this).parents('tr').first()).data()[24]);
     
     
     $('#tipo_form_prod').val("Old");

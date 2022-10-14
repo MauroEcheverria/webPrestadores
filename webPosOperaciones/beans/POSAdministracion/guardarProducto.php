@@ -32,13 +32,29 @@ try {
         $tarifaIva = null;
         $tarifaIce = null;
         $tarifaIbr = null;
+        $porcIvaDif = null;
         
-        if (isset($_POST["slcIva"]) && $_POST["slcIva"] !="")
+        if (!isset($_POST["slcIva"]) || $_POST["slcIva"] =="")
         {
+            $data_result["message"] = "error_negocio";
+            $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+            $data_result["dataModal_2"] = 'Información';
+            $data_result["dataModal_3"] = "El impuesto para el iva es obligatorio!";
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+            $data_result["numLineaCodigo"] = __LINE__;
+            echo json_encode($data_result);
+            return;
+            
+        }
             array_push($arrayImp, $_POST["slcIva"]);
             $codigoIva = $CODIGO_IVA;
             $tarifaIva = $_POST["slcIva"];
-        }
+            
+            if ($_POST["slcIva"] == 8)
+            {
+                $porcIvaDif = $_POST["slcIvaDif"];
+            }
+            
             
         
         if (isset($_POST["slcIce"]) && $_POST["slcIce"] !="")
@@ -102,8 +118,8 @@ try {
             echo json_encode($data_result);
             return;
         }
-
-
+        
+        
 
         //validar datos duplicados
         //codigo
@@ -163,22 +179,23 @@ try {
         $pDetValor2 = (isset($_POST["pDetalleValor2"]) && $_POST["pDetalleValor2"] !="" ? $_POST["pDetalleValor2"] : null);
         $pDet3 = (isset($_POST["pDetalle3"]) && $_POST["pDetalle3"] !="" ? $_POST["pDetalle3"] : null);
         $pDetValor3 = (isset($_POST["pDetalleValor3"]) && $_POST["pDetalleValor3"] !="" ? $_POST["pDetalleValor3"] : null);
+        $dscto = !isset($_POST["pDescuento"]) ? null : $_POST["pDescuento"];
  
         //ingreso registro
         $sql_2 = "insert into dct_pos_tbl_producto_servicio(emp_id_empresa,prs_codigo_item,prs_codigo_auxiliar,prs_descripcion_item,prs_valor_unitario
                         ,prs_iva_cod_impuesto,prs_iva_cod_tarifa,prs_ice_cod_impuesto,prs_ice_cod_tarifa,prs_irbpnr_cod_impuesto,prs_irbpnr_cod_tarifa
-                        ,prs_det_nombre_1, prs_det_valor_1, prs_det_nombre_2, prs_det_valor_2 ,prs_det_nombre_3, prs_det_valor_3
+                        ,prs_det_nombre_1, prs_det_valor_1, prs_det_nombre_2, prs_det_valor_2 ,prs_det_nombre_3, prs_det_valor_3, prs_descuento, prs_iva_dif_porc
                         ,prs_estado,prs_usuario_creacion,prs_fecha_creacion,prs_ip_creacion)
                         values (
                         :emp_id_empresa,:prs_codigo_item,:prs_codigo_auxiliar,:prs_descripcion_item,:prs_valor_unitario
                         ,:prs_iva_cod_impuesto,:prs_iva_cod_tarifa,:prs_ice_cod_impuesto,:prs_ice_cod_tarifa,:prs_irbpnr_cod_impuesto,:prs_irbpnr_cod_tarifa
-                        ,:prs_det_nombre_1, :prs_det_valor_1, :prs_det_nombre_2, :prs_det_valor_2 ,:prs_det_nombre_3, :prs_det_valor_3
+                        ,:prs_det_nombre_1, :prs_det_valor_1, :prs_det_nombre_2, :prs_det_valor_2 ,:prs_det_nombre_3, :prs_det_valor_3, :prs_descuento, :prs_iva_dif_porc
                         ,1,:prs_usuario_creacion,now(),:prs_ip_creacion
                         );";
         $query_2 = $pdo->prepare($sql_2);
         $query_2->bindValue(':emp_id_empresa', cleanData("noLimite", 0, "noMayuscula", $_POST["slcEmpresaP"]), PDO::PARAM_INT);
-        $query_2->bindValue(':prs_codigo_item', cleanData("siLimite", 300, "noMayuscula", $_POST["pCodigoItem"]), PDO::PARAM_STR);
-        $query_2->bindValue(':prs_codigo_auxiliar', cleanData("siLimite", 300, "noMayuscula", $_POST["pCodigoAuxiliar"]), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_codigo_item', cleanData("siLimite", 12, "noMayuscula", $_POST["pCodigoItem"]), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_codigo_auxiliar', cleanData("siLimite", 12, "noMayuscula", $_POST["pCodigoAuxiliar"]), PDO::PARAM_STR);
         $query_2->bindValue(':prs_descripcion_item', cleanData("siLimite", 300, "noMayuscula", $_POST["pDescripcion"]), PDO::PARAM_STR);
         $query_2->bindValue(':prs_valor_unitario', cleanData("noLimite", 0, "noMayuscula", $puFormateado));
         $query_2->bindValue(':prs_iva_cod_impuesto', cleanData("noLimite", 0, "noMayuscula", $codigoIva), PDO::PARAM_INT);
@@ -194,6 +211,8 @@ try {
         $query_2->bindValue(':prs_det_valor_2', cleanData("siLimite", 100, "noMayuscula", $pDetValor2), PDO::PARAM_STR);
         $query_2->bindValue(':prs_det_nombre_3', cleanData("siLimite", 100, "noMayuscula", $pDet3), PDO::PARAM_STR);
         $query_2->bindValue(':prs_det_valor_3', cleanData("siLimite", 100, "noMayuscula", $pDetValor3), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_descuento', cleanData("siLimite", 3, "noMayuscula", $dscto), PDO::PARAM_INT);
+        $query_2->bindValue(':prs_iva_dif_porc', cleanData("noLimite", 0, "noMayuscula", $porcIvaDif), PDO::PARAM_INT);
         
         $query_2->bindValue(':prs_usuario_creacion', cleanData("siLimite", 13, "noMayuscula", $dataSesion["cod_system_user"]), PDO::PARAM_STR);
         $query_2->bindValue(':prs_ip_creacion', getRealIP(), PDO::PARAM_STR);
@@ -228,13 +247,28 @@ try {
         $tarifaIva = null;
         $tarifaIce = null;
         $tarifaIbr = null;
+        $porcIvaDif = null;
         
-        if (isset($_POST["slcIva"]) && $_POST["slcIva"] !="")
+        if (!isset($_POST["slcIva"]) || $_POST["slcIva"] =="")
         {
+            $data_result["message"] = "error_negocio";
+            $data_result["dataModal_1"] = '<img src="../../../dist/img/modal_alerta.png" width="30px" heigth="20px">';
+            $data_result["dataModal_2"] = 'Información';
+            $data_result["dataModal_3"] = "El impuesto para el iva es obligatorio!";
+            $data_result["dataModal_4"] = '<button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>';
+            $data_result["numLineaCodigo"] = __LINE__;
+            echo json_encode($data_result);
+            return;
+            
+        }
             array_push($arrayImp, $_POST["slcIva"]);
             $codigoIva = $CODIGO_IVA;
             $tarifaIva = $_POST["slcIva"];
-        }
+            
+            if ($_POST["slcIva"] == 8)
+            {
+                $porcIvaDif = $_POST["slcIvaDif"];
+            }
             
         
         if (isset($_POST["slcIce"]) && $_POST["slcIce"] !="")
@@ -356,6 +390,7 @@ try {
         $pDetValor2 = (isset($_POST["pDetalleValor2"]) && $_POST["pDetalleValor2"] !="" ? $_POST["pDetalleValor2"] : null);
         $pDet3 = (isset($_POST["pDetalle3"]) && $_POST["pDetalle3"] !="" ? $_POST["pDetalle3"] : null);
         $pDetValor3 = (isset($_POST["pDetalleValor3"]) && $_POST["pDetalleValor3"] !="" ? $_POST["pDetalleValor3"] : null);
+        $dscto = !isset($_POST["pDescuento"]) ? null : $_POST["pDescuento"];
         
         //ACTUALIZAR
         $sql_2 = "update dct_pos_tbl_producto_servicio
@@ -375,6 +410,8 @@ try {
                     prs_det_valor_2 = :prs_det_valor_2,
                     prs_det_nombre_3 = :prs_det_nombre_3,
                     prs_det_valor_3 = :prs_det_valor_3,
+                    prs_descuento = :prs_descuento,
+                    prs_iva_dif_porc = :prs_iva_dif_porc,
                     prs_estado = :prs_estado,
                     prs_usuario_modificacion = :prs_usuario_modificacion,
                     prs_fecha_modificacion = now(),
@@ -382,8 +419,8 @@ try {
                     where prs_id_prod_serv = :prs_id_prod_serv";
         $query_2 = $pdo->prepare($sql_2);
 
-        $query_2->bindValue(':prs_codigo_item', cleanData("siLimite", 300, "noMayuscula", $_POST["pCodigoItem"]), PDO::PARAM_STR);
-        $query_2->bindValue(':prs_codigo_auxiliar', cleanData("siLimite", 300, "noMayuscula", $_POST["pCodigoAuxiliar"]), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_codigo_item', cleanData("siLimite", 12, "noMayuscula", $_POST["pCodigoItem"]), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_codigo_auxiliar', cleanData("siLimite", 12, "noMayuscula", $_POST["pCodigoAuxiliar"]), PDO::PARAM_STR);
         $query_2->bindValue(':prs_descripcion_item', cleanData("siLimite", 300, "noMayuscula", $_POST["pDescripcion"]), PDO::PARAM_STR);
         $query_2->bindValue(':prs_valor_unitario', cleanData("noLimite", 0, "noMayuscula", $puFormateado));
         $query_2->bindValue(':prs_iva_cod_impuesto', cleanData("noLimite", 0, "noMayuscula", $codigoIva), PDO::PARAM_INT);
@@ -404,6 +441,9 @@ try {
         $query_2->bindValue(':prs_det_valor_2', cleanData("siLimite", 100, "noMayuscula", $pDetValor2), PDO::PARAM_STR);
         $query_2->bindValue(':prs_det_nombre_3', cleanData("siLimite", 100, "noMayuscula", $pDet3), PDO::PARAM_STR);
         $query_2->bindValue(':prs_det_valor_3', cleanData("siLimite", 100, "noMayuscula", $pDetValor3), PDO::PARAM_STR);
+        $query_2->bindValue(':prs_descuento', cleanData("siLimite", 3, "noMayuscula", $dscto), PDO::PARAM_INT);
+        $query_2->bindValue(':prs_iva_dif_porc', cleanData("noLimite", 0, "noMayuscula", $porcIvaDif), PDO::PARAM_INT);
+        
         $query_2->execute();
 
          $pdo->commit();
