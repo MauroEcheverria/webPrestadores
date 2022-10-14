@@ -26,15 +26,23 @@ class generarFacturaXML {
     $pos_base_imp_2_acum = 0;
     $pos_base_imp_3_acum = 0;
     $pos_base_imp_8_acum = 0;
+    $pos_base_imp_0_acum = 0;
+    $pos_base_imp_6_acum = 0;
+    $pos_base_imp_7_acum = 0;
     $pos_base_imp_diff_8_acum = 0;
 
     $pos_base_imp_ice = 0;
     $pos_base_imp_ice_acum = 0;
     $pos_base_imp_base_ice_acum = 0;
+    $impuesto_ice = false;
+    $impuesto_cabecera_ice = '';
+    $array_ice = array();
 
     $pos_base_imp_irbpnr = 0;
     $pos_base_imp_irbpnr_acum = 0;
     $pos_base_imp_base_irbpnr_acum = 0;
+    $impuesto_cabecera_irbpnr = '';
+    $impuesto_irbpnr = false;
 
     $pos_total_comprobante = 0;
 
@@ -126,7 +134,25 @@ class generarFacturaXML {
           $pos_base_imp_diff_8_acum = $row_producto_detalle["trf_porcentaje_iva"];
           break;
         case '0':
+          $xml_detalles .= '<impuesto>
+                              <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                              <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                              <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                              <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                              <valor>0.00</valor>
+                            </impuesto>';
+          $pos_base_imp_0_acum += round($pos_trans_sub_total,2);
+          break;
         case '6':
+          $xml_detalles .= '<impuesto>
+                              <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
+                              <codigoPorcentaje>'.$row_producto_detalle["prs_iva_cod_tarifa"].'</codigoPorcentaje>
+                              <tarifa>'.$row_producto_detalle["trf_porcentaje_iva"].'</tarifa>
+                              <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                              <valor>0.00</valor>
+                            </impuesto>';
+          $pos_base_imp_6_acum += round($pos_trans_sub_total,2);
+          break;
         case '7':
           $xml_detalles .= '<impuesto>
                               <codigo>'.$row_producto_detalle["prs_iva_cod_impuesto"].'</codigo>
@@ -135,11 +161,13 @@ class generarFacturaXML {
                               <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
                               <valor>0.00</valor>
                             </impuesto>';
+          $pos_base_imp_7_acum += round($pos_trans_sub_total,2);
           break;
       }
 
       /* Diferenciacion ICE */
       if ($row_producto_detalle["prs_ice_cod_impuesto"] == 3) {
+        $impuesto_ice = true;
         $pos_base_imp_ice = $pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_ice"] / 100;
         $xml_detalles .= '<impuesto>
                             <codigo>'.$row_producto_detalle["prs_ice_cod_impuesto"].'</codigo>
@@ -150,10 +178,15 @@ class generarFacturaXML {
                           </impuesto>';
         $pos_base_imp_ice_acum += round($pos_base_imp_ice,2);
         $pos_base_imp_base_ice_acum += round($pos_trans_sub_total,2);
+
+        $array_ice[$row_producto_detalle["prs_ice_cod_tarifa"]]['base_imponible'] += round($pos_trans_sub_total,2);
+        $array_ice[$row_producto_detalle["prs_ice_cod_tarifa"]]['valor'] += round($pos_base_imp_ice,2);
+        $array_ice[$row_producto_detalle["prs_ice_cod_tarifa"]]['tarifa'] = $row_producto_detalle["trf_porcentaje_ice"];
       }
 
       /* Diferenciacion irbpnr */
       if ($row_producto_detalle["prs_irbpnr_cod_impuesto"] == 5) {
+        $impuesto_irbpnr = true;
         $pos_base_imp_irbpnr = $pos_trans_sub_total * $row_producto_detalle["trf_porcentaje_irbpnr"] / 100;
         $xml_detalles .= '<impuesto>
                             <codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
@@ -164,51 +197,89 @@ class generarFacturaXML {
                           </impuesto>';
         $pos_base_imp_irbpnr_acum += round($pos_base_imp_irbpnr,2);
         $pos_base_imp_base_irbpnr_acum += round($pos_trans_sub_total,2);
+
+        $impuesto_cabecera_irbpnr .= '<codigo>'.$row_producto_detalle["prs_irbpnr_cod_impuesto"].'</codigo>
+                                      <codigoPorcentaje>'.$row_producto_detalle["prs_irbpnr_cod_tarifa"].'</codigoPorcentaje>                        
+                                      <baseImponible>'.round($pos_trans_sub_total,2).'</baseImponible>
+                                      <tarifa>'.$row_producto_detalle['trf_porcentaje_irbpnr'].'</tarifa>
+                                      <valor>'.round($pos_base_imp_irbpnr,2).'</valor>';
       }
 
       $xml_detalles .= '</impuestos>';
       $xml_detalles .= '</detalle>';
     }
 
-    if ($pos_base_imp_iva_2_acum > 0) {
-        $xml_total_impuesto .= '<totalImpuesto>
-                                  <codigo>2</codigo>
-                                  <codigoPorcentaje>2</codigoPorcentaje>
-                                  <baseImponible>'.$pos_base_imp_2_acum.'</baseImponible>
-                                  <tarifa>12</tarifa>
-                                  <valor>'.$pos_base_imp_iva_2_acum.'</valor>
-                                </totalImpuesto>';
+    /*****************************************************************************************************************/
+
+    if ($pos_base_imp_2_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>2</codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_2_acum.'</baseImponible>
+                                <tarifa>12</tarifa>
+                                <valor>'.$pos_base_imp_iva_2_acum.'</valor>
+                              </totalImpuesto>';
     }
-    if ($pos_base_imp_iva_3_acum > 0) {
-        $xml_total_impuesto .= '<totalImpuesto>
-                                  <codigo>2</codigo>
-                                  <codigoPorcentaje>3</codigoPorcentaje>
-                                  <baseImponible>'.$pos_base_imp_3_acum.'</baseImponible>
-                                  <tarifa>14</tarifa>
-                                  <valor>'.$pos_base_imp_iva_3_acum.'</valor>
-                                </totalImpuesto>';
+    if ($pos_base_imp_3_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>3</codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_3_acum.'</baseImponible>
+                                <tarifa>14</tarifa>
+                                <valor>'.$pos_base_imp_iva_3_acum.'</valor>
+                              </totalImpuesto>';
     }
-    if ($pos_base_imp_iva_8_acum > 0) {
-        $xml_total_impuesto .= '<totalImpuesto>
-                                  <codigo>2</codigo>
-                                  <codigoPorcentaje>3</codigoPorcentaje>
-                                  <baseImponible>'.$pos_base_imp_8_acum.'</baseImponible>
-                                  <tarifa>'.$pos_base_imp_diff_8_acum.'</tarifa>
-                                  <valor>'.$pos_base_imp_iva_8_acum.'</valor>
-                                </totalImpuesto>';
+    if ($pos_base_imp_8_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>8/codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_8_acum.'</baseImponible>
+                                <tarifa>'.$pos_base_imp_diff_8_acum.'</tarifa>
+                                <valor>'.$pos_base_imp_iva_8_acum.'</valor>
+                              </totalImpuesto>';
+    }
+    if ($pos_base_imp_0_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>0</codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_0_acum.'</baseImponible>
+                                <tarifa>0</tarifa>
+                                <valor>0.00</valor>
+                              </totalImpuesto>';
+    }
+    if ($pos_base_imp_6_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>6</codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_6_acum.'</baseImponible>
+                                <tarifa>0</tarifa>
+                                <valor>0.00</valor>
+                              </totalImpuesto>';
+    }
+    if ($pos_base_imp_7_acum > 0) {
+      $xml_total_impuesto .= '<totalImpuesto>
+                                <codigo>2</codigo>
+                                <codigoPorcentaje>7</codigoPorcentaje>
+                                <baseImponible>'.$pos_base_imp_7_acum.'</baseImponible>
+                                <tarifa>0</tarifa>
+                                <valor>0.00</valor>
+                              </totalImpuesto>';
     }
 
-
-    /*if ($pos_base_imp_ice_acum > 0) {
-        $xml_total_impuesto .= '<totalImpuesto>
-                                  <codigo>2</codigo>
-                                  <codigoPorcentaje>2</codigoPorcentaje>
-                                  <baseImponible>'.$pos_base_imp_2_acum.'</baseImponible>
-                                  <tarifa>12</tarifa>
-                                  <valor>'.$pos_base_imp_iva_2_acum.'</valor>
-                                </totalImpuesto>';
-    }*/
-
+    if ($impuesto_ice) {
+      foreach($array_ice as $k => $v) {
+        $impuesto_cabecera_ice = '<codigo>3</codigo>
+                                  <codigoPorcentaje>'.$k.'</codigoPorcentaje>                        
+                                  <baseImponible>'.$v['base_imponible'].'</baseImponible>
+                                  <tarifa>'.$v['tarifa'].'</tarifa>
+                                  <valor>'.$v['valor'].'</valor>';
+        $xml .= '<totalImpuesto>'.$impuesto_cabecera_ice.'</totalImpuesto>';
+      }
+    }
+    
+    if($impuesto_irbpnr) {
+      $xml .= '<totalImpuesto>'.$impuesto_cabecera_irbpnr.'</totalImpuesto>';
+    } 
 
     $pos_total_comprobante = round($pos_total_sub_total,2) + round($pos_base_imp_iva_acum,2) + round($pos_base_imp_ice_acum,2) + round($pos_base_imp_irbpnr_acum,2);
 
