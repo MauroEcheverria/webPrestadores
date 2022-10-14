@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2022 a las 05:40:14
+-- Tiempo de generación: 14-10-2022 a las 23:34:45
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1665,6 +1665,61 @@ INSERT INTO `dct_parametro_tbl_div_politica` (`dvp_codigo_provincia`, `dvp_provi
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `dct_pos_tbl_advertencia_sri`
+--
+
+CREATE TABLE `dct_pos_tbl_advertencia_sri` (
+  `sra_codigo` tinyint(1) NOT NULL,
+  `sra_descripcion` varchar(150) DEFAULT NULL,
+  `sra_motivo` varchar(250) DEFAULT NULL,
+  `sra_validacion` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `dct_pos_tbl_advertencia_sri`
+--
+
+INSERT INTO `dct_pos_tbl_advertencia_sri` (`sra_codigo`, `sra_descripcion`, `sra_motivo`, `sra_validacion`) VALUES
+(2, 'RUC del emisor se encuentra NO ACTIVO.', 'Verificar que el número de RUC se encuentre en estado ACTIVO.', 'AUTORIZACIÓN'),
+(10, 'Establecimiento del emisor se encuentra Clausurado.', 'No se autorizará comprobantes si el establecimiento emisor ha sido clausurado, automáticamente se habilitará el servicio una vez concluido la clausura.', 'AUTORIZACIÓN'),
+(26, 'Tamaño máximo superado', 'Tamaño del archivo supera lo establecido', 'RECEPCIÓN'),
+(27, 'Clase no permitido', 'La clase del contribuyente no puede emitir comprobantes electrónicos.', 'AUTORIZACIÓN'),
+(28, 'Acuerdo de medios electrónicos no aceptado', 'Siempre el contribuyente debe haber aceptado el acuerdo de medio electrónicos en el cual se establece que se acepta que lleguen las notificaciones al buzón del contribuyente.', 'RECEPCIÓN'),
+(34, 'Comprobante no autorizado', 'Cuando el comprobante no ha sido autorizado como parte de la solicitud de emisión del contribuyente.', 'EMISOR'),
+(35, 'Documento inválido', 'Cuando el XML no pasa validación de esquema.', 'RECEPCIÓN'),
+(36, 'Versión esquema descontinuada', 'Cuando la versión del esquema no es la correcta.', 'RECEPCIÓN'),
+(37, 'RUC sin autorización de emisión', 'Cuando el RUC del emisor no cuenta con una solicitud de emisión de comprobantes electrónicos.', 'AUTORIZACIÓN'),
+(39, 'Firma inválida', 'Firma electrónica del emisor no es válida.', 'AUTORIZACIÓN'),
+(40, 'Error en el certificado', 'No se encontró el certificado o no se puede convertir en certificad X509.', 'AUTORIZACIÓN'),
+(42, 'Certificado revocado', 'Certificado que ha superado su fecha de caducidad, y no ha sido renovado.', 'EMISOR'),
+(43, 'Clave acceso registrada', 'Cuando la clave de acceso ya se encuentra registrada en la base de datos.', 'RECEPCIÓN'),
+(45, 'Secuencial registrado', 'Secuencial del comprobante ya se encuentra registrado en la base de datos', 'RECEPCIÓN'),
+(46, 'RUC no existe', 'Cuando el RUC emisor no existe en el Registro Único de Contribuyentes.', 'AUTORIZACIÓN'),
+(47, 'Tipo de comprobante no existe', 'Cuando envían en el tipo de comprobante uno que no exista en el catálogo de nuestros tipos de comprobantes.', 'RECEPCIÓN'),
+(48, 'Esquema XSD no existe', 'Cuando el esquema para el tipo de comprobante enviado no existe.', 'RECEPCIÓN'),
+(49, 'Argumentos que envían al WS nulos', 'Cuando se consume el WS con argumentos nulos.', 'RECEPCIÓN'),
+(50, 'Error interno general', 'Cuando ocurre un error inesperado en el servidor.', 'RECEPCIÓN'),
+(52, 'Error en diferencias', 'Cuando existe error en los cálculos del comprobante.', 'AUTORIZACIÓN'),
+(56, 'Establecimiento cerrado', 'Cuando el establecimiento desde el cual se genera el comprobante se encuentra cerrado.', 'AUTORIZACIÓN'),
+(57, 'Autorización suspendida', 'Cuando la autorización para emisión de comprobantes electrónicos para el emisor se encuentra suspendida por procesos de control de la Administración Tributaria.', 'AUTORIZACIÓN'),
+(58, 'Error en la estructura de clave acceso', 'Cuando la clave de acceso tiene componentes diferentes a los del comprobante.', 'AUTORIZACIÓN'),
+(59, 'Identificación no existe', 'Cuando el número de la identificación del adquirente no existe.', 'COD ERROR 70'),
+(60, 'Ambiente ejecución.', 'Siempre que el comprobante sea emitido en ambiente de certificación o pruebas se enviará como parte de la autorización esta advertencia.', 'COD ERROR 70'),
+(62, 'Identificación incorrecta', 'Cuando el número de la identificación del adquirente del comprobante está incorrecto.  Por ejemplo, cédulas no pasan el dígito verificador.', 'COD ERROR 70'),
+(63, 'RUC clausurado', 'Cuando el RUC del emisor se encuentra clausurado por procesos de control de la Administración Tributaria.', 'AUTORIZACIÓN'),
+(64, 'Código documento sustento', 'Cuando el código del documento sustento no existe en el catálogo de documentos que se tiene en la Administración.', 'EMISOR'),
+(65, 'Fecha de emisión extemporánea', 'Cuando el comprobante emitido no fue enviado de acuerdo con el tiempo del tipo de emisión en el cual fue realizado.', 'EMISOR/ RECEPCIÓN'),
+(67, 'Fecha inválida', 'Cuando existe errores en el formato de la fecha.', 'RECEPCIÓN'),
+(68, 'Documento sustento', 'Cuando el comprobante relacionado no existe como electrónico.', 'COD ERROR 70'),
+(69, 'Identificación del receptor', 'Cuando la identificación asociada al adquirente no existe. En general cuando el RUC del adquirente no existe en el Registro Único de Contribuyentes.', 'EMISOR'),
+(70, 'Clave de acceso en procesamiento', 'Cuando se desea enviar un comprobante que ha sido enviado anteriormente y el mismo no ha terminado su\nprocesamiento.', 'RECEPCIÓN'),
+(80, 'Error en la estructura de clave acceso', 'Cuando se ejecuta la consulta de autorización por clave de acceso y el valor de este parámetro supera los 49 dígitos, tiene caracteres alfanuméricos o cuando el tag\n(claveAccesoComprobante) está vacío', 'AUTORIZACIÓN'),
+(82, 'Error en la fecha de inicio de transporte', 'Cuando la fecha de inicio de transporte es menor a la fecha de emisión de la guía de remisión.', 'RECEPCIÓN'),
+(92, 'Error al validar monto de devolución del IVA.', 'Cuando el valor registrado en el campo de devolución del IVA, en facturas y notas de débito, no corresponde al que fue autorizado por el servicio web DIG.', 'RECEPCIÓN');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `dct_pos_tbl_cientes`
 --
 
@@ -1793,7 +1848,7 @@ CREATE TABLE `dct_pos_tbl_empresa_serial` (
 --
 
 INSERT INTO `dct_pos_tbl_empresa_serial` (`ser_id_empresa_serial`, `emp_id_empresa`, `ser_factura_serie`, `ser_factura_cod_num`, `ser_nota_credito_serie`, `ser_nota_credito_cod_num`, `ser_nota_debito_serie`, `ser_nota_debito_cod_num`, `ser_guia_remision_serie`, `ser_guia_remision_cod_num`, `ser_comp_ret_serie`, `ser_comp_ret_cod_num`, `ser_estado`, `ser_usuario_creacion`, `ser_usuario_modificacion`, `ser_fecha_creacion`, `ser_fecha_modificacion`, `ser_ip_creacion`, `ser_ip_modificacion`) VALUES
-(1, 1, 131, 133, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-13 03:38:04', NULL, '::1'),
+(1, 1, 138, 140, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-14 16:45:06', NULL, '::1'),
 (3, 2, 10, 1, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-08-09 03:44:36', NULL, '::1');
 
 -- --------------------------------------------------------
@@ -1843,7 +1898,17 @@ INSERT INTO `dct_pos_tbl_factura_detalle` (`fdt_id_factura_detalle`, `ftr_id_fac
 (20, 13, 2, 1, 1, '0919664854', NULL, '2022-10-13 03:30:57', NULL, '::1', NULL),
 (21, 13, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:30:59', NULL, '::1', NULL),
 (22, 14, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:37:29', NULL, '::1', NULL),
-(23, 15, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:38:03', NULL, '::1', NULL);
+(23, 15, 3, 20, 1, '0919664854', NULL, '2022-10-13 03:38:03', NULL, '::1', NULL),
+(24, 16, 3, 10, 1, '0919664854', NULL, '2022-10-14 13:44:42', NULL, '::1', NULL),
+(25, 17, 3, 10, 1, '0919664854', NULL, '2022-10-14 15:13:01', NULL, '::1', NULL),
+(26, 18, 3, 12, 1, '0919664854', NULL, '2022-10-14 15:14:46', NULL, '::1', NULL),
+(27, 19, 2, 10, 1, '0919664854', NULL, '2022-10-14 15:16:11', NULL, '::1', NULL),
+(28, 20, 2, 1, 1, '0919664854', NULL, '2022-10-14 15:21:48', NULL, '::1', NULL),
+(29, 20, 3, 2, 1, '0919664854', NULL, '2022-10-14 15:21:50', NULL, '::1', NULL),
+(30, 21, 3, 23, 1, '0919664854', NULL, '2022-10-14 16:44:09', NULL, '::1', NULL),
+(31, 21, 4, 56, 1, '0919664854', NULL, '2022-10-14 16:44:13', NULL, '::1', NULL),
+(32, 22, 2, 1, 1, '0919664854', NULL, '2022-10-14 16:44:54', NULL, '::1', NULL),
+(33, 22, 3, 20, 1, '0919664854', NULL, '2022-10-14 16:44:58', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1898,7 +1963,14 @@ INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `em
 (12, 1, 1, '16', '12102022', '01', '0919664854001', '1', '001', '001', '000000127', '00000129', '1', '8', '1210202201091966485400110010010000001270000012918', '2022-10-12', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-13 03:11:48', '2022-10-13 03:12:20', '::1', '::1'),
 (13, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000128', '00000130', '1', '4', '1210202201091966485400110010010000001280000013014', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:30:49', '2022-10-13 03:31:11', '::1', '::1'),
 (14, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000129', '00000131', '1', '7', '1210202201091966485400110010010000001290000013117', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:37:20', '2022-10-13 03:37:34', '::1', '::1'),
-(15, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000130', '00000132', '1', '1', '1210202201091966485400110010010000001300000013211', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:37:57', '2022-10-13 03:38:08', '::1', '::1');
+(15, 1, 1, '19', '12102022', '01', '0919664854001', '1', '001', '001', '000000130', '00000132', '1', '1', '1210202201091966485400110010010000001300000013211', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-13 03:37:57', '2022-10-13 03:38:08', '::1', '::1'),
+(16, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000131', '00000133', '1', '1', '1410202201091966485400110010010000001310000013311', NULL, 'DVT', 35, 1, '0919664854', '0919664854', '2022-10-14 13:37:39', '2022-10-14 14:16:44', '::1', '::1'),
+(17, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000132', '00000134', '1', '4', '1410202201091966485400110010010000001320000013414', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-14 15:12:53', '2022-10-14 15:13:13', '::1', '::1'),
+(18, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000133', '00000135', '1', '7', '1410202201091966485400110010010000001330000013517', NULL, 'PPR', NULL, 1, '0919664854', '0919664854', '2022-10-14 15:14:39', '2022-10-14 15:14:49', '::1', '::1'),
+(19, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000134', '00000136', '1', '1', '1410202201091966485400110010010000001340000013611', '2022-10-14', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-14 15:16:03', '2022-10-14 15:16:19', '::1', '::1'),
+(20, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000135', '00000137', '1', '2', '1410202201091966485400110010010000001350000013712', '2022-10-14', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-14 15:21:41', '2022-10-14 15:22:05', '::1', '::1'),
+(21, 1, 1, '16', '14102022', '01', '0919664854001', '1', '001', '001', '000000136', '00000138', '1', '5', '1410202201091966485400110010010000001360000013815', '2022-10-14', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-14 16:44:04', '2022-10-14 16:44:27', '::1', '::1'),
+(22, 1, 1, '19', '14102022', '01', '0919664854001', '1', '001', '001', '000000137', '00000139', '1', '8', '1410202201091966485400110010010000001370000013918', '2022-10-14', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-14 16:44:48', '2022-10-14 16:45:09', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -1962,8 +2034,8 @@ CREATE TABLE `dct_pos_tbl_producto_servicio` (
 
 INSERT INTO `dct_pos_tbl_producto_servicio` (`prs_id_prod_serv`, `emp_id_empresa`, `prs_codigo_item`, `prs_codigo_auxiliar`, `prs_descripcion_item`, `prs_valor_unitario`, `prs_descuento`, `prs_iva_cod_impuesto`, `prs_iva_cod_tarifa`, `prs_ice_cod_impuesto`, `prs_ice_cod_tarifa`, `prs_irbpnr_cod_impuesto`, `prs_irbpnr_cod_tarifa`, `prs_det_nombre_1`, `prs_det_valor_1`, `prs_det_nombre_2`, `prs_det_valor_2`, `prs_det_nombre_3`, `prs_det_valor_3`, `prs_estado`, `prs_usuario_creacion`, `prs_usuario_modificacion`, `prs_fecha_creacion`, `prs_fecha_modificacion`, `prs_ip_creacion`, `prs_ip_modificacion`) VALUES
 (1, 1, 'C001', 'CNJ', 'ALQUILER DE HABITACION PERSONAL', 100, 0, 2, 0, 0, 0, 0, 0, 'Tipo', 'Sinple con AC', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 'C002', 'BHY', 'CAMIONETA', 20000, 10, 2, 0, 0, 0, 0, 0, 'Tipo', '4V en B', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 1, 'C003', 'NY45', 'PARACETAMOL', 0.25, 0, 2, 0, 0, 0, 0, 0, 'CONCENTRACION', '0.5mg', 'PRESENTACION', 'FRASCO', NULL, NULL, 1, NULL, '0919664854', NULL, '2022-10-05 01:57:05', NULL, '::1'),
+(2, 1, 'C002', 'BHY', 'CAMIONETA', 20000, 10, 2, 2, 0, 0, 0, 0, 'Tipo', '4V en B', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 'C003', 'NY45', 'PARACETAMOL', 0.25, 0, 2, 6, 0, 0, 0, 0, 'CONCENTRACION', '0.5mg', 'PRESENTACION', 'FRASCO', NULL, NULL, 1, NULL, '0919664854', NULL, '2022-10-05 01:57:05', NULL, '::1'),
 (4, 1, 'C004', 'NY469', 'BOTELLAS PLASTICAS', 0.1, 0, 2, 0, 0, 0, 0, 0, 'Tipo', 'Estandar', '', '', '', '', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1991,8 +2063,77 @@ INSERT INTO `dct_pos_tbl_tarifa_impuesto` (`imp_codigo`, `trf_codigo`, `trf_porc
 (2, 6, 0, NULL, 'No Objeto de impuesto'),
 (2, 7, 0, NULL, 'Exento de IVA'),
 (2, 8, NULL, NULL, 'IVA diferenciado'),
-(3, 3023, 150, NULL, 'ICE Productos del Tabaco y Sucedáneos del Tabaco excepto Cigarrillos'),
+(3, 3011, 14, NULL, 'ICE Cigarrillos Rubios'),
+(3, 3021, 16, NULL, 'ICE Cigarrillos Negros'),
+(3, 3023, 150, NULL, 'ICE Productos del Tabaco y Sucedáneos  del Tabaco excepto Cigarrillos'),
 (3, 3031, 75, NULL, 'ICE Bebidas Alcohólicas'),
+(3, 3033, 722, NULL, 'ICE Alcohol'),
+(3, 3041, 75, NULL, 'ICE Cerveza Industrial Gran Escala'),
+(3, 3043, 115, NULL, 'ICE Cerveza Artesanal'),
+(3, 3053, 18, NULL, 'ICE Bebidas Gaseosas con Alto Contenido de Azúcar'),
+(3, 3054, 10, NULL, 'ICE Bebidas Gaseosas con Bajo Contenido de Azúcar'),
+(3, 3073, 5, NULL, 'ICE Vehículos Motorizados cuyo PVP sea hasta de 20000 USD'),
+(3, 3075, 15, NULL, 'ICE Vehículos Motorizados PVP entre 30000 y 40000'),
+(3, 3077, 20, NULL, 'ICE  Vehículos  Motorizados  cuyo  PVP  superior  USD  40.000 hasta 50.000'),
+(3, 3078, 25, NULL, 'ICE  Vehículos  Motorizados  cuyo  PVP  superior  USD  50.000 hasta 60.000'),
+(3, 3079, 30, NULL, 'ICE  Vehículos  Motorizados  cuyo  PVP  superior  USD  60.000 hasta 70.000'),
+(3, 3080, 35, NULL, 'ICE Vehículos Motorizados cuyo PVP superior USD 70.000'),
+(3, 3081, 15, NULL, 'ICE Aviones, Tricares, yates, Barcos de Recreo'),
+(3, 3092, 15, NULL, 'ICE Servicios de Televisión Prepagada'),
+(3, 3093, 15, NULL, 'ICE Servicios Telefonía Sociedades'),
+(3, 3101, 10, NULL, 'ICE Bebidas Energizantes'),
+(3, 3111, 18, NULL, 'ICE Bebidas No Alcohólicas'),
+(3, 3532, 75, NULL, 'ICE IMPORT. ALCOHOL SENAE'),
+(3, 3533, 75, NULL, 'ICE Import. Bebidas Alcohólicas'),
+(3, 3541, 75, NULL, 'ICE Cerveza Gran Escala Cae'),
+(3, 3542, 16, NULL, 'ICE Cigarrillos Rubios Cae'),
+(3, 3543, 16, NULL, 'ICE Cigarrillos Negros Cae'),
+(3, 3544, 150, NULL, 'ICE Productos del Tabaco y Sucedáneos del Tabaco Excepto Cigarrillos Cae'),
+(3, 3545, 75, NULL, 'ICE CERVEZA ARTESANAL SENAE'),
+(3, 3552, 18, NULL, 'ICE   BEBIDAS   GASEOSAS   CON   ALTO   CONTENIDO   DE AZUCAR SENAE'),
+(3, 3553, 10, NULL, 'ICE   BEBIDAS   GASEOSAS   CON   BAJO   CONTENIDO   DE AZÚCAR SENAE'),
+(3, 3581, 15, NULL, 'ICE Aeronaves Cae'),
+(3, 3582, 15, NULL, 'ICE    Aviones,    Avionetas    y    Helicópteros    Exct.    Aquellos destinados Al Trans. Cae'),
+(3, 3601, 10, NULL, 'ICE Bebidas Energizantes SENAE'),
+(3, 3602, 18, NULL, 'ICE BEBIDAS NO ALCOHOLICAS SENAE'),
+(3, 3610, 20, NULL, 'ICE Perfumes y Aguas de Tocador'),
+(3, 3620, 35, NULL, 'ICE Videojuegos'),
+(3, 3630, 300, NULL, 'ICE Armas de Fuego, Armas deportivas y Municiones'),
+(3, 3640, 100, NULL, 'ICE Focos Incandescentes'),
+(3, 3660, 35, NULL, 'ICE Cuotas Membresías Afiliaciones Acciones'),
+(3, 3671, 100, NULL, 'ICE  CALEFONES  Y  SISTEMAS  DE  CALENTAMIENTO  DE AGUA A GAS SRI'),
+(3, 3680, 4, NULL, 'ICE FUNDAS PLÁSTICAS'),
+(3, 3681, 10, NULL, 'ICE    SERVICIOS    DE    TELEFONÍA    MÓVIL    PERSONAS NATURALES'),
+(3, 3682, 150, NULL, 'ICE   CONSUMIBLES   TABACO   CALENTADO   Y   LIQUIDOS CON NICOTINA SRI'),
+(3, 3683, 150, NULL, 'ICE   CONSUMIBLES   TABACO   CALENTADO   Y   LIQUIDOS CON NICOTINA SENAE'),
+(3, 3684, 5, NULL, 'ICE   VEHÍCULOS   MOTORIZADOS    CAMIONETAS   Y   DE RESCATE CUYO PVP SEA HASTA DE 30.000 USD'),
+(3, 3685, 5, NULL, 'ICE   VEHÍCULOS   MOTORIZADOS    CAMIONETAS   Y  DE RESCATE PVP SEA HASTA DE 30.000 USD SENAE'),
+(3, 3686, 10, NULL, 'ICE VEHÍCULOS MOTORIZADOS EXCEPTO CAMIONETAS Y DE   RESCATE   CUYO   PVP   SEA   SUPERIOR   USD   20.000 HASTA DE 30.000'),
+(3, 3687, 10, NULL, 'ICE VEHÍCULOS MOTORIZADOS EXCEPTO CAMIONETAS Y DE   RESCATE   CUYO   PVP   SEA   SUPERIOR   USD   20.000\nHASTA DE 30.000 SENAE'),
+(3, 3688, 0, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SEA  DE  HASTA USD. 35.000'),
+(3, 3689, 0, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SEA  DE  HASTA USD. 35.000 SENAE'),
+(3, 3690, 8, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n35.000 HASTA 40.000 SENAE'),
+(3, 3691, 8, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n35.000 HASTA 40.000'),
+(3, 3692, 14, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n40.000 HASTA 50.000'),
+(3, 3693, 14, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n40.000 HASTA 50.000 SENAE'),
+(3, 3694, 20, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n50.000 HASTA 60.000 SENAE'),
+(3, 3695, 20, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n50.000 HASTA 60.000'),
+(3, 3696, 26, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n60.000 HASTA 70.000'),
+(3, 3697, 26, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  USD.\n60.000 HASTA 70.000 SENAE'),
+(3, 3698, 32, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  A  USD 70.000'),
+(3, 3699, 32, NULL, 'ICE  VEHÍCULOS  HÍBRIDOS  CUYO  PVP  SUPERIOR  A  USD\n70.000 SENAE'),
+(3, 3710, 20, NULL, 'ICE Perfumes Aguas de Tocador Cae'),
+(3, 3720, 35, NULL, 'ICE Video Juegos Cae'),
+(3, 3730, 300, NULL, 'ICE   Importaciones   Armas   de   Fuego,   Armas   deportivas   y Municiones Cae'),
+(3, 3740, 100, NULL, 'ICE Focos Incandecentes Cae'),
+(3, 3771, 100, NULL, 'ICE  CALEFONES  Y  SISTEMAS  DE  CALENTAMIENTO  DE AGUA A GAS SENAE'),
+(3, 3871, 5, NULL, 'ICE-VEHÍCULOS  MOTORIZADOS  CUYO  PVP  SEA  HASTA DE 20000 USD SENAE'),
+(3, 3873, 15, NULL, 'ICE-VEHÍCULOS   MOTORIZADOS   PVP   ENTRE   30000   Y 40000 SENAE'),
+(3, 3874, 20, NULL, 'ICE-VEHÍCULOS   MOTORIZADOS   CUYO   PVP   SUPERIOR USD 40.000 HASTA 50.000 SENAE'),
+(3, 3875, 25, NULL, 'ICE-VEHÍCULOS   MOTORIZADOS   CUYO   PVP   SUPERIOR USD 50.000 HASTA 60.000 SENAE'),
+(3, 3876, 30, NULL, 'ICE-VEHÍCULOS   MOTORIZADOS   CUYO   PVP   SUPERIOR USD 60.000 HASTA 70.000 SENAE'),
+(3, 3877, 35, NULL, 'ICE-VEHÍCULOS   MOTORIZADOS   CUYO   PVP   SUPERIOR USD 70.000 SENAE'),
+(3, 3878, 15, NULL, 'ICE-Aviones, Tricares, Yates, Barcos De Rec SENAE'),
 (5, 1, NULL, 0.02, 'Impuesto Redimible Botellas Plásticas no Retornables');
 
 -- --------------------------------------------------------
@@ -2412,7 +2553,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-13 03:38:19', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-12', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-14 16:44:47', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-14', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('45677686788', 'THFGHFG', 'HFGHFGH', 'FGHFGHFG', 'HFGHFGH', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'mreinacevallos@gmail.com', 0, 9, 1, 1, '2022-09-03', 0, 1, NULL, '0919664854', NULL, '2022-09-03 14:21:18', NULL, '::1', NULL);
 
@@ -2592,6 +2733,12 @@ ALTER TABLE `datos_retencion_electronica`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `dct_pos_tbl_advertencia_sri`
+--
+ALTER TABLE `dct_pos_tbl_advertencia_sri`
+  ADD PRIMARY KEY (`sra_codigo`);
+
+--
 -- Indices de la tabla `dct_pos_tbl_cientes`
 --
 ALTER TABLE `dct_pos_tbl_cientes`
@@ -2767,13 +2914,13 @@ ALTER TABLE `dct_pos_tbl_empresa_serial`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_detalle`
 --
 ALTER TABLE `dct_pos_tbl_factura_detalle`
-  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
 --
 ALTER TABLE `dct_pos_tbl_factura_transaccion`
-  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`
