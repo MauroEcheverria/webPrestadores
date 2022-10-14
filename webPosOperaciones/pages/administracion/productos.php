@@ -58,12 +58,12 @@
                             
                             <div class="form-group">
                                 <label for="pCodigoItem" class="control-label">Código item</label>
-                                <input type="text" class="form-control" id="pCodigoItem" name="pCodigoItem" maxlength="5" minlength="1" required>
+                                <input type="text" class="form-control" id="pCodigoItem" name="pCodigoItem" maxlength="12" minlength="1" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label for="pCodigoAuxiliar" class="control-label">Código auxiliar</label>
-                                    <input type="text" class="form-control" id="pCodigoAuxiliar" name="pCodigoAuxiliar" maxlength="5" minlength="1" required>
+                                    <input type="text" class="form-control" id="pCodigoAuxiliar" name="pCodigoAuxiliar" maxlength="12" minlength="1" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
@@ -94,7 +94,19 @@
                             
                             <div class="form-group">
                                 <label for="slcIva" class="control-label">IVA  - Impuesto al Valor Agregado</label>
-                                <select name="slcIva" id="slcIva" class="form-control"></select>
+                                <select name="slcIva" id="slcIva" class="form-control" required></select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            
+                            <div class="form-group slcIvaDif" style="display: none">
+                                <label for="slcIvaDif" class="control-label">Porcentaje Iva diferenciado</label>
+                                <select name="slcIvaDif" id="slcIvaDif" class="form-control slcIvaDif">
+                                    <option value="8">8%</option>
+                                    <option value="9">9%</option>
+                                    <option value="10">10%</option>
+                                    <option value="11">11%</option>
+                                    <option value="12">12%</option>
+                                </select>
                                 <div class="help-block with-errors"></div>
                             </div>
                             
@@ -109,23 +121,6 @@
                                 <select name="slcIbr" id="slcIbr" class="form-control"></select>
                                 <div class="help-block with-errors"></div>
                             </div>
-
-<!--                            <div class="form-group">
-                                <label for="slcImpuesto " class="control-label">Impuesto</label>
-                                <select name="slcImpuesto" id="slcImpuesto" class="form-control empCamposNoEditables"></select>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            
-                             <div class="form-group">
-                                <label for="slcTarifaImpuesto " class="control-label">Tarifa Impuesto</label>
-                                <select name="slcTarifaImpuesto" id="slcTarifaImpuesto" class="form-control empCamposNoEditables"></select>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            
-                            <button type="button" class="btn btn-block btn-outline-success" onclick="agregarImpuesto();" id="btnPrdAgregarImpuesto">Agregar Impuesto</button>
-                            
-                                        <table id="dtImpuestos" class="display" style="width:100%;">
-                                        </table>-->
 
                         </div>
                         
@@ -176,6 +171,16 @@
                                     <div class="form-group">
                                         <label for="pDetalleValor3" class="control-label">Valor</label>
                                         <input type="text" class="form-control" id="pDetalleValor3" name="pDetalleValor3" maxlength="200">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="pDescuento" class="control-label">% Descuento</label>
+                                        <input type="number" class="form-control" id="pDescuento" name="pDescuento" maxlength="3" min="0" max="100" onkeypress="return soloNumeros(event)">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>

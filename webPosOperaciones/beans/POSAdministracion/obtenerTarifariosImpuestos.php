@@ -20,7 +20,7 @@ try {
     $pdo->beginTransaction();
 
     $sql_1 = "select ti.trf_codigo, ti.trf_porcentaje, ti.trf_valor, ti.trf_descripcion, 
-		concat( (case when ti.trf_porcentaje is null then concat('+ $ ',ti.trf_valor) when ti.trf_valor is null then concat(ti.trf_porcentaje,'%') end)
+		concat( (case when ti.trf_porcentaje is null and  ti.trf_valor is null then '' when ti.trf_porcentaje is null then concat('+ $ ',ti.trf_valor) when ti.trf_valor is null then concat(ti.trf_porcentaje,'%') end)
 				, ' - ' ,ti.trf_descripcion) as full_desc
                     from dct_pos_tbl_tarifa_impuesto ti
                     where ti.imp_codigo = :imp_codigo;";
