@@ -336,7 +336,7 @@ $(document).ready(function() {
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+              obtenerComprobanteFirmadoSRI(result.id_transaccion,result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
               break;
             case "noPoseeFirma":
               $('#myModalRegistroTransacciones').modal('show');
@@ -508,7 +508,7 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [0]
+        aTargets: [2,4,6,7,8,9]
       },
       {
         "targets": [0,1],
@@ -528,12 +528,22 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Estado</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
-        width: "80",
+        width: "200",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="icondtEstadoTransaccionModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones  = '<a class="icondtRepoTransDescargarXML cursorPointerDT" title="Descargar XML"><i class="fas fa-edit iconDTiconTransacciones"></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtEstadoTransaccionResetear cursorPointerDT" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
+          acciones += '<a class="icondtRepoTransDescargarPDF cursorPointerDT" title="Descargar PDF"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransReenviarCompr cursorPointerDT" title="Reenviar Comprobante"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneNotaCre cursorPointerDT" title="Generar Nota de Crédito"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneNotaDeb cursorPointerDT" title="Generar Nota de Débito"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneCompRet cursorPointerDT" title="Generar Comprobante de Retención"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneGuiaRet cursorPointerDT" title="Generar Guía de Remisión"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
           return acciones
         }
       },
@@ -843,5 +853,50 @@ $(document).ready(function() {
   $('#btnEnviarPago').click( function (e) {
     e.preventDefault();
     $('#btnSubmitEnviarPago').click();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransDescargarXML', function (e) {
+    e.preventDefault();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransDescargarPDF', function (e) {
+    e.preventDefault();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransReenviarCompr', function (e) {
+    e.preventDefault();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneNotaCre', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarNotaCredito"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneNotaDeb', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarNotaDebito"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneCompRet', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarComprobanteRetencion"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneGuiaRet', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarGuiRemision"
+    },
+    'POST','');
   });
 });

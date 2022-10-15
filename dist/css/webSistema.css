@@ -118,7 +118,6 @@
 }
 .cursorPointerDT {
   cursor: pointer;
-  cursor: hand;
 }
 .invalid_pass {
   background:url(../../dist/img/dt_error.png) no-repeat 0 50%;

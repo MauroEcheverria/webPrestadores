@@ -18,6 +18,7 @@
                   ps.prs_valor_unitario, 
                   ps.prs_descuento,
                   ps.prs_iva_cod_tarifa,
+                  ps.prs_iva_dif_porc,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_iva_cod_impuesto AND trf_codigo = ps.prs_iva_cod_tarifa),0) trf_porcentaje_iva,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_ice_cod_impuesto AND trf_codigo = ps.prs_ice_cod_tarifa),0) trf_porcentaje_ice,
                   IFNULL((SELECT trf_porcentaje FROM dct_pos_tbl_tarifa_impuesto WHERE imp_codigo = ps.prs_irbpnr_cod_impuesto AND trf_codigo = ps.prs_irbpnr_cod_tarifa),0) trf_porcentaje_irbpnr
@@ -82,8 +83,8 @@
           break;
         case 8:
           $pos_base_imp_iva_diferenciado += $pos_trans_sub_total;
-          $pos_calc_iva_diferenciado += $pos_trans_sub_total * $row_seg_fas["trf_porcentaje_iva"] / 100;
-          $pos_porcentaje_iva = $row_seg_fas["trf_porcentaje_iva"];
+          $pos_calc_iva_diferenciado += $pos_trans_sub_total * $row_seg_fas["prs_iva_dif_porc"] / 100;
+          $pos_porcentaje_iva = $row_seg_fas["prs_iva_dif_porc"];
           break;
         case 0:
           $pos_base_imp_iva_0 += $pos_trans_sub_total;
@@ -115,11 +116,11 @@
     $data_tabla .= '</table>';
     
     if($query_seg_fas) {
-                    round(1.95583,2);
       $data_result["pos_base_imp_diff"] = round(($pos_base_imp_iva_12 + $pos_base_imp_iva_14 + $pos_base_imp_iva_diferenciado),2);
       $data_result["pos_base_imp_iva_0"] = round($pos_base_imp_iva_0,2);
       $data_result["pos_base_imp_iva_no_sujeto"] = round($pos_base_imp_iva_no_sujeto,2);
       $data_result["pos_base_imp_iva_exento"] = round($pos_base_imp_iva_exento,2);
+      $data_result["pos_total_iva"] = round(($pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado),2);
 
       if ($pos_porcentaje_iva != 0) {
         $data_result["pos_porcentaje_iva"] = $pos_porcentaje_iva;
@@ -127,7 +128,6 @@
       else {
         $data_result["pos_porcentaje_iva"] = 12;
       }
-      $data_result["pos_total_iva"] = round(($pos_calc_iva_12 + $pos_calc_iva_14 + $pos_calc_iva_diferenciado),2);
 
       $data_result["pos_total_ice"] = round($pos_calc_ice,2);
       $data_result["pos_total_irbpnr"] = round($pos_calc_irbpnr,2);

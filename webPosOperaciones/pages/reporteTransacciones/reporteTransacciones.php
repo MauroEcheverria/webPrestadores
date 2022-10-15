@@ -1,5 +1,5 @@
 <?php 
-  function reportes($pdo,$dataSesion){ 
+  function reporteTransacciones($pdo,$dataSesion){ 
   include("../../../template/templateHead.php");
   include("../../../template/templateFooter.php");
   include("../../../dialogs/modalViews.php"); 
@@ -18,8 +18,9 @@
   $js_dreconstec[] = '<script src="../../../plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/bootstrap-validator/dist/validator.min.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../plugins/select2/dist/js/select2.full.min.js'.$dataSesion["version_css_js"].'"></script>';
+  $js_dreconstec[] = '<script src="../../../plugins/jquery-redirect/jquery.redirect.js'.$dataSesion["version_css_js"].'"></script>';
   $js_dreconstec[] = '<script src="../../../dist/js/webPOSTransacciones.js'.$dataSesion["version_css_js"].'"></script>';
-
+  
   template_head($pdo,$dataSesion,$css_dreconstec);
 ?>
   <div class="content-wrapper">
