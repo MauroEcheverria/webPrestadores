@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2022 a las 21:31:39
+-- Tiempo de generación: 17-10-2022 a las 04:25:30
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -1848,7 +1848,7 @@ CREATE TABLE `dct_pos_tbl_empresa_serial` (
 --
 
 INSERT INTO `dct_pos_tbl_empresa_serial` (`ser_id_empresa_serial`, `emp_id_empresa`, `ser_factura_serie`, `ser_factura_cod_num`, `ser_nota_credito_serie`, `ser_nota_credito_cod_num`, `ser_nota_debito_serie`, `ser_nota_debito_cod_num`, `ser_guia_remision_serie`, `ser_guia_remision_cod_num`, `ser_comp_ret_serie`, `ser_comp_ret_cod_num`, `ser_estado`, `ser_usuario_creacion`, `ser_usuario_modificacion`, `ser_fecha_creacion`, `ser_fecha_modificacion`, `ser_ip_creacion`, `ser_ip_modificacion`) VALUES
-(1, 1, 151, 153, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-15 15:40:30', NULL, '::1'),
+(1, 1, 152, 154, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-10-16 02:22:45', NULL, '::1'),
 (3, 2, 10, 1, 1266, 1, 1236, 1, 102, 1, 123, 1, 1, NULL, '0919664854', NULL, '2022-08-09 03:44:36', NULL, '::1');
 
 -- --------------------------------------------------------
@@ -1922,7 +1922,8 @@ INSERT INTO `dct_pos_tbl_factura_detalle` (`fdt_id_factura_detalle`, `ftr_id_fac
 (44, 33, 3, 10, 0, '0919664854', '0919664854', '2022-10-15 15:34:42', '2022-10-15 15:34:54', '::1', '::1'),
 (45, 33, 2, 1, 1, '0919664854', NULL, '2022-10-15 15:34:59', NULL, '::1', NULL),
 (46, 34, 2, 1, 1, '0919664854', NULL, '2022-10-15 15:36:30', NULL, '::1', NULL),
-(47, 35, 1, 10, 1, '0919664854', NULL, '2022-10-15 15:40:27', NULL, '::1', NULL);
+(47, 35, 1, 10, 1, '0919664854', NULL, '2022-10-15 15:40:27', NULL, '::1', NULL),
+(48, 36, 4, 10, 1, '0919664854', NULL, '2022-10-16 02:22:37', NULL, '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -1997,7 +1998,8 @@ INSERT INTO `dct_pos_tbl_factura_transaccion` (`ftr_id_factura_transaccion`, `em
 (32, 1, 1, '16', '15102022', '01', '0919664854001', '1', '001', '001', '000000147', '00000149', '1', '3', '1510202201091966485400110010010000001470000014913', NULL, 'NAT', 52, 1, '0919664854', '0919664854', '2022-10-15 15:31:17', '2022-10-15 15:31:43', '::1', '::1'),
 (33, 1, 1, '19', '15102022', '01', '0919664854001', '1', '001', '001', '000000148', '00000150', '1', '1', '1510202201091966485400110010010000001480000015011', '2022-10-15', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-15 15:34:36', '2022-10-15 15:35:08', '::1', '::1'),
 (34, 1, 1, '19', '15102022', '01', '0919664854001', '1', '001', '001', '000000149', '00000151', '1', '2', '1510202201091966485400110010010000001490000015112', '2022-10-15', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-15 15:36:24', '2022-10-15 15:36:58', '::1', '::1'),
-(35, 1, 1, '19', '15102022', '01', '0919664854001', '1', '001', '001', '000000150', '00000152', '1', '5', '1510202201091966485400110010010000001500000015215', '2022-10-15', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-15 15:40:16', '2022-10-15 15:40:35', '::1', '::1');
+(35, 1, 1, '19', '15102022', '01', '0919664854001', '1', '001', '001', '000000150', '00000152', '1', '5', '1510202201091966485400110010010000001500000015215', '2022-10-15', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-15 15:40:16', '2022-10-15 15:40:35', '::1', '::1'),
+(36, 1, 1, '19', '15102022', '01', '0919664854001', '1', '001', '001', '000000151', '00000153', '1', '8', '1510202201091966485400110010010000001510000015318', '2022-10-15', 'AUT', 0, 1, '0919664854', '0919664854', '2022-10-16 02:22:33', '2022-10-16 02:22:56', '::1', '::1');
 
 -- --------------------------------------------------------
 
@@ -2582,7 +2584,7 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-15 19:24:38', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-15', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2022-10-16 03:58:29', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2022-10-03', 0, 0, '2022-10-15', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('45677686788', 'THFGHFG', 'HFGHFGH', 'FGHFGHFG', 'HFGHFGH', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'mreinacevallos@gmail.com', 0, 9, 1, 1, '2022-09-03', 0, 1, NULL, '0919664854', NULL, '2022-09-03 14:21:18', NULL, '::1', NULL);
 
@@ -2943,13 +2945,13 @@ ALTER TABLE `dct_pos_tbl_empresa_serial`
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_detalle`
 --
 ALTER TABLE `dct_pos_tbl_factura_detalle`
-  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `fdt_id_factura_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_factura_transaccion`
 --
 ALTER TABLE `dct_pos_tbl_factura_transaccion`
-  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ftr_id_factura_transaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `dct_pos_tbl_producto_servicio`

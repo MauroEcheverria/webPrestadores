@@ -23,11 +23,32 @@ function transacciones($pdo, $dataSesion) {
     $js_dreconstec[] = '<script src="../../../plugins/toastr-master/build/toastr.min.js'.$dataSesion["version_css_js"].'"></script>';
 
     template_head($pdo, $dataSesion, $css_dreconstec);
-    echo "AQUI MAURO: ".$_POST["ftr_id_factura_transaccion"];
     ?>
- 
-
-
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="container container_main">
+          <div class="card">
+            <div class="card-header">
+              <span class="panel-title">
+                <b>
+                  <?php
+                    if ($_POST["ftr_tipo_accion"] == "generarNotaCredito") {
+                      echo "Generar Nota de Crédito";
+                    }
+                    else {
+                      echo "Prueba";
+                    }
+                  ?>
+                </b>
+              </span>
+            </div>
+            <div class="card-body">
+                  
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
     <?php
     modalViews();
     template_footer($pdo, $dataSesion, $js_dreconstec);

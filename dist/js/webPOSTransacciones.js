@@ -531,9 +531,7 @@ $(document).ready(function() {
         width: "200",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="icondtRepoTransDescargarXML cursorPointerDT" title="Descargar XML"><i class="fas fa-edit iconDTiconTransacciones"></i></a>';
-          acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtRepoTransDescargarPDF cursorPointerDT" title="Descargar PDF"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<a class="icondtRepoTransVisualizarPDF cursorPointerDT" title="Visualizar PDF"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
           acciones += '<a class="icondtRepoTransReenviarCompr cursorPointerDT" title="Reenviar Comprobante"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
@@ -550,7 +548,7 @@ $(document).ready(function() {
     ],
     oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
     lengthMenu: [5,10,15,20,30],
-    order: [[ 1, "asc" ]],
+    order: [[ 7, "desc" ]],
     ajax:{
       url:'../../beans/POSTransacciones/obtenerClaveAcceso.php',
       type: "post",
@@ -854,11 +852,18 @@ $(document).ready(function() {
     e.preventDefault();
     $('#btnSubmitEnviarPago').click();
   });
-  $('#dtEstadoTransaccion').on('click','.icondtRepoTransDescargarXML', function (e) {
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransVisualizarPDF', function (e) {
     e.preventDefault();
-  });
-  $('#dtEstadoTransaccion').on('click','.icondtRepoTransDescargarPDF', function (e) {
-    e.preventDefault();
+    if (dtEstadoTransaccion.row($(this).parents('tr').first()).data()[8] == "AUTORIZADO") {
+      $.redirect('../../reportes/PDF/lectorPDF.php',{
+        'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1]
+      },
+      'POST','_');
+      //window.open('../../reportes/PDF/lectorPDF.php?ftr_sri_clave_acceso='+dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],'PDF','width=800,height=650');
+    }
+    else {
+      alert("El comprobante debe estar AUTORIZADO para poder visualizarlo.");
+    }
   });
   $('#dtEstadoTransaccion').on('click','.icondtRepoTransReenviarCompr', function (e) {
     e.preventDefault();
