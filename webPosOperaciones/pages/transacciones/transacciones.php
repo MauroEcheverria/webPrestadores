@@ -23,6 +23,7 @@ function transacciones($pdo, $dataSesion) {
     $js_dreconstec[] = '<script src="../../../plugins/toastr-master/build/toastr.min.js'.$dataSesion["version_css_js"].'"></script>';
 
     template_head($pdo, $dataSesion, $css_dreconstec);
+    if (!empty($_POST["ftr_tipo_accion"])) {
     ?>
     <div class="content-wrapper">
       <section class="content">
@@ -32,24 +33,62 @@ function transacciones($pdo, $dataSesion) {
               <span class="panel-title">
                 <b>
                   <?php
-                    if ($_POST["ftr_tipo_accion"] == "generarNotaCredito") {
-                      echo "Generar Nota de Crédito";
-                    }
-                    else {
-                      echo "Prueba";
+                    switch ($_POST["ftr_tipo_accion"]) {
+                      case 'generarNotaCredito':
+                        echo "Generar Nota de Crédito";
+                        break;
+                      case 'generarNotaDebito':
+                        echo "Generar Nota de Débito";
+                        break;
+                      case 'generarComprobanteRetencion':
+                        echo "Generar Comprobante de Retención";
+                        break;
+                      case 'generarGuiRemision':
+                        echo "Generar Guía de Remisión";
+                        break;
+                      default:
+                        ?>
+                          <script type="text/javascript">
+                            window.location.href = "../reporteTransacciones/"
+                          </script>
+                        <?php
+                        break;
                     }
                   ?>
                 </b>
               </span>
             </div>
             <div class="card-body">
-                  
+              <?php
+                switch ($_POST["ftr_tipo_accion"]) {
+                  case 'generarNotaCredito':
+                    echo "Generar Nota de Crédito";
+                    break;
+                  case 'generarNotaDebito':
+                    echo "Generar Nota de Débito";
+                    break;
+                  case 'generarComprobanteRetencion':
+                    echo "Generar Comprobante de Retención";
+                    break;
+                  case 'generarGuiRemision':
+                    echo "Generar Guía de Remisión";
+                    break;
+                }
+              ?>
             </div>
           </div>
         </div>
       </section>
     </div>
     <?php
+    }
+    else {
+      ?>
+        <script type="text/javascript">
+          window.location.href = "../reporteTransacciones/"
+        </script>
+      <?php
+    }
     modalViews();
     template_footer($pdo, $dataSesion, $js_dreconstec);
 }
