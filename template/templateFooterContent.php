@@ -4,11 +4,11 @@
     <div class="container">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Regresar</a></li>
+          <li class="nav-item"><a href="../" class="nav-link px-2 text-muted">Inicio</a></li>
+          <li class="nav-item"><a href="../productos/" class="nav-link px-2 text-muted">Productos</a></li>
+          <li class="nav-item"><a href="../planes/" class="nav-link px-2 text-muted">Planes</a></li>
+          <li class="nav-item"><a href="../contactanos/" class="nav-link px-2 text-muted">Contáctanos</a></li>
+          <li class="nav-item"><a href="../login.php" class="nav-link px-2 text-muted">Inicio de Sesión</a></li>
         </ul>
         <p class="text-center text-muted">&copy; <script>document.write(new Date().getFullYear());</script> Company, Inc</p>
       </footer>

@@ -173,6 +173,7 @@
                                       FROM dct_sistema_tbl_rol_opcion rp, dct_sistema_tbl_opcion op
                                       WHERE rp.rlo_id_opcion = op.opc_id_opcion
                                       AND op.opc_estado = 1
+                                      AND op.opc_id_opcion  <> 12
                                       AND rp.rlo_id_rol = :id_role)
                                       AND opt.opc_id_aplicacion = :id_application
                                       ORDER BY opt.opc_orden;";

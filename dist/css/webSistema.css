@@ -66,12 +66,11 @@
   border: 1px solid #ced4da !important;
   font-size: 12px;
 }
-/*.select2-selection__rendered {
-  font-size: 21px !important;
-  font-weight: 600 !important;
-}*/
 .select2-selection__arrow {
   top: 6px !important;
+}
+.select2-results__options {
+  font-size: 11px;
 }
 .help-block,.with-errors{
   font-size: 13px;
@@ -119,7 +118,6 @@
 }
 .cursorPointerDT {
   cursor: pointer;
-  cursor: hand;
 }
 .invalid_pass {
   background:url(../../dist/img/dt_error.png) no-repeat 0 50%;
@@ -170,4 +168,7 @@ b {
 }
 .form-control {
   font-size: 12px !important;
+}
+.infoPlanBasico {
+  height: 110px;
 }

@@ -17,7 +17,7 @@ try {
     $sql = "select est.est_id_empresa_establecimiento, emp.emp_id_empresa
                 ,emp.emp_empresa
                 ,est.est_nombre
-                ,est.est_codigo
+                ,est.est_cod_establecimiento
                 ,est.est_direccion_emisor
                 ,est.est_es_matriz
                 ,est.est_estado
@@ -35,7 +35,7 @@ try {
         $return_array[0] = $row["est_id_empresa_establecimiento"];
         $return_array[1] = $row["emp_id_empresa"];
         $return_array[2] = $row["emp_empresa"];
-        $return_array[3] = $row["est_codigo"];
+        $return_array[3] = $row["est_cod_establecimiento"];
         $return_array[4] = $row["est_direccion_emisor"];
         $return_array[5] = $row["est_nombre"];
         $return_array[6] = $row["est_es_matriz"];

@@ -92,10 +92,10 @@
                             
 				$sql_2="INSERT INTO dct_sistema_tbl_empresa(emp_empresa, emp_nom_comercial, emp_ruc, emp_estado, emp_vigencia_desde, emp_vigencia_hasta, 
 					ctg_id_catalogo, em_usuario_creacion, em_fecha_creacion, em_ip_creacion
-                                        , emp_contrib_especial,emp_url_logo,emp_direccion_matriz,wsr_tipo_ambiente,emp_obli_contabilidad)
+                                        , emp_contrib_especial,em_logo,emp_direccion_matriz,wsr_tipo_ambiente,emp_obli_contabilidad)
 			    	VALUES (:emp_empresa, :emp_nom_comercial, :emp_ruc, 1, :emp_vigencia_desde, :emp_vigencia_hasta, 
 			    		:ctg_id_catalogo, :em_usuario_creacion, now(), :em_ip_creacion
-                                        , :emp_contrib_especial,:emp_url_logo,:emp_direccion_matriz,:wsr_tipo_ambiente,:emp_obli_contabilidad);";
+                                        , :emp_contrib_especial,:em_logo,:emp_direccion_matriz,:wsr_tipo_ambiente,:emp_obli_contabilidad);";
 		    $query_2=$pdo->prepare($sql_2);          
 		    $query_2->bindValue(':emp_empresa',cleanData("siLimite",300,"noMayuscula",$_POST["emp_empresa"]),PDO::PARAM_STR);
                     $query_2->bindValue(':emp_nom_comercial',cleanData("siLimite",300,"noMayuscula",$_POST["emp_nom_comercial"]),PDO::PARAM_STR);
@@ -107,7 +107,7 @@
 		    $query_2->bindValue(':em_usuario_creacion',cleanData("siLimite",13,"noMayuscula",$dataSesion["cod_system_user"]),PDO::PARAM_INT); 
 		    $query_2->bindValue(':em_ip_creacion',getRealIP(),PDO::PARAM_STR);
                     $query_2->bindValue(':emp_contrib_especial',cleanData("siLimite",1,"noMayuscula",$_POST["emp_contr_esp"] ),PDO::PARAM_INT);
-                    $query_2->bindValue(':emp_url_logo',$pathto,PDO::PARAM_STR);
+                    $query_2->bindValue(':em_logo',$pathto,PDO::PARAM_STR);
                     $query_2->bindValue(':emp_direccion_matriz',cleanData("noLimite",0,"noMayuscula",$_POST["emp_direccion_matriz"]),PDO::PARAM_STR);
                     $query_2->bindValue(':wsr_tipo_ambiente',cleanData("siLimite",1,"noMayuscula",$_POST["em_tipo_ambiente"] ),PDO::PARAM_INT);
                     $query_2->bindValue(':emp_obli_contabilidad',cleanData("siLimite",2,"noMayuscula",$_POST["emp_obli_contabilidad"]),PDO::PARAM_STR);

@@ -27,11 +27,11 @@ try {
                                     inner join dct_sistema_tbl_empresa emp
                                             on emp.emp_id_empresa = est.emp_id_empresa
                                     where emp.emp_id_empresa = :emp_id_empresa
-                                    and (upper(est.est_codigo) = upper(:est_codigo)
+                                    and (upper(est.est_cod_establecimiento) = upper(:est_cod_establecimiento)
                                     or upper(trim(est.est_nombre)) = upper(trim(:est_nombre))
                                     );";
         $queryV = $pdo->prepare($sqlV);
-        $queryV->bindValue(':est_codigo', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
+        $queryV->bindValue(':est_cod_establecimiento', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
         $queryV->bindValue(':est_nombre', cleanData("siLimite", 300, "noMayuscula", $_POST["estNombre"]), PDO::PARAM_STR);
         $queryV->bindValue(':emp_id_empresa', cleanData("noLimite", 0, "noMayuscula", $_POST["slcEmpresa"]), PDO::PARAM_INT);
         $queryV->execute();
@@ -78,16 +78,16 @@ try {
 
         //ingreso establecimiento
         $sql_2 = "insert into dct_pos_tbl_empresa_establecimiento(
-                                        emp_id_empresa,est_codigo, est_nombre, est_direccion_emisor, est_es_matriz, est_estado
+                                        emp_id_empresa,est_cod_establecimiento, est_nombre, est_direccion_emisor, est_es_matriz, est_estado
                                         ,est_usuario_creacion,est_fecha_creacion,est_ip_creacion
                                         )
                                         values(
-                                        :emp_id_empresa,:est_codigo, :est_nombre, :est_direccion_emisor, :est_es_matriz, 1
+                                        :emp_id_empresa,:est_cod_establecimiento, :est_nombre, :est_direccion_emisor, :est_es_matriz, 1
                                         ,:est_usuario_creacion,now(),:est_ip_creacion
                                         );";
         $query_2 = $pdo->prepare($sql_2);
         $query_2->bindValue(':emp_id_empresa', cleanData("noLimite", 0, "noMayuscula", $_POST["slcEmpresa"]), PDO::PARAM_INT);
-        $query_2->bindValue(':est_codigo', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
+        $query_2->bindValue(':est_cod_establecimiento', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_nombre', cleanData("siLimite", 300, "noMayuscula", $_POST["estNombre"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_direccion_emisor', cleanData("siLimite", 300, "noMayuscula", $_POST["estDireccion"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_es_matriz', cleanData("noLimite", 0, "noMayuscula", $_POST["chkMatriz"]), PDO::PARAM_INT);
@@ -124,11 +124,11 @@ try {
                                             on emp.emp_id_empresa = est.emp_id_empresa
                                     where emp.emp_id_empresa = :emp_id_empresa
                                     and est.est_id_empresa_establecimiento != :est_id_empresa_establecimiento
-                                    and (upper(est.est_codigo) = upper(:est_codigo)
+                                    and (upper(est.est_cod_establecimiento) = upper(:est_cod_establecimiento)
                                     or upper(trim(est.est_nombre)) = upper(trim(:est_nombre))
                                     );";
         $queryV = $pdo->prepare($sqlV);
-        $queryV->bindValue(':est_codigo', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
+        $queryV->bindValue(':est_cod_establecimiento', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
         $queryV->bindValue(':est_nombre', cleanData("siLimite", 300, "noMayuscula", $_POST["estNombre"]), PDO::PARAM_STR);
         $queryV->bindValue(':emp_id_empresa', cleanData("noLimite", 0, "noMayuscula", $_POST["slcEmpresa"]), PDO::PARAM_INT);
         $queryV->bindValue(':est_id_empresa_establecimiento', cleanData("noLimite", 0, "noMayuscula", $_POST["id_establecimiento"]), PDO::PARAM_INT);
@@ -148,7 +148,7 @@ try {
         //ACTUALIZAR establecimiento
         $sql_2 = "update dct_pos_tbl_empresa_establecimiento
                     set 
-                    est_codigo = :est_codigo,
+                    est_cod_establecimiento = :est_cod_establecimiento,
                     est_nombre = :est_nombre,
                     est_direccion_emisor = :est_direccion_emisor, 
                     est_estado = :est_estado,
@@ -157,7 +157,7 @@ try {
                     est_usuario_modificacion = :est_usuario_modificacion
                     where est_id_empresa_establecimiento = :est_id_empresa_establecimiento;";
         $query_2 = $pdo->prepare($sql_2);
-        $query_2->bindValue(':est_codigo', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
+        $query_2->bindValue(':est_cod_establecimiento', cleanData("siLimite", 60, "noMayuscula", $_POST["estCodigo"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_nombre', cleanData("siLimite", 300, "noMayuscula", $_POST["estNombre"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_direccion_emisor', cleanData("siLimite", 300, "noMayuscula", $_POST["estDireccion"]), PDO::PARAM_STR);
         $query_2->bindValue(':est_estado', cleanData("noLimite", 0, "noMayuscula", $_POST["slcEstado"]), PDO::PARAM_INT);

@@ -11,9 +11,17 @@ try {
     $ConnectionDB = new ConnectionDB();
     $pdo = $ConnectionDB->connect();
     $pdo->beginTransaction();
-
-    //id empresa de persona logueada
-    $idEmpresaUserLogin = !isset($dataSesion["usr_id_empresa"]) ? null : $dataSesion["usr_id_empresa"];
+    
+    $idEmpresaUserLogin = null;
+    $isSuAdmin = (isset($dataSesion["id_role"]) && $dataSesion["id_role"] == 1);
+    
+    if (!$isSuAdmin)
+    {
+      //id empresa de persona logueada
+      $idEmpresaUserLogin = !isset($dataSesion["usr_id_empresa"]) ? -1 : $dataSesion["usr_id_empresa"];  
+    }
+    
+    
 
     $sql_1 = "select e.emp_id_empresa, e.emp_empresa, e.emp_estado
             from dct_sistema_tbl_empresa e

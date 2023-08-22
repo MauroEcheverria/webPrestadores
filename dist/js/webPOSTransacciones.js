@@ -7,16 +7,58 @@ function renderizarProductoServicio() {
       var result = eval('('+result+')');
       switch (result.message) {
         case "saveOK":
-          $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
-          $("#posTransComprobante").empty().prepend(result.total_temp);
-          $('.refDetalleItemProceso').click(function() {
-            var idClicked = this.id;
-            alert("Se visualizará el detalle del Ítem: "+idClicked);
-          });
-          $('.refDescartarItemProceso').click(function() {
-            var idClicked = this.id;
-            inactivarProductoServicio($('#'+idClicked+' span').text());
-          });
+          if (result.pos_cant_item >= 1) {
+            $("#idTablaProductoServicio").empty().prepend(result.data_tabla);
+            $("#pos_total_comprobante_1,#pos_total_comprobante_2").empty().prepend(result.pos_total_comprobante);
+            $("#pos_porcentaje_iva").empty().prepend(result.pos_porcentaje_iva);
+            $("#pos_base_imp_diff").empty().prepend(result.pos_base_imp_diff);
+            $("#pos_base_imp_iva_0").empty().prepend(result.pos_base_imp_iva_0);
+            $("#pos_base_imp_iva_no_sujeto").empty().prepend(result.pos_base_imp_iva_no_sujeto);
+            $("#pos_base_imp_iva_exento").empty().prepend(result.pos_base_imp_iva_exento);
+            $("#pos_total_descuento").empty().prepend(result.pos_total_descuento);
+            $("#pos_total_sub_total").empty().prepend(result.pos_total_sub_total);
+            $("#pos_total_iva").empty().prepend(result.pos_total_iva);
+            $("#pos_total_ice").empty().prepend(result.pos_total_ice);
+            $("#pos_total_irbpnr").empty().prepend(result.pos_total_irbpnr);
+            $('.refDetalleItemProceso').click(function() {
+              var idClicked = this.id;
+              alert("Se visualizará el detalle del Ítem: "+idClicked);
+            });
+            $('.refDescartarItemProceso').click(function() {
+              var idClicked = this.id;
+              inactivarProductoServicio($('#'+idClicked+' span').text());
+            });
+            $('.fdt_cantidad_tbl').change(function() {
+              var idClicked = this.id;
+              idProdServ = idClicked.split("_");
+              actualizarProductoServicio(idProdServ[1],$("#"+idClicked).val());
+            });
+            $('#transPanel_3').fadeIn();
+          }
+          else {
+            $('#transPanel_3').fadeOut();
+          }
+          break;
+        default:
+          alert("Error al realizar la transacción solicitada.");
+          break;
+      }
+    }
+  });
+}
+function actualizarProductoServicio(fdt_id_factura_detalle,fdt_cantidad_tbl) {
+  $.ajax({
+    url: '../../beans/POSTransacciones/actualizarProductoServicio.php',
+    type: 'POST',
+    dataType: 'html',
+    data: { 
+      'fdt_id_factura_detalle' : fdt_id_factura_detalle, 
+      'fdt_cantidad_tbl' : fdt_cantidad_tbl},
+    success: function(result){
+      var result = eval('('+result+')');
+      switch (result.message) {
+        case "saveOK":
+          renderizarProductoServicio();
           break;
         default:
           alert("Error al realizar la transacción solicitada.");
@@ -44,10 +86,78 @@ function inactivarProductoServicio(fdt_id_factura_detalle) {
     }
   });
 }
+function focusAnimado (idElemento) {
+  setParentTransition('#'+idElemento, 'all', '0s', 'ease', function() {
+      $('#'+idElemento).addClass('citaSeleccionada');
+  });
+  setTimeout(function() {
+      setParentTransition('#'+idElemento, 'all', '1s', 'ease', function() {
+          $('#'+idElemento).removeClass('citaSeleccionada');
+      });
+  }); 
+  $('#'+idElemento).focus().focusout();
+}
+function setParentTransition(id, prop, delay, style, callback) {
+  $(id).css({'-webkit-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'-moz-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'-o-transition' : prop + ' ' + delay + ' ' + style});
+  $(id).css({'transition' : prop + ' ' + delay + ' ' + style});
+  callback();
+}
+function obtenerDatosCliente(cli_identificacion) {
+  if ( cli_identificacion != "") {
+    $.ajax({
+      url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
+      type: 'POST',
+      data:{ 'cli_identificacion' : cli_identificacion },
+      dataType: 'html',
+      success: function(result){
+        var result = eval('('+result+')');
+        $('#transPanel_2').fadeOut();
+        if (result.msmData == "siData" && result.message == "saveOK") {
+          $('#transPanel_2').fadeIn();
+          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+          $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
+          $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
+          $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
+          $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
+          $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
+          $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
+        }
+        else if (result.msmData == "noData") {
+          $('#myConfirmarClienteNoRegistrado').modal('show');
+        }
+        else {
+          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
+          $('#myModalErrorGeneral').modal('show');
+        }
+      }
+    });
+  }
+  else {
+    toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+  }
+}
 $(document).ready(function() {
 
   $(".select2").select2({
     maximumSelectionLength: 20
+  });
+
+  $('#cli_identificacion').keypress(function(e){
+    if( e.which == 13 ){
+      if( $('#cli_identificacion').val() != "" ){
+        if( $('#cli_identificacion').val().length >= 8 ){
+          $('#btn_cli_identificacion').click();
+        }
+        else {
+          toastr.warning('El número ingresado debe contener más de 8 dígitos.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+        }
+      }
+      else {
+        toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+      }
+    }
   });
 
   if($('div#appTransaccionesFlag').hasClass('appTransaccionesFlag')) {
@@ -61,12 +171,12 @@ $(document).ready(function() {
         $("#ftr_id_forma_pago").empty().prepend(result.formas_pago);
         $("#cli_tipo_identificacion").empty().prepend(result.tipo_identificacion);
         $("#prs_id_prod_serv").empty().prepend(result.productos_servicios);
-        $('#dataCliente').fadeOut();
+        $('#transPanel_2').fadeOut();
         switch (result.message) {
           case "si_transaccion":
             renderizarProductoServicio();
             if (result.data_row.cli_identificacion != null) {
-              $('#dataCliente').fadeIn();
+              $('#transPanel_2').fadeIn();
               //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
               $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
               $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -77,12 +187,16 @@ $(document).ready(function() {
               $('#cli_identificacion').val(result.data_row.cli_identificacion);
               $('#ftr_id_forma_pago').val(result.data_row.ftr_id_forma_pago);
             }
+            $('#transPanel_1').fadeIn();
+            $('#btnPosNuevaFactura').prop("disabled",true);
             $('#cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
             break;
           case "no_transaccion":
+            $('#transPanel_1').fadeOut();
+            $('#btnPosNuevaFactura').prop("disabled",false);
             $('#cli_identificacion').prop("disabled",true);
             $('#btn_cli_identificacion').prop("disabled",true);
             $('#ftr_id_forma_pago').prop("disabled",true);
@@ -149,45 +263,61 @@ $(document).ready(function() {
   $('#formPOSTransGenerarFactura').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
-      $.ajax({
-        url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
-        type: 'POST',
-        dataType: 'html',
-        data:$("#formPOSTransGenerarFactura").serialize(),
-        success: function(result){
-        var result = eval('('+result+')');
-          switch (result.message) {
-            case "saveOK":
-              $('#myModalRegistroTransacciones').modal('show');
-              $("#dataPOSTransacciones").empty().prepend("");
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
-              break;
-            case "noPoseeFirma":
-              $('#myModalRegistroTransacciones').modal('show');
-              $("#dataPOSTransacciones").empty().prepend("");
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>No posee una firma electrónica registrada en el sistema.</div>" );
-              break; 
-            case "saveDbError":
-              $('#myModalRegistroTransacciones').modal('show');
-              $("#dataPOSTransacciones").empty().prepend("");
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
-              break;
-            case "saveXmlError":
-              $('#myModalRegistroTransacciones').modal('show');
-              $("#dataPOSTransacciones").empty().prepend("");
-              $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
-              break;
-            case "token_csrf_error":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              
-              break;
+      var val_identificacion = 0;
+      var val_forma_pago = 0;
+      if ($('#cli_identificacion').val() != "") {
+        val_identificacion = 1;
+      }
+      else {
+        toastr.warning('Debe ingresar un número de identificación.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+      }
+      if ($('#ftr_id_forma_pago').val() != "") {
+        val_forma_pago = 1;
+      }
+      else {
+        toastr.warning('Debe seleccionar un tipo de forma de pago.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
+      }
+      if ( val_identificacion == 1 && val_forma_pago == 1 ) {
+        $.ajax({
+          url: '../../beans/POSTransacciones/guardarPOSTransGenerarFactura.php',
+          type: 'POST',
+          dataType: 'html',
+          data:$("#formPOSTransGenerarFactura").serialize()+"&cli_identificacion="+$('#cli_identificacion').val()+"&ftr_id_forma_pago="+$('#ftr_id_forma_pago').val(),
+          success: function(result){
+          var result = eval('('+result+')');
+            switch (result.message) {
+              case "saveOK":
+                $('#myModalRegistroTransacciones').modal('show');
+                $("#dataPOSTransacciones").empty().prepend("");
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
+                obtenerComprobanteFirmadoSRI(result.id_transaccion,result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+                break;
+              case "noPoseeFirma":
+                $('#myModalRegistroTransacciones').modal('show');
+                $("#dataPOSTransacciones").empty().prepend("");
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>No posee una firma electrónica registrada en el sistema.</div>" );
+                break; 
+              case "saveDbError":
+                $('#myModalRegistroTransacciones').modal('show');
+                $("#dataPOSTransacciones").empty().prepend("");
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al guardar registro en base de datos.</div>" );
+                break;
+              case "saveXmlError":
+                $('#myModalRegistroTransacciones').modal('show');
+                $("#dataPOSTransacciones").empty().prepend("");
+                $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_error.png' class='iconDataTrans'>Error al generar archivo XML.</div>" );
+                break;
+              case "token_csrf_error":
+                modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+                break;
+              default:
+                
+                break;
+            }
           }
-        }
-      });
+        });
+      }
     }
   });
   $('#formPOSTransGenerarNotaCredito').validator().on('submit', function (e) {
@@ -206,7 +336,7 @@ $(document).ready(function() {
               $("#dataPOSTransacciones").empty().prepend("");
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea registro de transacción en base de datos.</div>" );
               $("#dataPOSTransacciones").prepend("<div class='txtDataTrans'><img src='../../../dist/img/dt_visto_2.png' class='iconDataTrans'>Se crea archivo XML.</div>" );
-              obtenerComprobanteFirmadoSRI(result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
+              obtenerComprobanteFirmadoSRI(result.id_transaccion,result.clave_acceso_sri,result.ruta_certificado,result.contrasenia_archivo,result.ruta_xml);
               break;
             case "noPoseeFirma":
               $('#myModalRegistroTransacciones').modal('show');
@@ -378,7 +508,7 @@ $(document).ready(function() {
     aoColumnDefs: [
       { 
         sClass: "centrarContent", 
-        aTargets: [1,2,3,4,6,7,8,9]
+        aTargets: [2,4,6,7,8,9]
       },
       {
         "targets": [0,1],
@@ -398,25 +528,32 @@ $(document).ready(function() {
       { title: '<div class="tituloColumnasDT">Estado</div>' },
       { 
         title: '<div class="tituloColumnasDT">Acciones</div>',
-        width: "80",
+        width: "200",
         mRender: function (data, type, row) {
           var acciones = '';
-          acciones  = '<a class="icondtEstadoTransaccionModificar cursorPointerDT" title="Editar registro"><i class="fas fa-edit iconDTicon"></i></a>';
+          acciones += '<a class="icondtRepoTransVisualizarPDF cursorPointerDT" title="Visualizar PDF"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
           acciones += '<span class="iconDTsep">|</span>';
-          acciones += '<a class="icondtEstadoTransaccionResetear cursorPointerDT" title="Resetear contraseña"><i class="fas fa-sync iconDTicon"></i></i></a>';
+          acciones += '<a class="icondtRepoTransReenviarCompr cursorPointerDT" title="Reenviar Comprobante"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneNotaCre cursorPointerDT" title="Generar Nota de Crédito"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneNotaDeb cursorPointerDT" title="Generar Nota de Débito"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneCompRet cursorPointerDT" title="Generar Comprobante de Retención"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
+          acciones += '<span class="iconDTsep">|</span>';
+          acciones += '<a class="icondtRepoTransGeneGuiaRet cursorPointerDT" title="Generar Guía de Remisión"><i class="fas fa-sync iconDTiconTransacciones"></i></i></a>';
           return acciones
         }
       },
     ],
     oLanguage: {sUrl:"../../../plugins/DataTables/media/spanish.json"},
     lengthMenu: [5,10,15,20,30],
-    order: [[ 1, "asc" ]],
+    order: [[ 7, "desc" ]],
     ajax:{
       url:'../../beans/POSTransacciones/obtenerClaveAcceso.php',
       type: "post",
       data: function ( d ) {
         d.trans_desde_hasta = $('#trans_desde_hasta').val();
-        d.asdasdasd = $('#cli_identificacion').val()
       },
       dataSrc: function (json) {
         return json.data;
@@ -439,10 +576,14 @@ $(document).ready(function() {
         var result = eval('('+result+')');
         switch (result.message) {
           case "saveOK":
+            toastr.success('Cabecera de comprobante creada exitosamente.',null,{timeOut:5000,progressBar:true,positionClass:"toast-top-right",preventDuplicates:true});
             $('#cli_identificacion').prop("disabled",false);
             $('#btn_cli_identificacion').prop("disabled",false);
             $('#ftr_id_forma_pago').prop("disabled",false);
             $('#prs_id_prod_serv').prop("disabled",false);
+            $('#btnPosNuevaFactura').prop("disabled",true);
+            $('#transPanel_1').fadeIn();
+            break;
           case "token_csrf_error":
           case "fact_transaccion_registrada":
             modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
@@ -456,50 +597,24 @@ $(document).ready(function() {
     });
   });
   $('#btn_cli_identificacion').click( function () {
-    $.ajax({
-      url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
-      type: 'POST',
-      data:{ 'cli_identificacion' : $("#cli_identificacion").val() },
-      dataType: 'html',
-      success: function(result){
-        var result = eval('('+result+')');
-        $('#dataCliente').fadeOut();
-
-        if (result.msmData == "siData" && result.message == "saveOK") {
-          $('#dataCliente').fadeIn();
-          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
-          $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
-          $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
-          $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
-          $("#dataCliDireccion").empty().prepend(result.data_row.cli_direccion);
-          $("#dataCliTelefono").empty().prepend(result.data_row.cli_telefono);
-          $("#dataCliPlaca").empty().prepend(result.data_row.cli_placa);
-        }
-        else if (result.msmData == "noData") {
-          $('#myConfirmarClienteNoRegistrado').modal('show');
-        }
-        else {
-          $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-          $('#myModalErrorGeneral').modal('show');
-        }
-
-      }
-    });
+    obtenerDatosCliente($("#cli_identificacion").val());
+  });
+  $('#cli_identificacion').change( function () {
+    obtenerDatosCliente($("#cli_identificacion").val());
   });
   $('#idConsumidorFinal').click( function (e) {
     e.preventDefault();
-    $("#cli_identificacion").val("9999999999");
     $.ajax({
       url: '../../beans/POSTransacciones/obtenerDatosClientes.php',
       type: 'POST',
-      data:{ 'cli_identificacion' : "9999999999" },
+      data:{ 'cli_identificacion' : "9999999999999" },
       dataType: 'html',
       success: function(result){
         var result = eval('('+result+')');
-        $('#dataCliente').fadeOut();
+        $('#transPanel_2').fadeOut();
         if (result.msmData == "siData" && result.message == "saveOK") {
-          $('#dataCliente').fadeIn();
-          //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
+          $('#transPanel_2').fadeIn();
+          $("#cli_identificacion").val("9999999999999");
           $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
           $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
           $("#dataCliCorreo").empty().prepend(result.data_row.cli_correo);
@@ -529,6 +644,10 @@ $(document).ready(function() {
         testOcultarModalCliente = 0;
       }
     });
+  });
+  $('#btnNoRegistrarClienteNoRegistrado').click( function () {
+    $('#cli_identificacion').val("");
+    $('#myConfirmarClienteNoRegistrado').modal('hide');
   });
   $('#ftr_id_forma_pago').change( function () {
     if ($("#ftr_id_forma_pago").val() != "") {
@@ -583,10 +702,10 @@ $(document).ready(function() {
           success: function(result){
           var result = eval('('+result+')');
             $('#myModalClienteNoRegistrado').modal('hide');
-            $('#dataCliente').fadeIn();
+            $('#transPanel_2').fadeIn();
             switch (result.message) {
               case "saveOK":
-                $('#dataCliente').fadeIn();
+                $('#transPanel_2').fadeIn();
                 //$("#dataTipoIdentifica").empty().prepend("("+result.data_row.cli_tipo_identificacion+")");
                 $("#dataCliIdentificacion").empty().prepend(result.data_row.cli_identificacion);
                 $("#dataCliNombres").empty().prepend(result.data_row.cli_nombres);
@@ -671,33 +790,6 @@ $(document).ready(function() {
       });
     }
   });
-  $('#prs_id_prod_serv').change( function () {
-    if ($("#prs_id_prod_serv").val() != "") {
-      $.ajax({
-        url: '../../beans/POSTransacciones/validarItemComprobante.php',
-        type: 'POST',
-        dataType: 'html',
-        data:{ 'prs_id_prod_serv' : $("#prs_id_prod_serv").val() },
-        success: function(result){
-          var result = eval('('+result+')');
-          $("#prs_id_prod_serv").val("").trigger("change");
-          switch (result.message) {
-             case "saveOK":
-              document.getElementById("formItemComprobante").reset();
-              $('#myModalItemComprobante').modal('show');
-              break;
-            case "userError":
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
-              break;
-            default:
-              $("span#idCodErrorGeneral").empty().prepend(result.numLineaCodigo);
-              $('#myModalErrorGeneral').modal('show');
-              break;
-          }
-        }
-      });
-    }
-  });
   $('#formItemComprobante').validator().on('submit', function (e) {
     if (!e.isDefaultPrevented()) {
       e.preventDefault();
@@ -707,12 +799,18 @@ $(document).ready(function() {
         dataType: 'html',
         data:$("#formItemComprobante").serialize(),
         success: function(result){
-        var result = eval('('+result+')');
+          var result = eval('('+result+')');
+          $("#prs_id_prod_serv").val("").trigger("change");
+          document.getElementById("formItemComprobante").reset();
+          $('#transPanel_3').fadeOut();
           switch (result.message) {
             case "saveOK":
-              $('#myModalItemComprobante').modal('hide');
               renderizarProductoServicio();
-              modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
+              $('#transPanel_3').fadeIn();
+              break;
+            case "itemRegistrado":
+              $('#transPanel_3').fadeIn();
+              focusAnimado("itemCant_"+result.id_item);
               break;
             case "token_csrf_error":
               modalGenerico(result.dataModal_1,result.dataModal_2,result.dataModal_3,result.dataModal_4);
@@ -749,5 +847,61 @@ $(document).ready(function() {
         }
       }
     });
+  });
+  $('#btnEnviarPago').click( function (e) {
+    e.preventDefault();
+    $('#btnSubmitEnviarPago').click();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransVisualizarPDF', function (e) {
+    e.preventDefault();
+    if (dtEstadoTransaccion.row($(this).parents('tr').first()).data()[8] == "AUTORIZADO") {
+      $.redirect('../../reportes/PDF/lectorPDF.php',{
+        'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1]
+      },
+      'POST','_');
+      //window.open('../../reportes/PDF/lectorPDF.php?ftr_sri_clave_acceso='+dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],'PDF','width=800,height=650');
+    }
+    else {
+      alert("El comprobante debe estar AUTORIZADO para poder visualizarlo.");
+    }
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransReenviarCompr', function (e) {
+    e.preventDefault();
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneNotaCre', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarNotaCredito"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneNotaDeb', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarNotaDebito"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneCompRet', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarComprobanteRetencion"
+    },
+    'POST','');
+  });
+  $('#dtEstadoTransaccion').on('click','.icondtRepoTransGeneGuiaRet', function (e) {
+    e.preventDefault();
+    $.redirect('../../pages/transacciones/',{
+      'ftr_id_factura_transaccion': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[0],
+      'ftr_sri_clave_acceso': dtEstadoTransaccion.row($(this).parents('tr').first()).data()[1],
+      'ftr_tipo_accion': "generarGuiRemision"
+    },
+    'POST','');
   });
 });

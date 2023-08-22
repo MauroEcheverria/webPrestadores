@@ -25,7 +25,7 @@
 			$dataValidaAcceso = [
 				'cod_system_user' => $userSystem,
 				'fecha_actual' => $fechaActual_4,
-				'id_option' => 6
+				'id_option' => 12
 			];
 			$returnValidar = validaAcceso($pdo,$dataValidaAcceso);
 			$_SESSION["token_csrf"] = $token_csrf;
