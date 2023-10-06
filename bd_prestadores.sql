@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2023 a las 03:42:12
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 06-10-2023 a las 05:15:54
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,7 +49,7 @@ CREATE TABLE `datos_cabecera_electronica` (
   `direccion_matriz` varchar(45) DEFAULT NULL,
   `obligado` varchar(2) DEFAULT NULL,
   `nota_no` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `datos_cabecera_electronica`
@@ -97,7 +97,7 @@ CREATE TABLE `datos_guia_electronica` (
   `d_razon_social` varchar(250) NOT NULL,
   `d_punto_llegada` varchar(250) NOT NULL,
   `tipo_comprobante` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='		';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='		';
 
 --
 -- Volcado de datos para la tabla `datos_guia_electronica`
@@ -143,14 +143,14 @@ CREATE TABLE `datos_nota_credito` (
   `valor` decimal(19,4) DEFAULT NULL,
   `motivo` varchar(45) DEFAULT NULL,
   `nota_no` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `datos_nota_credito`
 --
 
 INSERT INTO `datos_nota_credito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocial`, `nombreComercial`, `ruc`, `cod_doc`, `establecimiento`, `ptoEmi`, `secuencial`, `dirMatriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `rise`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `valorModificacion`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `motivo`, `nota_no`) VALUES
-(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1015, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', '11.0000', '11.0000', 2, 0, 999, '0.0000', NULL, 1);
+(1, 2, 1, 1, 'COQUE TENORIO MARIA YOLANDA', 'COQUE TENORIO MARIA YOLANDA', '1716762396001', 4, '001', '001', 1015, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2022-02-16', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1716762396001', 1, '000022323', NULL, 'NO', NULL, '2019-02-02', 11.0000, 11.0000, 2, 0, 999, 0.0000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -194,14 +194,14 @@ CREATE TABLE `datos_nota_debito` (
   `campoAdiconalDirecci` varchar(300) DEFAULT NULL,
   `campoAdicionalMail` varchar(300) DEFAULT NULL,
   `campoAdionalFono` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `datos_nota_debito`
 --
 
 INSERT INTO `datos_nota_debito` (`id`, `id_comprobante`, `ambiente`, `tipoEmision`, `razonSocialComprador`, `nombreComercial`, `cod_doc`, `establecimiento`, `secuencial`, `direccion_matriz`, `fecha_emision`, `dirEstablecimiento`, `tipoIdentificacionComprador`, `identificacionComprador`, `codDocmodificado`, `numDocModificado`, `contribuyenteEspecial`, `obligadoContabilidad`, `fechaEmisionDocSustento`, `total_sin_impuestos`, `codigo`, `codigoPorcentaje`, `baseImponible`, `valor`, `tarifa`, `valorTotal`, `formapago`, `total`, `plazo`, `unidadTiempo`, `razonDescripcion`, `valorModificado`, `campoAdiconalDirecci`, `campoAdicionalMail`, `campoAdionalFono`) VALUES
-(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 1010, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', '11.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 22, 1, 1, 'aaaa', 'aaa', 5, '001', 1010, 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', '2018-10-05', 'CAMILO PONCE ENRIQUEZ Y PASAJE ALMEIDA CONJUN', 4, '1706034756', 1, '000222323', NULL, 'SI', '2019-02-01', 11.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +231,7 @@ CREATE TABLE `datos_retencion_electronica` (
   `razon_social_sujeto_retenido` varchar(100) DEFAULT NULL,
   `identificacion_sujeto_retenido` varchar(45) DEFAULT NULL,
   `periodo_fiscal` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `datos_retencion_electronica`
@@ -253,7 +253,7 @@ CREATE TABLE `dct_parametro_tbl_div_politica` (
   `dvp_canton` varchar(35) NOT NULL,
   `dvp_codigo_parroquia` varchar(9) NOT NULL,
   `dvp_parroquia` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_parametro_tbl_div_politica`
@@ -1673,7 +1673,7 @@ CREATE TABLE `dct_pos_tbl_advertencia_sri` (
   `sra_descripcion` varchar(150) DEFAULT NULL,
   `sra_motivo` varchar(250) DEFAULT NULL,
   `sra_validacion` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_advertencia_sri`
@@ -1743,7 +1743,7 @@ CREATE TABLE `dct_pos_tbl_cientes` (
   `cli_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `cli_ip_creacion` varchar(100) DEFAULT NULL,
   `cli_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_cientes`
@@ -1779,7 +1779,7 @@ CREATE TABLE `dct_pos_tbl_empresa_establecimiento` (
   `est_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `est_ip_creacion` varchar(100) DEFAULT NULL,
   `est_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_empresa_establecimiento`
@@ -1806,7 +1806,7 @@ CREATE TABLE `dct_pos_tbl_empresa_punto_emision` (
   `epe_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `epe_ip_creacion` varchar(100) DEFAULT NULL,
   `epe_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_empresa_punto_emision`
@@ -1841,7 +1841,7 @@ CREATE TABLE `dct_pos_tbl_empresa_serial` (
   `ser_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `ser_ip_creacion` varchar(100) DEFAULT NULL,
   `ser_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_empresa_serial`
@@ -1869,7 +1869,7 @@ CREATE TABLE `dct_pos_tbl_factura_detalle` (
   `fdt_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `fdt_ip_creacion` varchar(100) DEFAULT NULL,
   `fdt_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_factura_detalle`
@@ -1957,7 +1957,7 @@ CREATE TABLE `dct_pos_tbl_factura_transaccion` (
   `ftr_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `ftr_ip_creacion` varchar(100) DEFAULT NULL,
   `ftr_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_factura_transaccion`
@@ -2011,7 +2011,7 @@ CREATE TABLE `dct_pos_tbl_impuesto` (
   `imp_codigo` int(11) NOT NULL,
   `imp_impuesto` varchar(10) NOT NULL,
   `imp_descripcion` varchar(60) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_impuesto`
@@ -2056,7 +2056,7 @@ CREATE TABLE `dct_pos_tbl_producto_servicio` (
   `prs_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `prs_ip_creacion` varchar(100) DEFAULT NULL,
   `prs_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_producto_servicio`
@@ -2080,7 +2080,7 @@ CREATE TABLE `dct_pos_tbl_tarifa_impuesto` (
   `trf_porcentaje` int(11) DEFAULT NULL,
   `trf_valor` double DEFAULT NULL,
   `trf_descripcion` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_tarifa_impuesto`
@@ -2184,7 +2184,7 @@ CREATE TABLE `dct_pos_tbl_usuario_est_pun_emi` (
   `uep_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `uep_ip_creacion` varchar(100) DEFAULT NULL,
   `uep_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_usuario_est_pun_emi`
@@ -2212,7 +2212,7 @@ CREATE TABLE `dct_pos_tbl_ws_sri` (
   `wsr_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `wsr_ip_creacion` varchar(100) DEFAULT NULL,
   `wsr_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_pos_tbl_ws_sri`
@@ -2245,7 +2245,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion` (
   `apl_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `apl_ip_creacion` varchar(100) DEFAULT NULL,
   `apl_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_aplicacion`
@@ -2271,7 +2271,7 @@ CREATE TABLE `dct_sistema_tbl_aplicacion_empresa` (
   `ape_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `ape_ip_creacion` varchar(100) DEFAULT NULL,
   `ape_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_aplicacion_empresa`
@@ -2293,7 +2293,7 @@ CREATE TABLE `dct_sistema_tbl_catalogo` (
   `ctg_key` varchar(5) NOT NULL,
   `ctg_descripcion` varchar(40) NOT NULL,
   `ctg_estado` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_catalogo`
@@ -2339,7 +2339,7 @@ CREATE TABLE `dct_sistema_tbl_contrasenia` (
   `cts_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `cts_ip_creacion` varchar(100) DEFAULT NULL,
   `cts_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2370,7 +2370,7 @@ CREATE TABLE `dct_sistema_tbl_empresa` (
   `em_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `em_ip_creacion` varchar(100) DEFAULT NULL,
   `em_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_empresa`
@@ -2398,7 +2398,7 @@ CREATE TABLE `dct_sistema_tbl_opcion` (
   `opc_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `opc_ip_creacion` varchar(100) DEFAULT NULL,
   `opc_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_opcion`
@@ -2434,7 +2434,7 @@ CREATE TABLE `dct_sistema_tbl_rol` (
   `rol_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `rol_ip_creacion` varchar(100) DEFAULT NULL,
   `rol_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_rol`
@@ -2460,7 +2460,7 @@ CREATE TABLE `dct_sistema_tbl_rol_aplicacion` (
   `rla_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `rla_ip_creacion` varchar(100) DEFAULT NULL,
   `rla_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_rol_aplicacion`
@@ -2487,7 +2487,7 @@ CREATE TABLE `dct_sistema_tbl_rol_opcion` (
   `rlo_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `rlo_ip_creacion` varchar(100) DEFAULT NULL,
   `rlo_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_rol_opcion`
@@ -2526,7 +2526,7 @@ CREATE TABLE `dct_sistema_tbl_token` (
   `tok_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `tok_ip_creacion` varchar(100) DEFAULT NULL,
   `tok_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_token`
@@ -2577,14 +2577,14 @@ CREATE TABLE `dct_sistema_tbl_usuario` (
   `usr_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `usr_ip_creacion` varchar(100) DEFAULT NULL,
   `usr_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_usuario`
 --
 
 INSERT INTO `dct_sistema_tbl_usuario` (`usr_cod_usuario`, `usr_nombre_1`, `usr_nombre_2`, `usr_apellido_1`, `usr_apellido_2`, `usr_contrasenia`, `usr_logeado`, `usr_estado`, `usr_ip_pc_acceso`, `usr_fecha_acceso`, `usr_correo`, `usr_estado_correo`, `usr_id_rol`, `usr_estado_contrasenia`, `usr_id_empresa`, `usr_fecha_cambio_contrasenia`, `usr_contador_error_contrasenia`, `usr_expiro_contrasenia`, `usr_ultimo_acceso`, `usr_usuario_creacion`, `usr_usuario_modificacion`, `usr_fecha_creacion`, `usr_fecha_modificacion`, `usr_ip_creacion`, `usr_ip_modificacion`) VALUES
-('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2023-01-31 23:43:32', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2023-01-01', 0, 0, '2023-01-31', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
+('0919664854', 'Mauro', 'Vinicio', 'Echeverría', 'Chugulí', 'amkyZWwvV0EzTjA5Q2kvKy85aUoxQjh3K1dxZ3kxQlp6NnBwb0E3cGRmVS9VL3cxcHJwOEZaT0tRa2V3N2hSNw==', 1, 1, '::1', '2023-10-06 03:14:50', 'maurovinicio.echeverria@gmail.com', 1, 1, 1, 1, '2023-01-01', 0, 0, '2023-10-05', '0919664854', '0919664854', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('0930921853', 'Erick', 'Joel', 'Jalón', 'Gómez', 'elRmR0JqaDNrR3VuVGtoRmN6Zlh4MFRYRFh3Rjg4SXpXTXBuSk13VUEydlpMYS9rUE5DUVRlaTR5ZkFuL2Jteg==', 0, 1, NULL, NULL, 'jjalon90@gmail.com', 1, 1, 1, 1, '2022-07-03', 0, 0, '2022-08-11', '0930921853', '0930921853', '2021-05-19 20:20:25', '2021-05-19 20:20:25', 'DESKTOP-5L9FRDR', 'DESKTOP-5L9FRDR'),
 ('45677686788', 'THFGHFG', 'HFGHFGH', 'FGHFGHFG', 'HFGHFGH', 'VGJjSWZicjBKbVRPWDd3Q1hMVVdCN090VGVYRU10VU5nZ01oMHU0dlQ0Si9IWjVOaGFiSk9aMUFmL1FCNFByUA==', 0, 1, NULL, NULL, 'mreinacevallos@gmail.com', 0, 9, 1, 1, '2022-09-03', 0, 1, NULL, '0919664854', NULL, '2022-09-03 14:21:18', NULL, '::1', NULL);
 
@@ -2613,7 +2613,7 @@ CREATE TABLE `dct_sistema_tbl_usuario_adicional` (
   `usr_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `usr_ip_creacion` varchar(100) DEFAULT NULL,
   `usr_ip_modificacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dct_sistema_tbl_usuario_adicional`
@@ -2648,17 +2648,17 @@ CREATE TABLE `detalle_factura_electronica` (
   `tarifa_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00,
   `baseImponible_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00,
   `valor_irbpnr` decimal(10,2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `detalle_factura_electronica`
 --
 
 INSERT INTO `detalle_factura_electronica` (`id_tabla`, `orden_no`, `cantidad`, `item`, `precio_u`, `total`, `iva`, `ice`, `irbpnr`, `codigo_ice`, `codigoPorcentaje_ice`, `baseImponible_ice`, `tarifa_ice`, `valor_ice`, `codigo_irbpnr`, `codigoPorcentaje_irbpnr`, `tarifa_irbpnr`, `baseImponible_irbpnr`, `valor_irbpnr`) VALUES
-(25, 1, 2, 'Pulpa de COCO', '3.37', '6.74', '0', '0', '0', '3', '0', '0.00', '5.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
-(26, 1, 900, 'Pulpa de NARANJILLA CMP', '0.25', '225.00', '0', '0', '0', '3', '0', '0.00', '0.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
-(27, 1, 1600, 'Pulpa de GUANABANA CMP', '0.31', '496.00', '0', '0', '0', '3', '0', '0.00', '5.00', '0.00', '5', '0', '5.00', '5.00', '5.00'),
-(28, 1, 1600, 'Pulpa de MORA CAMP', '0.27', '432.00', '0', '0', '0', '3', '0', '0.00', '0.00', '0.00', '5', '0', '5.00', '5.00', '5.00');
+(25, 1, 2, 'Pulpa de COCO', 3.37, 6.74, 0, 0, 0, '3', '0', 0.00, 5.00, 0.00, '5', '0', 5.00, 5.00, 5.00),
+(26, 1, 900, 'Pulpa de NARANJILLA CMP', 0.25, 225.00, 0, 0, 0, '3', '0', 0.00, 0.00, 0.00, '5', '0', 5.00, 5.00, 5.00),
+(27, 1, 1600, 'Pulpa de GUANABANA CMP', 0.31, 496.00, 0, 0, 0, '3', '0', 0.00, 5.00, 0.00, '5', '0', 5.00, 5.00, 5.00),
+(28, 1, 1600, 'Pulpa de MORA CAMP', 0.27, 432.00, 0, 0, 0, '3', '0', 0.00, 0.00, 0.00, '5', '0', 5.00, 5.00, 5.00);
 
 -- --------------------------------------------------------
 
@@ -2672,7 +2672,7 @@ CREATE TABLE `detalle_guia_electronica` (
   `unidad` varchar(50) NOT NULL,
   `productos` varchar(50) NOT NULL,
   `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `detalle_guia_electronica`
@@ -2694,15 +2694,15 @@ CREATE TABLE `detalle_nota_electronica` (
   `item` varchar(50) NOT NULL,
   `precio_u` decimal(19,4) NOT NULL,
   `total` decimal(19,4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `detalle_nota_electronica`
 --
 
 INSERT INTO `detalle_nota_electronica` (`id_tabla`, `nota_no`, `cantidad`, `item`, `precio_u`, `total`) VALUES
-(1, 1, 1, '1', '11.0000', '11.0000'),
-(3, 2, 1, '1', '11.0000', '11.0000');
+(1, 1, 1, '1', 11.0000, 11.0000),
+(3, 2, 1, '1', 11.0000, 11.0000);
 
 -- --------------------------------------------------------
 
@@ -2720,14 +2720,14 @@ CREATE TABLE `detalle_retencion_electronica` (
   `valor_retenido` decimal(19,4) DEFAULT NULL,
   `tipo_comprobante` varchar(45) DEFAULT NULL,
   `impuesto` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `detalle_retencion_electronica`
 --
 
 INSERT INTO `detalle_retencion_electronica` (`id`, `orden_no`, `codigo`, `codigo_retencion`, `base_imponible`, `porcentaje_retencion`, `valor_retenido`, `tipo_comprobante`, `impuesto`) VALUES
-(1, 1, 1, 332, '3280.0000', 0, '0.0000', '01', '100');
+(1, 1, 1, 332, 3280.0000, 0, 0.0000, '01', '100');
 
 --
 -- Índices para tablas volcadas
