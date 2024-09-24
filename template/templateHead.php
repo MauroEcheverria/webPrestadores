@@ -20,7 +20,6 @@
         ?>
       </head>
       <body class="hold-transition sidebar-mini layout-fixed">
-
         <div class="wrapper">
           <div id="loading"><img src="../../../dist/img/loading.gif"/></div>
           <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -138,12 +137,11 @@
           <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
               <img src="../../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
+              <span class="brand-text font-weight-light">AdminLTE 3 </span>
             </a>
             <div class="sidebar">
               <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
                   <?php 
                     $sql="SELECT up.rla_id_aplicacion, app.apl_aplicacion, app.apl_ruta 
                           FROM dct_sistema_tbl_rol_aplicacion up, dct_sistema_tbl_aplicacion app
@@ -184,14 +182,27 @@
                             $row = $query->fetchAll();
                             foreach ($row as $row2) {
                               $route = $row1["apl_ruta"].$row2["opc_ruta"];
-                              ?>
-                                <li class="nav-item">
-                                  <a href="<?php echo $route; ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p><?php echo $row2["opc_opcion"]; ?></p>
-                                  </a>
-                                </li>
-                              <?php 
+                              $url_path = explode("/",$_SERVER['REQUEST_URI']);
+                              if ($row2["opc_ruta"] == "/pages/".$url_path[5]) {
+                                ?>
+                                  <li class="nav-item">
+                                    <a href="<?php echo $route; ?>" class="nav-link text-white">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p class="p_menu"><?php echo $row2["opc_opcion"]; ?></p>
+                                    </a>
+                                  </li>
+                                <?php 
+                              }
+                              else {
+                                ?>
+                                  <li class="nav-item">
+                                    <a href="<?php echo $route; ?>" class="nav-link text-secondary">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p><?php echo $row2["opc_opcion"]; ?></p>
+                                    </a>
+                                  </li>
+                                <?php 
+                              }
                             } 
                           ?>
                           </ol>

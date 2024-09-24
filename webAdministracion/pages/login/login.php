@@ -16,61 +16,65 @@
   template_head($data_template, $css_dreconstec);
 ?>
 
-  <div class="row">
-    <div class="col-md-8">
-      <div><img src="../../../dist/img/portada_1.jpg" style="width: 100%;" /></div>
-    </div>
-    <div class="col-md-4">
-      <div class="login-box">
-        <div class="card card-outline card-primary">
-          <div class="card-header text-center">
-            <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+  <!-- Login 9 - Bootstrap Brain Component -->
+<section class="bg-primary py-3 py-md-5 py-xl-8">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <div class="col-12 col-md-6 col-xl-7">
+        <div class="d-flex justify-content-center text-bg-primary">
+          <div class="col-12 col-xl-9">
+            <h2 class="h1 mb-4">We make digital products that drive you to stand out.</h2>
+            <p class="lead mb-5">We write words, take photos, make videos, and interact with artificial intelligence.</p>
           </div>
-          <div class="card-body">
-            <p class="login-box-msg">Inicio de Sesión</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-xl-5">
+        <div class="card border-0 rounded-4">
+          <div class="card-body p-3 p-md-4 p-xl-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-4">
+                  <h3>Inicio de Sesión</h3>
+                  <hr class="border-primary-subtle mb-4">
+                </div>
+              </div>
+            </div>
             <form id="formLoginSesion" class="needs-validation" novalidate method="post" data-toggle="validator" role="form" autocomplete="off">
               <input type="hidden" name="linkTemp" id="linkTemp" value="<?php echo $data_template["linkTemp"]; ?>">
-              <input type="hidden" name="csrf" value="<?php echo $data_template["token_csrf"]; ?>">
-              <div class="form-group">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Cédula Identidad" name="inputUser" id="inputUser" required="">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-envelope"></span>
-                    </div>
+              <input type="hidden" name="csrf" value="<?php echo $data_template['token_csrf']; ?>">
+              <div class="row gy-3 overflow-hidden">
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="inputUser" class="form-control" name="inputUser" id="inputUser" placeholder="name@example.com" required>
+                    <label for="inputUser" class="form-label">Cédula Identidad</label>
                   </div>
-                  <div class="invalid-feedback">
-                    Por favor ingrese su cédula de identidad
-                  </div>
-                  <div class="valid-feedback"></div>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Contraseña" name="inputPassword" id="inputPassword" required="">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-lock"></span>
-                    </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="inputPassword" required>
+                    <label for="inputPassword" class="form-label">Contraseña</label>
                   </div>
-                  <div class="invalid-feedback">
-                    Por favor ingrese su contraseña
-                  </div>
-                  <div class="valid-feedback"></div>
                 </div>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+                <div class="col-12">
+                  <div class="d-grid">
+                    <button class="btn btn-primary btn-lg" type="submit">Acceder</button>
+                  </div>
+                </div>
               </div>
             </form>
-            <p class="mb-1">
-              <a href="#" id="idOlvidoContrasena">¿Olvidó su contraseña?</a>
-            </p>
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
+                  <a href="#" id="idOlvidoContrasena">¿Olvidó su contraseña?</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>   
+  </div>
+</section>
 
   <div class="modal fade" id="myModalExpirePass" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
@@ -152,15 +156,13 @@
         <form id="formReestaPass" class="formModalPages" data-toggle="validator" role="form">
           <div class="modal-body">
             <input type="hidden" name="csrf" value="<?php echo $data_template['token_csrf']; ?>">
-            <div class="form-group">
+            <div class="form-floating mb-3">
               <label for="cedOlvPass" class="control-label">Ingrese su cédula</label>
               <input type="text" class="form-control inputOlvidoPass" id="cedOlvPass" name="cedOlvPass" required maxlength="13" onkeypress='validateOnlyNumber(event)'>
               <div class="help-block with-errors"></div>
             </div>
-          </div>
-          <div class="modal-footer centralFooter">
-            <div class="form-group">
-              <div class="row">
+            <div class="form-floating mb-3">
+              <div class="row centrarContent">
                 <div class="col-xs-12 col-md-6">
                   <button type="button" class="btn btn-success btn-dreconstec" data-bs-dismiss="modal">Cerrar</button>
                 </div>

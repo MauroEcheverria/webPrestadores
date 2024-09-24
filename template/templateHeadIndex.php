@@ -28,10 +28,10 @@
                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
               </a>
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="" class="nav-link px-2 text-secondary">Inicio</a></li>
-                <li><a href="productos/" class="nav-link px-2 text-white">Productos</a></li>
-                <li><a href="planes/" class="nav-link px-2 text-white">Planes</a></li>
-                <li><a href="contactanos/" class="nav-link px-2 text-white">Contáctanos</a></li>
+                <li><a id="ctn_inicio" href="" class="nav-link px-2 text-secondary">Inicio</a></li>
+                <li><a id="ctn_productos" href="productos/" class="nav-link px-2 text-secondary">Productos</a></li>
+                <li><a id="ctn_planes" href="planes/" class="nav-link px-2 text-secondary">Planes</a></li>
+                <li><a id="ctn_contactanos" href="contactanos/" class="nav-link px-2 text-secondary">Contáctanos</a></li>
               </ul>
               <div class="text-end">
                 <button type="button" class="btn btn-outline-light me-2" onclick="location.href='login.php';">Login</button>

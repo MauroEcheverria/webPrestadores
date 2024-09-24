@@ -21,6 +21,34 @@
         echo $js_dreconstec[$i];
       }
     ?>  
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var dir_url = window.location.pathname;
+        dir_url = dir_url.split("/");
+        switch (dir_url[3]) {
+          case "productos":
+            $("#ctn_inicio").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_productos").addClass("text-white").removeClass("text-secondary");
+            $("#ctn_planes").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_contactanos").addClass("text-secondary").removeClass("text-white");
+            break;
+          case "planes":
+            $("#ctn_inicio").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_productos").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_planes").addClass("text-white").removeClass("text-secondary");
+            $("#ctn_contactanos").addClass("text-secondary").removeClass("text-white");
+            break;
+          case "contactanos":
+            $("#ctn_inicio").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_productos").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_planes").addClass("text-secondary").removeClass("text-white");
+            $("#ctn_contactanos").addClass("text-white").removeClass("text-secondary");
+            break;
+          default:
+            break;
+        }
+      });
+    </script>
     </body>
   </html>
 <?php 

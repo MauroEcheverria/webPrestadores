@@ -172,3 +172,8 @@ b {
 .infoPlanBasico {
   height: 110px;
 }
+.p_menu {
+  position: fixed;
+  margin: -3px 0 0 10px !important;
+  font-size: 15px;
+}
