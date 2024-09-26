@@ -112,7 +112,7 @@ Route::controller(Envio_SMS_WS_Controller::class)->group(function(){
 });
 
 Route::controller(AdministrarUsuariosController::class)->group(function(){
-    Route::get('/sistema/administrarUsuarios','index')->name('administrarUsuarios.index');
+    Route::get('/sistema/administrarUsuarios','index')->name('administrarUsuarios.index')->middleware('auth','accesos_dct');
     Route::post('/sistema/administrarUsuarios/proceso_1','getDataTableUsuarios')->name('administrarUsuarios.proceso_1');
     Route::post('/sistema/administrarUsuarios/proceso_2','getCedulaRepetida')->name('administrarUsuarios.proceso_2');
     Route::post('/sistema/administrarUsuarios/proceso_3','getCorreoRepetido')->name('administrarUsuarios.proceso_3');

@@ -52,6 +52,7 @@ $(document).ready(function() {
                 d._token = $("#getTokenRender").val();
             },
             dataSrc: function (json) {
+                $('#btnUserNuevo').fadeIn();
                 return json.data;
             },
             timeout: 60000

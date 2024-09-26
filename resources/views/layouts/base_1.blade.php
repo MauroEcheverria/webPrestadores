@@ -52,9 +52,9 @@
         </ul>
         <p class="text-center text-muted">&copy; {{ now()->year }} Dreconstec 
             @if (Auth::user() && auth()->user()->email == "maurovinicio.echeverria@gmail.com")
-            @auth
-            | Laravel v{{ Illuminate\Foundation\Application::VERSION }} | PHP v{{ PHP_VERSION }}
-            @else @endauth
+              @auth
+                | Laravel v{{ Illuminate\Foundation\Application::VERSION }} | PHP v{{ PHP_VERSION }}
+              @else @endauth
             @endif
         </p>
       </footer>

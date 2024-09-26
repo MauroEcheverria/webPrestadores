@@ -120,20 +120,62 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           switch (result.message) {
               case "saveOK":
-                for (var i = 0; i < result.dataRenderAplicativo.length; i+=1) {
-                  if (result.dataRenderAplicativo[i].estado_aplicativo == 1) {
-                    $('#id_dct_apl_'+result.dataRenderAplicativo[i].id_dct_aplicativo).removeClass('dct_main');
-                  } else {
-                    $('#id_dct_apl_'+result.dataRenderAplicativo[i].id_dct_aplicativo).addClass('dct_main');
+                /*** Aplicativos ***/
+                result.dataRenderAplicativo.forEach(dataAplicativo => {
+                  if (dataAplicativo.apl_estado == 1) {
+                    $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).removeClass('dct_main');
+                    result.dataRenderOpcion.forEach(dataOpcion => {
+                      if (dataAplicativo.apl_id_aplicacion == dataOpcion.opc_id_aplicacion) {
+                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
+                      }
+                    });
                   }
-                }
-                for (var i = 0; i < result.dataRenderRol.length; i+=1) {
-                  if (result.dataRenderRol[i].estado_rol == 1) {
-                    $('#id_dct_opc_'+result.dataRenderRol[i].id_dct_rol).removeClass('dct_main');
-                  } else {
-                    $('#id_dct_opc_'+result.dataRenderRol[i].id_dct_rol).addClass('dct_main');
+                  else {
+                    result.dataRenderOpcion.forEach(dataOpcion => {
+                      $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).addClass('dct_main');
+                      if (dataAplicativo.apl_id_aplicacion == dataOpcion.opc_id_aplicacion) {
+                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
+                      }
+                    });
                   }
-                }
+                });
+                /*** Opciones ***/
+                result.dataRenderOpcion.forEach(dataOpcion => {
+                  if (dataOpcion.opc_estado == 1) {
+                    $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
+                  }
+                  else {
+                    $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
+                  }
+                });
+                /*** Rol Aplicación ***/
+                result.dataRenderRolAplicativo.forEach(dataAplicativo => {
+                  if (dataAplicativo.rla_estado == 1) {
+                    $('#id_dct_apl_'+dataAplicativo.rla_id_aplicacion).removeClass('dct_main');
+                    result.dataRenderOpcion.forEach(dataOpcion => {
+                      if (dataAplicativo.rla_id_aplicacion == dataOpcion.opc_id_aplicacion) {
+                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
+                      }
+                    });
+                  }
+                  else {
+                    result.dataRenderOpcion.forEach(dataOpcion => {
+                      $('#id_dct_apl_'+dataAplicativo.rla_id_aplicacion).addClass('dct_main');
+                      if (dataAplicativo.rla_id_aplicacion == dataOpcion.opc_id_aplicacion) {
+                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
+                      }
+                    });
+                  }
+                });
+                /*** Rol Opciones ***/
+                result.dataRenderRolOpcion.forEach(dataOpcion => {
+                  if (dataOpcion.rlo_estado == 1) {
+                    $('#id_dct_opc_'+dataOpcion.rlo_id_opcion).removeClass('dct_main');
+                  }
+                  else {
+                    $('#id_dct_opc_'+dataOpcion.rlo_id_opcion).addClass('dct_main');
+                  }
+                });
               break;
               default:
                 toastrMostarError("RR_1");
@@ -141,7 +183,7 @@ $(document).ready(function() {
           }
       }
     });
-    $('#spiner_loading').hide();  
+    /*$('#spiner_loading').hide();  */
     $(document)
     .ajaxStart(function(){$('#spiner_loading').show();})
     .ajaxStop(function(){$('#spiner_loading').hide();});

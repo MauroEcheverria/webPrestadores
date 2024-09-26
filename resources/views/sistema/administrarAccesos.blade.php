@@ -41,7 +41,7 @@
                 <div class="divPanelTogglable">
                     <div class="toggle_dentro_panel">
                     <div class="seccionDtBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresa">Crear</button>
+                        <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnNuevaSistemaEmpresa">Crear</button>
                     </div>
                     <input type="hidden" value="{{ route('administrarAccesos.proceso_1') }}" id="getDataTableSistemaEmpresa" class="dct_main">
                     <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
