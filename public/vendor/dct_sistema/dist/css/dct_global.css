@@ -94,10 +94,10 @@
     margin: 2px 10px 0 0;
 }
 .main-sidebar, .sidebar, .nav-sidebar {
-    font-size: 12px;
+    font-size: 13px;
 }
 .cell-border, .dataTable, .no-footer {
-    font-size: 12px;
+    font-size: 13px;
 }
 .dct_pestanas .nav-item .active {
     font-weight: bold !important;

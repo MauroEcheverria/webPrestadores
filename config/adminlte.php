@@ -342,7 +342,7 @@ return [
             ],
         ],
         // POS:
-        [
+        /*[
             'text'    => 'POS',
             'icon'    => 'fa fa-cogs',
             'id'    => 'id_dct_apl_2',
@@ -390,7 +390,7 @@ return [
                     'id'  => 'id_dct_opc_10',
                 ],
             ],
-        ],
+        ],*/
 
         // Salud:
         [
@@ -452,7 +452,7 @@ return [
         /*****************************************************************************************************************/
 
         // Accesos Fijos:
-        ['header' => 'Accesos Fijos'],
+        /*['header' => 'Accesos Fijos'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -467,7 +467,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
