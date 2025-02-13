@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\Sistema\Token;
 use App\Models\Sistema\Usuario;
-use App\Models\User;
+use App\Models\Sistema\Token;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
 
 class AdministrarUsuariosController extends Controller
 {
 
-    public function index(Request $request) {
+   public function index(Request $request) {
 		return view('sistema.administrarUsuarios');
 	}
 
@@ -25,7 +26,7 @@ class AdministrarUsuariosController extends Controller
 			try {
 				$usuarios = DB::select("SELECT u.usr_cod_usuario,u.usr_correo,
 										r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
-										u.usr_estado_contrasenia,
+										u.usr_estado_contrasenia,u.usr_celular,
 										u.usr_estado,u.usr_estado_correo,
 										CONCAT(IFNULL(usr_nombre_1,''),' ',IFNULL(usr_nombre_2,''),' ',IFNULL(usr_apellido_1,''),' ',IFNULL(usr_apellido_2,'')) usr_nom_completos,
 										u.usr_nombre_1,u.usr_nombre_2,u.usr_apellido_1,u.usr_apellido_2
@@ -38,18 +39,19 @@ class AdministrarUsuariosController extends Controller
 					$return_array[0] = $usuario->usr_cod_usuario;
 					$return_array[1] = $usuario->usr_nom_completos;
 					$return_array[2] = $usuario->usr_correo;
-					$return_array[3] = $usuario->rol_rol;
-					$return_array[4] = $usuario->emp_empresa;
-					$return_array[5] = $usuario->usr_estado;
-					$return_array[6] = $usuario->usr_estado_contrasenia;
-					$return_array[7] = $usuario->usr_estado_correo;
-					$return_array[8] = $usuario->usr_id_empresa;
-					$return_array[9] = $usuario->usr_id_rol;
-					$return_array[10] = null;
-					$return_array[11] = $usuario->usr_nombre_1;
-					$return_array[12] = $usuario->usr_nombre_2;
-					$return_array[13] = $usuario->usr_apellido_1;
-					$return_array[14] = $usuario->usr_apellido_2;
+					$return_array[3] = $usuario->usr_celular;
+					$return_array[4] = $usuario->rol_rol;
+					$return_array[5] = $usuario->emp_empresa;
+					$return_array[6] = $usuario->usr_estado;
+					$return_array[7] = $usuario->usr_estado_contrasenia;
+					$return_array[8] = $usuario->usr_estado_correo;
+					$return_array[9] = $usuario->usr_id_empresa;
+					$return_array[10] = $usuario->usr_id_rol;
+					$return_array[11] = null;
+					$return_array[12] = $usuario->usr_nombre_1;
+					$return_array[13] = $usuario->usr_nombre_2;
+					$return_array[14] = $usuario->usr_apellido_1;
+					$return_array[15] = $usuario->usr_apellido_2;
 					array_push($return,$return_array);
 				}
 				$return = array(
@@ -126,8 +128,7 @@ class AdministrarUsuariosController extends Controller
 			try {
 				$data_rol= DB::select("SELECT rol_id_rol,rol_rol 
 										FROM dct_sistema_tbl_rol
-										WHERE rol_estado = 1
-										AND rol_id_rol NOT IN (1);");
+										WHERE rol_estado = 1;");
 
 				$data_empresa= DB::select("SELECT emp_id_empresa,emp_empresa 
 										FROM dct_sistema_tbl_empresa
@@ -218,6 +219,7 @@ class AdministrarUsuariosController extends Controller
 					'usr_nombre_1' => 'required',
 					'usr_nombre_2' => 'required',
 					'usr_apellido_1' => 'required',
+					'usr_celular' => 'required',
 					'usr_id_empresa' => 'required',
 					'usr_id_rol' => 'required'
 				]);
@@ -235,6 +237,7 @@ class AdministrarUsuariosController extends Controller
 				$save_tbl_sistema_usuario->usr_apellido_1 = $funcionAcceso->cleanData(true,15,false,$request->usr_apellido_1);
 				$save_tbl_sistema_usuario->usr_apellido_2 = $funcionAcceso->cleanData(true,15,false,$request->usr_apellido_2);
 				$save_tbl_sistema_usuario->usr_correo = $funcionAcceso->cleanData(true,60,false,$request->usr_correo);
+				$save_tbl_sistema_usuario->usr_celular = $funcionAcceso->cleanData(true,10,false,$request->usr_celular);
 				$save_tbl_sistema_usuario->usr_id_rol = $funcionAcceso->cleanData(false,0,false,$request->usr_id_rol);
 				$save_tbl_sistema_usuario->usr_id_empresa = $funcionAcceso->cleanData(false,0,false,$request->usr_id_empresa);
 				$save_tbl_sistema_usuario->usr_logeado = 0;
@@ -243,13 +246,13 @@ class AdministrarUsuariosController extends Controller
 				$save_tbl_sistema_usuario->usr_contador_error_contrasenia = 0;
 				$save_tbl_sistema_usuario->usr_expiro_contrasenia = 0;
 				$save_tbl_sistema_usuario->usr_estado_correo = 0;
-				$save_tbl_sistema_usuario->usr_fecha_cambio_contrasenia = config('global.fecha_actual.fechaActual_5');
-				$save_tbl_sistema_usuario->usr_fecha_creacion = config('global.fecha_actual.fechaActual_2');
+				$save_tbl_sistema_usuario->usr_fecha_cambio_contrasenia = config('global.fechaActual_4');
+				$save_tbl_sistema_usuario->usr_fecha_creacion = Carbon::now();
 				$save_tbl_sistema_usuario->usr_usuario_creacion = $funcionAcceso->getCedulaPorCorreo(auth()->user()->email);
 				$save_tbl_sistema_usuario->usr_ip_creacion = request()->ip();
 				$save_tbl_sistema_usuario->save();
 										
-				$tokenAsignado = md5($request->usr_cod_usuario.config('global.fecha_actual.fechaActual_1'));
+				$tokenAsignado = md5($request->usr_cod_usuario.config('global.fechaActual_0'));
 				$save_tbl_token = new Token();
 				$save_tbl_token->tok_token = $tokenAsignado;
 				$save_tbl_token->tok_tipo = 'ACTIVACION';
@@ -299,6 +302,7 @@ class AdministrarUsuariosController extends Controller
 				$dataValidateForm = $request->validate([
 					'edit_usr_estado' => 'required',
 					'edit_usr_correo' => 'required',
+					'edit_usr_celular' => 'required',
 					'edit_usr_nombre_1' => 'required',
 					'edit_usr_nombre_2' => 'required',
 					'edit_usr_apellido_1' => 'required',
@@ -308,6 +312,7 @@ class AdministrarUsuariosController extends Controller
 				$usuario_update = Usuario::where('usr_cod_usuario',$request->usr_cod_usuario)
 				->update([
 					'usr_correo' => $funcionAcceso->cleanData(true,60,false,$request->edit_usr_correo),
+					'usr_celular' => $funcionAcceso->cleanData(true,10,false,$request->edit_usr_celular),
 					'usr_id_rol' => $funcionAcceso->cleanData(false,0,false,$request->edit_usr_id_rol),
 					'usr_estado' => $funcionAcceso->cleanData(false,0,false,$request->edit_usr_estado),
 					'usr_id_empresa' => $funcionAcceso->cleanData(false,0,false,$request->edit_usr_id_empresa),
@@ -316,7 +321,7 @@ class AdministrarUsuariosController extends Controller
 					'usr_apellido_1' => $funcionAcceso->cleanData(true,15,false,$request->edit_usr_apellido_1),
 					'usr_apellido_2' => $funcionAcceso->cleanData(true,15,false,$request->edit_usr_apellido_2),
 					'usr_usuario_modificacion' => $funcionAcceso->getCedulaPorCorreo(auth()->user()->email),
-					'usr_fecha_modificacion' => config('global.fecha_actual.fechaActual_2'),
+					'usr_fecha_modificacion' => Carbon::now(),
 					'usr_ip_modificacion' => request()->ip()
 				]);
 				if ($dataValidateForm && $usuario_update) {
@@ -358,7 +363,7 @@ class AdministrarUsuariosController extends Controller
 					'usr_estado_contrasenia' => 1,
 					'usr_expiro_contrasenia' => 1,
 					'usr_contador_error_contrasenia' => 0,
-					'usr_fecha_cambio_contrasenia' => config('global.fecha_actual.fechaActual_5')
+					'usr_fecha_cambio_contrasenia' => config('global.fechaActual_5')
 				]);
 				if ($user_update && $usuario_update) {
 					DB::commit();

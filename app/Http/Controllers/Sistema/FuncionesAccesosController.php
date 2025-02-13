@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class FuncionesAccesosController extends Controller
-{
+class FuncionesAccesosController extends Controller {
     public function cleanData($limite,$max,$mayuscula,$data) {
 		if ($data != "" && $data != NULL) {
 			$data = trim($data);
@@ -17,7 +16,7 @@ class FuncionesAccesosController extends Controller
 			if ($limite) {
 				$data = substr($data,0,$max);
 			}
-		    if ($mayuscula) {
+			if ($mayuscula) {
 				$data = strtoupper($data);
 			}
 		}
@@ -34,7 +33,7 @@ class FuncionesAccesosController extends Controller
 		} catch (\Exception $e) {
 			return NULL;
 		}
-    }
+	}
 
 	public function getEmpresaPorCorreo($correo){ 
 		try {
@@ -43,7 +42,7 @@ class FuncionesAccesosController extends Controller
 		} catch (\Exception $e) {
 			return NULL;
 		}
-    }
+	}
 
 	public function getCorreoPorCedula($cedula){
 		try {
@@ -52,6 +51,6 @@ class FuncionesAccesosController extends Controller
 		} catch (\Exception $e) {
 			return NULL;
 		}
-    }
+	}
 
 }
