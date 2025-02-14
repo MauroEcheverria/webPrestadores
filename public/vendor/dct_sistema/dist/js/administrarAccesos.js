@@ -58,7 +58,7 @@ function fnSistemaEmpresa() {
           d._token = $("#getTokenRender").val();
         },
         dataSrc: function (json) {
-          $('#btnNuevaSistemaEmpresa').fadeIn();
+          //$('#btnNuevaSistemaEmpresa').fadeIn();
           return json.data;
         },
         timeout: 60000

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Sistema;
 
 use App\Http\Controllers\Sistema\FuncionesAccesosController;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\Sistema\Aplicacion;
@@ -14,6 +16,7 @@ use App\Models\Sistema\Rol;
 use App\Models\Sistema\Rol_Aplicativo;
 use App\Models\Sistema\Rol_Opcion;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AdministrarAccesosController extends Controller
 {
@@ -402,16 +405,8 @@ class AdministrarAccesosController extends Controller
 					$rpta_rol_opcion.="<option value='".$data_rol_opcion->opc_id_opcion."'>".$data_rol_opcion->opc_opcion."</option>";
 				}
 				
-				if( $data_rol_opcion ) {
-					$data_result["message"] = "saveOK";
-					$data_result["dataRolOpcion"] = $rpta_rol_opcion;
-				}
-				else {
-					Log::error("Salida por error en Proceso");
-					Log::error("Archivo: ", [__FILE__]);
-					Log::error("Línea: ", [__LINE__]);
-					$data_result["message"] = "saveError";
-				}
+				$data_result["message"] = "saveOK";
+				$data_result["dataRolOpcion"] = $rpta_rol_opcion;
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				Log::error("Salida por Excepción");
@@ -522,16 +517,8 @@ class AdministrarAccesosController extends Controller
 					$rpta_rol_aplicacion.="<option value='".$data_rol_aplicacion->apl_id_aplicacion."'>".$data_rol_aplicacion->apl_aplicacion."</option>";
 				}
 				
-				if( $data_rol_aplicacion ) {
-					$data_result["message"] = "saveOK";
-					$data_result["dataRolAplicacion"] = $rpta_rol_aplicacion;
-				}
-				else {
-					Log::error("Salida por error en Proceso");
-					Log::error("Archivo: ", [__FILE__]);
-					Log::error("Línea: ", [__LINE__]);
-					$data_result["message"] = "saveError";
-				}
+				$data_result["message"] = "saveOK";
+				$data_result["dataRolAplicacion"] = $rpta_rol_aplicacion;
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				Log::error("Salida por Excepción");
@@ -640,22 +627,15 @@ class AdministrarAccesosController extends Controller
 				foreach ($data_empresa_aplicacion as $data_empresa_aplicacion) {
 					$rpta_empresa_aplicacion.="<option value='".$data_empresa_aplicacion->apl_id_aplicacion."'>".$data_empresa_aplicacion->apl_aplicacion."</option>";
 				}
-				if( $data_empresa_aplicacion ) {
-					$data_result["message"] = "saveOK";
-					$data_result["dataEmpresaAplicacion"] = $rpta_empresa_aplicacion;
-				}
-				else {
-					Log::error("Salida por error en Proceso");
-					Log::error("Archivo: ", [__FILE__]);
-					Log::error("Línea: ", [__LINE__]);
-					$data_result["message"] = "saveError";
-				}
+
+				$data_result["message"] = "saveOK";
+				$data_result["dataEmpresaAplicacion"] = $rpta_empresa_aplicacion;
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				Log::error("Salida por Excepción");
 				Log::error("Archivo: ", [__FILE__]);
 				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
+				$data_result["message"] = "saveError3";
 				$data_result["exception"] = $e;
 				echo json_encode($data_result);
 			}

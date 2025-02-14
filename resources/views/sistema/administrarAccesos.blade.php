@@ -41,7 +41,7 @@
                 <div class="divPanelTogglable">
                     <div class="toggle_dentro_panel">
                     <div class="seccionDtBtnAccion">
-                        <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnNuevaSistemaEmpresa">Crear</button>
+                      <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnNuevaSistemaEmpresa">Crear</button>
                     </div>
                     <input type="hidden" value="{{ route('administrarAccesos.proceso_1') }}" id="getDataTableSistemaEmpresa" class="dct_main">
                     <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
@@ -369,15 +369,15 @@
                     <label for="emp_empresa_1" class="control-label">Empresa</label>
                     <select name="emp_empresa_1" id="emp_empresa_1" class="form-control" required></select>
                     <div class="invalid-feedback">
-                                Debe ingresar/seleccionar un valor valido.
-                            </div>
+                        Debe ingresar/seleccionar un valor valido.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="apl_aplicacion_1" class="control-label">Aplicación</label>
                     <select name="apl_aplicacion_1" id="apl_aplicacion_1" class="form-control" required></select>
                     <div class="invalid-feedback">
-                                Debe ingresar/seleccionar un valor valido.
-                            </div>
+                        Debe ingresar/seleccionar un valor valido.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="ape_estado" class="control-label">Estado</label>
@@ -387,8 +387,8 @@
                     <option value="0">Inactivo</option>
                     </select>
                     <div class="invalid-feedback">
-                                Debe ingresar/seleccionar un valor valido.
-                            </div>
+                        Debe ingresar/seleccionar un valor valido.
+                    </div>
                 </div>
                 </div>
                 <div class="modal-footer centralFooter">
