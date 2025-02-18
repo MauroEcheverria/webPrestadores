@@ -19,126 +19,101 @@ class Accesos_dct {
   public function handle(Request $request, Closure $next): Response {
     try {
 
-      $contValidaAcceso = 0;
-      $valAccesoOpcion = false;
-      $valEstadoUsuario = false;
-      $valEstadoContrasena = false;
-      $valEstadoCorreo = false;
-      $valExpiroContrasena = false;
-      $valEnOtraPC = false;
-      $valEstadoOpcion = false;
-      $valEstadoAplicativo = false;
-      $valEstadoRol = false;
-      $valEstadoEmpresa = false;
-      $valEstadoVigencia = false;
-      $estadoValidarAcceso = false;
-
       $data_usuario = DB::select("SELECT 
-                                u.usr_cod_usuario,
-                                u.usr_ip_pc_acceso,
-                                u.usr_id_rol,
-                                u.usr_estado,
-                                u.usr_estado_contrasenia,
-                                u.usr_expiro_contrasenia,
-                                r.rol_rol,
-                                u.usr_estado_correo,
-                                u.usr_id_empresa, 
-                                r.rol_estado, 
-                                m.emp_estado, 
-                                m.emp_vigencia_desde, 
-                                m.emp_vigencia_hasta
-                              FROM dct_sistema_tbl_usuario u, dct_sistema_tbl_rol r, dct_sistema_tbl_empresa m
-                              WHERE u.usr_id_rol=r.rol_id_rol
-                              AND u.usr_id_empresa=m.emp_id_empresa
-                              AND u.usr_correo=:usr_correo;",
-                              ['usr_correo' => auth()->user()->email]);
+                                  usr_id_rol,
+                                  usr_estado,
+                                  usr_estado_contrasenia,
+                                  usr_expiro_contrasenia,
+                                  usr_id_empresa
+                                  FROM dct_sistema_tbl_usuario
+                                  WHERE usr_correo=:usr_correo;",
+                                  ['usr_correo' => auth()->user()->email]);
 
-      $empresa= DB::select("SELECT emp_id_empresa,emp_estado 
+      $data_empresa= DB::select("SELECT emp_estado,emp_vigencia_hasta
                                 FROM dct_sistema_tbl_empresa 
                                 WHERE emp_id_empresa = :emp_id_empresa;",
                                 ['emp_id_empresa' => $data_usuario[0]->usr_id_empresa]);
 
-      $opcion = DB::select("SELECT opc_id_opcion, opc_estado
-                          FROM dct_sistema_tbl_opcion
-                          WHERE opc_ruta=:opc_ruta;",
-                          ['opc_ruta' => Route::currentRouteName()]);
+      $data_rol = DB::select("SELECT rol_estado
+                              FROM dct_sistema_tbl_rol
+                              WHERE rol_id_rol=:rol_id_rol;",
+                              ['rol_id_rol' => $data_usuario[0]->usr_id_rol]);
 
-      $aplicacion = DB::select("SELECT apl_estado
-                              FROM dct_sistema_tbl_aplicacion
-                              WHERE apl_id_aplicacion = (SELECT opc_id_aplicacion
-                              FROM dct_sistema_tbl_opcion
-                              WHERE opc_id_opcion = :opc_id_opcion);",
-                              ['opc_id_opcion' => $opcion[0]->opc_id_opcion]);
+      $data_opcion = DB::select("SELECT opc_id_opcion, opc_estado
+                                FROM dct_sistema_tbl_opcion
+                                WHERE opc_ruta=:opc_ruta;",
+                                ['opc_ruta' => Route::currentRouteName()]);
+
+      $data_aplicacion = DB::select("SELECT apl_id_aplicacion,apl_estado
+                                    FROM dct_sistema_tbl_aplicacion
+                                    WHERE apl_id_aplicacion = (SELECT opc_id_aplicacion
+                                    FROM dct_sistema_tbl_opcion
+                                    WHERE opc_id_opcion = :opc_id_opcion);",
+                                    ['opc_id_opcion' => $data_opcion[0]->opc_id_opcion]);
+
+      $data_empresa_aplicativo = DB::select("SELECT ape_estado
+                                            FROM dct_sistema_tbl_aplicacion_empresa
+                                            WHERE ape_id_aplicacion = :ape_id_aplicacion
+                                            AND ape_id_empresa = :ape_id_empresa;",
+                                            [
+                                              'ape_id_aplicacion' => $data_aplicacion[0]->apl_id_aplicacion,
+                                              'ape_id_empresa' => $data_usuario[0]->usr_id_empresa
+                                            ]);
+
+      $data_rol_aplicativo = DB::select("SELECT rla_estado
+                                        FROM dct_sistema_tbl_rol_aplicacion
+                                        WHERE rla_id_rol = :rla_id_rol
+                                        AND rla_id_aplicacion = :rla_id_aplicacion;",
+                                        [
+                                          'rla_id_rol' => $data_usuario[0]->usr_id_rol,
+                                          'rla_id_aplicacion' => $data_aplicacion[0]->apl_id_aplicacion
+                                        ]);
       
-      $rol = DB::select("SELECT rol_id_rol,rol_estado
-                          FROM dct_sistema_tbl_rol
-                          WHERE rol_id_rol=:rol_id_rol;",
-                          ['rol_id_rol' => $data_usuario[0]->usr_id_rol]);
-      
-      $rol_opcion = DB::select("SELECT rlo_id_opcion
-                              FROM dct_sistema_tbl_rol_opcion
-                              WHERE rlo_id_rol = (SELECT usr_id_rol 
-                              FROM dct_sistema_tbl_usuario
-                              WHERE usr_cod_usuario = :usr_cod_usuario)
-                              AND rlo_estado = 1;",
-                              ['usr_cod_usuario' => $data_usuario[0]->usr_cod_usuario]);
-      $return = array();
-      foreach ($rol_opcion as $rol_opcion) {
-          $return[] = $rol_opcion->rlo_id_opcion;
+      $data_rol_opcion = DB::select("SELECT rlo_estado
+                                    FROM dct_sistema_tbl_rol_opcion
+                                    WHERE rlo_id_rol = :rlo_id_rol
+                                    AND rlo_id_opcion = :rlo_id_opcion;",
+                                    [
+                                      'rlo_id_rol' => $data_usuario[0]->usr_id_rol,
+                                      'rlo_id_opcion' => $data_opcion[0]->opc_id_opcion
+                                    ]);
+
+      if ($data_usuario[0]->usr_estado == 0) {
+        return redirect('/usuario_inactivo');
       }
-      if (in_array($opcion[0]->opc_id_opcion, $return)) {$valAccesoOpcion = true; $contValidaAcceso += 1;}
-      if($data_usuario[0]->usr_estado == 1) { $valEstadoUsuario = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->usr_estado_correo == 1) { $valEstadoCorreo = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->usr_estado_contrasenia == 1) { $valEstadoContrasena = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->usr_expiro_contrasenia == 0) { $valExpiroContrasena = true; $contValidaAcceso += 1; }
-      //if($data_usuario[0]->usr_ip_pc_acceso == request()->ip() || $data_usuario[0]->usr_ip_pc_acceso == NULL) { $valEnOtraPC = true; $contValidaAcceso += 1; }
-      if($opcion[0]->opc_estado == 1) { $valEstadoOpcion = true; $contValidaAcceso += 1; }
-      if($aplicacion[0]->apl_estado == 1) { $valEstadoAplicativo = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->rol_estado == 1) { $valEstadoRol = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->emp_estado == 1) { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
-      if($data_usuario[0]->emp_vigencia_hasta >= config('global.fecha_actual.fechaActual_5')) { $valEstadoVigencia = true; $contValidaAcceso += 1; }
-      if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
-      
-      if ($estadoValidarAcceso) {
-          return $next($request);
+      else if ($data_usuario[0]->usr_estado_contrasenia == 0) {
+        return redirect('/contrasena_inactiva');
+      }
+      else if ($data_usuario[0]->usr_expiro_contrasenia == 1) {
+        return redirect('/expiro_contrasena');
+      }
+      else if ($data_empresa[0]->emp_estado == 0) {
+        return redirect('/empresa_inactiva');
+      }
+      else if ($data_empresa[0]->emp_vigencia_hasta < config('global.fechaActual_4')) {
+        return redirect('/licencia_caducada');
+      }
+      else if ($data_rol[0]->rol_estado == 0) {
+        return redirect('/rol_inactivo');
+      }
+      else if ($data_opcion[0]->opc_estado == 0) {
+        return redirect('/opcion_inactiva');
+      }
+      else if ($data_aplicacion[0]->apl_estado == 0) {
+        return redirect('/aplicativo_inactivo');
+      }
+      else if ($data_empresa_aplicativo[0]->ape_estado == 0) {
+        return redirect('/empresa_aplicativo_inactivo');
+      }
+      else if ($data_rol_aplicativo[0]->rla_estado == 0) {
+        return redirect('/rol_aplicativo_inactivo');
+      }
+      else if ($data_rol_opcion[0]->rlo_estado == 0) {
+        return redirect('/rol_opcion_inactivo');
       }
       else {
-          if (!$valEstadoUsuario) {
-              return redirect('/usuario_inactivo');
-          }
-          else if (!$valEstadoContrasena) {
-              return redirect('/contrasena_inactiva');
-          }
-          else if (!$valExpiroContrasena) {
-              return redirect('/expiro_contrasena');
-          }
-          else if (!$valEstadoAplicativo) {
-              return redirect('/aplicativo_inactivo');
-          }
-          else if (!$valEstadoRol) {
-              return redirect('/rol_inactivo');
-          }
-          else if (!$valEstadoEmpresa) {
-              return redirect('/empresa_inactiva');
-          }
-          else if (!$valEstadoVigencia) {
-              return redirect('/licencia_caducada');
-          }
-          else if (!$valEstadoOpcion) {
-              return redirect('/modulo_inactivo');
-          }
-          else if (!$valEstadoCorreo) {
-              return redirect('/correo_no_validado');
-          }
-          else if (!$valAccesoOpcion) {
-              return redirect('/no_possee_autorizacion');
-          }
-          else {
-              /*if (!$valEnOtraPC) {
-                  return redirect('/ingreso_otra_PC');
-              }*/
-              return redirect('/opcion_no_registrada');
-          }
+        return $next($request);
+        //return redirect('/opcion_no_registrada');
       }
     } catch (\Exception $e) {
       Log::error($e->getMessage());
