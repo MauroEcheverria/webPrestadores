@@ -32,9 +32,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('auth','accesos_dct');
 });
 
+/******************************************************************************************/
 Route::get('/productos', function () {
     return view('info.productos');
 })->name('info.productos');
@@ -43,9 +44,11 @@ Route::get('/planes', function () {
     return view('info.planes');
 })->name('info.planes');
 
-Route::get('contactanos', function (){
+Route::get('/contactanos', function (){
     return view('info.contactanos');
 })->name('info.contactanos');
+
+/******************************************************************************************/
 
 Route::get('/usuario_inactivo',function(){
     $accion = ['acceso' => 'usuario_inactivo' ];
@@ -101,6 +104,9 @@ Route::get('/opcion_no_registrada',function(){
     $accion = ['acceso' => 'opcion_no_registrada' ];
     return view('sistema.informativo',compact('accion'));
 })->name('opcion_no_registrada');
+
+/******************************************************************************************/
+/*Controller para opciones en menú*/
 
 Route::get('/sistema/renderAplicacionOpcion', 
     [RenderAplicacionOpcionController::class,'menu_render']
@@ -215,5 +221,7 @@ Route::controller(VademecumController::class)->group(function(){
     Route::get('/salud/vademecum','index')->name('saludVademecum.index')->middleware('auth','accesos_dct');
 });
 
-/***** APIs ******/
+/******************************************************************************************/
+/*APIS*/
+
 Route::get('/api/getAllUsers', [ApiController::class, 'getAllUsers'])->name('getAllUsers');
