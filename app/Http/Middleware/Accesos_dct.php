@@ -33,9 +33,20 @@ class Accesos_dct {
       $valEstadoVigencia = false;
       $estadoValidarAcceso = false;
 
-      $data_usuario = DB::select("SELECT u.usr_cod_usuario,u.usr_ip_pc_acceso,u.usr_id_rol,u.usr_estado,u.usr_estado_contrasenia,u.usr_expiro_contrasenia,
-                              CONCAT(usr_nombre_1,' ',usr_nombre_2,' ',usr_apellido_1,' ', usr_apellido_2) usr_nom_completos,r.rol_rol,u.usr_estado_correo,
-                              u.usr_id_rol,u.usr_id_empresa, r.rol_estado, m.emp_estado, m.emp_vigencia_desde, m.emp_vigencia_hasta
+      $data_usuario = DB::select("SELECT 
+                                u.usr_cod_usuario,
+                                u.usr_ip_pc_acceso,
+                                u.usr_id_rol,
+                                u.usr_estado,
+                                u.usr_estado_contrasenia,
+                                u.usr_expiro_contrasenia,
+                                r.rol_rol,
+                                u.usr_estado_correo,
+                                u.usr_id_empresa, 
+                                r.rol_estado, 
+                                m.emp_estado, 
+                                m.emp_vigencia_desde, 
+                                m.emp_vigencia_hasta
                               FROM dct_sistema_tbl_usuario u, dct_sistema_tbl_rol r, dct_sistema_tbl_empresa m
                               WHERE u.usr_id_rol=r.rol_id_rol
                               AND u.usr_id_empresa=m.emp_id_empresa
@@ -45,7 +56,12 @@ class Accesos_dct {
       $empresa= DB::select("SELECT emp_id_empresa,emp_estado 
                                 FROM dct_sistema_tbl_empresa 
                                 WHERE emp_id_empresa = :emp_id_empresa;",
-                                ['emp_id_empresa'=>$data_usuario[0]->usr_id_empresa]);
+                                ['emp_id_empresa' => $data_usuario[0]->usr_id_empresa]);
+
+      $opcion = DB::select("SELECT opc_id_opcion, opc_estado
+                          FROM dct_sistema_tbl_opcion
+                          WHERE opc_ruta=:opc_ruta;",
+                          ['opc_ruta' => Route::currentRouteName()]);
 
       $aplicacion = DB::select("SELECT apl_estado
                               FROM dct_sistema_tbl_aplicacion
@@ -53,16 +69,11 @@ class Accesos_dct {
                               FROM dct_sistema_tbl_opcion
                               WHERE opc_id_opcion = :opc_id_opcion);",
                               ['opc_id_opcion' => $opcion[0]->opc_id_opcion]);
-     
-      $opcion = DB::select("SELECT opc_id_opcion, opc_estado
-                          FROM dct_sistema_tbl_opcion
-                          WHERE opc_ruta=:opc_ruta;",
-                          ['opc_ruta' => Route::currentRouteName()]);
       
-      $rol = DB::select("SELECT opc_id_opcion, opc_estado
-                          FROM dct_sistema_tbl_opcion
-                          WHERE opc_ruta=:opc_ruta;",
-                          ['opc_ruta' => Route::currentRouteName()]);
+      $rol = DB::select("SELECT rol_id_rol,rol_estado
+                          FROM dct_sistema_tbl_rol
+                          WHERE rol_id_rol=:rol_id_rol;",
+                          ['rol_id_rol' => $data_usuario[0]->usr_id_rol]);
       
       $rol_opcion = DB::select("SELECT rlo_id_opcion
                               FROM dct_sistema_tbl_rol_opcion
@@ -87,6 +98,7 @@ class Accesos_dct {
       if($data_usuario[0]->emp_estado == 1) { $valEstadoEmpresa = true; $contValidaAcceso += 1; }
       if($data_usuario[0]->emp_vigencia_hasta >= config('global.fecha_actual.fechaActual_5')) { $valEstadoVigencia = true; $contValidaAcceso += 1; }
       if($contValidaAcceso == 10) { $estadoValidarAcceso = true;}
+      
       if ($estadoValidarAcceso) {
           return $next($request);
       }
@@ -129,11 +141,8 @@ class Accesos_dct {
           }
       }
     } catch (\Exception $e) {
-      Log::error("Salida por Excepción");
-      Log::error("Archivo: ", [__FILE__]);
-      Log::error("Línea: ", [__LINE__]);
-      $data_result["message"] = "saveError";
-      $data_result["exception"] = $e;
+      Log::error($e->getMessage());
+      $data_result["message"] = "exitForException";
       return $data_result;
     }
   }

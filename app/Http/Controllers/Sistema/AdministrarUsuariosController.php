@@ -61,11 +61,9 @@ class AdministrarUsuariosController extends Controller
 				);
 				return $return;
 			} catch (\Exception $e) {
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
    
@@ -87,11 +85,9 @@ class AdministrarUsuariosController extends Controller
 				}
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
         }
@@ -113,11 +109,9 @@ class AdministrarUsuariosController extends Controller
 				}	
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}	
         }
@@ -155,11 +149,9 @@ class AdministrarUsuariosController extends Controller
 				}
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
         }
@@ -284,11 +276,9 @@ class AdministrarUsuariosController extends Controller
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				DB::rollback();
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
 		}
@@ -339,11 +329,9 @@ class AdministrarUsuariosController extends Controller
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				DB::rollback();
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
 		}
@@ -381,11 +369,9 @@ class AdministrarUsuariosController extends Controller
 				echo json_encode($data_result);
 			} catch (\Exception $e) {
 				DB::rollback();
-				Log::error("Salida por Excepción");
-				Log::error("Archivo: ", [__FILE__]);
-				Log::error("Línea: ", [__LINE__]);
-				$data_result["message"] = "saveError";
-				$data_result["exception"] = $e;
+				Log::error($e->getMessage());
+				$data_result["message"] = "exitForException";
+				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
 		}

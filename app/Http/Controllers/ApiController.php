@@ -35,9 +35,9 @@ class ApiController extends Controller {
       return response()->json(['data' => $return]);
     }
 		catch (\Exception $e) {
-			$data_result["message"] = "saveError";
-			$data_result["exception"] = $e;
-			echo json_encode($data_result);
+			Log::error($e->getMessage());
+			$data_result["message"] = "exitForException";
+			return $data_result;
 		}
   }
 }
