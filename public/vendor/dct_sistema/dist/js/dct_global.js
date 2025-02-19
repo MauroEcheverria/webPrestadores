@@ -111,7 +111,8 @@ $(document).ready(function() {
           return false;
         }
     }*/
-    $.ajax({
+
+    /*$.ajax({
       url: $("#getRenderAplicacionOpcion").val(),
       type: 'GET',
       dataType: 'html',
@@ -120,7 +121,7 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           switch (result.message) {
               case "saveOK":
-                /*** Aplicativos ***/
+          
                 result.dataRenderAplicativo.forEach(dataAplicativo => {
                   if (dataAplicativo.apl_estado == 1) {
                     $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).removeClass('dct_main');
@@ -139,7 +140,7 @@ $(document).ready(function() {
                     });
                   }
                 });
-                /*** Opciones ***/
+               
                 result.dataRenderOpcion.forEach(dataOpcion => {
                   if (dataOpcion.opc_estado == 1) {
                     $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
@@ -148,7 +149,7 @@ $(document).ready(function() {
                     $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
                   }
                 });
-                /*** Rol Aplicación ***/
+          
                 result.dataRenderRolAplicativo.forEach(dataAplicativo => {
                   if (dataAplicativo.rla_estado == 1) {
                     $('#id_dct_apl_'+dataAplicativo.rla_id_aplicacion).removeClass('dct_main');
@@ -167,7 +168,7 @@ $(document).ready(function() {
                     });
                   }
                 });
-                /*** Rol Opciones ***/
+              
                 result.dataRenderRolOpcion.forEach(dataOpcion => {
                   if (dataOpcion.rlo_estado == 1) {
                     $('#id_dct_opc_'+dataOpcion.rlo_id_opcion).removeClass('dct_main');
@@ -182,8 +183,9 @@ $(document).ready(function() {
               break;
           }
       }
-    });
-    /*$('#spiner_loading').hide();  */
+    });*/
+
+    $('#spiner_loading').hide();
     $(document)
     .ajaxStart(function(){$('#spiner_loading').show();})
     .ajaxStop(function(){$('#spiner_loading').hide();});

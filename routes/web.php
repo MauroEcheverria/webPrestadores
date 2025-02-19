@@ -55,11 +55,6 @@ Route::get('/usuario_inactivo',function(){
     return view('sistema.informativo',compact('accion'));
 })->name('usuario_inactivo');
 
-Route::get('/no_possee_autorizacion',function(){
-    $accion = ['acceso' => 'no_possee_autorizacion' ];
-    return view('sistema.informativo',compact('accion'));
-})->name('no_possee_autorizacion');
-
 Route::get('/contrasena_inactiva',function(){
     $accion = ['acceso' => 'contrasena_inactiva' ];
     return view('sistema.informativo',compact('accion'));
@@ -69,16 +64,6 @@ Route::get('/expiro_contrasena',function(){
     $accion = ['acceso' => 'expiro_contrasena' ];
     return view('sistema.informativo',compact('accion'));
 })->name('expiro_contrasena');
-
-Route::get('/aplicativo_inactivo',function(){
-    $accion = ['acceso' => 'aplicativo_inactivo' ];
-    return view('sistema.informativo',compact('accion'));
-})->name('aplicativo_inactivo');
-
-Route::get('/rol_inactivo',function(){
-    $accion = ['acceso' => 'rol_inactivo' ];
-    return view('sistema.informativo',compact('accion'));
-})->name('rol_inactivo');
 
 Route::get('/correo_no_validado',function(){
     $accion = ['acceso' => 'correo_no_validado' ];
@@ -95,15 +80,36 @@ Route::get('/licencia_caducada',function(){
     return view('sistema.informativo',compact('accion'));
 })->name('licencia_caducada');
 
-Route::get('/modulo_inactivo',function(){
-    $accion = ['acceso' => 'modulo_inactivo' ];
+Route::get('/rol_inactivo',function(){
+    $accion = ['acceso' => 'rol_inactivo' ];
     return view('sistema.informativo',compact('accion'));
-})->name('modulo_inactivo');
+})->name('rol_inactivo');
 
-Route::get('/opcion_no_registrada',function(){
-    $accion = ['acceso' => 'opcion_no_registrada' ];
+Route::get('/opcion_inactiva',function(){
+    $accion = ['acceso' => 'opcion_inactiva' ];
     return view('sistema.informativo',compact('accion'));
-})->name('opcion_no_registrada');
+})->name('opcion_inactiva');
+
+Route::get('/aplicativo_inactivo',function(){
+    $accion = ['acceso' => 'aplicativo_inactivo' ];
+    return view('sistema.informativo',compact('accion'));
+})->name('aplicativo_inactivo');
+
+Route::get('/empresa_aplicativo_inactivo',function(){
+    $accion = ['acceso' => 'empresa_aplicativo_inactivo' ];
+    return view('sistema.informativo',compact('accion'));
+})->name('empresa_aplicativo_inactivo');
+
+Route::get('/rol_aplicativo_inactivo',function(){
+    $accion = ['acceso' => 'rol_aplicativo_inactivo' ];
+    return view('sistema.informativo',compact('accion'));
+})->name('rol_aplicativo_inactivo');
+
+Route::get('/rol_opcion_inactivo',function(){
+    $accion = ['acceso' => 'rol_opcion_inactivo' ];
+    return view('sistema.informativo',compact('accion'));
+})->name('rol_opcion_inactivo');
+
 
 /******************************************************************************************/
 /*Controller para opciones en menú*/

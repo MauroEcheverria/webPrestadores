@@ -18,29 +18,31 @@
                     <div>
                         <span class="inf_text">Informativo:</span><span>
                             @if ($accion["acceso"] == "usuario_inactivo")
-                                No puede acceder a esta opción, su usuario se encuentra inactivo.
+                                No puede acceder a esta sección de la página WEB su usuario se encuentra inactiva.
                             @elseif ($accion["acceso"] == "contrasena_inactiva")
-                                No puede acceder a esta opción, su contraseña se encuentra inactiva.
+                                No puede acceder a esta sección de la página WEB su contraseña se encuentra inactiva.
                             @elseif ($accion["acceso"] == "expiro_contrasena")
-                                No puede acceder a esta opción, ya que su contraseña ha expirado.
-                            @elseif ($accion["acceso"] == "aplicativo_inactivo")
-                                No puede acceder a esta opción, ya que el modulo principal al que desea acceder esta inactivo.
-                            @elseif ($accion["acceso"] == "rol_inactivo")
-                                No puede acceder a esta opción, ya que el rol al que deseea acceder esta inactivo.
-                            @elseif ($accion["acceso"] == "empresa_inactiva")
-                                No puede acceder a esta opción, ya que su empresa se encuentra inactiva en la WEB.
-                            @elseif ($accion["acceso"] == "licencia_caducada")
-                                No puede acceder a esta opción, ya que su licencia de uso del paplicativo ha caducado
-                            @elseif ($accion["acceso"] == "modulo_inactivo")
-                                No puede acceder a esta opción, ya que el modulo al que desea acceder esta inactivo.
-                            @elseif ($accion["acceso"] == "no_possee_autorizacion")
-                                No posee autorización para acceder a esta sección/módulo de la página WEB.
+                                No puede acceder a esta sección de la página WEB ya que su contraseña ha expirado.
                             @elseif ($accion["acceso"] == "correo_no_validado")
-                                No puede acceder a esta opción, ya que su correo no ha sido validado.
-                            @elseif ($accion["acceso"] == "opcion_no_registrada")
-                                Opción no registrada, favor contactárse con el administrador del sitio WEB. Cod Error # 001
+                                No puede acceder a esta sección de la página WEB ya que su correo no ha sido validado.
+                            @elseif ($accion["acceso"] == "empresa_inactiva")
+                                No puede acceder a esta sección de la página WEB ya que su empresa se encuentra inactiva.
+                            @elseif ($accion["acceso"] == "licencia_caducada")
+                                No puede acceder a esta sección de la página WEB ya que su licencia de uso del aplicativo ha caducado.
+                            @elseif ($accion["acceso"] == "rol_inactivo")
+                                No puede acceder a esta sección de la página WEB ya que el rol al que desea acceder esta inactivo.
+                            @elseif ($accion["acceso"] == "opcion_inactiva")
+                                No puede acceder a esta sección de la página WEB ya que el módulo al que desea acceder esta inactivo.
+                            @elseif ($accion["acceso"] == "aplicativo_inactivo")
+                                No puede acceder a esta sección de la página WEB ya que el módulo principal al que desea acceder esta inactivo.
+                            @elseif ($accion["acceso"] == "empresa_aplicativo_inactivo")
+                                No puede acceder a esta sección de la página WEB ya que el módulo principal al que desea acceder esta inactivo.
+                            @elseif ($accion["acceso"] == "rol_aplicativo_inactivo")
+                                No puede acceder a esta sección de la página WEB ya que el módulo principal al que desea acceder esta inactivo.
+                            @elseif ($accion["acceso"] == "rol_opcion_inactivo")
+                                No puede acceder a esta sección de la página WEB ya que su autorización esta inactiva.
                             @else
-                                Opción no registrada, favor contactárse con el administrador del sitio WEB. Cod Error # 002
+                                Opción no registrada, favor contactárse con el administrador del sitio WEB. Cod Error # 001
                             @endif
                         </span>
                     </div>

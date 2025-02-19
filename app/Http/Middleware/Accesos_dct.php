@@ -24,7 +24,8 @@ class Accesos_dct {
                                   usr_estado,
                                   usr_estado_contrasenia,
                                   usr_expiro_contrasenia,
-                                  usr_id_empresa
+                                  usr_id_empresa,
+                                  usr_estado_correo
                                   FROM dct_sistema_tbl_usuario
                                   WHERE usr_correo=:usr_correo;",
                                   ['usr_correo' => auth()->user()->email]);
@@ -87,6 +88,9 @@ class Accesos_dct {
       else if ($data_usuario[0]->usr_expiro_contrasenia == 1) {
         return redirect('/expiro_contrasena');
       }
+      else if ($data_usuario[0]->usr_estado_correo == 0) {
+        return redirect('/correo_no_validado');
+      }
       else if ($data_empresa[0]->emp_estado == 0) {
         return redirect('/empresa_inactiva');
       }
@@ -113,7 +117,6 @@ class Accesos_dct {
       }
       else {
         return $next($request);
-        //return redirect('/opcion_no_registrada');
       }
     } catch (\Exception $e) {
       Log::error($e->getMessage());
