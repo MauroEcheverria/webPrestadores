@@ -405,6 +405,12 @@ return [
                     'id'  => 'id_dct_opc_12',
                 ],
                 [
+                    'text' => 'Agenda Médica',
+                    'icon'    => 'fa fa-cog',
+                    'url'  => 'salud/agendaMedica',
+                    'id'  => 'id_dct_opc_20',
+                ],
+                [
                     'text' => 'Vademecum',
                     'icon'    => 'fa fa-cog',
                     'url'  => 'salud/vademecum',

@@ -18,6 +18,7 @@ use App\Http\Controllers\Salud\EstadisticaController;
 use App\Http\Controllers\Salud\HistoriaClinicaController;
 use App\Http\Controllers\Salud\PacienteController;
 use App\Http\Controllers\Salud\VademecumController;
+use App\Http\Controllers\Salud\AgendaMedicaController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -225,6 +226,10 @@ Route::controller(ReportesController::class)->group(function(){
 
 Route::controller(VademecumController::class)->group(function(){
     Route::get('/salud/vademecum','index')->name('saludVademecum.index')->middleware('auth','accesos_dct');
+});
+
+Route::controller(AgendaMedicaController::class)->group(function(){
+    Route::get('/salud/agendaMedica','index')->name('saludAgendaMedica.index')->middleware('auth','accesos_dct');
 });
 
 /******************************************************************************************/

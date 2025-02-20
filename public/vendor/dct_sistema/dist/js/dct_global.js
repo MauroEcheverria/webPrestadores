@@ -112,7 +112,7 @@ $(document).ready(function() {
         }
     }*/
 
-    /*$.ajax({
+    $.ajax({
       url: $("#getRenderAplicacionOpcion").val(),
       type: 'GET',
       dataType: 'html',
@@ -121,69 +121,83 @@ $(document).ready(function() {
           var result = eval('('+result+')');
           switch (result.message) {
               case "saveOK":
-          
-                result.dataRenderAplicativo.forEach(dataAplicativo => {
-                  if (dataAplicativo.apl_estado == 1) {
-                    $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).removeClass('dct_main');
+                var array_aplicativo = new Array();
+                var array_opcion = new Array();
+                
+                if (result.dataRenderEmpresa == 1) {
+                  if (result.dataRenderRol == 1) {
+                    result.dataRenderAplicativo.forEach(dataAplicativo => {
+                      array_aplicativo.push([dataAplicativo.apl_id_aplicacion,dataAplicativo.apl_estado]);
+                    });
                     result.dataRenderOpcion.forEach(dataOpcion => {
-                      if (dataAplicativo.apl_id_aplicacion == dataOpcion.opc_id_aplicacion) {
-                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
+                      array_opcion.push([dataOpcion.opc_id_opcion,dataOpcion.opc_estado])
+                    });
+                    result.dataRenderEmpresaAplicativo.forEach(dataEmpresaAplicativo => {
+                      array_aplicativo.push([dataEmpresaAplicativo.ape_id_aplicacion,dataEmpresaAplicativo.ape_estado]);
+                    });
+                    result.dataRenderRolAplicativo.forEach(dataRolAplicativo => {
+                      array_aplicativo.push([dataRolAplicativo.rla_id_aplicacion,dataRolAplicativo.rla_estado]);
+                    });
+                    result.dataRenderRolOpcion.forEach(dataRolOpcion => {
+                      array_opcion.push([dataRolOpcion.rlo_id_opcion,dataRolOpcion.rlo_estado]);
+                    });
+
+                    var unique_aplicativo = [...new Set(array_aplicativo.map(arr => arr[0]))];
+                    unique_aplicativo.forEach((item_unique_aplicativo) => {
+                      var count_aplicativo = 0;
+                      var count_apl_array = 0;
+                      array_aplicativo.forEach((item_aplicativo) => {
+                        if ( item_unique_aplicativo == item_aplicativo[0] ) {
+                          count_apl_array += 1;
+                          count_aplicativo += item_aplicativo[1]
+                        }
+                      });
+                      if (count_aplicativo == count_apl_array) {
+                        $('#id_dct_apl_'+item_unique_aplicativo).fadeIn();
+                      }
+                      else {
+                        $('#id_dct_apl_'+item_unique_aplicativo).fadeOut();
                       }
                     });
-                  }
-                  else {
-                    result.dataRenderOpcion.forEach(dataOpcion => {
-                      $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).addClass('dct_main');
-                      if (dataAplicativo.apl_id_aplicacion == dataOpcion.opc_id_aplicacion) {
-                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
+
+                    var unique_opcion = [...new Set(array_opcion.map(arr => arr[0]))];
+                    unique_opcion.forEach((item_unique_opcion) => {
+                      var count_opcion = 0;
+                      var count_opc_array = 0;
+                      array_opcion.forEach((item_opcion) => {
+                        if ( item_unique_opcion == item_opcion[0] ) {
+                          count_opc_array += 1;
+                          count_opcion += item_opcion[1]
+                        }
+                      });
+                      if (count_opcion == count_opc_array) {
+                        $('#id_dct_opc_'+item_unique_opcion).fadeIn();
+                      }
+                      else {
+                        $('#id_dct_opc_'+item_unique_opcion).fadeOut();
                       }
                     });
-                  }
-                });
-               
-                result.dataRenderOpcion.forEach(dataOpcion => {
-                  if (dataOpcion.opc_estado == 1) {
-                    $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
+
                   }
                   else {
-                    $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
-                  }
-                });
-          
-                result.dataRenderRolAplicativo.forEach(dataAplicativo => {
-                  if (dataAplicativo.rla_estado == 1) {
-                    $('#id_dct_apl_'+dataAplicativo.rla_id_aplicacion).removeClass('dct_main');
-                    result.dataRenderOpcion.forEach(dataOpcion => {
-                      if (dataAplicativo.rla_id_aplicacion == dataOpcion.opc_id_aplicacion) {
-                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).removeClass('dct_main');
-                      }
+                    result.dataRenderAplicativo.forEach(dataAplicativo => {
+                      $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).fadeOut();
                     });
                   }
-                  else {
-                    result.dataRenderOpcion.forEach(dataOpcion => {
-                      $('#id_dct_apl_'+dataAplicativo.rla_id_aplicacion).addClass('dct_main');
-                      if (dataAplicativo.rla_id_aplicacion == dataOpcion.opc_id_aplicacion) {
-                        $('#id_dct_opc_'+dataOpcion.opc_id_opcion).addClass('dct_main');
-                      }
-                    });
-                  }
-                });
-              
-                result.dataRenderRolOpcion.forEach(dataOpcion => {
-                  if (dataOpcion.rlo_estado == 1) {
-                    $('#id_dct_opc_'+dataOpcion.rlo_id_opcion).removeClass('dct_main');
-                  }
-                  else {
-                    $('#id_dct_opc_'+dataOpcion.rlo_id_opcion).addClass('dct_main');
-                  }
-                });
+                }
+                else {
+                  result.dataRenderAplicativo.forEach(dataAplicativo => {
+                    $('#id_dct_apl_'+dataAplicativo.apl_id_aplicacion).fadeOut();
+                  });
+                }
+
               break;
               default:
                 toastrMostarError("RR_1");
               break;
           }
       }
-    });*/
+    });
 
     $('#spiner_loading').hide();
     $(document)

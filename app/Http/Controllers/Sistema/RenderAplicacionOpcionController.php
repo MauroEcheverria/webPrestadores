@@ -10,13 +10,13 @@ class RenderAplicacionOpcionController extends Controller {
   public function menu_render(){
     try {
 
-      $data_usuario= DB::select("SELECT usr_id_rol,usr_id_empresa
+      $data_usuario = DB::select("SELECT usr_id_rol,usr_id_empresa
                                 FROM dct_sistema_tbl_usuario  
                                 WHERE usr_correo = :usr_correo
                                 LIMIT 1;",
       ['usr_correo' => auth()->user()->email]);
 
-      $data_empresa= DB::select("SELECT emp_estado 
+      $data_empresa = DB::select("SELECT emp_estado 
                                 FROM dct_sistema_tbl_empresa 
                                 WHERE emp_id_empresa = :emp_id_empresa;",
                                 ['emp_id_empresa'=>$data_usuario[0]->usr_id_empresa]);
@@ -28,8 +28,7 @@ class RenderAplicacionOpcionController extends Controller {
 
       $render_aplicativo_array = [];
       $render_aplicativo = [];
-      $data_aplicativo= DB::select("SELECT apl_id_aplicacion,apl_estado 
-                                    FROM dct_sistema_tbl_aplicacion;");
+      $data_aplicativo= DB::select("SELECT apl_id_aplicacion,apl_estado FROM dct_sistema_tbl_aplicacion;");
       foreach ($data_aplicativo as $data_aplicativo) {
           $render_aplicativo_array = [
               'apl_id_aplicacion' => $data_aplicativo->apl_id_aplicacion,
@@ -40,8 +39,7 @@ class RenderAplicacionOpcionController extends Controller {
 
       $render_opcion_array = [];
       $render_opcion = [];
-      $data_opcion= DB::select("SELECT opc_id_opcion,opc_estado 
-                                FROM dct_sistema_tbl_opcion;");
+      $data_opcion= DB::select("SELECT opc_id_opcion,opc_estado FROM dct_sistema_tbl_opcion;");
       foreach ($data_opcion as $data_opcion) {
           $render_opcion_array = [
             'opc_id_opcion' => $data_opcion->opc_id_opcion,
@@ -93,9 +91,12 @@ class RenderAplicacionOpcionController extends Controller {
       }
 
       $data_result["message"] = "saveOK";
+      $data_result["dataRenderEmpresa"] = $data_empresa[0]->emp_estado;
+      $data_result["dataRenderRol"] = $data_rol[0]->rol_estado;
       $data_result["dataRenderAplicativo"] = $render_aplicativo;
-      $data_result["dataRenderRolAplicativo"] = $render_rol_aplicativo;
       $data_result["dataRenderOpcion"] = $render_opcion;
+      $data_result["dataRenderEmpresaAplicativo"] = $render_empresa_aplicativo;
+      $data_result["dataRenderRolAplicativo"] = $render_rol_aplicativo;
       $data_result["dataRenderRolOpcion"] = $render_rol_opcion;
       echo json_encode($data_result);
 
