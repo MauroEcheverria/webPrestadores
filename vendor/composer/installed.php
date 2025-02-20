@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a20a37650a7e9fb0d91dcd99a14b5842b819ffb9',
+        'reference' => 'f75a96466349bf53ee50a6979f78d606c9db4876',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -436,7 +436,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a20a37650a7e9fb0d91dcd99a14b5842b819ffb9',
+            'reference' => 'f75a96466349bf53ee50a6979f78d606c9db4876',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -647,9 +647,9 @@
             'dev_requirement' => false,
         ),
         'opcodesio/log-viewer' => array(
-            'pretty_version' => 'v3.14.0',
-            'version' => '3.14.0.0',
-            'reference' => '876166da7af4864faca7100e63534116c1c295b9',
+            'pretty_version' => 'v3.15.0',
+            'version' => '3.15.0.0',
+            'reference' => '927c2ab872a4b1ee2eb213051c847f53539e6c92',
             'type' => 'library',
             'install_path' => __DIR__ . '/../opcodesio/log-viewer',
             'aliases' => array(),
@@ -865,8 +865,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

@@ -622,6 +622,7 @@ class ComposerStaticIniteb88deae307508b3ac3bfac703f7ac76
         'App\\Http\\Controllers\\POS\\ReportesController' => __DIR__ . '/../..' . '/app/Http/Controllers/POS/ReportesController.php',
         'App\\Http\\Controllers\\POS\\TransaccionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/POS/TransaccionesController.php',
         'App\\Http\\Controllers\\Salud\\AdministracionSaludController' => __DIR__ . '/../..' . '/app/Http/Controllers/Salud/AdministracionSaludController.php',
+        'App\\Http\\Controllers\\Salud\\AgendaMedicaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Salud/AgendaMedicaController.php',
         'App\\Http\\Controllers\\Salud\\ConsultaEnfermeriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Salud/ConsultaEnfermeriaController.php',
         'App\\Http\\Controllers\\Salud\\ConsultaMedicaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Salud/ConsultaMedicaController.php',
         'App\\Http\\Controllers\\Salud\\EstadisticaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Salud/EstadisticaController.php',

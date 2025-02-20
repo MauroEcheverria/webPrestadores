@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\POS\\ReportesController' => $baseDir . '/app/Http/Controllers/POS/ReportesController.php',
     'App\\Http\\Controllers\\POS\\TransaccionesController' => $baseDir . '/app/Http/Controllers/POS/TransaccionesController.php',
     'App\\Http\\Controllers\\Salud\\AdministracionSaludController' => $baseDir . '/app/Http/Controllers/Salud/AdministracionSaludController.php',
+    'App\\Http\\Controllers\\Salud\\AgendaMedicaController' => $baseDir . '/app/Http/Controllers/Salud/AgendaMedicaController.php',
     'App\\Http\\Controllers\\Salud\\ConsultaEnfermeriaController' => $baseDir . '/app/Http/Controllers/Salud/ConsultaEnfermeriaController.php',
     'App\\Http\\Controllers\\Salud\\ConsultaMedicaController' => $baseDir . '/app/Http/Controllers/Salud/ConsultaMedicaController.php',
     'App\\Http\\Controllers\\Salud\\EstadisticaController' => $baseDir . '/app/Http/Controllers/Salud/EstadisticaController.php',

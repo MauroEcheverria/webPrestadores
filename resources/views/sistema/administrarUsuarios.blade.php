@@ -5,20 +5,18 @@
 @section('content_header') &nbsp; @stop
 
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <span class="panel-title"><b>Administración de Usuarios</b></span>
-            </div>
-            <div class="card-body">
-                <div class="seccionDtBtnAccion">
-                <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnUserNuevo">Crear Usuario</button>
-                </div>
-                <input type="hidden" value="{{ asset('vendor/datatables/spanish.json') }}" id="oLanguageDataTable" class="dct_main">
-                <input type="hidden" value="{{ route('administrarUsuarios.proceso_1') }}" id="getDataTableUsuarios" class="dct_main">
-                <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
-            </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="panel-title"><b>Administración de Usuarios</b></span>
+      </div>
+      <div class="card-body">
+        <div class="seccionDtBtnAccion">
+        <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnUserNuevo">Crear Usuario</button>
         </div>
+        <input type="hidden" value="{{ asset('vendor/datatables/spanish.json') }}" id="oLanguageDataTable" class="dct_main">
+        <input type="hidden" value="{{ route('administrarUsuarios.proceso_1') }}" id="getDataTableUsuarios" class="dct_main">
+        <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
+      </div>
     </div>
     <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">

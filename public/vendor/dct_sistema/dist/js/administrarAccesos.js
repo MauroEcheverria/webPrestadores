@@ -511,7 +511,7 @@ $(document).ready(function() {
     window.dtSistemaRolAplicativo = null;
     window.dtSistemaRolOpcion = null;
     if($('div#appAdministrarSistema').hasClass('appAdministrarSistema')) {
-        fnSistemaEmpresa();
+      fnSistemaEmpresa();
     }
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href")

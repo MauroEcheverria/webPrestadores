@@ -7,109 +7,107 @@
 @section('content')
     <div id="appAdministrarSistema" class="appAdministrarSistema"></div>
     <input type="hidden" value="{{ asset('vendor/datatables/spanish.json') }}" id="oLanguageDataTable" class="dct_main">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-            <span class="panel-title"><b>Administración de Accesos</b></span>
+    <div class="card">
+        <div class="card-header">
+        <span class="panel-title"><b>Administración de Accesos</b></span>
+        </div>
+        <div class="card-body">
+        <ul class="nav nav-tabs dct_pestanas" role="tablist">
+            <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Aplicaciones</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_3-tab" data-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Opciones</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_4-tab" data-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Roles</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_5-tab" data-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Empresa - Aplicativo</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_6-tab" data-toggle="tab" href="#idTogglable_6" role="tab" aria-controls="idTogglable_6" aria-selected="true">Rol - Aplicativo</a>
+            </li>
+            <li class="nav-item" role="presentation">
+            <a class="nav-link" id="idTogglable_7-tab" data-toggle="tab" href="#idTogglable_7" role="tab" aria-controls="idTogglable_7" aria-selected="true">Rol - Opción</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                <div class="seccionDtBtnAccion">
+                  <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnNuevaSistemaEmpresa">Crear</button>
+                </div>
+                <input type="hidden" value="{{ route('administrarAccesos.proceso_1') }}" id="getDataTableSistemaEmpresa" class="dct_main">
+                <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
             </div>
-            <div class="card-body">
-            <ul class="nav nav-tabs dct_pestanas" role="tablist">
-                <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="idTogglable_1-tab" data-toggle="tab" href="#idTogglable_1" role="tab" aria-controls="idTogglable_1" aria-selected="false">Empresas</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_2-tab" data-toggle="tab" href="#idTogglable_2" role="tab" aria-controls="idTogglable_2" aria-selected="false">Aplicaciones</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_3-tab" data-toggle="tab" href="#idTogglable_3" role="tab" aria-controls="idTogglable_3" aria-selected="false">Opciones</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_4-tab" data-toggle="tab" href="#idTogglable_4" role="tab" aria-controls="idTogglable_4" aria-selected="true">Roles</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_5-tab" data-toggle="tab" href="#idTogglable_5" role="tab" aria-controls="idTogglable_5" aria-selected="true">Empresa - Aplicativo</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_6-tab" data-toggle="tab" href="#idTogglable_6" role="tab" aria-controls="idTogglable_6" aria-selected="true">Rol - Aplicativo</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                <a class="nav-link" id="idTogglable_7-tab" data-toggle="tab" href="#idTogglable_7" role="tab" aria-controls="idTogglable_7" aria-selected="true">Rol - Opción</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="idTogglable_1" role="tabpanel" aria-labelledby="idTogglable_1-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
+            </div>
+            <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_2') }}" id="getDataTableSistemaAplicacion" class="dct_main">
+                    <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_3') }}" id="getDataTableSistemaOpcion" class="dct_main">
+                    <table id="dtSistemaOpcion" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
                     <div class="seccionDtBtnAccion">
-                      <button type="button" class="btn btn-success btn-dreconstec dct_main" id="btnNuevaSistemaEmpresa">Crear</button>
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
                     </div>
-                    <input type="hidden" value="{{ route('administrarAccesos.proceso_1') }}" id="getDataTableSistemaEmpresa" class="dct_main">
-                    <table id="dtSistemaEmpresa" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_2" role="tabpanel" aria-labelledby="idTogglable_2-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_2') }}" id="getDataTableSistemaAplicacion" class="dct_main">
-                        <table id="dtSistemaAplicacion" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_3" role="tabpanel" aria-labelledby="idTogglable_3-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_3') }}" id="getDataTableSistemaOpcion" class="dct_main">
-                        <table id="dtSistemaOpcion" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_4" role="tabpanel" aria-labelledby="idTogglable_4-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <div class="seccionDtBtnAccion">
-                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRol">Crear</button>
-                        </div>
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_4') }}" id="getDataTableSistemaRol" class="dct_main">
-                        <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_5-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <div class="seccionDtBtnAccion">
-                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresaAplicativo">Crear</button>
-                        </div>
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_5') }}" id="getDataTableSistemaEmpresaAplicativo" class="dct_main">
-                        <table id="dtSistemaEmpresaAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_6" role="tabpanel" aria-labelledby="idTogglable_6-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <div class="seccionDtBtnAccion">
-                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolAplicativo">Crear</button>
-                        </div>
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_6') }}" id="getDataTableSistemaRolAplicativo" class="dct_main">
-                        <table id="dtSistemaRolAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
-                </div>
-                <div class="tab-pane fade" id="idTogglable_7" role="tabpanel" aria-labelledby="idTogglable_7-tab">
-                <div class="divPanelTogglable">
-                    <div class="toggle_dentro_panel">
-                        <div class="seccionDtBtnAccion">
-                            <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolOpcion">Crear</button>
-                        </div>
-                        <input type="hidden" value="{{ route('administrarAccesos.proceso_7') }}" id="getDataTableSistemaRolOpcion" class="dct_main">
-                        <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
-                    </div>
-                </div>
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_4') }}" id="getDataTableSistemaRol" class="dct_main">
+                    <table id="dtSistemaRol" class="cell-border" cellspacing="0" width="100%"></table>
                 </div>
             </div>
             </div>
+            <div class="tab-pane fade" id="idTogglable_5" role="tabpanel" aria-labelledby="idTogglable_5-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                    <div class="seccionDtBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaEmpresaAplicativo">Crear</button>
+                    </div>
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_5') }}" id="getDataTableSistemaEmpresaAplicativo" class="dct_main">
+                    <table id="dtSistemaEmpresaAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_6" role="tabpanel" aria-labelledby="idTogglable_6-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                    <div class="seccionDtBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolAplicativo">Crear</button>
+                    </div>
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_6') }}" id="getDataTableSistemaRolAplicativo" class="dct_main">
+                    <table id="dtSistemaRolAplicativo" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="idTogglable_7" role="tabpanel" aria-labelledby="idTogglable_7-tab">
+            <div class="divPanelTogglable">
+                <div class="toggle_dentro_panel">
+                    <div class="seccionDtBtnAccion">
+                        <button type="button" class="btn btn-success btn-dreconstec" id="btnNuevaSistemaRolOpcion">Crear</button>
+                    </div>
+                    <input type="hidden" value="{{ route('administrarAccesos.proceso_7') }}" id="getDataTableSistemaRolOpcion" class="dct_main">
+                    <table id="dtSistemaRolOpcion" class="cell-border" cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+            </div>
+        </div>
         </div>
     </div>
     <input type="hidden" value="{{ route('administrarAccesos.proceso_8') }}" id="getDataSelect" class="dct_main">
