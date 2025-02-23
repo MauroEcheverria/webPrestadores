@@ -5,28 +5,29 @@
 @section('content_header') &nbsp; @stop
 
 @section('content')
-  	<div class="row">
-	    <div class="col-md-3">
-	    	<div class="card">
-		      <div class="card-header">
-		          <span class="panel-title"><b>Parámetros</b></span>
-		      </div>
-		      <div class="card-body">
-		         
-		      </div>
-		    </div>
+	<input type="hidden" value="{{ route('agendaMedica.proceso_1') }}" id="getDataTableAgendaMedica" class="dct_main">
+	<div class="row">
+    <div class="col-md-3">
+    	<div class="card">
+	      <div class="card-header">
+	          <span class="panel-title"><b>Parámetros</b></span>
+	      </div>
+	      <div class="card-body">
+	         
+	      </div>
 	    </div>
-	    <div class="col-md-9">
-	    	<div class="card">
-		      <div class="card-header">
-		        <span class="panel-title"><b>Agenda Médica</b></span>
-		      </div>
-		      <div class="card-body">
-    				<div id='calendar'></div>
-		      </div>
-		    </div>
+    </div>
+    <div class="col-md-9">
+    	<div class="card">
+	      <div class="card-header">
+	        <span class="panel-title"><b>Agenda Médica</b></span>
+	      </div>
+	      <div class="card-body">
+  				<div id='calendar'></div>
+	      </div>
 	    </div>
-	  </div>
+    </div>
+  </div>
 @stop
 
 @section('css')

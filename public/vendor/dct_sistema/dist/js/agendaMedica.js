@@ -4,9 +4,42 @@ $(document).ready(function() {
 var fechaInicio = moment().format('YYYY-MM-DD');
 var fechaFin = (moment().add(30,'days')).format('YYYY-MM-DD');
 
+/*
+CREATE TABLE `dct_salud_tbl_agenda_medica` (
+  `agm_id_agenda` bigint(20) NOT NULL,
+  `pct_id_paciente` bigint(20) NOT NULL,
+  `emp_id_empresa` int(11) NOT NULL,
+  `esp_id_especialidad` int(11) NOT NULL,
+  `usr_cod_usuario` varchar(12) NOT NULL,
+  `agm_iden_uni` varchar(15),
+  `agm_fecha_inicio` varchar(10),
+  `agm_hora_inicio` varchar(8),
+  `agm_fecha_final` varchar(10),
+  `agm_hora_final` varchar(8),
+  `agm_background_color` varchar(10),
+  `agm_border_color` varchar(10),
+  `agm_observacion` varchar(100),
+  `agm_estado` varchar(1) NOT NULL,
+  `agm_usuario_creacion` varchar(12) DEFAULT NULL,
+  `agm_fecha_creacion` timestamp NULL DEFAULT NULL,
+  `agm_ip_creacion` varchar(100) DEFAULT NULL,
+  `agm_usuario_modificacion` varchar(12) DEFAULT NULL,
+  `agm_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `agm_ip_modificacion` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+ALTER TABLE `dct_salud_tbl_agenda_medica`
+  ADD PRIMARY KEY (`agm_id_agenda`);
+  
+  ALTER TABLE `dct_salud_tbl_agenda_medica`
+  MODIFY `agm_id_agenda` bigint(20) NOT NULL AUTO_INCREMENT;
+
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    height: 500,
     locale: 'es',
     buttonText: {
       today:'Hoy',
@@ -23,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
       right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
     },
     allDaySlot : false,
-    slotDuration:'00:15:00',
+    slotDuration:'00:30:00',
 
     initialView: 'dayGridMonth',
     validRange: {
@@ -39,103 +72,29 @@ document.addEventListener('DOMContentLoaded', function() {
     nowIndicator: true,
     events: [
       {
-        title: 'Business Lunch',
-        start: '2025-01-03T13:00:00',
-        constraint: 'businessHours'
-      },
-      {
-        title: 'Conference',
-        start: '2025-01-11',
-        end: '2025-01-13'
+        title: 'Cita - Mauro Echeverria',
+        start: '2025-01-10T10:30:00',
+        end: '2025-01-10T12:30:00',
+        url: '#',
+        color: '#ff9f89',
+        descripcion: '2Hola Mauro',
       },
       {
         title: 'Meeting',
         start: '2025-01-12T10:30:00',
-        end: '2025-01-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2025-01-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-01-12T14:30:00'
-      },
-      {
-        title: 'Happy Hour',
-        start: '2025-01-12T17:30:00'
-      },
-      {
-        title: 'Dinner',
-        start: '2025-01-12T20:00:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2025-01-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: '#',
-        start: '2025-01-28'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-01-13T11:00:00',
-        constraint: 'availableForMeeting', // defined below
+        end: '2025-01-12T12:30:00',
         color: '#257e4a'
       },
       {
-        title: 'Conference',
-        start: '2025-01-18',
-        end: '2025-01-20'
+        title: 'Birthday Party',
+        start: '2025-01-13T07:00:00',
+         color: '#257e4a'
       },
       {
-        title: 'Party',
-        start: '2025-01-29T20:00:00'
-      },
-
-      // areas where "Meeting" must be dropped
-      {
-        groupId: 'availableForMeeting',
-        start: '2025-01-11T10:00:00',
-        end: '2025-01-11T16:00:00',
-        display: 'background'
-      },
-      {
-        groupId: 'availableForMeeting',
-        start: '2025-01-13T10:00:00',
-        end: '2025-01-13T16:00:00',
-        display: 'background'
-      },
-
-      // red areas where no events can be dropped
-      {
-        start: '2025-01-24',
-        end: '2025-01-28',
-        overlap: false,
+        start: '2025-01-26',
+        end: '2025-01-26',    
         display: 'background',
         color: '#ff9f89'
-      },
-      {
-        start: '2025-01-06',
-        end: '2025-01-08',
-        overlap: false,
-        display: 'background',
-        color: '#ff9f89'
-      },
-      {
-        title: 'All Day Event',
-        start: '2025-02-01',
-      },
-      {
-        title: 'Long Event',
-        start: '2025-02-07',
-        end: '2025-02-10'
-      },
-      {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2025-02-09T16:00:00'
       },
       {
         groupId: 999,
@@ -143,49 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
         start: '2025-02-16T16:00:00'
       },
       {
-        title: 'Conference',
-        start: '2025-02-11',
-        end: '2025-02-13'
-      },
-      {
         title: 'Meeting',
         start: '2025-02-12T10:30:00',
         end: '2025-02-12T12:30:00'
       },
       {
-        title: 'Lunch',
-        start: '2025-02-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T14:30:00'
-      },
-      {
-        title: 'Happy Hour',
-        start: '2025-02-12T17:30:00'
-      },
-      {
-        title: 'Dinner',
-        start: '2025-02-12T20:00:00'
-      },
-      {
         title: 'Birthday Party',
         start: '2025-02-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: '#',
-        start: '2025-02-28'
       }
     ],
     eventClick: function(info){
-      //console.log(info);
-      //alert('Event: ' + info.event.title);
-      //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-      //alert('View: ' + info.view.type);
-
-      // change the border color just for fun
-      //info.el.style.borderColor = 'red';
+      console.log(info);descripcion
+      alert('Event: ' + info.event.title);
     }
   });
   calendar.render();
