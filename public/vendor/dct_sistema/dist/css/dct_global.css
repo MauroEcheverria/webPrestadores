@@ -119,3 +119,6 @@
 .has-treeview ul li {
     padding-left: 20px !important;
 }
+.content-wrapper, .content-header {
+    padding: 0 0 0 0;
+}

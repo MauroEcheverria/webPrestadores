@@ -231,6 +231,7 @@ Route::controller(VademecumController::class)->group(function(){
 Route::controller(AgendaMedicaController::class)->group(function(){
     Route::get('/salud/agendaMedica','index')->name('saludAgendaMedica.index')->middleware('auth','accesos_dct');
     Route::get('/salud/agendaMedica/proceso_1','getDataTableAgendaMedica')->name('agendaMedica.proceso_1');
+    Route::post('/salud/agendaMedica/guardar_agenda','guardar_agenda')->name('agendaMedica.guardar_agenda');
 });
 
 /******************************************************************************************/
