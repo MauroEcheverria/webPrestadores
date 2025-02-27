@@ -5,27 +5,49 @@
 @section('content_header') &nbsp; @stop
 
 @section('content')
+  <style>
+  .greenEvent {
+      background-color:#00FF00;
+  }
+
+  .redEvent {
+      background-color:#FF0000;
+  }
+  </style>
 	<input type="hidden" value="{{ route('agendaMedica.proceso_1') }}" id="getDataTableAgendaMedica" class="dct_main">
-	<div class="row">
-    <div class="col-md-3">
-    	<div class="card">
-	      <div class="card-header">
-	          <span class="panel-title"><b>Parámetros</b></span>
-	      </div>
-	      <div class="card-body">
-	         
-	      </div>
-	    </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="panel-title"><b>Agenda Médica</b></span>
     </div>
-    <div class="col-md-9">
-    	<div class="card">
-	      <div class="card-header">
-	        <span class="panel-title"><b>Agenda Médica</b></span>
-	      </div>
-	      <div class="card-body">
-  				<div id='calendar'></div>
-	      </div>
-	    </div>
+    <div class="card-body">
+      <button type="button" id="testbtn" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
+      <div id='calendar'></div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modalLogin">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-1">
+                <img src="{{ asset('vendor/dct_sistema/dist/img/modal_visto.png') }}" width="30px" heigth="20px">
+                </div>
+                <div class="col-md-11">
+                <h4 class="modal-title">Crear Usuario</h4>
+                </div>
+            </div>
+        </div>
+            
+        <div class="modal-body">
+            
+            asdasdas
+        </div>
+        <div class="modal-footer centralFooter">
+            <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+        </div>
+      </div>
     </div>
   </div>
 @stop

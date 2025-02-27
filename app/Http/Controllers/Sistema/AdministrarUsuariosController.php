@@ -22,7 +22,7 @@ class AdministrarUsuariosController extends Controller
 	}
 
 	public function getDataTableUsuarios(Request $request){
-
+		if ($request->ajax()) {
 			try {
 				$usuarios = DB::select("SELECT u.usr_cod_usuario,u.usr_correo,
 										r.rol_rol,u.usr_id_empresa,m.emp_empresa,u.usr_id_rol,
@@ -66,7 +66,7 @@ class AdministrarUsuariosController extends Controller
 				$data_result["exception"] = $e->getMessage();
 				echo json_encode($data_result);
 			}
-   
+   		}
     }
 
 	public function getCedulaRepetida(Request $request){

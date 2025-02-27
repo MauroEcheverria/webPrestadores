@@ -39,8 +39,18 @@ ALTER TABLE `dct_salud_tbl_agenda_medica`
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    height: 500,
+    allDaySlot : false,
+    slotDuration:'00:30:00',
+    height: 600,
     locale: 'es',
+    initialView: 'dayGridMonth',
+    initialDate: '2025-01-10',
+    navLinks: true, // can click day/week names to navigate views
+    editable: false,
+    selectable: true,
+    dayMaxEvents: true,
+    selectMirror: true,
+    nowIndicator: true,
     buttonText: {
       today:'Hoy',
       multiMonthYear:'Año',
@@ -55,66 +65,45 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listMonth'
     },
-    allDaySlot : false,
-    slotDuration:'00:30:00',
-
-    initialView: 'dayGridMonth',
     validRange: {
       start: '2025-01-01',
       end: moment(fechaFin).add(10, 'years').format('YYYY-MM-DD')
     },
-    initialDate: '2025-01-10',
-    navLinks: true, // can click day/week names to navigate views
-    editable: false,
-    selectable: true,
-    dayMaxEvents: true,
-    selectMirror: true,
-    nowIndicator: true,
-    events: [
-      {
-        title: 'Cita - Mauro Echeverria',
-        start: '2025-01-10T10:30:00',
-        end: '2025-01-10T12:30:00',
-        url: '#',
-        color: '#ff9f89',
-        descripcion: '2Hola Mauro',
-      },
-      {
-        title: 'Meeting',
-        start: '2025-01-12T10:30:00',
-        end: '2025-01-12T12:30:00',
-        color: '#257e4a'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2025-01-13T07:00:00',
-         color: '#257e4a'
-      },
-      {
-        start: '2025-01-26',
-        end: '2025-01-26',    
-        display: 'background',
-        color: '#ff9f89'
-      },
-      {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2025-02-16T16:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2025-02-12T10:30:00',
-        end: '2025-02-12T12:30:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2025-02-13T07:00:00'
-      }
-    ],
+    eventSources: {
+        url: $("#getDataTableAgendaMedica").val(),
+        type: 'GET',
+        error: function() {
+          alert('there was an error while fetching events!');
+        }
+    },
+    eventColor: '#378006',
     eventClick: function(info){
-      console.log(info);descripcion
-      alert('Event: ' + info.event.title);
-    }
+      info.jsEvent.preventDefault();
+      console.log('title: ' + info.event.title);
+      console.log(info.event.extendedProps.descriptionMau);
+      /*if (info.event.id) {
+        var event = calendar.getEventById(info.event.id);
+        event.remove();
+      }*/
+    },
   });
   calendar.render();
+
+  $("#testbtn").on("click", function(){
+    $('#myModalNuevoUser').modal('show');
+    /*calendar.addEvent({
+      id: '123',
+      title: 'Third Event',
+      start: '2025-01-11T10:30:00',
+      end: '2025-01-11T12:30:00'
+    });*/
+    calendar.refetchEvents();
+  });
+
+  /*
+var event = calendar.getEventById('a') // an event object!
+var start = event.start // a property (a Date object)
+console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
+  */
+
 });
