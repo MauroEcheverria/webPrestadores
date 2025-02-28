@@ -1,0 +1,37 @@
+CREATE TABLE dct_salud_tbl_agenda_medica (
+  agm_id_agenda bigint(20) NOT NULL,
+  pct_id_paciente bigint(20) NOT NULL,
+  emp_id_empresa int(11) NOT NULL,
+  esp_id_especialidad int(11) NOT NULL,
+  usr_cod_usuario varchar(12) NOT NULL,
+	agm_tipo varchar(15),
+	agm_titulo varchar(40),
+	agm_correo_paciente varchar(40),
+  agm_fecha_inicio varchar(10),
+  agm_hora_inicio varchar(8),
+  agm_fecha_final varchar(10),
+  agm_hora_final varchar(8),
+  agm_background_color varchar(10),
+  agm_border_color varchar(10),
+  agm_observacion varchar(100),
+  agm_estado varchar(1) NOT NULL,
+  agm_usuario_creacion varchar(12) DEFAULT NULL,
+  agm_fecha_creacion timestamp NULL DEFAULT NULL,
+  agm_ip_creacion varchar(100) DEFAULT NULL,
+  agm_usuario_modificacion varchar(12) DEFAULT NULL,
+  agm_fecha_modificacion timestamp NULL DEFAULT NULL,
+  agm_ip_modificacion varchar(100) DEFAULT NULL,
+	created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+ALTER TABLE dct_salud_tbl_agenda_medica
+  ADD PRIMARY KEY (agm_id_agenda);
+  
+  ALTER TABLE dct_salud_tbl_agenda_medica
+  MODIFY agm_id_agenda bigint(20) NOT NULL AUTO_INCREMENT;
+
+
+
+
+  aria-hidden="true"

@@ -53,4 +53,20 @@ class FuncionesAccesosController extends Controller {
 		}
 	}
 
+	public function getTokenHash($texto){
+		try {
+	    $hash = crc32($texto);
+	    $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $base = strlen($alphabet);
+	    $shortHash = '';
+	    while ($hash > 0) {
+        $shortHash = $alphabet[$hash % $base] . $shortHash;
+        $hash = intdiv($hash, $base);
+	    }
+	    return substr(str_pad($shortHash, 7, "7", STR_PAD_LEFT), 0, 7);
+		} catch (\Exception $e) {
+			return NULL;
+		}
+	}
+
 }

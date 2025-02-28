@@ -47,7 +47,7 @@ function renderizarProductoServicio() {
     }
   });
 }
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
   $(".select2").select2({ maximumSelectionLength: 20 });
   $('#cli_identificacion').keypress(function(e){
     if( e.which == 13 ){

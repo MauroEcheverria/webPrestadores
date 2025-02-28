@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
   window.dtUsuarios = $('#dtUsuarios').DataTable( {
     bRetrive: true,
     processing: false,

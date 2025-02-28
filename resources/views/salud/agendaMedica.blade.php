@@ -16,7 +16,7 @@
     </div>
   </div>
   
-  <div class="modal fade" id="myModalAgendaMedicaAdd" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal fade" id="myModalAgendaMedicaAdd" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modalLogin">
       <div class="modal-content">
         <div class="modal-header">
@@ -39,22 +39,7 @@
                     <label for="agm_titulo" class="control-label">Cédula</label>
                     <input type="text" class="form-control" id="agm_titulo" name="agm_titulo" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
                   </div>
-                  <div class="form-group">
-                    <label for="usr_nombre_1" class="control-label">Primer Nombre</label>
-                    <input type="text" class="form-control" id="usr_nombre_1" name="usr_nombre_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                  </div>
-                  <div class="form-group">
-                    <label for="usr_apellido_1" class="control-label">Primer Apellido</label>
-                    <input type="text" class="form-control" id="usr_apellido_1" name="usr_apellido_1" maxlength="15" required minlength="3" oninput="this.value = this.value.toUpperCase()">
-                  </div>
-                  <div class="form-group">
-                    <label for="usr_celular" class="control-label">Celular</label>
-                    <input type="text" class="form-control" id="usr_celular" name="usr_celular" maxlength="10" required minlength="3" onkeypress="return soloNumeros(event);">
-                  </div>
-                  <div class="form-group">
-                    <label for="usr_id_empresa" class="control-label">Empresa</label>
-                    <select name="usr_id_empresa" id="usr_id_empresa" class="form-control" required style="width: 100%;"></select>
-                  </div>
+                  
               </div>
               <div class="col-md-6">
                   <div class="form-group">
@@ -62,18 +47,8 @@
                     <input type="email" class="form-control" id="usr_correo" name="usr_correo" maxlength="60" 
                     data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
                   </div>
-                  <div class="form-group">
-                    <label for="usr_nombre_2" class="control-label">Segundo Nombre</label>
-                    <input type="text" class="form-control" id="usr_nombre_2" name="usr_nombre_2" maxlength="15" minlength="2" required oninput="this.value = this.value.toUpperCase()">
-                  </div>
-                  <div class="form-group">
-                    <label for="usr_apellido_2" class="control-label">Segundo Apellido</label>
-                    <input type="text" class="form-control" id="usr_apellido_2" name="usr_apellido_2" maxlength="15" oninput="this.value = this.value.toUpperCase()">
-                  </div>
-                  <div class="form-group">
-                    <label for="usr_id_rol" class="control-label">Tipo Rol</label>
-                    <select name="usr_id_rol" id="usr_id_rol" class="form-control" required style="width: 100%;"></select>
-                  </div>
+          
+                 
               </div>
             </div>
           </div>

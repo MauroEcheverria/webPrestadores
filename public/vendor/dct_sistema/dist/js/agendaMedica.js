@@ -1,15 +1,12 @@
-var fechaInicio = moment().format('YYYY-MM-DD');
-var fechaFin = (moment().add(30,'days')).format('YYYY-MM-DD');
-
 document.addEventListener('DOMContentLoaded', function() {
+  window.agm_id_agenda = null;
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     allDaySlot : false,
     slotDuration:'00:30:00',
-    height: 600,
     locale: 'es',
     initialView: 'dayGridMonth',
-    initialDate: '2025-01-10',
+    initialDate: moment().format('YYYY-MM-DD'),
     navLinks: true, // can click day/week names to navigate views
     editable: false,
     selectable: true,
@@ -32,20 +29,26 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     validRange: {
       start: '2025-01-01',
-      end: moment(fechaFin).add(10, 'years').format('YYYY-MM-DD')
+      end: moment().add(1,'years').format('YYYY-MM-DD')
     },
     eventSources: {
-        url: $("#getDataTableAgendaMedica").val(),
-        type: 'GET',
-        error: function() {
-          alert('there was an error while fetching events!');
-        }
+      url: $("#getDataTableAgendaMedica").val(),
+      type: 'GET',
+      data: {
+        dynamic_value: Math.random(),
+        _token : $("#getTokenRender").val(),
+        custom_param1 : 'something',
+      },
+      error: function() {
+        alert('there was an error while fetching events!');
+      },
     },
-    eventColor: '#378006',
     eventClick: function(info){
       info.jsEvent.preventDefault();
-      console.log('title: ' + info.event.title);
-      console.log(info.event.extendedProps.descriptionMau);
+      agm_id_agenda = info.event.id;
+      console.log(agm_id_agenda);
+      console.log(info.event.extendedProps.observacion);
+      $('#myModalAgendaMedicaAdd').modal('show');
       /*if (info.event.id) {
         var event = calendar.getEventById(info.event.id);
         event.remove();
@@ -56,13 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   $("#testbtn").on("click", function(){
     $('#myModalAgendaMedicaAdd').modal('show');
-    /*calendar.addEvent({
-      id: '123',
-      title: 'Third Event',
-      start: '2025-01-11T10:30:00',
-      end: '2025-01-11T12:30:00'
-    });*/
-    
+
   });
 
   /*

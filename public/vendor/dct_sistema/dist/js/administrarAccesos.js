@@ -501,7 +501,7 @@ function fnSistemaEmpresa() {
       }
     });
   }
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     window.dtSistemaEmpresa = null;
     window.dtSistemaRol = null;
     window.dtSistemaAplicacion = null;
