@@ -29,35 +29,55 @@
             </div>
           </div>
         </div>
-
         <form data-action="{{route('agendaMedica.guardar_agenda')}}" method="POST" id="formAgendaMedicaAdd" class="formModalPages" data-toggle="validator" role="form" novalidate>
           @csrf
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="agm_titulo" class="control-label">Cédula</label>
-                    <input type="text" class="form-control" id="agm_titulo" name="agm_titulo" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
-                  </div>
-                  
+                <div class="form-group">
+                  <label for="agm_titulo" class="control-label">Cédula</label>
+                  <input type="text" class="form-control" id="agm_titulo" name="agm_titulo" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
+                </div>
               </div>
               <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="usr_correo" class="control-label">Correo</label>
-                    <input type="email" class="form-control" id="usr_correo" name="usr_correo" maxlength="60" 
-                    data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
-                  </div>
-          
-                 
+                <div class="form-group">
+                  <label for="usr_correo" class="control-label">Correo</label>
+                  <input type="email" class="form-control" id="usr_correo" name="usr_correo" maxlength="60" 
+                  data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
+                </div>  
               </div>
             </div>
           </div>
           <div class="modal-footer centralFooter">
-              <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
+            <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success btn-dreconstec">Guardar</button>
           </div>
         </form>
-       
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalAgendaMedicaEdit" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modalLogin">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <div class="col-md-1">
+              <img src="{{ asset('vendor/dct_sistema/dist/img/modal_visto.png') }}" width="30px" heigth="20px">
+            </div>
+            <div class="col-md-11">
+              <h4 class="modal-title">Añadir Evento</h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label class="control-label cal_label">Fecha Calificación:&nbsp;</label><span class="cal_data" id="id_span_fecha_calificacion"></span>
+          </div>
+        </div>
+        <div class="modal-footer centralFooter">
+          <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger btn-dreconstec">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>

@@ -35,9 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
       url: $("#getDataTableAgendaMedica").val(),
       type: 'GET',
       data: {
-        dynamic_value: Math.random(),
         _token : $("#getTokenRender").val(),
-        custom_param1 : 'something',
       },
       error: function() {
         alert('there was an error while fetching events!');
@@ -46,13 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
     eventClick: function(info){
       info.jsEvent.preventDefault();
       agm_id_agenda = info.event.id;
-      console.log(agm_id_agenda);
-      console.log(info.event.extendedProps.observacion);
-      $('#myModalAgendaMedicaAdd').modal('show');
-      /*if (info.event.id) {
-        var event = calendar.getEventById(info.event.id);
-        event.remove();
-      }*/
+      console.log("🚀 ~ document.addEventListener ~ agm_id_agenda:", agm_id_agenda)
+      
+      $("#id_span_fecha_calificacion").empty().prepend(info.event.extendedProps.observacion);
+      $('#myModalAgendaMedicaEdit').modal('show');
     },
   });
   calendar.render();
@@ -62,11 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  /*
-var event = calendar.getEventById('a') // an event object!
-var start = event.start // a property (a Date object)
-console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
-  */
   document.getElementById("formAgendaMedicaAdd").addEventListener("submit", function(event) {
     event.preventDefault();
     if (this.checkValidity() === false) {

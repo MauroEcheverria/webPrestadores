@@ -4,6 +4,7 @@ CREATE TABLE dct_salud_tbl_agenda_medica (
   emp_id_empresa int(11) NOT NULL,
   esp_id_especialidad int(11) NOT NULL,
   usr_cod_usuario varchar(12) NOT NULL,
+  agm_iden_uni varchar(15),
 	agm_tipo varchar(15),
 	agm_titulo varchar(40),
 	agm_correo_paciente varchar(40),

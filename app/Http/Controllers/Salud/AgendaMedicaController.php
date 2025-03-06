@@ -30,7 +30,7 @@ class AgendaMedicaController extends Controller
 	          'borderColor'   => '#0000ff',
 	          'url'           => '#',
 	          'extendedProps' => [
-	            'observacion'  => $request->custom_param1,
+	            'observacion'  => $agenda->agm_observacion,
 	            'correo_paciente'  => $agenda->agm_correo_paciente,
 	          ],
 	          'className' => ["redEvent"]
@@ -69,9 +69,9 @@ class AgendaMedicaController extends Controller
 				$save_tbl_agenda_medica->agm_tipo = $funcionAcceso->cleanData(false,0,false,"CITA");
 				$save_tbl_agenda_medica->agm_titulo = $funcionAcceso->cleanData(false,0,false,"CITA");
 				$save_tbl_agenda_medica->agm_correo_paciente = $funcionAcceso->cleanData(false,0,false,"asasds");
-				$save_tbl_agenda_medica->agm_fecha_inicio = $funcionAcceso->cleanData(false,0,false,"2025-02-08");
+				$save_tbl_agenda_medica->agm_fecha_inicio = $funcionAcceso->cleanData(false,0,false,"2025-03-05");
 				$save_tbl_agenda_medica->agm_hora_inicio = $funcionAcceso->cleanData(false,0,false,"08:00");
-				$save_tbl_agenda_medica->agm_fecha_final = $funcionAcceso->cleanData(false,0,false,"2025-02-08");
+				$save_tbl_agenda_medica->agm_fecha_final = $funcionAcceso->cleanData(false,0,false,"2025-03-05");
 				$save_tbl_agenda_medica->agm_hora_final = $funcionAcceso->cleanData(false,0,false,"08:30");
 				$save_tbl_agenda_medica->agm_background_color = $funcionAcceso->cleanData(false,0,false,"#dddd");
 				$save_tbl_agenda_medica->agm_border_color = $funcionAcceso->cleanData(false,0,false,"#ffff");
