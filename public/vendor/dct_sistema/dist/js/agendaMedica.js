@@ -45,8 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
       info.jsEvent.preventDefault();
       agm_id_agenda = info.event.id;
       console.log("🚀 ~ document.addEventListener ~ agm_id_agenda:", agm_id_agenda)
-      
-      $("#id_span_fecha_calificacion").empty().prepend(info.event.extendedProps.observacion);
+      $("#id_agm_titulo").empty().prepend(info.event.title);
+      $("#id_agm_fecha_inicio").empty().prepend(info.event.extendedProps.desde);
+      $("#id_agm_fecha_final").empty().prepend(info.event.extendedProps.hasta);
+      $("#id_agm_correo_paciente").empty().prepend(info.event.extendedProps.correo_paciente);
+      $("#id_agm_observacion").empty().prepend(info.event.extendedProps.observacion);
       $('#myModalAgendaMedicaEdit').modal('show');
     },
   });
@@ -56,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#myModalAgendaMedicaAdd').modal('show');
 
   });
+
+  $('#av_fecha_ampliacion').datepicker({
+    autoclose: true,
+    format: 'yyyy/mm/dd',
+    language: 'es'/*,
+    datesDisabled: result,*/
+  });
+  $('#av_fecha_ampliacion').datepicker('setDate', new Date());
+  $('#timepicker').timepicker();
 
   document.getElementById("formAgendaMedicaAdd").addEventListener("submit", function(event) {
     event.preventDefault();

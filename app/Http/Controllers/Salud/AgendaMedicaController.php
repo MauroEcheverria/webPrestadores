@@ -32,6 +32,8 @@ class AgendaMedicaController extends Controller
 	          'extendedProps' => [
 	            'observacion'  => $agenda->agm_observacion,
 	            'correo_paciente'  => $agenda->agm_correo_paciente,
+				'desde'  => $agenda->agm_fecha_inicio."  ".$agenda->agm_hora_inicio,
+				'hasta'  => $agenda->agm_fecha_final."  ".$agenda->agm_hora_final,
 	          ],
 	          'className' => ["redEvent"]
 	        ];

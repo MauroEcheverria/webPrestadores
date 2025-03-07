@@ -25,9 +25,9 @@
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap-4.6.2/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="{{ asset('vendor/fonts/googleapis.css') }}">
         @endif
@@ -85,8 +85,9 @@
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ asset('vendor/moment/min/moment.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap-4.6.2/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @else
