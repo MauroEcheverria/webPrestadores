@@ -37,13 +37,9 @@ Route::middleware([
 });
 
 /******************************************************************************************/
-Route::get('/productos', function () {
-    return view('info.productos');
-})->name('info.productos');
-
-Route::get('/planes', function () {
-    return view('info.planes');
-})->name('info.planes');
+Route::get('/servicios', function () {
+    return view('info.servicios');
+})->name('info.servicios');
 
 Route::get('/contactanos', function (){
     return view('info.contactanos');

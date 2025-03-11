@@ -1,95 +1,82 @@
 @extends('layouts.base_1')
 @section('title','ServiDCT | Página Principal')
 @section('content')
-<main>
+  <main>
     <div class="container px-4 py-5" id="featured-3">
       <h2 class="pb-2 border-bottom">Contáctanos</h2>
-      <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="feature col">
-          <div class="feature-icon bg-primary bg-gradient">
-            <i class="fab fa-amilia"></i>
+
+      <div class="centrarAll">
+        <div class="full">
+          <div class="main_heading contactMain">
+            <h2 class="h2Contact">No dudes en consultarnos.</h2>
+            <p class="large pContact">Tienes todos estos canales para que tu negocio de un nuevo giro.</p>
           </div>
-          <h2>Featured title</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-          <a href="#" class="icon-link">
-            Call to action
-            <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-          </a>
         </div>
-        <div class="feature col">
-          <div class="feature-icon bg-primary bg-gradient">
-            <i class="fab fa-amilia"></i>
+        <div class="row rowContact centrarAll">
+          <div class="col-xs-3 col-sm-3 col-md-3 columnIconContac">
+            <a href="https://api.whatsapp.com/send?phone=+593960939030&text=Hola...!!!%20Necesito%20saber%20de%20sus%20servicios." target="_blank">
+              <img src="../images/logos/dreconstec_whatsapp.svg" class="imgLogosContact" alt="Dreconstec WhatsAPP">
+            </a>
           </div>
-          <h2>Featured title</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-          <a href="#" class="icon-link">
-            Call to action
-            <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-          </a>
-        </div>
-        <div class="feature col">
-          <div class="feature-icon bg-primary bg-gradient">
-            <i class="fab fa-amilia"></i>
+          <div class="col-xs-3 col-sm-3 col-md-3 columnIconContac">
+            <a href="https://www.instagram.com/dreconstec" target="_blank">
+              <img src="../images/logos/dreconstec_instagram.svg" class="imgLogosContact" alt="Dreconstec Instagram">
+            </a>
           </div>
-          <h2>Featured title</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-          <a href="#" class="icon-link">
-            Call to action
-            <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-          </a>
+          <div class="col-xs-3 col-sm-3 col-md-3 columnIconContac">
+            <a href="https://www.facebook.com/dreconstec" target="_blank">
+              <img src="../images/logos/dreconstec_facebook.svg" class="imgLogosContact" alt="Dreconstec Facebook">
+            </a>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 columnIconContac">
+            <a href="https://twitter.com/dreconstec" target="_blank">
+              <img src="../images/logos/dreconstec_twitter.svg" class="imgLogosContact" alt="Dreconstec Twitter">
+            </a>
+          </div>
         </div>
+        <form id="dreconstecFormContactar" class="form-consulta" data-toggle="validator" role="form"> 
+          <div class="form-group">
+            <label>Nombres Completos: <span>*</span></label>
+            <input type="text" name="dct_nombre" id="dct_nombre" class="form-control campo-form" required maxlength="50">
+            <div class="help-block with-errors errorRedContact"></div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico: <span>*</span></label>
+            <input type="email" name="dct_email" id="dct_email" class="form-control campo-form" maxlength="40" data-error="Formato de Correo inválido." required>
+            <div class="help-block with-errors errorRedContact dct_email"></div>
+          </div>
+          <div class="form-group">
+            <label>Convencional / Celular: <span>*</span></label>
+            <input type="text" name="dct_telefono" id="dct_telefono" class="form-control campo-form" required maxlength="10">
+            <div class="help-block with-errors errorRedContact dct_telefono"></div>
+          </div>
+          <div class="form-group">
+            <label>Indíquenos su consulta: <span>*</span></label>
+            <textarea name="dct_consulta" id="dct_consulta" class="form-control campo-form" maxlength="400" required></textarea>
+            <div class="help-block with-errors errorRedContact"></div>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Enviar" class="btn-form btnMarginContact">
+          </div>
+        </form>
       </div>
+
     </div>
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
+  </main>
+  <div class="modal fade" id="dctModalSendOk" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+          <div class="">
+            <img src="../images/it_service/dreconstec_ok.png" width="30px" heigth="20px">
+            <h4 class="modal-title infoModalContact" id="myModalLabel">Información</h4>
           </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</main>
+	      </div>
+	      <div class="modal-body"><strong>Gracias. Su mensaje ha sido enviado exitosamente, en momentos nos comunicaremos con usted.</strong></div>
+	      <div class="modal-footer" style="text-align: -webkit-center;">
+	        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="redireccionarDreConsTec();">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 @endsection
