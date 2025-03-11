@@ -8,7 +8,9 @@
   <link href="{{ asset('vendor/bootstrap-5.1.3/dist/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/bootstrap-5.1.3/dist/css/carousel.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/bootstrap-5.1.3/dist/css/features.css') }}" rel="stylesheet">
-  <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/fontawesome-free/css/fontawesome.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/fontawesome-free/css/brands.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/fontawesome-free/css/solid.css') }}" rel="stylesheet">
 <title>@yield('title')</title>
 </head>
 <body>
