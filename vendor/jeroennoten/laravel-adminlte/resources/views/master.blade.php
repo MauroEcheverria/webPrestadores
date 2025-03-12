@@ -73,6 +73,7 @@
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery-3.7.1.min.js') }}"></script>
         <script src="{{ asset('vendor/moment/min/moment.min.js') }}"></script>
+        <script src="{{ asset('vendor/moment/min/moment-with-locales.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap-4.6.2/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>

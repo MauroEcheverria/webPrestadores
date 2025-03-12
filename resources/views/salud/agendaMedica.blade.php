@@ -46,16 +46,21 @@
                   <label class="control-label cal_label">Nombres Paciente:&nbsp;</label><span class="cal_data" id="id_agm_titulo"></span>
                 </div>
                 <div class="form-group">
-                  <label for="agm_titulo" class="control-label">Fecha</label>
-                  <div class="input-group date">
-                    <input type="text" class="form-control pull-right" id="av_fecha_ampliacion" name="av_fecha_ampliacion" required>
+                  <label>Date:</label>
+                  <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="agm_titulo" class="control-label">Hora</label>
-                  <div class="input-group date">
-                  
-                  </div>
+                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                        </div>
+                    </div>
                 </div>
               </div>
               <div class="col-md-6">
@@ -124,8 +129,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/tempusdominus/css/tempusdominus-bootstrap-4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/toastr-master/build/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/dct_sistema/dist/css/dct_global.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/dct_sistema/dist/css/agendaMedica.css') }}" />
@@ -138,9 +142,7 @@
 
 @section('js')
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('vendor/toastr-master/build/toastr.min.js') }}"></script>
     <script src="{{ asset('vendor/fullcalendar/dist/index.global.min.js') }}"></script>
     <script src="{{ asset('vendor/dct_sistema/dist/js/dct_global.js') }}"></script>

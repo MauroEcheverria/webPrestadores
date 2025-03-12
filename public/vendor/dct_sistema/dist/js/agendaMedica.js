@@ -60,13 +60,35 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#myModalAgendaMedicaAdd').modal('show');
   });
 
-  $('#av_fecha_ampliacion').datepicker({
+  /*$('#av_fecha_ampliacion').datepicker({
     autoclose: true,
     format: 'yyyy/mm/dd',
-    language: 'es'/*,
-    datesDisabled: result,*/
+    language: 'es',
+    datesDisabled: result,
   });
-  $('#av_fecha_ampliacion').datepicker('setDate', new Date());
+  $('#av_fecha_ampliacion').datepicker('setDate', new Date());*/
+
+  $(function () {
+    $('#reservationdate').datetimepicker({
+      /*format: 'YYYY-MM-DD HH:mm:ss',*/
+      format: 'YYYY-MM-DD',
+      locale: 'es-us',
+      minDate: '2025-01-01',
+      maxDate: '2025-03-31',
+      sideBySide: true,
+      defaultDate: moment().format('YYYY-MM-DD'),
+      disabledDates: ["2025-03-15", "2025-03-20"]
+    });
+  });
+  $('#reservationdate').datetimepicker({ format: 'YYYY-MM-DD', date: '2025-02-05' });
+
+  $('#datetimepicker3').datetimepicker({
+    format: 'LT',
+    locale: 'es-us',
+    disabledHours: [10, 11]
+  });
+  $('#datetimepicker3').datetimepicker('date', moment('20:10', 'HH:mm'));
+
 
   document.getElementById("formAgendaMedicaAdd").addEventListener("submit", function (event) {
     event.preventDefault();
