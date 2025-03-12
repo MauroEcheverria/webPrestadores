@@ -41,7 +41,7 @@
         </ul>
       </div>
       <div class="col-md-5 order-md-1">
-        <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s4.jpg') }}" style="width:500px;">
+        <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s2.jpg') }}" style="width:500px;">
       </div>
     </div>
       <hr class="featurette-divider">
@@ -58,7 +58,7 @@
           </ul>
         </div>
         <div class="col-md-5">
-          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s4.jpg') }}" style="width:500px;">
+          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s5.jpg') }}" style="width:500px;">
         </div>
       </div>
       <hr class="featurette-divider">
@@ -82,7 +82,7 @@
           </ul>
         </div>
         <div class="col-md-5 order-md-1">
-          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s4.jpg') }}" style="width:500px;">
+          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s6.jpg') }}" style="width:500px;">
         </div>
       </div>
       <hr class="featurette-divider">
@@ -100,7 +100,7 @@
           </ul>
         </div>
         <div class="col-md-5">
-          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s4.jpg') }}" style="width:500px;">
+          <img src="{{ asset('vendor/dct_sistema/dist/img/main/service/dreconstec_s7.jpg') }}" style="width:500px;">
         </div>
       </div>
   </div>

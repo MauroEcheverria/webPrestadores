@@ -45,6 +45,10 @@ Route::get('/contactanos', function (){
     return view('info.contactanos');
 })->name('info.contactanos');
 
+Route::get('/canales', function (){
+    return view('info.canales');
+})->name('info.canales');
+
 /******************************************************************************************/
 
 Route::get('/usuario_inactivo',function(){

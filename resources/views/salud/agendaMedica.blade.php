@@ -11,7 +11,6 @@
       <span class="panel-title"><b>Agenda Médica</b></span>
     </div>
     <div class="card-body">
-    <input id="timepicker" class="form-control" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text" required/>
       <button type="button" id="testbtn" class="btn btn-info btn-dreconstec" data-dismiss="modal">Añadir</button>
       <div id='calendar'></div>
     </div>
