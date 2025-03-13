@@ -7,7 +7,7 @@
 @section('content')
     <div class="card">
       <div class="card-header">
-        <span class="panel-title"><b>Administración de Usuarios</b></span>
+        <span class="panel-title"><b>Administración de Usuarios Main</b></span>
       </div>
       <div class="card-body">
         <div class="seccionDtBtnAccion">
