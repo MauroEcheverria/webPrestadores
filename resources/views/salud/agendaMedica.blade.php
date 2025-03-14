@@ -34,7 +34,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group adminUser_2">
+                <div class="form-group">
                   <label for="xxxxxxxx" class="control-label">Médico</label>
                   <select name="xxxxxxxx" id="xxxxxxxx" class="form-control" required style="width: 100%;"></select>
                 </div>
@@ -42,11 +42,35 @@
                   <label for="agm_titulo" class="control-label">Cédula Paciente</label>
                   <input type="text" class="form-control" id="agm_titulo" name="agm_titulo" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
                 </div>
+              </div>
+              <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label cal_label">Nombres Paciente:&nbsp;</label><span class="cal_data" id="id_agm_titulo"></span>
+                  <label for="yyyyyy" class="control-label">Especialidad</label>
+                  <select name="yyyyyy" id="yyyyyy" class="form-control" required style="width: 100%;"></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label cal_label">Nombres Paciente:&nbsp;</label><span class="cal_data" id="id_agm_titulo">Mauro Echeverria asd asdkl ñlasd</span><br>
+              <label class="control-label cal_label">Correo paciente:&nbsp;</label><span class="cal_data" id="id_agm_titulo"> asdsa asdsa sa as d</span><br>
+              <label class="control-label cal_label">Contacto paciente:&nbsp;</label><span class="cal_data" id="id_agm_titulo">0960939030</span><br>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="xxxxxxxx" class="control-label">Timpo de agenda</label>
+                  <select name="xxxxxxxx" id="xxxxxxxx" class="form-control" required style="width: 100%;">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                    <option value="60">60</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label>Date:</label>
+                  <label for="xxxxxxxx" class="control-label">Fecha Cita</label>
                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
                     <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
@@ -55,28 +79,44 @@
                   </div>
                 </div>
                 <div class="form-group">
-                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
-                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                        </div>
-                    </div>
+                  <label for="xxxxxxxx" class="control-label">Timpo de atención</label>
+                  <select name="xxxxxxxx" id="xxxxxxxx" class="form-control" required style="width: 100%;">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                    <option value="60">60</option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group adminUser_2">
-                  <label for="yyyyyy" class="control-label">Especialidad</label>
-                  <select name="yyyyyy" id="yyyyyy" class="form-control" required style="width: 100%;"></select>
+                <div class="form-group">
+                  <label for="agm_titulo" class="control-label">Detalle</label>
+                  <input type="text" class="form-control" id="agm_titulo" name="agm_titulo" maxlength="13" minlength="8" onkeypress="return soloNumeros(event);" required>
                 </div>
                 <div class="form-group">
-                  <label for="usr_correo" class="control-label">Correo</label>
-                  <input type="email" class="form-control" id="usr_correo" name="usr_correo" maxlength="60" data-error="Formato de Correo inválido." required oninput="this.value = this.value.toLowerCase()" minlength="6">
-                </div>  
+                  <label for="xxxxxxxx" class="control-label">Hora Desde</label>
+                  <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
+                      <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                      </div>
+                  </div>
+                </div>
                 <div class="form-group">
-                  <label class="control-label cal_label">Fecha Nacimiento:&nbsp;</label><span class="cal_data" id="id_agm_titulo"></span>
+                  <label for="xxxxxxxx" class="control-label">Hora Hasta</label>
+                  <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3" disabled/>
+                      <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
+              
           </div>
           <div class="modal-footer centralFooter">
             <button type="button" class="btn btn-warning btn-dreconstec" data-dismiss="modal">Cerrar</button>

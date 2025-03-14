@@ -17,35 +17,33 @@ class AgendaMedicaController extends Controller
 	}
 
 	public function getDataTableAgendaMedica(Request $request){
-		
-			try {
-				$agendas = DB::select("SELECT * FROM dct_salud_tbl_agenda_medica");
-				$events = array();
-				foreach ($agendas as $agenda) {
-					$events[] = [
-	          'id'            => $agenda->agm_id_agenda,
-	          'title'         => $agenda->agm_titulo,
-	          'start'         => $agenda->agm_fecha_inicio."T".$agenda->agm_hora_inicio,
-	          'end'           => $agenda->agm_fecha_final."T".$agenda->agm_hora_final,
-	          'borderColor'   => '#0000ff',
-	          'url'           => '#',
-	          'extendedProps' => [
-	            'observacion'  => $agenda->agm_observacion,
-	            'correo_paciente'  => $agenda->agm_correo_paciente,
-				'desde'  => $agenda->agm_fecha_inicio."  ".$agenda->agm_hora_inicio,
-				'hasta'  => $agenda->agm_fecha_final."  ".$agenda->agm_hora_final,
-	          ],
-	          'className' => ["redEvent"]
-	        ];
-				}
-	    	echo json_encode($events);
-			} catch (\Exception $e) {
-				Log::error($e->getMessage());
-				$data_result["message"] = "exitForException";
-				$data_result["exception"] = $e->getMessage();
-				echo json_encode($data_result);
-			}
-
+    try {
+      $agendas = DB::select("SELECT * FROM dct_salud_tbl_agenda_medica");
+      $events = array();
+      foreach ($agendas as $agenda) {
+        $events[] = [
+          'id'            => $agenda->agm_id_agenda,
+          'title'         => $agenda->agm_titulo,
+          'start'         => $agenda->agm_fecha_inicio."T".$agenda->agm_hora_inicio,
+          'end'           => $agenda->agm_fecha_final."T".$agenda->agm_hora_final,
+          'borderColor'   => '#0000ff',
+          'url'           => '#',
+          'extendedProps' => [
+            'observacion'  => $agenda->agm_observacion,
+            'correo_paciente'  => $agenda->agm_correo_paciente,
+          'desde'  => $agenda->agm_fecha_inicio."  ".$agenda->agm_hora_inicio,
+          'hasta'  => $agenda->agm_fecha_final."  ".$agenda->agm_hora_final,
+              ],
+          'className' => ["redEvent"]
+        ];
+      }
+      echo json_encode($events);
+    } catch (\Exception $e) {
+      Log::error($e->getMessage());
+      $data_result["message"] = "exitForException";
+      $data_result["exception"] = $e->getMessage();
+      echo json_encode($data_result);
+    }
 	}
 	public function guardar_agenda(Request $request) {
 		if ($request->ajax()) {
