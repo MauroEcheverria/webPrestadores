@@ -1,6 +1,22 @@
 .greenEvent {
-  background-color:#00FF00;
+  background-color: #00FF00;
 }
-.redEvent {
-  background-color:#FF0000;
+
+.evt_agendada {
+  background-color: #39CCCC;
+  border-color: #39CCCC;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.evt_agendada:hover {
+  background-color: #39cccc7a;
+  border: 1px solid #033c3c;
+  color: #fff !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.id_buscar_cedula_agenda {
+  cursor: pointer;
 }

@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  window.agm_id_agenda = null;
-  var calendarEl = document.getElementById('calendar');
+  $('[data-mask]').inputmask()
+
+  window.agm_id_agenda = null
+  var calendarEl = document.getElementById('calendar')
   var calendar = new FullCalendar.Calendar(calendarEl, {
     allDaySlot: false,
     slotDuration: '00:30:00',
@@ -53,44 +55,56 @@ document.addEventListener('DOMContentLoaded', function () {
       $("#id_agm_observacion").empty().prepend(info.event.extendedProps.observacion);
       $('#myModalAgendaMedicaEdit').modal('show');
     },
-  });
-  calendar.render();
+  })
+  calendar.render()
 
-  $("#testbtn").on("click", function () {
+  $("#idCrearEvento").on("click", function () {
+    document.getElementById('formAgendaMedicaNuevo').reset();
     $('#myModalAgendaMedicaAdd').modal('show');
-  });
+  })
 
-  /*$('#av_fecha_ampliacion').datepicker({
-    autoclose: true,
-    format: 'yyyy/mm/dd',
-    language: 'es',
-    datesDisabled: result,
-  });
-  $('#av_fecha_ampliacion').datepicker('setDate', new Date());*/
+  $(".id_buscar_cedula_agenda").on("click", function () {
+    if ($('#pct_id_paciente').val() != "") {
+      alert("Busco Cédula.")
+    }
+  })
 
-  $(function () {
-    $('#reservationdate').datetimepicker({
-      /*format: 'YYYY-MM-DD HH:mm:ss',*/
-      format: 'YYYY-MM-DD',
-      locale: 'es-us',
-      minDate: '2025-01-01',
-      maxDate: '2025-03-31',
-      sideBySide: true,
-      defaultDate: moment().format('YYYY-MM-DD'),
-      disabledDates: ["2025-03-15", "2025-03-20"]
-    });
-  });
-  $('#reservationdate').datetimepicker({ format: 'YYYY-MM-DD', date: '2025-02-05' });
-
-  $('#datetimepicker3').datetimepicker({
-    format: 'LT',
+  $('#agm_fecha_inicio').datetimepicker({
+    /*format: 'YYYY-MM-DD HH:mm:ss',*/
+    format: 'YYYY-MM-DD',
     locale: 'es-us',
-    disabledHours: [10, 11]
+    minDate: '2025-01-01',
+    maxDate: '2025-03-31',
+    sideBySide: true,
+    defaultDate: moment().format('YYYY-MM-DD'),
+    /*disabledDates: ["2025-03-15", "2025-03-20"]*/
+  })
+
+  $('#agm_hora_inicio,#agm_hora_final').datetimepicker({
+    format: 'HH:mm',
+    locale: 'es-us',
+    date: moment('08:00', 'HH:mm'),
+    /*disabledHours: [10, 11]*/
+  })
+
+  //$('#agm_hora_inicio').datetimepicker('date', moment('20:10', 'HH:mm'));
+  //$('#agm_fecha_inicio').datetimepicker({ format: 'YYYY-MM-DD', date: '2025-02-05' });
+
+  $('#agm_intervalo').change(function () {
+    if ($('#agm_intervalo').val() != "") {
+      const agm_hora_inicio = moment($('#agm_fecha_inicio').val() + " " + $('#agm_hora_inicio').val() + ":00.000");
+      $('#agm_hora_final').datetimepicker('date', agm_hora_inicio.add($('#agm_intervalo').val(), 'm').format('HH:mm'))
+    }
+  })
+
+  $('#agm_hora_inicio').on('change.datetimepicker', function () {
+    if ($('#agm_intervalo').val() != "") {
+      const agm_hora_inicio = moment($('#agm_fecha_inicio').val() + " " + $('#agm_hora_inicio').val() + ":00.000");
+      $('#agm_hora_final').datetimepicker('date', agm_hora_inicio.add($('#agm_intervalo').val(), 'm').format('HH:mm'))
+    }
   });
-  $('#datetimepicker3').datetimepicker('date', moment('20:10', 'HH:mm'));
 
-
-  document.getElementById("formAgendaMedicaAdd").addEventListener("submit", function (event) {
+  document.getElementById("formAgendaMedicaNuevo").addEventListener("submit", function (event) {
     event.preventDefault();
     if (this.checkValidity() === false) {
       event.stopPropagation();
@@ -98,26 +112,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     else {
       $.ajax({
-        url: $("#formAgendaMedicaAdd").attr('data-action'),
+        url: $("#formAgendaMedicaNuevo").attr('data-action'),
         type: 'POST',
         dataType: 'html',
-        data: $("#formAgendaMedicaAdd").serialize(),
+        data: $("#formAgendaMedicaNuevo").serialize(),
         success: function (result) {
           var result = eval('(' + result + ')');
           $('#myModalAgendaMedicaAdd').modal('hide');
           switch (result.message) {
             case "saveOK":
               calendar.refetchEvents();
-              $("#formAgendaMedicaAdd").trigger("reset");
+              $("#formAgendaMedicaNuevo").trigger("reset");
               toastrSuccess("😄 El registro fue guardado correctamente. ✅");
               break;
             case "saveError":
-              toastrMostarError("AU_4");
+              toastrMostarError("Error al guardar la información");
+              break;
+            case "exitForException":
+              toastrMostarError("Salida por Excepción.");
               break;
           }
         }
-      });
+      })
     }
-  }, false);
+  }, false)
 
-});
+})
