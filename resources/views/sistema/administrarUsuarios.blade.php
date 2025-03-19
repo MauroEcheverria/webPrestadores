@@ -18,7 +18,7 @@
         <table id="dtUsuarios" class="cell-border" cellspacing="0" width="100%"></table> 
       </div>
     </div>
-    <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalNuevoUser" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,7 +96,7 @@
         </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalEditUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalEditUser" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
                 <div class="modal-header">
@@ -189,7 +189,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalPassUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalPassUser" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

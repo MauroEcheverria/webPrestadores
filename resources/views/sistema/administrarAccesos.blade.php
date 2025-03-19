@@ -111,7 +111,7 @@
         </div>
     </div>
     <input type="hidden" value="{{ route('administrarAccesos.proceso_8') }}" id="getDataSelect" class="dct_main">
-    <div class="modal fade" id="myModalSistemaEmpresa" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaEmpresa" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-xl modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -301,7 +301,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaRol" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaRol" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -345,7 +345,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaEmpresaAplicativo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaEmpresaAplicativo" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -397,7 +397,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaRolAplicativo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaRolAplicativo" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -449,7 +449,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaRolOpcion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaRolOpcion" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -501,7 +501,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaAplicacion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaAplicacion" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
@@ -545,7 +545,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalSistemaOpcion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="myModalSistemaOpcion" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modalLogin">
             <div class="modal-content">
             <div class="modal-header">
