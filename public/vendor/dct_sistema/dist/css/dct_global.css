@@ -171,3 +171,13 @@
 .modal-title {
   font-size: 21px !important;
 }
+
+.dct_label {
+  font-size: 16px;
+  font-weight: 800;
+  margin-right: 5px;
+}
+
+.dct_data {
+  font-size: 16px;
+}

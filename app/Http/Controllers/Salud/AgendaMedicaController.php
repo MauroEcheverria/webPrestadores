@@ -25,18 +25,23 @@ class AgendaMedicaController extends Controller
         switch ($agenda->agm_estado) {
           case 'AG':
             $className = "evt_agendada";
+			$estadoName = "Agendada";
             break;
           case 'AT':
             $className = "evt_agendada";
+			$estadoName = "Agendada";
             break;
           case 'CU':
             $className = "evt_agendada";
+			$estadoName = "Agendada";
             break;
           case 'EL':
             $className = "evt_agendada";
+			$estadoName = "Agendada";
             break;
           default:
-          $className = "evt_agendada";
+			$className = "evt_agendada";
+			$estadoName = "Agendada";
             break;
         }
 
@@ -48,8 +53,10 @@ class AgendaMedicaController extends Controller
           'url'           => '#',
           'extendedProps' => [
             'observacion'  => $agenda->agm_observacion,
+			'tipo'  => $agenda->agm_tipo,
             'desde'  => $agenda->agm_fecha_inicio."  ".$agenda->agm_hora_inicio,
             'hasta'  => $agenda->agm_fecha_final."  ".$agenda->agm_hora_final,
+			'estado'  => $estadoName,
           ],
           'className' => [$className]
         ];

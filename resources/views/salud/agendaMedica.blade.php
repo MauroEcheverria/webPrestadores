@@ -66,11 +66,11 @@
                             </div>
                         </div>
                         <div class="form-group" style="display:none;">
-                            <span class="control-label cal_label">Nombres Paciente:</span><span class="cal_data"
+                            <span class="control-label dct_label">Nombres Paciente:</span><span class="dct_data"
                                 id="pct_nombres">Mauro Vinicio Echeverria Chuguli</span><br>
-                            <span class="control-label cal_label">Correo paciente:</span><span class="cal_data"
+                            <span class="control-label dct_label">Correo paciente:</span><span class="dct_data"
                                 id="pct_correo">maurovinicio.echeverria@gmail.com</span><br>
-                            <span class="control-label cal_label">Contacto paciente:</span><span class="cal_data"
+                            <span class="control-label dct_label">Contacto paciente:</span><span class="dct_data"
                                 id="pct_telefono">0960939030</span><br>
                         </div>
                         <div class="row">
@@ -177,39 +177,39 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <span class="control-label cal_label">Paciente:</span><span class="cal_data"
+                        <span class="control-label dct_label">Paciente:</span><span class="dct_data"
                             id="id_pct_id_paciente"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Médico:</span><span class="cal_data"
+                        <span class="control-label dct_label">Médico:</span><span class="dct_data"
                             id="id_usr_cod_usuario"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Especialidad:</span><span class="cal_data"
+                        <span class="control-label dct_label">Especialidad:</span><span class="dct_data"
                             id="id_esp_id_especialidad"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Tipo Evento:</span><span class="cal_data"
+                        <span class="control-label dct_label">Tipo Evento:</span><span class="dct_data"
                             id="id_agm_tipo"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Motivo:</span><span class="cal_data"
+                        <span class="control-label dct_label">Motivo:</span><span class="dct_data"
                             id="id_agm_motivo"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Desde:</span><span class="cal_data"
+                        <span class="control-label dct_label">Desde:</span><span class="dct_data"
                             id="id_agm_fecha_inicio"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Hasta:</span><span class="cal_data"
+                        <span class="control-label dct_label">Hasta:</span><span class="dct_data"
                             id="id_agm_fecha_final"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Observación:</span><span class="cal_data"
+                        <span class="control-label dct_label">Observación:</span><span class="dct_data"
                             id="id_agm_observacion"></span>
                     </div>
                     <div>
-                        <span class="control-label cal_label">Estado:</span><span class="cal_data"
+                        <span class="control-label dct_label">Estado:</span><span class="dct_data"
                             id="id_agm_estado"></span>
                     </div>
                 </div>

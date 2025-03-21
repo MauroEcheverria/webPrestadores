@@ -1,3 +1,8 @@
+function inicializarTiempos() {
+  $('#agm_hora_inicio,#agm_hora_final').datetimepicker('date', moment('08:00', 'HH:mm'))
+  $('#agm_fecha_inicio').datetimepicker('defaultDate', moment().format('YYYY-MM-DD'))
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   $('[data-mask]').inputmask()
@@ -48,29 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
       info.jsEvent.preventDefault();
       agm_id_agenda = info.event.id;
       console.log("🚀 ~ document.addEventListener ~ agm_id_agenda:", agm_id_agenda)
-      $("#id_agm_titulo").empty().prepend(info.event.title);
+      $("#id_agm_motivo").empty().prepend(info.event.title);
       $("#id_agm_fecha_inicio").empty().prepend(info.event.extendedProps.desde);
       $("#id_agm_fecha_final").empty().prepend(info.event.extendedProps.hasta);
-      $("#id_agm_correo_paciente").empty().prepend(info.event.extendedProps.correo_paciente);
+      $("#id_agm_tipo").empty().prepend(info.event.extendedProps.tipo);
       $("#id_agm_observacion").empty().prepend(info.event.extendedProps.observacion);
+      $("#id_agm_estado").empty().prepend(info.event.extendedProps.estado);
       $('#myModalAgendaMedicaEdit').modal('show');
     },
   })
   calendar.render()
 
-  $("#idCrearEvento").on("click", function () {
-    document.getElementById('formAgendaMedicaNuevo').reset();
-    $('#myModalAgendaMedicaAdd').modal('show');
-  })
-
-  $(".id_buscar_cedula_agenda").on("click", function () {
-    if ($('#pct_id_paciente').val() != "") {
-      alert("Busco Cédula.")
-    }
-  })
-
   $('#agm_fecha_inicio').datetimepicker({
-    /*format: 'YYYY-MM-DD HH:mm:ss',*/
     format: 'YYYY-MM-DD',
     locale: 'es-us',
     minDate: '2025-01-01',
@@ -87,8 +81,17 @@ document.addEventListener('DOMContentLoaded', function () {
     /*disabledHours: [10, 11]*/
   })
 
-  //$('#agm_hora_inicio').datetimepicker('date', moment('20:10', 'HH:mm'));
-  //$('#agm_fecha_inicio').datetimepicker({ format: 'YYYY-MM-DD', date: '2025-02-05' });
+  $("#idCrearEvento").on("click", function () {
+    document.getElementById('formAgendaMedicaNuevo').reset();
+    inicializarTiempos()
+    $('#myModalAgendaMedicaAdd').modal('show');
+  })
+
+  $(".id_buscar_cedula_agenda").on("click", function () {
+    if ($('#pct_id_paciente').val() != "") {
+      alert("Busco Cédula.")
+    }
+  })
 
   $('#agm_intervalo').change(function () {
     if ($('#agm_intervalo').val() != "") {
